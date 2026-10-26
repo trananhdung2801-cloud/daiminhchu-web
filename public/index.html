@@ -2,17 +2,16 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=6">
+    <link rel="stylesheet" href="/css/style.css?v=8">
 </head>
 <body>
     <div id="game-container">
-        <!-- Floating GM Admin Tool Button -->
-        <button id="btn-floating-gm" class="btn-floating-gm" onclick="openAdminModal()">⚙️ GM Tool</button>
-
-        <!-- ================= SCREEN 1: AUTHENTIC LOGIN ================= -->
+        <!-- ================= SCREEN 1: AUTHENTIC LOGIN & REGISTER ================= -->
         <div id="screen-login" class="screen active">
             <div class="login-screen-bg">
                 <div class="login-brand-header anim-pop-in">
@@ -26,18 +25,69 @@
                 <img class="login-dragon-logo" src="/assets/ui/login_06.png" alt="Đại Minh Chủ Logo">
                 
                 <div class="login-card-panel anim-zoom-enter">
-                    <div class="login-input-wrap">
-                        <input type="text" id="login-username" class="login-input" placeholder="Nhập tên Minh Chủ..." value="MinhChu">
+                    <!-- Auth Switch Tabs -->
+                    <div class="auth-tabs-row">
+                        <button id="tab-btn-login" class="auth-tab-btn active" onclick="switchAuthTab('login')">ĐĂNG NHẬP</button>
+                        <button id="tab-btn-register" class="auth-tab-btn" onclick="switchAuthTab('register')">ĐĂNG KÝ MỚI</button>
                     </div>
-                    <button class="btn-login-game" onclick="doLogin()">VÀO GAME</button>
+
+                    <!-- 1. Form Đăng Nhập -->
+                    <div id="form-login-wrap" class="auth-form-wrap">
+                        <div class="login-input-wrap">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="login-username" class="login-input" placeholder="Tên tài khoản..." value="MinhChu" autocomplete="username">
+                        </div>
+                        <div class="login-input-wrap">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="login-password" class="login-input" placeholder="Mật khẩu..." value="123456" autocomplete="current-password">
+                        </div>
+                        <button class="btn-login-game" onclick="doLogin()">VÀO GAME NGAY</button>
+                    </div>
+
+                    <!-- 2. Form Đăng Ký Tài Khoản Mới -->
+                    <div id="form-register-wrap" class="auth-form-wrap" style="display: none;">
+                        <div class="login-input-wrap">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="reg-username" class="login-input" placeholder="Tên tài khoản mới (>=3 ký tự)..." autocomplete="username">
+                        </div>
+                        <div class="login-input-wrap">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="reg-password" class="login-input" placeholder="Mật khẩu bảo mật (>=4 ký tự)..." autocomplete="new-password">
+                        </div>
+                        <div class="reg-starter-picker">
+                            <div class="reg-picker-title">Chọn Đại Hiệp Khởi Đầu:</div>
+                            <div class="reg-starters-grid">
+                                <label class="reg-starter-opt">
+                                    <input type="radio" name="reg-starter" value="NV_LenhHoXung" checked>
+                                    <span>Lệnh Hồ Xung</span>
+                                </label>
+                                <label class="reg-starter-opt">
+                                    <input type="radio" name="reg-starter" value="NV_QuachTinh">
+                                    <span>Quách Tĩnh</span>
+                                </label>
+                                <label class="reg-starter-opt">
+                                    <input type="radio" name="reg-starter" value="NV_DuongQua">
+                                    <span>Dương Quá</span>
+                                </label>
+                                <label class="reg-starter-opt">
+                                    <input type="radio" name="reg-starter" value="NV_TruongVoKy">
+                                    <span>Trương Vô Kỵ</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn-login-game reg" onclick="doRegister()">TẠO TÀI KHOẢN & VÀO GAME</button>
+                    </div>
+
+                    <div id="auth-error-msg" class="auth-error-msg"></div>
+
+                    <!-- Setting & Admin PIN link on login screen -->
+                    <div class="login-settings-link" onclick="openSettingsModal()">
+                        <span>⚙️ Cài Đặt / Quản Trị GM</span>
+                    </div>
                 </div>
 
                 <div class="login-footer">
-                    <div class="footer-logos">
-                        <img src="/assets/res/logosoha.png" alt="SohaGame">
-                        <img src="/assets/res/vietid.png" alt="VietID">
-                    </div>
-                    <div class="footer-client-info">AppID: bfd6d7145f6b11f7015c9626629218e0</div>
+                    <div class="footer-client-info" style="color: #a8a29e; font-size: 11px;">Đại Minh Chủ Mobile - Phiên Bản Võ Lâm Kiếm Hiệp Kim Dung</div>
                 </div>
             </div>
         </div>
@@ -130,6 +180,7 @@
                         <span>🍗</span>
                         <span id="header-stamina">30/30</span>
                     </div>
+                    <button class="btn-hdr-settings" onclick="openSettingsModal()" title="Cài Đặt & Quản Trị">⚙️</button>
                 </div>
             </div>
 
@@ -520,7 +571,7 @@
             <div class="payment-dialog anim-zoom-enter">
                 <div class="dialog-header-bar">
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <img src="/assets/res/logosoha.png" style="height: 22px; object-fit: contain;" alt="SohaGame">
+                        <span style="font-size: 20px;">💎</span>
                         <span class="dialog-title">BẢO KHỐ MINH CHỦ</span>
                     </div>
                     <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closePaymentModal()" alt="Đóng">
@@ -596,11 +647,52 @@
                         <li><b>3. Tầm Tiên Chiêu Mộ:</b> Dùng Vàng tầm tiên để đón nhận các đệ tử phẩm chất <b>Giáp (Hoàng Kim)</b> và <b>Ất (Tử Sắc)</b> vang danh thiên hạ.</li>
                         <li><b>4. Bảo Khố Minh Chủ:</b> Nạp KNB/Vàng để bồi dưỡng võ công, mua Gà Quay hồi phục thể lực hành hiệp.</li>
                     </ul>
+                </div>
+            </div>
+        </div>
 
-                    <div style="text-align: center; margin-top: 16px;">
-                        <img src="/assets/res/logosoha.png" style="height: 24px; display: inline-block; margin-right: 10px;" alt="Soha">
-                        <img src="/assets/res/vietid.png" style="height: 24px; display: inline-block;" alt="VietID">
+        <!-- ================= MODAL: CÀI ĐẶT & MÃ PIN ADMIN (6996) ================= -->
+        <div id="settings-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 380px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">⚙️</span>
+                        <span class="dialog-title">CÀI ĐẶT HỆ THỐNG</span>
                     </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeSettingsModal()" alt="Đóng">
+                </div>
+
+                <div class="dialog-body-scroll">
+                    <!-- General Settings -->
+                    <div class="settings-group-box">
+                        <div class="settings-row-item">
+                            <span>🔊 Âm Thanh Hiệu Ứng</span>
+                            <button id="btn-toggle-sound" class="btn-setting-toggle on" onclick="toggleSound()">BẬT</button>
+                        </div>
+                        <div class="settings-row-item">
+                            <span>🎵 Nhạc Nền Giang Hồ</span>
+                            <button id="btn-toggle-music" class="btn-setting-toggle on" onclick="toggleMusic()">BẬT</button>
+                        </div>
+                        <div class="settings-row-item" style="margin-top: 8px;">
+                            <span>👤 Tài Khoản Đang Chơi</span>
+                            <b id="settings-current-user" style="color: #ffd700;">MinhChu</b>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100%; height: 34px; font-size: 11px; margin-top: 10px; background: linear-gradient(180deg, #7f1d1d, #450a0a); border-color: #ef4444;" onclick="doLogout()">ĐĂNG XUẤT TÀI KHOẢN</button>
+                    </div>
+
+                    <!-- Admin GM Protected Area -->
+                    <div class="settings-admin-box">
+                        <div class="admin-box-title">🔒 KHU VỰC QUẢN TRỊ VIÊN (ADMIN GM)</div>
+                        <p style="font-size: 11px; color: #a8a29e; margin-bottom: 8px;">Vui lòng nhập mã PIN Quản Trị Viên để mở menu GM Tool:</p>
+                        
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="password" id="admin-pin-input" class="login-input" placeholder="Nhập PIN (4 số)..." maxlength="6" style="flex: 1; text-align: center; letter-spacing: 6px; font-size: 18px; font-weight: bold;">
+                            <button class="btn-wuxia-gold" style="width: 110px; height: 38px; font-size: 11px;" onclick="verifyAdminPin()">MỞ KHÓA</button>
+                        </div>
+                        <div id="pin-error-msg" style="font-size: 11px; margin-top: 6px; text-align: center;"></div>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 12px;" onclick="closeSettingsModal()">ĐÓNG</button>
                 </div>
             </div>
         </div>
@@ -1019,6 +1111,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=6"></script>
+    <script src="/js/game.js?v=8"></script>
 </body>
 </html>

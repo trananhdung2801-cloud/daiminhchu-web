@@ -94,6 +94,9 @@ function handleHttpRequest(req, res) {
                 case 'login':
                     result = webApi.login(body);
                     break;
+                case 'register':
+                    result = webApi.register(body);
+                    break;
                 case 'select_starter':
                     result = webApi.selectStarter(body);
                     break;

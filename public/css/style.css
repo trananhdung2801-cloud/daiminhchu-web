@@ -15,17 +15,21 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    height: 100dvh;
+    width: 100vw;
     overflow: hidden;
 }
 
 #game-container {
     width: 100%;
-    max-width: 450px;
+    max-width: 440px;
     height: 100vh;
-    max-height: 800px;
+    height: 100dvh;
+    max-height: 880px;
+    aspect-ratio: 9 / 16;
     background: url('/assets/ui/background.png') no-repeat center top;
     background-size: cover;
-    border: 3px solid #73502b;
+    border: 2px solid #73502b;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -245,26 +249,71 @@ img {
 }
 
 .login-card-panel {
-    width: 90%;
-    max-width: 300px;
-    background: url('/assets/ui/login1_44.png') no-repeat center center;
+    width: 95%;
+    max-width: 320px;
+    background: #18120d url('/assets/ui/chien_dau (3).png') no-repeat center center;
     background-size: 100% 100%;
-    padding: 40px 20px 25px;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    padding: 16px 14px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.auth-tabs-row {
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid #8c6031;
+    margin-bottom: 12px;
+}
+
+.auth-tab-btn {
+    flex: 1;
+    padding: 6px 4px;
+    background: transparent;
+    border: none;
+    color: #a8a29e;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+}
+
+.auth-tab-btn.active {
+    color: #ffd700;
+    border-bottom: 3px solid #ffd700;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+.auth-form-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-input-wrap {
     width: 100%;
-    height: 44px;
-    background: url('/assets/ui/login1_46.png') no-repeat center center;
-    background-size: 100% 100%;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #78350f;
+    border-radius: 6px;
     display: flex;
     align-items: center;
-    padding: 0 14px;
-    margin-bottom: 15px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.login-input-wrap:focus-within {
+    border-color: #ffd700;
+}
+
+.input-icon {
+    font-size: 14px;
+    margin-right: 6px;
 }
 
 .login-input {
@@ -273,21 +322,96 @@ img {
     border: none;
     outline: none;
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
+}
+
+.auth-error-msg {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #f87171;
+    text-align: center;
+    font-weight: bold;
+    min-height: 16px;
+}
+
+.reg-starter-picker {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 6px;
+    margin-bottom: 10px;
+}
+
+.reg-picker-title {
+    font-size: 10px;
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 4px;
     text-align: center;
 }
 
-.btn-login-game {
-    width: 170px;
-    height: 54px;
-    background: url('/assets/ui/login1_45_03.png') no-repeat center center;
-    background-size: 100% 100%;
-    border: none;
+.reg-starters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+}
+
+.reg-starter-opt {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #fef08a;
     cursor: pointer;
-    font-size: 15px;
+    background: rgba(28, 18, 13, 0.8);
+    padding: 3px 5px;
+    border-radius: 4px;
+    border: 1px solid #78350f;
+}
+
+.reg-starter-opt input:checked + span {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.login-settings-link {
+    margin-top: 8px;
+    cursor: pointer;
+    color: #b45309;
+    font-size: 10px;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.login-settings-link:hover {
+    color: #ffd700;
+}
+
+.btn-login-game {
+    width: 100%;
+    height: 42px;
+    background: linear-gradient(180deg, #d97706, #92400e);
+    border: 1.5px solid #ffd700;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
     font-weight: 900;
-    color: #2b1704;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    transition: transform 0.1s;
+}
+
+.btn-login-game.reg {
+    background: linear-gradient(180deg, #059669, #047857);
+    border-color: #34d399;
+}
+
+.btn-login-game:active {
+    transform: scale(0.96);
+}
     text-shadow: 0 1px 0 rgba(255,255,255,0.4);
     display: flex;
     align-items: center;
@@ -2912,5 +3036,153 @@ img {
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 6px;
+}
+
+/* ================= SETTINGS & ADMIN PIN MODAL ================= */
+.btn-hdr-settings {
+    background: linear-gradient(180deg, #5c2f16, #2d1305);
+    border: 1px solid #b45309;
+    color: #ffd700;
+    font-size: 15px;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.btn-hdr-settings:active {
+    transform: scale(0.92);
+}
+
+.settings-group-box {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.settings-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 12px;
+    color: #e2e8f0;
+    border-bottom: 1px dashed rgba(120, 53, 15, 0.5);
+}
+
+.settings-row-item:last-child {
+    border-bottom: none;
+}
+
+.btn-setting-toggle {
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #10b981;
+    background: linear-gradient(180deg, #059669, #047857);
+    color: #fff;
+}
+
+.btn-setting-toggle.off {
+    border: 1px solid #6b7280;
+    background: linear-gradient(180deg, #4b5563, #374151);
+    color: #9ca3af;
+}
+
+.settings-admin-box {
+    background: rgba(30, 10, 5, 0.75);
+    border: 1.5px solid #dc2626;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.admin-box-title {
+    font-size: 12px;
+    color: #ef4444;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+/* ================= 9:16 MOBILE RESPONSIVE OPTIMIZATION ================= */
+@media (max-width: 600px), (max-aspect-ratio: 9/14) {
+    html, body {
+        height: 100%;
+        height: 100dvh;
+        width: 100vw;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    #game-container {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100%;
+        height: 100dvh;
+        max-height: 100dvh;
+        aspect-ratio: unset;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .game-header-authentic {
+        padding-top: max(4px, env(safe-area-inset-top));
+    }
+
+    .bottom-bar-authentic {
+        padding-bottom: max(6px, env(safe-area-inset-bottom));
+        height: auto;
+        min-height: 54px;
+    }
+
+    .content-area {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .login-dragon-logo {
+        width: 70%;
+        max-width: 220px;
+        margin-bottom: 8px;
+    }
+
+    .login-brand-header {
+        margin-bottom: 8px;
+    }
+
+    .login-card-panel {
+        width: 92%;
+        max-width: 320px;
+        padding: 12px;
+    }
+
+    .modal-overlay {
+        padding: 8px;
+    }
+
+    .wuxia-dialog, .admin-dialog, .boiduong-dialog {
+        max-height: 88dvh;
+    }
+
+    .dialog-body-scroll {
+        max-height: calc(88dvh - 55px);
+    }
+
+    .battle-overlay-authentic {
+        width: 100vw;
+        height: 100dvh;
+    }
 }
 

@@ -13,11 +13,17 @@ class SoundSystem {
         if (!this.enabled) return;
         try {
             if (!this.cache[name]) {
-                this.cache[name] = new Audio(`${AUDIO_BASE}${name}.wav`);
+                const audio = new Audio(`${AUDIO_BASE}${name}.wav`);
+                audio.preload = 'none';
+                this.cache[name] = audio;
             }
-            const sound = this.cache[name].cloneNode();
-            sound.volume = 0.6;
-            sound.play().catch(() => {});
+            const sound = this.cache[name];
+            sound.currentTime = 0;
+            sound.volume = 0.5;
+            const playPromise = sound.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
         } catch (e) {}
     }
 }
@@ -62,7 +68,7 @@ const GameState = {
 
 // API Helpers
 function getEffectiveAid() {
-    if (GameState.user && getEffectiveAid()) return getEffectiveAid();
+    if (GameState.user && GameState.user.aid) return GameState.user.aid;
     const saved = localStorage.getItem('dmc_aid');
     if (saved) {
         const num = Number(saved);
@@ -753,26 +759,166 @@ async function confirmStarterSelection() {
     initMainGame();
 }
 
-// ================= LOGIN / BOOTSTRAP =================
+// ================= AUTH (LOGIN / REGISTER) =================
+function switchAuthTab(tab) {
+    sound.play('click');
+    const isLogin = tab === 'login';
+    document.getElementById('tab-btn-login').classList.toggle('active', isLogin);
+    document.getElementById('tab-btn-register').classList.toggle('active', !isLogin);
+    document.getElementById('form-login-wrap').style.display = isLogin ? 'flex' : 'none';
+    document.getElementById('form-register-wrap').style.display = !isLogin ? 'flex' : 'none';
+    const errEl = document.getElementById('auth-error-msg');
+    if (errEl) errEl.innerText = '';
+}
+
 async function doLogin() {
     sound.play('click');
-    const username = document.getElementById('login-username').value.trim() || 'MinhChu';
+    const errEl = document.getElementById('auth-error-msg');
+    if (errEl) errEl.innerText = '';
 
-    const res = await apiPost('login', { username });
-    if (!res.success) {
-        alert('Đăng nhập thất bại!');
+    const username = (document.getElementById('login-username').value || '').trim();
+    const password = (document.getElementById('login-password').value || '').trim();
+
+    if (!username) {
+        if (errEl) errEl.innerText = 'Vui lòng nhập tên tài khoản!';
         return;
     }
 
-    GameState.user = res.user; localStorage.setItem("dmc_aid", res.user.aid); localStorage.setItem("dmc_username", res.user.username);
+    showLoading('Đang kết nối vào chốn giang hồ...');
+    try {
+        const res = await apiPost('login', { username, password });
+        hideLoading();
 
-    if (!res.hasCharacter || !res.playerData) {
-        switchScreen('screen-starter');
-        // Initial showcase setup for Lenh Ho Xung
-        selectStarterHero('NV_LenhHoXung', document.querySelector('.starter-thumb-btn.selected'));
-    } else {
+        if (!res.success) {
+            sound.play('chet_m');
+            if (errEl) errEl.innerText = res.error || 'Đăng nhập thất bại!';
+            return;
+        }
+
+        GameState.user = res.user;
         GameState.playerData = res.playerData;
+        localStorage.setItem("dmc_aid", res.user.aid);
+        localStorage.setItem("dmc_username", res.user.username);
+
         initMainGame();
+    } catch (e) {
+        hideLoading();
+        console.error('Login error:', e);
+        if (errEl) errEl.innerText = 'Lỗi kết nối máy chủ: ' + (e.message || '');
+    }
+}
+
+async function doRegister() {
+    sound.play('click');
+    const errEl = document.getElementById('auth-error-msg');
+    if (errEl) errEl.innerText = '';
+
+    const username = (document.getElementById('reg-username').value || '').trim();
+    const password = (document.getElementById('reg-password').value || '').trim();
+    const starterRadio = document.querySelector('input[name="reg-starter"]:checked');
+    const starterCode = starterRadio ? starterRadio.value : 'NV_LenhHoXung';
+
+    if (!username || username.length < 3) {
+        if (errEl) errEl.innerText = 'Tên tài khoản phải từ 3 ký tự trở lên!';
+        return;
+    }
+    if (!password || password.length < 4) {
+        if (errEl) errEl.innerText = 'Mật khẩu phải từ 4 ký tự trở lên!';
+        return;
+    }
+
+    showLoading('Đang tạo mới cao thủ võ lâm...');
+    try {
+        const res = await apiPost('register', { username, password, starterCode });
+        hideLoading();
+
+        if (!res.success) {
+            sound.play('chet_m');
+            if (errEl) errEl.innerText = res.error || 'Đăng ký thất bại!';
+            return;
+        }
+
+        sound.play('renxong');
+        GameState.user = res.user;
+        GameState.playerData = res.playerData;
+        localStorage.setItem("dmc_aid", res.user.aid);
+        localStorage.setItem("dmc_username", res.user.username);
+
+        initMainGame();
+    } catch (e) {
+        hideLoading();
+        console.error('Register error:', e);
+        if (errEl) errEl.innerText = 'Lỗi kết nối máy chủ: ' + (e.message || '');
+    }
+}
+
+function doLogout() {
+    sound.play('click');
+    localStorage.removeItem("dmc_aid");
+    localStorage.removeItem("dmc_username");
+    GameState.user = null;
+    GameState.playerData = null;
+    closeSettingsModal();
+    switchScreen('screen-login');
+}
+
+// ================= SETTINGS & ADMIN PIN (6996) =================
+function openSettingsModal() {
+    sound.play('click');
+    const userLabel = document.getElementById('settings-current-user');
+    if (userLabel) {
+        userLabel.innerText = (GameState.user && GameState.user.username)
+            ? GameState.user.username
+            : (localStorage.getItem('dmc_username') || 'Chưa đăng nhập');
+    }
+    const pinErr = document.getElementById('pin-error-msg');
+    if (pinErr) pinErr.innerText = '';
+    const pinInput = document.getElementById('admin-pin-input');
+    if (pinInput) pinInput.value = '';
+    document.getElementById('settings-modal').classList.add('active');
+}
+
+function closeSettingsModal() {
+    sound.play('click');
+    document.getElementById('settings-modal').classList.remove('active');
+}
+
+function verifyAdminPin() {
+    const pinInput = document.getElementById('admin-pin-input');
+    const errEl = document.getElementById('pin-error-msg');
+    const val = (pinInput ? pinInput.value : '').trim();
+
+    if (val === '6996') {
+        sound.play('renxong');
+        if (pinInput) pinInput.value = '';
+        if (errEl) errEl.innerText = '';
+        closeSettingsModal();
+        openAdminModal();
+    } else {
+        sound.play('chet_m');
+        if (errEl) {
+            errEl.style.color = '#f87171';
+            errEl.innerText = '❌ Mã PIN Admin không chính xác!';
+        }
+    }
+}
+
+function toggleSound() {
+    sound.enabled = !sound.enabled;
+    const btn = document.getElementById('btn-toggle-sound');
+    if (btn) {
+        btn.classList.toggle('off', !sound.enabled);
+        btn.innerText = sound.enabled ? 'BẬT' : 'TẮT';
+    }
+}
+
+let isMusicPlaying = false;
+function toggleMusic() {
+    isMusicPlaying = !isMusicPlaying;
+    const btn = document.getElementById('btn-toggle-music');
+    if (btn) {
+        btn.classList.toggle('off', !isMusicPlaying);
+        btn.innerText = isMusicPlaying ? 'BẬT' : 'TẮT';
     }
 }
 
@@ -828,7 +974,7 @@ function selectAmount(amount, elem) {
 
 async function submitRecharge() {
     sound.play('click');
-    showLoading('Đang kết nối cổng thanh toán SohaGame...');
+    showLoading('Đang kết nối bảo khố...');
     const serial = document.getElementById('pay-serial').value.trim();
     const pin = document.getElementById('pay-pin').value.trim();
 
