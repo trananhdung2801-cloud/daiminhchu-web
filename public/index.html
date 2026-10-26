@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=10">
+    <link rel="stylesheet" href="/css/style.css?v=11">
 </head>
 <body>
     <div id="game-container">
@@ -160,34 +160,47 @@
                 <div class="marquee-text">⚔️ '!SupPerZzz' đã thành công vượt ải giang hồ Linh Thứu Cung... 'Võ Lâm Chí Bảo' mở bảo rương nhận được Đồ Long Đao... Chúc mừng các vị Minh Chủ xuất thế!</div>
             </div>
 
-            <!-- Authentic Top Header Bar -->
-            <div class="game-header-authentic">
-                <div class="header-left-group">
-                    <span id="header-player-name" class="player-wuxia-name">Chưởng Môn</span>
-                    <span id="header-level" style="font-size: 11px; color: #ffd700; font-weight: bold; background: rgba(0,0,0,0.5); padding: 1px 6px; border-radius: 4px; border: 1px solid #b45309;">Lv.1</span>
-                    <span id="header-vip-badge" class="vip-gold-badge">VIP 1</span>
-                    <div style="display: flex; flex-direction: column; width: 60px; margin-left: 2px;">
-                        <div style="background: #292524; height: 4px; border-radius: 2px; overflow: hidden; border: 1px solid #78350f;">
-                            <div id="header-exp-fill" style="background: #22c55e; height: 100%; width: 0%;"></div>
+            <!-- 100% Authentic Top Header Bar (Matching Image 1 & 2) -->
+            <div class="header-profile-authentic">
+                <!-- Left: Level Wheel Badge + Name + Curved EXP Bar -->
+                <div class="header-left-col">
+                    <div class="level-wheel-box">
+                        <span id="header-level" class="level-wheel-text">133</span>
+                    </div>
+                    <div class="header-name-exp-box">
+                        <span id="header-player-name" class="header-player-wuxia-name">Chưởng Môn</span>
+                        <div class="header-exp-curved-bar">
+                            <div id="header-exp-fill" class="header-exp-fill-curved" style="width: 45%;"></div>
+                            <span id="header-exp-text" class="header-exp-num-text">299766/636469</span>
                         </div>
-                        <span id="header-exp-text" style="font-size: 8px; color: #a8a29e; line-height: 8px; margin-top: 1px;">0/100</span>
                     </div>
                 </div>
 
-                <div class="header-right-group">
-                    <div class="curr-badge" title="Vàng (KNB)">
-                        <img src="/assets/res/ico_coin.png" alt="Vàng">
-                        <span id="header-knb">3</span>
+                <!-- Right: Row 1 (VIP, Gold, Stamina) | Row 2 (Silver, Qi, Settings) -->
+                <div class="header-right-col">
+                    <div class="header-stat-row">
+                        <span id="header-vip-badge" class="vip-gold-badge" style="font-size: 11px; padding: 1px 6px;">VIP 3</span>
+                        <div class="header-stat-cell" title="Nguyên Bảo (KNB)">
+                            <img src="/assets/res/ico_coin.png" style="width: 14px; height: 14px;" alt="Vàng">
+                            <span id="header-knb" style="color: #fde047;">760,121</span>
+                        </div>
+                        <div class="header-stat-cell" title="Thể Lực">
+                            <span style="font-size: 13px;">🥋</span>
+                            <span id="header-stamina" style="color: #fca5a5;">29049/30</span>
+                        </div>
                     </div>
-                    <div class="curr-badge" title="Bạc">
-                        <img src="/assets/ui/icon_bac.png" alt="Bạc">
-                        <span id="header-bac">4786534</span>
+
+                    <div class="header-stat-row">
+                        <div class="header-stat-cell" title="Ngân Lượng (Bạc)">
+                            <img src="/assets/ui/icon_bac.png" style="width: 15px; height: 12px;" alt="Bạc">
+                            <span id="header-bac" style="color: #e2e8f0; font-size: 10px;">790,495,280</span>
+                        </div>
+                        <div class="header-stat-cell" title="Khí Lực">
+                            <span style="font-size: 13px;">🧘</span>
+                            <span id="header-qi" style="color: #67e8f9;">114/12</span>
+                        </div>
+                        <button class="btn-hdr-settings" onclick="openSettingsModal()" title="Cài Đặt & Quản Trị GM">⚙️</button>
                     </div>
-                    <div class="stamina-mini" title="Thể Lực">
-                        <span>🍗</span>
-                        <span id="header-stamina">30/30</span>
-                    </div>
-                    <button class="btn-hdr-settings" onclick="openSettingsModal()" title="Cài Đặt & Quản Trị">⚙️</button>
                 </div>
             </div>
 
@@ -200,113 +213,95 @@
             <!-- Content Area -->
             <div class="content-area">
                 <!-- Tab 1: Authentic Disciple Scroll Painting (Tr.chủ) -->
-                <div id="tab-home" class="tab-view">
-                    <div class="scroll-painting-stage">
-                        <!-- Left 3 Equip Slots -->
-                        <div class="equip-column-left">
-                            <div class="equip-slot-box" id="slot-skill-1" onclick="showItemDetail('skill')">
-                                <img src="/assets/images/VC_QuyHoaBaoDien_vo_cong_to.png" alt="Võ Công">
-                                <span class="slot-lvl">1</span>
+                <div id="tab-home" class="tab-view home-authentic-container">
+                    <!-- 1. Disciple Cloud Stage with disciples in formation (Image 1 & 2) -->
+                    <div class="home-cloud-stage">
+                        <div id="home-cloud-disciples" class="home-cloud-disciples-row">
+                            <div class="home-cloud-disciple-item" onclick="openDiscipleDetailModal('NV_DuongQua')" title="Dương Quá">
+                                <img src="/assets/images/NV_DuongQua_ava_to.png" alt="Dương Quá">
                             </div>
-                            <div class="equip-slot-box" id="slot-weapon" onclick="showItemDetail('weapon')">
-                                <img src="/assets/images/VK_DoLongDao_trang_bi_to.png" alt="Vũ Khí">
-                                <span class="slot-lvl">1</span>
+                            <div class="home-cloud-disciple-item" onclick="openDiscipleDetailModal('NV_HoaVoKhuyet')" title="Hoa Vô Khuyết">
+                                <img src="/assets/images/NV_HoaVoKhuyet_ava_to.png" alt="Hoa Vô Khuyết">
                             </div>
-                            <div class="equip-slot-box" id="slot-armor" onclick="showItemDetail('armor')">
-                                <img src="/assets/images/AG_CamVeHoangKimGiap_trang_bi_to.png" alt="Phòng Cụ">
-                                <span class="slot-lvl">2</span>
+                            <div class="home-cloud-disciple-item" onclick="openDiscipleDetailModal('NV_TruongTamPhong')" title="Trương Tam Phong" style="transform: scale(1.08) translateY(-4px); z-index: 5;">
+                                <img src="/assets/images/NV_TruongTamPhong_ava_to.png" alt="Trương Tam Phong">
                             </div>
-                        </div>
-
-                        <!-- Center Cuộn Tranh Trục Thư -->
-                        <div class="disciple-main-scroll">
-                            <!-- Background painting texture -->
-                            <div class="scroll-art-wrapper">
-                                <img id="disciple-scroll-portrait" class="scroll-hero-img" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đệ Tử">
-                                
-                                <!-- Calligraphy Vertical Name -->
-                                <div id="disciple-scroll-calligraphy" class="calligraphy-vertical-name">Đông Phương Bất Bại</div>
-
-                                <!-- Quality Badge -->
-                                <div id="disciple-scroll-quality" class="quality-badge-giap">GIÁP</div>
-
-                                <!-- Level & HP Bar -->
-                                <div class="scroll-level-hp-box">
-                                    <div class="hero-level-tag"><span id="disciple-scroll-level">32</span><small>+0</small></div>
-                                    <div class="scroll-hp-bar">
-                                        <div id="disciple-hp-fill" class="scroll-hp-fill" style="width: 46%;"></div>
-                                        <span id="disciple-hp-text" class="scroll-hp-text">1111/2418</span>
-                                    </div>
-                                </div>
-
-                                <!-- 4 Core Stats Row with Authentic Icons -->
-                                <div class="scroll-stats-quad">
-                                    <div class="stat-quad-item" title="Khí Huyết">
-                                        <span class="stat-icon-blood">🩸</span>
-                                        <span id="stat-val-hp">1021</span>
-                                    </div>
-                                    <div class="stat-quad-item" title="Vũ Lực">
-                                        <span class="stat-icon-sword">⚔️</span>
-                                        <span id="stat-val-atk">862</span>
-                                    </div>
-                                    <div class="stat-quad-item" title="Hộ Thể">
-                                        <span class="stat-icon-shield">🛡️</span>
-                                        <span id="stat-val-def">381</span>
-                                    </div>
-                                    <div class="stat-quad-item" title="Nội Lực">
-                                        <span class="stat-icon-inner">⚡</span>
-                                        <span id="stat-val-inner">548</span>
-                                    </div>
-                                </div>
-
-                                <!-- 6 Synergy Bonds (Duyên Phận) -->
-                                <div id="disciple-synergy-grid" class="synergy-bonds-grid">
-                                    <div class="synergy-bond-item active">• Ma giáo lãnh tụ</div>
-                                    <div class="synergy-bond-item">• Bất bại thần thoại</div>
-                                    <div class="synergy-bond-item active">• Quỳ hoa bảo điển</div>
-                                    <div class="synergy-bond-item">• Hồng châm tả lực</div>
-                                    <div class="synergy-bond-item">• Tham Lang thôn nhật</div>
-                                    <div class="synergy-bond-item active">• Cùng hung cực ác</div>
-                                </div>
-
-                                <!-- Scroll Footer: Giá trị & Action Buttons (img_28, img_35, img_36) -->
-                                <div class="scroll-footer-bar">
-                                    <div class="disciple-value-tag">
-                                        Giá trị : <span id="disciple-scroll-value" style="color: #ffd700; font-weight: bold;">6993 Vàng</span>
-                                    </div>
-                                    <div class="scroll-action-btns">
-                                        <button class="btn-mini-boiduong" onclick="openBoiDuongModal()">Bồi Dưỡng</button>
-                                        <button class="btn-mini-action" onclick="openKinhMachModal()">Kinh Mạch</button>
-                                        <button class="btn-mini-action" onclick="openTayDuyenModal()">Tẩy Duyên</button>
-                                        <button class="btn-mini-action" onclick="openBeQuanModal()">Bế Quan</button>
-                                    </div>
-                                    <div class="chan-khi-orb-btn" onclick="openKinhMachModal()">
-                                        <img src="/assets/ui/chan_khi_01.png" class="chan-khi-glow anim-rotate-spinner" alt="Chân Khí">
-                                        <span>Chân Khí</span>
-                                    </div>
-                                </div>
+                            <div class="home-cloud-disciple-item" onclick="openDiscipleDetailModal('NV_QuachTinh')" title="Quách Tĩnh">
+                                <img src="/assets/images/NV_QuachTinh_ava_to.png" alt="Quách Tĩnh">
                             </div>
-                        </div>
-
-                        <!-- Right 3 Equip Slots -->
-                        <div class="equip-column-right">
-                            <div class="equip-slot-box" id="slot-trinket" onclick="showItemDetail('trinket')">
-                                <img src="/assets/images/VK_KimXaKiem_trang_bi_to.png" alt="Ám Khí">
-                                <span class="slot-lvl">49</span>
-                            </div>
-                            <div class="equip-slot-box" id="slot-robe" onclick="showItemDetail('robe')">
-                                <img src="/assets/images/AG_DaHanhY_trang_bi_to.png" alt="Y Phục">
-                                <span class="slot-lvl">51</span>
-                            </div>
-                            <div class="equip-slot-box" id="slot-skill-2" onclick="showItemDetail('book')">
-                                <img src="/assets/images/VC_DocCoCuuKiem_vo_cong_to.png" alt="Tâm Pháp">
-                                <span class="slot-lvl">49</span>
+                            <div class="home-cloud-disciple-item" onclick="openDiscipleDetailModal('NV_DongPhuongBatBai')" title="Đông Phương Bất Bại">
+                                <img src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đông Phương Bất Bại">
                             </div>
                         </div>
                     </div>
+
+                    <!-- 2. Six Carved Wooden Buttons (2x3) (Image 1 & 2) -->
+                    <div class="home-core-features-grid">
+                        <button class="home-wood-btn" onclick="openDiscipleDetailModal()" title="Đệ tử">
+                            <img src="/assets/ui/home_authentic/btn_detu.png" alt="Đệ tử">
+                        </button>
+                        <button class="home-wood-btn" onclick="openTinhLuyenModal()" title="Trang bị">
+                            <img src="/assets/ui/home_authentic/btn_trangbi.png" alt="Trang bị">
+                        </button>
+                        <button class="home-wood-btn" onclick="openThanTienTyTyModal()" title="Võ công">
+                            <img src="/assets/ui/home_authentic/btn_vocong.png" alt="Võ công">
+                        </button>
+                        <button class="home-wood-btn" onclick="openKinhMachModal()" title="Kinh Mạch">
+                            <img src="/assets/ui/home_authentic/btn_kinhmach.png" alt="Kinh Mạch">
+                        </button>
+                        <button class="home-wood-btn" onclick="openChanKhiModal()" title="Chân khí">
+                            <img src="/assets/ui/home_authentic/btn_chankhi.png" alt="Chân khí">
+                        </button>
+                        <button class="home-wood-btn" onclick="openTayDuyenModal()" title="Khẩu quyết">
+                            <img src="/assets/ui/home_authentic/btn_khauquyet.png" alt="Khẩu quyết">
+                        </button>
+                    </div>
+
+                    <!-- 3. Six Activity Big Icons (2x3) (Image 1 & 2) -->
+                    <div class="home-activities-grid">
+                        <button class="home-activity-btn" onclick="openLongChauModal()" title="Long Châu">
+                            <img src="/assets/ui/home_authentic/icon_longchau.png" alt="Long Châu">
+                        </button>
+                        <button class="home-activity-btn" onclick="openLienServerModal()" title="Liên Server">
+                            <img src="/assets/ui/home_authentic/icon_lienserver.png" alt="Liên Server">
+                        </button>
+                        <button class="home-activity-btn" onclick="switchTab('luankiem')" title="Luận kiếm Liên Cụm">
+                            <img src="/assets/ui/home_authentic/icon_luankiemliencum.png" alt="Luận kiếm Liên Cụm">
+                        </button>
+                        <button class="home-activity-btn" onclick="openAmKhiModal()" title="Ám khí">
+                            <img src="/assets/ui/home_authentic/icon_amkhi.png" alt="Ám khí">
+                        </button>
+                        <button class="home-activity-btn" onclick="openGiftcodeModal()" title="Fanpage">
+                            <img src="/assets/ui/home_authentic/icon_fanpage.png" alt="Fanpage">
+                        </button>
+                        <button class="home-activity-btn" onclick="openLienMinhModal()" title="Liên minh">
+                            <img src="/assets/ui/home_authentic/icon_lienminh.png" alt="Liên minh">
+                        </button>
+                    </div>
+
+                    <!-- 4. Six Utility Square Buttons (1x6) (Image 1 & 2) -->
+                    <div class="home-utilities-bar">
+                        <button class="home-util-btn" onclick="switchTab('items')" title="Tay nải">
+                            <img src="/assets/ui/home_authentic/btn_taynai.png" alt="Tay nải">
+                        </button>
+                        <button class="home-util-btn" onclick="openTopServerModal()" title="Võ lâm phổ">
+                            <img src="/assets/ui/home_authentic/btn_volampho.png" alt="Võ lâm phổ">
+                        </button>
+                        <button class="home-util-btn" onclick="openMailModal()" title="Truyền thư">
+                            <img src="/assets/ui/home_authentic/btn_truyenthu.png" alt="Truyền thư">
+                        </button>
+                        <button class="home-util-btn" onclick="openAnOanModal()" title="Ân oán">
+                            <img src="/assets/ui/home_authentic/btn_an_oan.png" alt="Ân oán">
+                        </button>
+                        <button class="home-util-btn" onclick="openChatModal()" title="Trò chuyện">
+                            <img src="/assets/ui/home_authentic/btn_trochuyen.png" alt="Trò chuyện">
+                        </button>
+                        <button class="home-util-btn" onclick="openSettingsModal()" title="Cài đặt">
+                            <img src="/assets/ui/home_authentic/btn_caidat.png" alt="Cài đặt">
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Tab 2: Authentic Bát Quái Trận Hình & Thất Tinh Trận (img_15 & img_30) -->
                 <div id="tab-formation" class="tab-view" style="display: none;">
                     <div class="formation-power-banner">
                         <div class="power-tag">Tổng Trị : <span id="formation-total-power" style="color: #ffd700; font-weight: 900;">2.524.651</span></div>
@@ -535,42 +530,31 @@
             </div>
 
             <!-- Authentic 8-Tab Bottom Navigation Bar (Matching Image 2 & 3) -->
-            <div class="bottom-bar-authentic">
-                <button class="tab-btn-auth active" data-tab="home" onclick="switchTab('home')">
-                    <img src="/assets/ui/home_03_09.png" alt="Trang Chủ">
-                    <span>Tr.chủ</span>
+            <div class="bottom-nav-bar-authentic">
+                <button class="bottom-tab-auth-btn active" data-tab="home" onclick="switchTab('home')" title="Trang Chủ">
+                    <img src="/assets/ui/home_authentic/tab_trangchu.png" alt="Tr.chủ">
                 </button>
-                <button class="tab-btn-auth" data-tab="formation" onclick="switchTab('formation')">
-                    <img src="/assets/ui/home_03_20.png" alt="Dàn Trận">
-                    <span>D.trận</span>
+                <button class="bottom-tab-auth-btn" data-tab="formation" onclick="switchTab('formation')" title="Dàn Trận">
+                    <img src="/assets/ui/home_authentic/tab_dantran.png" alt="D.trận">
                 </button>
-                <button class="tab-btn-auth" data-tab="giangho" onclick="switchTab('giangho')">
-                    <img src="/assets/ui/home_03_27.png" alt="Giang Hồ">
-                    <span>Gi.hồ</span>
+                <button class="bottom-tab-auth-btn" data-tab="giangho" onclick="switchTab('giangho')" title="Giang Hồ">
+                    <img src="/assets/ui/home_authentic/tab_giangho.png" alt="Gi.hồ">
                 </button>
-                <button class="tab-btn-auth" data-tab="luyencong" onclick="switchTab('luyencong')">
-                    <img src="/assets/ui/home_02_66.png" alt="Luyện Công">
-                    <span>L.công</span>
+                <button class="bottom-tab-auth-btn" data-tab="luyencong" onclick="switchTab('luyencong')" title="Luyện Công">
+                    <img src="/assets/ui/home_authentic/tab_luyencong.png" alt="L.công">
                 </button>
-                <button class="tab-btn-auth" data-tab="recruit" onclick="switchTab('recruit')">
-                    <img src="/assets/ui/home_02_70.png" alt="Kỳ Ngộ">
-                    <span>Kỳ ngộ</span>
+                <button class="bottom-tab-auth-btn" data-tab="recruit" onclick="switchTab('recruit')" title="Kỳ Ngộ">
+                    <img src="/assets/ui/home_authentic/tab_kyngo.png" alt="Kỳ ngộ">
                 </button>
-                <button class="tab-btn-auth" data-tab="market" onclick="switchTab('market')">
-                    <img src="/assets/ui/home_03_34.png" alt="Chợ">
-                    <span>Chợ</span>
+                <button class="bottom-tab-auth-btn" data-tab="market" onclick="switchTab('market')" title="Chợ">
+                    <img src="/assets/ui/home_authentic/tab_cho.png" alt="Chợ">
                 </button>
-                <button class="tab-btn-auth" data-tab="luankiem" onclick="switchTab('luankiem')">
-                    <img src="/assets/ui/home_02_72.png" alt="Luận Kiếm">
-                    <span>L.kiếm</span>
+                <button class="bottom-tab-auth-btn" data-tab="luankiem" onclick="switchTab('luankiem')" title="Luận Kiếm">
+                    <img src="/assets/ui/home_authentic/tab_luankiem_full.png" alt="L.kiếm">
                 </button>
-                <button class="tab-btn-auth" data-tab="items" onclick="switchTab('items')">
-                    <img src="/assets/ui/home_03_42.png" alt="Cứu Minh">
-                    <span>C.minh</span>
+                <button class="bottom-tab-auth-btn" data-tab="lienminh" onclick="openLienMinhModal()" title="Liên Minh">
+                    <img src="/assets/ui/home_authentic/tab_lienminh_full.png" alt="L.Minh">
                 </button>
-                
-                <!-- Watermark Logo Seal in Bottom Right Corner -->
-                <img class="bottom-watermark-logo" src="/assets/ui/login_06.png" alt="Đại Minh Chủ">
             </div>
         </div>
 
@@ -1383,6 +1367,262 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=10"></script>
+    
+    <!-- ================= MODAL CUỘN TRANH TRỤC THƯ ĐỆ TỬ ================= -->
+    <div id="disciple-detail-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 480px; padding: 6px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">📜</span>
+                    <span class="dialog-title">CHI TIẾT ĐỆ TỬ - TRỤC THƯ KIM DUNG</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeDiscipleDetailModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll" style="padding: 4px;">
+                <div class="scroll-painting-stage" style="margin: 0 auto;">
+                    <!-- Left 3 Equip Slots -->
+                    <div class="equip-column-left">
+                        <div class="equip-slot-box" id="slot-skill-1" onclick="showItemDetail('skill')">
+                            <img src="/assets/images/VC_QuyHoaBaoDien_vo_cong_to.png" alt="Võ Công">
+                            <span class="slot-lvl">1</span>
+                        </div>
+                        <div class="equip-slot-box" id="slot-weapon" onclick="showItemDetail('weapon')">
+                            <img src="/assets/images/VK_DoLongDao_trang_bi_to.png" alt="Vũ Khí">
+                            <span class="slot-lvl">1</span>
+                        </div>
+                        <div class="equip-slot-box" id="slot-armor" onclick="showItemDetail('armor')">
+                            <img src="/assets/images/AG_CamVeHoangKimGiap_trang_bi_to.png" alt="Phòng Cụ">
+                            <span class="slot-lvl">2</span>
+                        </div>
+                    </div>
+
+                    <!-- Center Cuộn Tranh Trục Thư -->
+                    <div class="disciple-main-scroll">
+                        <div class="scroll-art-wrapper">
+                            <img id="disciple-scroll-portrait" class="scroll-hero-img" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đệ Tử">
+                            <div id="disciple-scroll-calligraphy" class="calligraphy-vertical-name">Đông Phương Bất Bại</div>
+                            <div id="disciple-scroll-quality" class="quality-badge-giap">GIÁP</div>
+
+                            <div class="scroll-level-hp-box">
+                                <div class="hero-level-tag"><span id="disciple-scroll-level">32</span><small>+0</small></div>
+                                <div class="scroll-hp-bar">
+                                    <div id="disciple-hp-fill" class="scroll-hp-fill" style="width: 46%;"></div>
+                                    <span id="disciple-hp-text" class="scroll-hp-text">1111/2418</span>
+                                </div>
+                            </div>
+
+                            <div class="scroll-stats-quad">
+                                <div class="stat-quad-item" title="Khí Huyết">
+                                    <span class="stat-icon-blood">🩸</span>
+                                    <span id="stat-val-hp">1021</span>
+                                </div>
+                                <div class="stat-quad-item" title="Vũ Lực">
+                                    <span class="stat-icon-sword">⚔️</span>
+                                    <span id="stat-val-atk">862</span>
+                                </div>
+                                <div class="stat-quad-item" title="Hộ Thể">
+                                    <span class="stat-icon-shield">🛡️</span>
+                                    <span id="stat-val-def">381</span>
+                                </div>
+                                <div class="stat-quad-item" title="Nội Lực">
+                                    <span class="stat-icon-inner">⚡</span>
+                                    <span id="stat-val-inner">548</span>
+                                </div>
+                            </div>
+
+                            <div id="disciple-synergy-grid" class="synergy-bonds-grid">
+                                <div class="synergy-bond-item active">• Ma giáo lãnh tụ</div>
+                                <div class="synergy-bond-item">• Bất bại thần thoại</div>
+                                <div class="synergy-bond-item active">• Quỳ hoa bảo điển</div>
+                                <div class="synergy-bond-item">• Hồng châm tả lực</div>
+                                <div class="synergy-bond-item">• Tham Lang thôn nhật</div>
+                                <div class="synergy-bond-item active">• Cùng hung cực ác</div>
+                            </div>
+
+                            <div class="scroll-footer-bar">
+                                <div class="disciple-value-tag">
+                                    Giá trị : <span id="disciple-scroll-value" style="color: #ffd700; font-weight: bold;">6993 Vàng</span>
+                                </div>
+                                <div class="scroll-action-btns">
+                                    <button class="btn-mini-boiduong" onclick="openBoiDuongModal()">Bồi Dưỡng</button>
+                                    <button class="btn-mini-action" onclick="openKinhMachModal()">Kinh Mạch</button>
+                                    <button class="btn-mini-action" onclick="openTayDuyenModal()">Tẩy Duyên</button>
+                                    <button class="btn-mini-action" onclick="openBeQuanModal()">Bế Quan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right 3 Equip Slots -->
+                    <div class="equip-column-right">
+                        <div class="equip-slot-box" id="slot-trinket" onclick="showItemDetail('trinket')">
+                            <img src="/assets/images/VK_KimXaKiem_trang_bi_to.png" alt="Ám Khí">
+                            <span class="slot-lvl">49</span>
+                        </div>
+                        <div class="equip-slot-box" id="slot-robe" onclick="showItemDetail('robe')">
+                            <img src="/assets/images/AG_DaHanhY_trang_bi_to.png" alt="Y Phục">
+                            <span class="slot-lvl">51</span>
+                        </div>
+                        <div class="equip-slot-box" id="slot-skill-2" onclick="showItemDetail('book')">
+                            <img src="/assets/images/VC_DocCoCuuKiem_vo_cong_to.png" alt="Tâm Pháp">
+                            <span class="slot-lvl">49</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL LONG CHÂU ================= -->
+    <div id="longchau-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/icon_longchau.png" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="dialog-title">THẤT TINH LONG CHÂU</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeLongChauModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll" style="text-align: center;">
+                <div style="margin-bottom: 12px;">
+                    <img src="/assets/ui/LongChau_HoangKim.png" style="width: 80px; height: 80px; filter: drop-shadow(0 0 10px #f59e0b);">
+                    <h3 style="color: #ffd700; font-size: 15px; margin-top: 6px;">Hoàng Kim Long Châu</h3>
+                    <p style="font-size: 11px; color: #fed7aa;">Hấp thụ linh khí nhật nguyệt, tăng <b>+25% Toàn Thuộc Tính</b> cho toàn bộ đệ tử xuất trận!</p>
+                </div>
+                <div style="display: flex; justify-content: space-around; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 12px;">
+                    <div>Cấp Long Châu: <b style="color: #ffd700;">Lv.7</b></div>
+                    <div>Thuộc tính ẩn: <b style="color: #86efac;">+15% Bạo Kích</b></div>
+                </div>
+                <button class="btn-wuxia-gold" style="width: 180px; height: 38px; font-size: 12px;" onclick="alert('Long Châu đã kích hoạt viên mãn!')">✨ LUYỆN LONG CHÂU</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL LIÊN SERVER ================= -->
+    <div id="lienserver-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/icon_lienserver.png" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="dialog-title">ĐẠI CHIẾN LIÊN SERVER</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeLienServerModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll" style="text-align: center;">
+                <p style="font-size: 12px; color: #ffd700; margin-bottom: 12px;">Đấu trường liên cụm máy chủ mở vào 21:00 hàng ngày!</p>
+                <div class="spending-tier-item">
+                    <div>
+                        <b style="color: #ffd700;">S1. Thái Sơn Bắc Đẩu</b>
+                        <small style="display: block; color: #a8a29e;">Chiến lực: 88.500.000</small>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 80px; height: 30px; font-size: 10px;" onclick="triggerTestBattle()">Tỉ Thí</button>
+                </div>
+                <div class="spending-tier-item">
+                    <div>
+                        <b style="color: #ffd700;">S2. Hoa Sơn Kiếm Thánh</b>
+                        <small style="display: block; color: #a8a29e;">Chiến lực: 82.100.000</small>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 80px; height: 30px; font-size: 10px;" onclick="triggerTestBattle()">Tỉ Thí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL ÁM KHÍ ================= -->
+    <div id="amkhi-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/icon_amkhi.png" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="dialog-title">ÁM KHÍ ĐƯỜNG MÔN</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeAmKhiModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll" style="text-align: center;">
+                <img src="/assets/ui/AmKhi_1.png" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 8px;">
+                <h3 style="color: #ffd700; font-size: 14px;">Bạo Vũ Lê Hoa Châm</h3>
+                <p style="font-size: 11px; color: #fed7aa; margin: 4px 0 12px;">Xuất kỳ bất ý, bắn độc châm gây sát thương toàn thể phe địch!</p>
+                <button class="btn-wuxia-gold" style="width: 160px; height: 36px; font-size: 11px;" onclick="alert('Đã trang bị Ám Khí xuất trận!')">TRANG BỊ ÁM KHÍ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL TRUYỀN THƯ / HÒM THƯ ================= -->
+    <div id="mail-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/btn_truyenthu.png" style="width: 24px; height: 24px;">
+                    <span class="dialog-title">TRUYỀN THƯ GIANG HỒ</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeMailModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll">
+                <div class="spending-tier-item">
+                    <div>
+                        <b style="color: #ffd700;">[Thư Bồ Câu] Quà Chào Mừng Chưởng Môn</b>
+                        <small style="display: block; color: #a8a29e;">Kính gửi chưởng môn món quà khai mở võ lâm!</small>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 75px; height: 28px; font-size: 10px;" onclick="alert('Đã nhận quà thư bồ câu!')">Nhận</button>
+                </div>
+                <div class="spending-tier-item">
+                    <div>
+                        <b style="color: #ffd700;">[Thư Bang Hội] Chiến Tích Boss Thần Điêu</b>
+                        <small style="display: block; color: #a8a29e;">Thần Điêu xuất thế, toàn server kích sát!</small>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 75px; height: 28px; font-size: 10px;" onclick="alert('Đã nhận!')">Nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL ÂN OÁN GIANG HỒ ================= -->
+    <div id="an-oan-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/btn_an_oan.png" style="width: 24px; height: 24px;">
+                    <span class="dialog-title">ÂN OÁN & CỪU NHÂN VÕ LÂM</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeAnOanModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll">
+                <p style="font-size: 11px; color: #fed7aa; margin-bottom: 8px;">Ghi chép cừu nhân đã cướp tiêu hoặc khiêu chiến môn phái:</p>
+                <div class="spending-tier-item">
+                    <div>
+                        <b style="color: #f87171;">Phúc Oai Tiêu Cục (Cừu Địch)</b>
+                        <small style="display: block; color: #a8a29e;">Đã cướp 35.000 Bạc của chưởng môn hôm nay</small>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 80px; height: 30px; font-size: 10px;" onclick="triggerTestBattle()">Báo Thù</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL TRÒ CHUYỆN (CHAT) ================= -->
+    <div id="chat-modal" class="modal-overlay">
+        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+            <div class="dialog-header-bar">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <img src="/assets/ui/home_authentic/btn_trochuyen.png" style="width: 24px; height: 24px;">
+                    <span class="dialog-title">KÊNH CHAT THẾ GIỚI</span>
+                </div>
+                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeChatModal()" alt="Đóng">
+            </div>
+            <div class="dialog-body-scroll">
+                <div style="background: rgba(0,0,0,0.5); padding: 8px; border-radius: 6px; min-height: 140px; margin-bottom: 10px; font-size: 11px;">
+                    <div style="color: #ffd700; margin-bottom: 4px;"><b>[Thế Giới] S1.Đạt Ma:</b> Chúc mừng chưởng môn đã xuất thế!</div>
+                    <div style="color: #38bdf8; margin-bottom: 4px;"><b>[Liên Minh] Trương Tam Phong:</b> Tối nay 20h58 săn Boss Thần Điêu nhé anh em!</div>
+                    <div style="color: #fca5a5; margin-bottom: 4px;"><b>[Cừu Hận] Tây Môn Xuy Tuyết:</b> Ai dám qua Vô Lượng Sơn tỷ thí với ta?</div>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                    <input type="text" placeholder="Nhập tin nhắn võ lâm..." style="flex: 1; padding: 6px 10px; background: #1c1917; border: 1px solid #78350f; color: #fff; border-radius: 4px;">
+                    <button class="btn-wuxia-gold" style="width: 70px; height: 34px; font-size: 11px;" onclick="alert('Đã gửi tin nhắn!')">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/game.js?v=11"></script>
 </body>
 </html>

@@ -151,6 +151,9 @@ function updateHeader() {
 
     const staminaEl = document.getElementById('header-stamina');
     if (staminaEl) staminaEl.innerText = `${time.LuotNV ?? 30}/${time.LuotNVMax || 30}`;
+
+    const qiEl = document.getElementById('header-qi');
+    if (qiEl) qiEl.innerText = `${time.LuotTD ?? 12}/${time.LuotTDMax || 12}`;
 }
 
 function switchScreen(screenId) {
@@ -176,8 +179,7 @@ function switchTab(tabName) {
 function renderCurrentTab() {
     switch (GameState.activeTab) {
         case 'home':
-            renderTopCarousel();
-            renderScrollPainting();
+            renderHomeCloudDisciples();
             break;
         case 'formation':
             renderFormation();
@@ -2088,6 +2090,122 @@ async function doExploreKhoBau(map) {
         hideLoading();
         alert('Lỗi kết nối máy chủ!');
     }
+}
+
+
+// ================= AUTHENTIC HOME HELPERS =================
+function renderHomeCloudDisciples() {
+    const container = document.getElementById('home-cloud-disciples');
+    if (!container || !GameState.playerData || !GameState.playerData.NhanVat) return;
+
+    container.innerHTML = '';
+    const disciples = GameState.playerData.NhanVat.slice(0, 5);
+
+    disciples.forEach((nv, idx) => {
+        const code = nv.name || nv.Code;
+        const cfg = getDiscipleCfg(code);
+
+        const item = document.createElement('div');
+        item.className = 'home-cloud-disciple-item';
+        // Give center disciple slight elevation
+        if (idx === Math.floor(disciples.length / 2)) {
+            item.style.transform = 'scale(1.08) translateY(-4px)';
+            item.style.zIndex = '5';
+        }
+        item.onclick = () => openDiscipleDetailModal(code);
+        item.title = cfg.TenHienThi || code;
+
+        const img = document.createElement('img');
+        img.src = getAvatarUrl(code);
+        img.onerror = () => { img.src = '/assets/images/NV_QuachTinh_ava_to.png'; };
+        item.appendChild(img);
+
+        container.appendChild(item);
+    });
+}
+
+function openDiscipleDetailModal(code) {
+    sound.play('click');
+    const modal = document.getElementById('disciple-detail-modal');
+    if (!modal) return;
+    if (code && GameState.playerData && GameState.playerData.NhanVat) {
+        const found = GameState.playerData.NhanVat.find(d => (d.name || d.Code) === code);
+        if (found) GameState.selectedDiscipleId = found.id || found.Id;
+    }
+    renderScrollPainting();
+    modal.classList.add('active');
+}
+
+function closeDiscipleDetailModal() {
+    sound.play('click');
+    const modal = document.getElementById('disciple-detail-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openLongChauModal() {
+    sound.play('click');
+    const modal = document.getElementById('longchau-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeLongChauModal() {
+    sound.play('click');
+    const modal = document.getElementById('longchau-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openLienServerModal() {
+    sound.play('click');
+    const modal = document.getElementById('lienserver-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeLienServerModal() {
+    sound.play('click');
+    const modal = document.getElementById('lienserver-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openAmKhiModal() {
+    sound.play('click');
+    const modal = document.getElementById('amkhi-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeAmKhiModal() {
+    sound.play('click');
+    const modal = document.getElementById('amkhi-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openMailModal() {
+    sound.play('click');
+    const modal = document.getElementById('mail-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeMailModal() {
+    sound.play('click');
+    const modal = document.getElementById('mail-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openAnOanModal() {
+    sound.play('click');
+    const modal = document.getElementById('an-oan-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeAnOanModal() {
+    sound.play('click');
+    const modal = document.getElementById('an-oan-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function openChatModal() {
+    sound.play('click');
+    const modal = document.getElementById('chat-modal');
+    if (modal) modal.classList.add('active');
+}
+function closeChatModal() {
+    sound.play('click');
+    const modal = document.getElementById('chat-modal');
+    if (modal) modal.classList.remove('active');
 }
 
 // Init Game on Load
