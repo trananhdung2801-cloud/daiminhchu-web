@@ -169,6 +169,21 @@ function handleHttpRequest(req, res) {
                 case 'get_server_rankings':
                     result = webApi.getServerRankings(body);
                     break;
+                case 'vantieu_action':
+                    result = webApi.vantieuAction(body);
+                    break;
+                case 'boss_thandieu_action':
+                    result = webApi.bossThanDieuAction(body);
+                    break;
+                case 'thantientyty_action':
+                    result = webApi.thanTienTyTyAction(body);
+                    break;
+                case 'tinhluyen_action':
+                    result = webApi.tinhLuyenAction(body);
+                    break;
+                case 'khobau_action':
+                    result = webApi.khobauAction(body);
+                    break;
                 default:
                     return sendJson(res, 404, result);
             }
