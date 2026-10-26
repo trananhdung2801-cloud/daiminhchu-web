@@ -1,0 +1,2916 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #080605 url('/assets/ui/background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #e5e5e5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    max-height: 800px;
+    background: url('/assets/ui/background.png') no-repeat center top;
+    background-size: cover;
+    border: 3px solid #73502b;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(212, 175, 55, 0.25);
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ================= AUTHENTIC TOP HEADER ================= */
+.game-header {
+    background: url('/assets/ui/home_03_03.png') no-repeat center center;
+    background-size: 100% 100%;
+    height: 76px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    flex-shrink: 0;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-level {
+    background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%);
+    color: #261605;
+    font-weight: 900;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid #ffe066;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.player-name {
+    font-weight: 900;
+    font-size: 14px;
+    color: #fffae6;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.currencies {
+    display: flex;
+    gap: 8px;
+}
+
+.currency-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(18, 12, 8, 0.85);
+    padding: 2px 7px;
+    border-radius: 12px;
+    border: 1px solid #735338;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.coin-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.currency-knb {
+    color: #ffde59;
+}
+
+.currency-bac {
+    color: #e2e8f0;
+}
+
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.exp-bar-container {
+    flex: 1;
+    height: 9px;
+    background: #1a100a;
+    border-radius: 5px;
+    border: 1px solid #5a3c26;
+    overflow: hidden;
+    position: relative;
+    margin-right: 10px;
+}
+
+.exp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff8800, #ffcc00);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.stamina-badge {
+    color: #86efac;
+    font-weight: bold;
+    background: rgba(15, 23, 12, 0.85);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid #166534;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+}
+
+/* ================= CONTENT AREA ================= */
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    position: relative;
+}
+
+.content-area::-webkit-scrollbar {
+    width: 4px;
+}
+.content-area::-webkit-scrollbar-thumb {
+    background: #73502b;
+    border-radius: 2px;
+}
+
+/* ================= AUTHENTIC BOTTOM NAVIGATION ================= */
+.game-nav {
+    display: flex;
+    background: #140d09 url('/assets/ui/home_02_09.png') no-repeat center center;
+    background-size: 100% 100%;
+    height: 64px;
+    border-top: 2px solid #8c6031;
+    z-index: 10;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.8);
+    flex-shrink: 0;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    background: transparent;
+    border: none;
+    color: #bfa58a;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.nav-item .nav-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: transform 0.15s;
+}
+
+.nav-item.active {
+    color: #ffd700;
+    background: radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+}
+
+.nav-item.active .nav-icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 6px #ffd700);
+}
+
+/* ================= SCREENS ================= */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= LOGIN SCREEN ================= */
+.login-screen-bg {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(circle at 50% 30%, rgba(30, 20, 15, 0.4) 0%, rgba(10, 6, 4, 0.95) 100%);
+}
+
+.login-dragon-logo {
+    width: 85%;
+    max-width: 320px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+}
+
+.login-card-panel {
+    width: 90%;
+    max-width: 300px;
+    background: url('/assets/ui/login1_44.png') no-repeat center center;
+    background-size: 100% 100%;
+    padding: 40px 20px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.login-input-wrap {
+    width: 100%;
+    height: 44px;
+    background: url('/assets/ui/login1_46.png') no-repeat center center;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    margin-bottom: 15px;
+}
+
+.login-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-login-game {
+    width: 170px;
+    height: 54px;
+    background: url('/assets/ui/login1_45_03.png') no-repeat center center;
+    background-size: 100% 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 900;
+    color: #2b1704;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+}
+
+.btn-login-game:active {
+    transform: scale(0.96);
+}
+
+/* ================= STARTER SELECTION SHOWCASE (NO OVERFLOW) ================= */
+.starter-showcase-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.starter-title-box {
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.starter-title-box h2 {
+    color: #ffd700;
+    font-size: 18px;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.starter-title-box p {
+    font-size: 11px;
+    color: #d6bc9f;
+}
+
+/* Featured Hero Showcase Card */
+.featured-hero-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    flex: 1;
+    max-height: 380px;
+}
+
+.hero-main-card {
+    width: 172px;
+    height: 255px;
+    background: url('/assets/ui/hang1_nam_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.4);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.hero-main-img {
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 72%;
+    height: 58%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.hero-main-name {
+    position: absolute;
+    bottom: 14%;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 900;
+    color: #fffae6;
+    text-shadow: 1px 1px 3px #000, 0 0 6px #000;
+}
+
+.hero-main-skill {
+    position: absolute;
+    bottom: 6%;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* Details Panel beside the card */
+.hero-details-panel {
+    background: rgba(26, 17, 12, 0.88);
+    border: 1.5px solid #73502b;
+    border-radius: 6px;
+    padding: 10px;
+    flex: 1;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+}
+
+.hero-details-panel h3 {
+    color: #ffd700;
+    font-size: 14px;
+    border-bottom: 1px solid #5a3c22;
+    padding-bottom: 3px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #d6bc9f;
+}
+
+.stat-item b {
+    color: #fffae6;
+}
+
+/* Selector Thumbnails Row */
+.starter-selector-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.starter-thumb-btn {
+    width: 60px;
+    height: 70px;
+    background: rgba(28, 18, 13, 0.9);
+    border: 2px solid #5a3c22;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 3px;
+}
+
+.starter-thumb-btn img {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid #73502b;
+}
+
+.starter-thumb-btn span {
+    font-size: 9px;
+    font-weight: bold;
+    color: #d6bc9f;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.starter-thumb-btn.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 12px #ffd700;
+    transform: translateY(-2px);
+    background: rgba(45, 30, 20, 0.95);
+}
+
+.starter-thumb-btn.selected span {
+    color: #ffd700;
+}
+
+/* Big Gold Action Button */
+.btn-wuxia-gold {
+    background: url('/assets/ui/button1_15.png') no-repeat center center;
+    background-size: 100% 100%;
+    width: 160px;
+    height: 48px;
+    border: none;
+    color: #2b1704;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    transition: transform 0.1s;
+    margin: 4px auto 0;
+}
+
+.btn-wuxia-gold:active {
+    transform: scale(0.96);
+}
+
+/* ================= FORMATION TAB ================= */
+.formation-board {
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, rgba(40, 25, 18, 0.8) 0%, rgba(15, 10, 8, 0.95) 100%);
+    border: 2px solid #5a3c22;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.bat-quai-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.formation-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    position: relative;
+    z-index: 2;
+}
+
+.formation-slot-item {
+    aspect-ratio: 172/255;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #4d3320;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formation-slot-item.occupied {
+    background: url('/assets/ui/hang1_nam_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    border: none;
+}
+
+.slot-order-tag {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 9px;
+    color: #ffd700;
+    font-weight: 900;
+    z-index: 4;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.card-avatar-img {
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 72%;
+    height: 58%;
+    object-fit: contain;
+}
+
+.card-hero-name {
+    position: absolute;
+    bottom: 12%;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 900;
+    color: #fffae6;
+    text-shadow: 1px 1px 2px #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-skill-tag {
+    position: absolute;
+    bottom: 4%;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* ================= DISCIPLES TAB ================= */
+.disciple-scroll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.disciple-banner-item {
+    background: rgba(26, 17, 12, 0.85);
+    border: 1.5px solid #6b4c29;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.disciple-card-mini {
+    width: 55px;
+    height: 80px;
+    background: url('/assets/ui/hang1_nam_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.disciple-card-mini img {
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 72%;
+    height: 58%;
+    object-fit: contain;
+}
+
+.disciple-card-mini.tier-at {
+    background-image: url('/assets/ui/hang2_nam_bkgto.png');
+}
+.disciple-card-mini.tier-binh {
+    background-image: url('/assets/ui/hang3_nam_bkgto.png');
+}
+
+.disciple-info-col {
+    flex: 1;
+}
+
+.disciple-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.disciple-name-row h4 {
+    font-size: 13px;
+    font-weight: 900;
+    color: #fffae6;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.tier-pill {
+    font-size: 9px;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+.tier-pill.giap { background: #854d0e; color: #fef08a; border: 1px solid #fde047; }
+.tier-pill.at { background: #1e40af; color: #bfdbfe; border: 1px solid #93c5fd; }
+.tier-pill.binh { background: #166534; color: #bbf7d0; border: 1px solid #86efac; }
+
+.disciple-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    font-size: 11px;
+    color: #d6bc9f;
+}
+
+/* ================= GIANG HO TAB ================= */
+.giangho-banner {
+    background: url('/assets/ui/giang_ho_19.png') no-repeat center center;
+    background-size: cover;
+    height: 70px;
+    border-radius: 6px;
+    border: 2px solid #73502b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.giangho-banner h3 {
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.mission-row {
+    background: rgba(28, 18, 13, 0.9);
+    border: 1px solid #5a3c22;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mission-row h4 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #fffae6;
+    margin-bottom: 2px;
+}
+
+.mission-row p {
+    font-size: 10px;
+    color: #a8917e;
+    max-width: 240px;
+}
+
+.btn-authentic-fight {
+    width: 86px;
+    height: 36px;
+    background: url('/assets/ui/button1_24.png') no-repeat center center;
+    background-size: 100% 100%;
+    border: none;
+    color: #fff;
+    font-weight: 900;
+    font-size: 11px;
+    text-shadow: 1px 1px 2px #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+    flex-shrink: 0;
+}
+
+.btn-authentic-fight:active {
+    transform: scale(0.95);
+}
+
+/* ================= RECRUIT & ITEMS ================= */
+.recruit-box-item {
+    background: rgba(28, 18, 13, 0.9);
+    border: 2px solid #73502b;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ================= BATTLE ARENA ================= */
+.battle-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000 url('/assets/ui/TuLinh_BG_chiendau.png') no-repeat center center;
+    background-size: cover;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.battle-overlay.active {
+    display: flex;
+}
+
+.battle-arena-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: 8px 0;
+}
+
+.battle-team-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.battle-card-unit {
+    aspect-ratio: 172/255;
+    background: url('/assets/ui/hang1_nam_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    position: relative;
+    border-radius: 4px;
+    transition: transform 0.2s, filter 0.2s;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+    overflow: hidden;
+}
+
+.battle-card-unit.enemy-unit {
+    background-image: url('/assets/ui/hang2_nam_bkgto.png');
+}
+
+.battle-card-unit.dead-unit {
+    filter: grayscale(100%) opacity(30%);
+}
+
+.battle-card-unit.attacking-unit {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 15px #ffd700);
+    z-index: 10;
+}
+
+.battle-card-unit.hit-unit {
+    animation: shake 0.3s;
+    filter: drop-shadow(0 0 15px #ef4444);
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-3px, 0); }
+    50% { transform: translate(3px, -1px); }
+    75% { transform: translate(-2px, 1px); }
+    100% { transform: translate(0, 0); }
+}
+
+.battle-card-avatar {
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 72%;
+    height: 58%;
+    object-fit: contain;
+}
+
+.battle-card-hp-track {
+    position: absolute;
+    bottom: 2%;
+    left: 10%;
+    width: 80%;
+    height: 5px;
+    background: #2b170e;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 0.5px solid #000;
+}
+
+.battle-card-hp-bar {
+    height: 100%;
+    background: #22c55e;
+    width: 100%;
+    transition: width 0.25s;
+}
+
+.battle-card-name-label {
+    position: absolute;
+    bottom: 9%;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 900;
+    color: #fffae6;
+    text-shadow: 1px 1px 2px #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.floating-damage {
+    position: absolute;
+    color: #ff3333;
+    font-weight: 900;
+    font-size: 16px;
+    text-shadow: 0 0 5px #000, 1px 1px 0 #000;
+    animation: floatUp 0.8s ease-out forwards;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.floating-skill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.85);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+    animation: skillPop 1s ease-out forwards;
+    z-index: 60;
+    white-space: nowrap;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-35px); }
+}
+
+@keyframes skillPop {
+    0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+    30% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0; }
+}
+
+/* Victory Popup */
+.battle-victory-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+    background: url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    padding: 30px 20px 20px;
+    text-align: center;
+    z-index: 150;
+    display: none;
+    box-shadow: 0 0 40px rgba(0,0,0,0.95);
+}
+
+.battle-victory-modal.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.victory-banner-img {
+    width: 85%;
+    max-width: 260px;
+    margin-bottom: 8px;
+}
+
+.victory-rewards-box {
+    color: #fffae6;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 2px #000;
+    display: flex;
+    gap: 15px;
+}
+
+/* ================= AUTHENTIC ANDROID ANIMATIONS (res/anim/*.xml) ================= */
+@keyframes anim-shake {
+    0%, 100% { transform: translateX(0); }
+    15%, 45%, 75% { transform: translateX(-6px); }
+    30%, 60%, 90% { transform: translateX(6px); }
+}
+.anim-shake {
+    animation: anim-shake 0.45s ease-in-out;
+}
+
+@keyframes anim-pop-in {
+    0% { transform: scale(0.65); opacity: 0; }
+    70% { transform: scale(1.06); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.anim-pop-in {
+    animation: anim-pop-in 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes anim-pop-out {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.6); opacity: 0; }
+}
+.anim-pop-out {
+    animation: anim-pop-out 0.25s ease-in forwards;
+}
+
+@keyframes anim-zoom-enter {
+    0% { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.anim-zoom-enter {
+    animation: anim-zoom-enter 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes anim-rotate-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.anim-rotate-spinner {
+    animation: anim-rotate-spinner 1s linear infinite;
+}
+
+@keyframes anim-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+.anim-blink {
+    animation: anim-blink 1s ease-in-out infinite;
+}
+
+/* ================= AUTHENTIC LOGIN SCREEN BRANDING ================= */
+.login-brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    background: rgba(20, 14, 10, 0.75);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #735338;
+}
+
+.login-app-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.login-brand-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.game-version {
+    font-size: 11px;
+    color: #ffde59;
+    font-weight: bold;
+}
+
+.game-server {
+    font-size: 11px;
+    color: #a7f3d0;
+}
+
+.login-footer {
+    position: absolute;
+    bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-logos img {
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+}
+
+.footer-client-info {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: monospace;
+}
+
+/* ================= HEADER ACTIONS & AVATAR ================= */
+.header-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    border: 1.5px solid #ffd700;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+    cursor: pointer;
+}
+
+.player-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-right-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-hdr-recharge, .btn-hdr-guide {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    border: 1px solid #d4af37;
+    background: linear-gradient(180deg, #991b1b, #450a0a);
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    transition: transform 0.1s;
+}
+
+.btn-hdr-guide {
+    background: linear-gradient(180deg, #1e3a8a, #0f172a);
+    color: #93c5fd;
+    border-color: #3b82f6;
+}
+
+.btn-hdr-recharge:active, .btn-hdr-guide:active {
+    transform: scale(0.92);
+}
+
+.btn-hdr-recharge img, .btn-hdr-guide img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+/* ================= MODAL BASE STYLING ================= */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(3px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+/* ================= AUTHENTIC PAYMENT DIALOG (dialog_payment.xml) ================= */
+.payment-dialog {
+    width: 100%;
+    max-width: 390px;
+    background: #18120d url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.95), 0 0 15px rgba(212, 175, 55, 0.4);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #8c6031;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.dialog-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.btn-dialog-close {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.btn-dialog-close:hover {
+    transform: scale(1.1);
+}
+
+.card-type-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.card-type-btn {
+    flex: 1;
+    background: rgba(25, 17, 12, 0.85);
+    border: 1px solid #5a3c26;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.card-type-btn img {
+    height: 28px;
+    object-fit: contain;
+}
+
+.card-type-btn.active {
+    border-color: #ffd700;
+    background: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+}
+
+.form-label {
+    font-size: 11px;
+    font-weight: 900;
+    color: #ffde59;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.btn-amount {
+    background: rgba(30, 20, 15, 0.9);
+    border: 1px solid #73502b;
+    border-radius: 6px;
+    color: #fff;
+    padding: 6px 2px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.btn-amount small {
+    color: #ffd700;
+    font-size: 10px;
+}
+
+.btn-amount.active {
+    background: linear-gradient(180deg, #b8860b, #73502b);
+    border-color: #ffd700;
+    color: #000;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.btn-amount.active small {
+    color: #2b1704;
+}
+
+.card-inputs-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+}
+
+.input-field-group label {
+    font-size: 11px;
+    color: #d6bc9f;
+}
+
+.dialog-input {
+    background: rgba(10, 6, 4, 0.85);
+    border: 1px solid #73502b;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #ffd700;
+    font-size: 13px;
+    font-weight: bold;
+    outline: none;
+}
+
+.dialog-input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+}
+
+.pay-result-text {
+    font-size: 12px;
+    color: #86efac;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    white-space: pre-line;
+    min-height: 18px;
+}
+
+/* ================= GUIDE DIALOG (assets/welcome.html) ================= */
+.guide-dialog {
+    width: 100%;
+    max-width: 400px;
+    max-height: 85vh;
+    background: #140d09 url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    box-shadow: 0 0 35px rgba(0,0,0,0.95);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-dialog-body {
+    overflow-y: auto;
+    font-size: 12px;
+    color: #e5d5c5;
+    line-height: 1.5;
+    padding-right: 6px;
+}
+
+.guide-dialog-body h4 {
+    color: #ffd700;
+    margin: 10px 0 4px;
+    font-size: 13px;
+}
+
+.guide-dialog-body ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.guide-dialog-body li {
+    margin-bottom: 8px;
+    background: rgba(25, 17, 12, 0.6);
+    padding: 6px 8px;
+    border-radius: 4px;
+    border-left: 3px solid #b8860b;
+}
+
+/* ================= AUTHENTIC LOADING SPINNER ================= */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-box {
+    background: rgba(20, 14, 10, 0.95);
+    border: 1.5px solid #b8860b;
+    border-radius: 8px;
+    padding: 18px 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.9);
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+#loading-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* ================= FLOATING GM ADMIN TOOL BUTTON ================= */
+.btn-floating-gm {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 999;
+    background: linear-gradient(180deg, #dc2626, #7f1d1d);
+    color: #ffd700;
+    border: 1.5px solid #ffd700;
+    border-radius: 14px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.7), 0 2px 5px rgba(0,0,0,0.8);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-floating-gm:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+}
+
+/* ================= TOP MARQUEE BANNER ================= */
+.top-marquee-banner {
+    width: 100%;
+    height: 22px;
+    background: rgba(15, 10, 7, 0.9);
+    border-bottom: 1px solid #735338;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 22s linear infinite;
+    color: #fef08a;
+    font-size: 11px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px #000;
+}
+
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+/* ================= AUTHENTIC TOP HEADER (MATCHING IMAGE 2 & 3) ================= */
+.game-header-authentic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    padding: 0 10px;
+    background: #19120c url('/assets/ui/home_03_03.png') no-repeat center center;
+    background-size: 100% 100%;
+    border-bottom: 1.5px solid #8c6031;
+    z-index: 10;
+}
+
+.player-wuxia-name {
+    font-family: serif, "Times New Roman", Georgia;
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px #000, 0 0 8px rgba(255, 215, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+.vip-gold-badge {
+    background: linear-gradient(180deg, #ffd700, #b8860b);
+    color: #1e1105;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    margin-left: 6px;
+}
+
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.curr-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fffae6;
+    background: rgba(10, 6, 4, 0.7);
+    padding: 1px 6px;
+    border-radius: 10px;
+    border: 1px solid #5a3c26;
+}
+
+.curr-badge img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.stamina-mini {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: #86efac;
+    font-weight: bold;
+}
+
+/* ================= TOP DISCIPLE CAROUSEL (IMAGE 2 & 3) ================= */
+.disciple-carousel-wrap {
+    display: flex;
+    align-items: center;
+    height: 58px;
+    padding: 3px 8px;
+    background: #140d09;
+    border-bottom: 1.5px solid #73502b;
+    gap: 6px;
+    z-index: 9;
+}
+
+.disciple-carousel-list {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 0;
+}
+
+.disciple-carousel-list::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-thumb-item {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 2px solid #b8860b;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: #25160c;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    transition: transform 0.15s, border-color 0.15s;
+}
+
+.carousel-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-thumb-item.active {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px #ffd700;
+    transform: scale(1.08);
+}
+
+.btn-dan-tran {
+    width: 48px;
+    height: 44px;
+    background: linear-gradient(180deg, #854d0e, #451a03);
+    border: 1.5px solid #ffd700;
+    border-radius: 6px;
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px #000;
+    flex-shrink: 0;
+}
+
+/* ================= AUTHENTIC SCROLL PAINTING STAGE (IMAGE 2 & 3) ================= */
+.scroll-painting-stage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    padding: 4px 0;
+}
+
+/* Left & Right Equip Columns */
+.equip-column-left, .equip-column-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 94%;
+    width: 48px;
+    z-index: 5;
+}
+
+.equip-slot-box {
+    width: 46px;
+    height: 46px;
+    background: url('/assets/ui/vukhi_hang1_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    border-radius: 6px;
+    border: 1.5px solid #8c6031;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.8);
+    transition: transform 0.15s;
+}
+
+.equip-slot-box:hover {
+    transform: scale(1.06);
+    border-color: #ffd700;
+}
+
+.equip-slot-box img {
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+}
+
+.slot-lvl {
+    position: absolute;
+    bottom: 1px;
+    left: 2px;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 900;
+    text-shadow: 1px 1px 2px #000;
+    background: rgba(0,0,0,0.6);
+    padding: 0 3px;
+    border-radius: 2px;
+}
+
+/* Center Cuộn Tranh Trục Thư */
+.disciple-main-scroll {
+    flex: 1;
+    height: 100%;
+    margin: 0 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.scroll-art-wrapper {
+    width: 100%;
+    max-width: 280px;
+    height: 100%;
+    max-height: 480px;
+    background: #e7cbb1 url('/assets/ui/hang1_nam_bkgto.png') no-repeat center center;
+    background-size: 100% 100%;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 15px rgba(212, 175, 55, 0.4);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-hero-img {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 58%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.7));
+}
+
+/* Calligraphy Vertical Name */
+.calligraphy-vertical-name {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    font-family: serif, "Times New Roman";
+    font-size: 15px;
+    font-weight: 900;
+    color: #2b1704;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 2px;
+    text-shadow: 0 0 1px #fff;
+    z-index: 6;
+}
+
+/* Quality Badge [GIÁP] */
+.quality-badge-giap {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #7e22ce, #9333ea);
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1.5px solid #ffd700;
+    box-shadow: 0 0 8px rgba(147, 51, 234, 0.8);
+    z-index: 6;
+}
+
+/* Level & HP Bar */
+.scroll-level-hp-box {
+    position: absolute;
+    top: 56%;
+    left: 12%;
+    width: 76%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 6;
+}
+
+.hero-level-tag {
+    font-size: 13px;
+    font-weight: 900;
+    color: #2b1704;
+    white-space: nowrap;
+}
+
+.hero-level-tag small {
+    font-size: 10px;
+    color: #15803d;
+}
+
+.scroll-hp-bar {
+    flex: 1;
+    height: 12px;
+    background: #2b1704;
+    border-radius: 6px;
+    border: 1px solid #73502b;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-hp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626, #f97316);
+    transition: width 0.3s;
+}
+
+.scroll-hp-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 9px;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    line-height: 12px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* 4 Core Stats Row */
+.scroll-stats-quad {
+    position: absolute;
+    top: 61%;
+    left: 8%;
+    width: 84%;
+    display: flex;
+    justify-content: space-around;
+    background: rgba(43, 23, 4, 0.85);
+    border-radius: 4px;
+    padding: 3px 0;
+    border: 1px solid #8c6031;
+    z-index: 6;
+}
+
+.stat-quad-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #fef08a;
+}
+
+/* 6 Synergy Bonds */
+.synergy-bonds-grid {
+    position: absolute;
+    top: 70%;
+    left: 6%;
+    width: 88%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px 6px;
+    z-index: 6;
+}
+
+.synergy-bond-item {
+    font-size: 10px;
+    color: #78716c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.synergy-bond-item.active {
+    color: #2b1704;
+    font-weight: 900;
+    text-shadow: 0 0 2px rgba(255, 215, 0, 0.6);
+}
+
+/* Scroll Footer */
+.scroll-footer-bar {
+    position: absolute;
+    bottom: 6px;
+    left: 8%;
+    width: 84%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 6;
+}
+
+.disciple-value-tag {
+    font-size: 10px;
+    color: #3f2208;
+    font-weight: bold;
+}
+
+.chan-khi-orb-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chan-khi-glow {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px #38bdf8);
+}
+
+.chan-khi-orb-btn span {
+    font-size: 9px;
+    font-weight: 900;
+    color: #0369a1;
+}
+
+/* ================= AUTHENTIC 8-TAB BOTTOM NAVIGATION BAR (IMAGE 2 & 3) ================= */
+.bottom-bar-authentic {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #140d09 url('/assets/ui/home_02_09.png') no-repeat center center;
+    background-size: 100% 100%;
+    height: 56px;
+    border-top: 2px solid #8c6031;
+    position: relative;
+    z-index: 10;
+    padding: 0 2px;
+}
+
+.tab-btn-auth {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #d6bc9f;
+    cursor: pointer;
+    padding: 2px 0;
+    transition: all 0.15s;
+}
+
+.tab-btn-auth img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.tab-btn-auth span {
+    font-size: 9px;
+    font-weight: 900;
+    margin-top: 1px;
+}
+
+.tab-btn-auth.active {
+    color: #ffd700;
+}
+
+.tab-btn-auth.active img {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 5px #ffd700);
+}
+
+.bottom-watermark-logo {
+    position: absolute;
+    right: 4px;
+    bottom: 2px;
+    height: 26px;
+    object-fit: contain;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ================= AUTHENTIC BATTLE OVERLAY (100% MATCHING IMAGE 1 & VIDEO) ================= */
+.battle-overlay-authentic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 40% 50%, #4a1703 0%, #1c0800 45%, #050201 100%);
+    z-index: 120;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.battle-overlay-authentic.active {
+    display: flex;
+}
+
+.battle-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    padding: 0 12px;
+    background: rgba(10, 4, 2, 0.85);
+    border-bottom: 1.5px solid #d97706;
+    z-index: 20;
+}
+
+.battle-title-text {
+    font-size: 13px;
+    font-weight: 900;
+    color: #fef08a;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.btn-battle-skip {
+    background: linear-gradient(180deg, #b45309, #78350f);
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 3px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.btn-battle-skip:active {
+    transform: scale(0.94);
+}
+
+/* Battle Stage with Horizontal Speed Lines */
+.battle-stage-authentic {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background: url('/assets/ui/TuLinh_BG_chiendau.png') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+/* Attacker Zone (Left) */
+.battle-attacker-zone {
+    width: 48%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.attacker-damage-banner {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 15;
+}
+
+.damage-title {
+    font-family: serif, "Times New Roman";
+    font-size: 22px;
+    font-weight: 900;
+    font-style: italic;
+    color: #fffae6;
+    text-shadow: -2px -2px 0 #7f1d1d, 2px -2px 0 #7f1d1d, -2px 2px 0 #7f1d1d, 2px 2px 0 #7f1d1d, 0 0 10px #dc2626;
+    letter-spacing: 1px;
+}
+
+.damage-number {
+    font-family: serif, "Times New Roman";
+    font-size: 28px;
+    font-weight: 900;
+    color: #fffae6;
+    text-shadow: -2px -2px 0 #991b1b, 2px -2px 0 #991b1b, -2px 2px 0 #991b1b, 2px 2px 0 #991b1b, 0 0 15px #f59e0b;
+    margin-top: -4px;
+}
+
+.attacker-portrait-wrapper {
+    position: relative;
+    width: 190px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dragon-fire-glow {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.7) 0%, rgba(234, 88, 12, 0.35) 45%, transparent 70%);
+    border-radius: 50%;
+    animation: dragonPulse 1.2s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes dragonPulse {
+    0%   { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+.battle-attacker-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 12;
+    filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.8));
+    animation: attackerDash 0.6s ease-out;
+}
+
+@keyframes attackerDash {
+    0%   { transform: translateX(-40px) scale(0.85); opacity: 0; }
+    100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.battle-attacker-name {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* VFX Layer: Fire/Sword projectile */
+.battle-fx-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 14;
+}
+
+.fire-beam-projectile {
+    position: absolute;
+    height: 8px;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    box-shadow: 0 0 12px #f59e0b, 0 0 25px #ef4444;
+    border-radius: 4px;
+    animation: beamShoot 0.4s ease-out forwards;
+}
+
+@keyframes beamShoot {
+    0%   { width: 0; opacity: 1; }
+    100% { width: 180px; opacity: 0; }
+}
+
+/* Vertical Column of 8 Target Enemy Heads (Right Side - Image 1) */
+.battle-targets-column {
+    width: 48%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 12px;
+    z-index: 10;
+}
+
+.targets-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 88%;
+}
+
+.target-head-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 48px;
+    margin: 2px 0;
+    transition: transform 0.15s;
+}
+
+.target-avatar-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    background: #2b1704;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.9), 0 0 5px rgba(212, 175, 55, 0.4);
+    flex-shrink: 0;
+}
+
+.target-avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.target-head-item.dead .target-avatar-circle {
+    filter: grayscale(1) brightness(0.4);
+    border-color: #555;
+}
+
+/* Authentic Damage Calligraphy Float */
+.target-damage-float {
+    position: absolute;
+    right: 50px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-family: serif, "Times New Roman";
+    font-weight: 900;
+    font-size: 20px;
+    color: #ef4444;
+    text-shadow: 1px 1px 2px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 0 6px #7f1d1d;
+    white-space: nowrap;
+    animation: damagePopAnim 0.8s ease-out forwards;
+    pointer-events: none;
+    z-index: 25;
+}
+
+.target-damage-float.crit .crit-tag {
+    font-family: serif, "Times New Roman";
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffd700;
+    font-style: italic;
+    text-shadow: 0 0 8px #f59e0b, 1px 1px 2px #000;
+}
+
+.target-damage-float.crit .dmg-num {
+    color: #ff6b6b;
+    font-size: 24px;
+}
+
+@keyframes damagePopAnim {
+    0%   { transform: scale(0.5) translateX(20px); opacity: 0; }
+    30%  { transform: scale(1.15) translateX(0); opacity: 1; }
+    80%  { transform: scale(1) translateX(-5px); opacity: 1; }
+    100% { transform: scale(0.95) translateX(-10px); opacity: 0; }
+}
+
+/* Bottom Watermark Seal */
+.battle-watermark-seal {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ================= ADMIN GM TOOL MODAL ================= */
+.admin-dialog {
+    width: 100%;
+    max-width: 410px;
+    background: #140d09 url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    border: 2px solid #ef4444;
+    border-radius: 8px;
+    box-shadow: 0 0 35px rgba(239, 68, 68, 0.4), 0 0 50px rgba(0,0,0,0.95);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dialog-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gm-action-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.btn-gm-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(30, 20, 15, 0.9);
+    border: 1px solid #8c6031;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #fffae6;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+}
+
+.btn-gm-btn b {
+    font-size: 13px;
+    color: #fef08a;
+}
+
+.btn-gm-btn small {
+    font-size: 10px;
+    color: #a8a29e;
+}
+
+.btn-gm-btn:hover {
+    background: rgba(60, 30, 20, 0.95);
+    border-color: #ffd700;
+    transform: translateX(3px);
+}
+
+.btn-gm-btn.highlight {
+    border-color: #ffd700;
+    background: linear-gradient(90deg, rgba(126, 34, 206, 0.4), rgba(30, 20, 15, 0.9));
+}
+
+.btn-gm-btn.highlight b {
+    color: #c084fc;
+}
+
+.btn-gm-btn.test-battle-btn {
+    border-color: #ef4444;
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.35), rgba(30, 20, 15, 0.9));
+}
+
+.btn-gm-btn.test-battle-btn b {
+    color: #f87171;
+}
+
+.btn-gm-btn.reset-btn {
+    border-color: #71717a;
+    background: rgba(20, 14, 10, 0.9);
+}
+
+.btn-gm-btn.reset-btn b {
+    color: #d4d4d8;
+}
+
+.gm-result-msg {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #86efac;
+    text-align: center;
+    min-height: 18px;
+    white-space: pre-line;
+}
+
+/* ================= 37 INGAME SCREENSHOT FEATURES STYLING ================= */
+.btn-mini-boiduong {
+    margin-left: 6px;
+    background: linear-gradient(180deg, #b45309, #78350f);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 1px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.formation-power-banner {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(20, 14, 10, 0.9);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #8c6031;
+    margin-bottom: 8px;
+}
+
+.power-tag {
+    font-size: 12px;
+    font-weight: bold;
+    color: #e5e5e5;
+}
+
+.formation-sub-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.sub-tab-btn {
+    flex: 1;
+    padding: 6px;
+    background: rgba(30, 20, 15, 0.8);
+    border: 1px solid #73502b;
+    border-radius: 4px;
+    color: #d6bc9f;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.sub-tab-btn.active {
+    background: linear-gradient(180deg, #991b1b, #450a0a);
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+.thattinh-board {
+    background: rgba(15, 10, 7, 0.85);
+    border: 1px solid #8c6031;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.thattinh-desc {
+    font-size: 11px;
+    color: #fef08a;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.thattinh-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* Ky Ngo Activities (Ăn Gà & Kho Báu - img_04, img_18, img_22) */
+.kyngo-card-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(25, 17, 12, 0.9);
+    border: 1px solid #8c6031;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* Luận Kiếm PvP (img_05, img_24, img_27) */
+.luankiem-header-banner {
+    background: rgba(20, 14, 10, 0.9);
+    border: 1px solid #b45309;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.luankiem-quote {
+    font-family: serif, "Times New Roman";
+    font-style: italic;
+    color: #fef08a;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.luankiem-stats-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px;
+    color: #e5e5e5;
+    background: rgba(0,0,0,0.4);
+    padding: 4px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.luankiem-subtext {
+    font-size: 10px;
+    color: #a8a29e;
+}
+
+.luankiem-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    max-height: 380px;
+}
+
+.luankiem-rank-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(28, 18, 13, 0.9);
+    border: 1px solid #5a3c22;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+.rank-badge-num {
+    width: 24px;
+    height: 24px;
+    background: #ffd700;
+    color: #000;
+    font-weight: 900;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.rank-badge-num.top1 { background: #eab308; box-shadow: 0 0 6px #eab308; }
+.rank-badge-num.top2 { background: #94a3b8; }
+.rank-badge-num.top3 { background: #d97706; }
+
+/* Bag Category Tabs */
+.items-category-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.item-cat-btn {
+    flex: 1;
+    background: rgba(30, 20, 15, 0.8);
+    border: 1px solid #73502b;
+    border-radius: 4px;
+    color: #d6bc9f;
+    padding: 5px 0;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item-cat-btn.active {
+    background: linear-gradient(180deg, #991b1b, #450a0a);
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+/* World Chat Dock (img_13) */
+.world-chat-dock {
+    height: 22px;
+    background: rgba(10, 6, 4, 0.95);
+    border-top: 1px solid #5a3c26;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 10;
+}
+
+.chat-prefix {
+    color: #38bdf8;
+    font-weight: 900;
+}
+
+.chat-content {
+    color: #fef08a;
+    animation: chatTicker 12s linear infinite;
+}
+
+@keyframes chatTicker {
+    0%   { opacity: 0; transform: translateY(4px); }
+    10%  { opacity: 1; transform: translateY(0); }
+    90%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-4px); }
+}
+
+/* ================= BỒI DƯỠNG ĐỆ TỬ DIALOG (img_35) ================= */
+.boiduong-dialog {
+    width: 100%;
+    max-width: 390px;
+    background: #140d09 url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    box-shadow: 0 0 35px rgba(0,0,0,0.95);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.boiduong-dialog-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.boiduong-hint {
+    font-size: 11px;
+    color: #ffd700;
+    text-align: center;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.boiduong-info-card {
+    display: flex;
+    gap: 12px;
+    background: rgba(25, 17, 12, 0.85);
+    border: 1px solid #73502b;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 14px;
+}
+
+.boiduong-avatar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+}
+
+.boiduong-avatar-col img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    object-fit: cover;
+}
+
+.bd-hero-name {
+    font-size: 11px;
+    font-weight: 900;
+    color: #ffd700;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.boiduong-stats-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 11px;
+    color: #e5e5e5;
+}
+
+.bd-dan-count {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #5a3c26;
+    font-size: 11px;
+}
+
+.boiduong-btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.btn-bd-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #854d0e, #451a03);
+    border: 1px solid #ca8a04;
+    border-radius: 6px;
+    padding: 8px 4px;
+    color: #ffd700;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+
+.btn-bd-action small {
+    font-size: 10px;
+    color: #fef08a;
+    margin-top: 2px;
+}
+
+.btn-bd-action.high {
+    background: linear-gradient(180deg, #991b1b, #450a0a);
+    border-color: #ef4444;
+}
+
+.btn-bd-action.high small {
+    color: #fca5a5;
+}
+
+.btn-bd-action:active {
+    transform: scale(0.95);
+}
+
+.bd-result-msg {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #86efac;
+    text-align: center;
+    white-space: pre-line;
+    min-height: 20px;
+}
+
+/* ================= NEW EXPANDED WUXIA MODALS & CONTROLS ================= */
+.scroll-action-btns {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.btn-mini-action {
+    background: linear-gradient(180deg, #5c2f16, #2d1305);
+    border: 1px solid #b45309;
+    color: #fef08a;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.btn-mini-action:active {
+    transform: scale(0.92);
+}
+
+.wuxia-dialog {
+    width: 100%;
+    background: #18120d url('/assets/ui/chien_dau (3).png') no-repeat center center;
+    background-size: 100% 100%;
+    border: 2px solid #b8860b;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.95), 0 0 15px rgba(212, 175, 55, 0.4);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.dialog-body-scroll {
+    overflow-y: auto;
+    max-height: calc(90vh - 60px);
+    padding-right: 4px;
+}
+
+/* Modal 1: Huyết Chiến Hắc Mộc Nhai */
+.hc-status-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+}
+
+.hc-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.hc-buff-tags {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    color: #86efac;
+}
+
+.hc-opponents-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hc-opponent-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(24, 18, 13, 0.85);
+    border: 1px solid #92400e;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 0.1s, border-color 0.2s;
+}
+
+.hc-opponent-card:hover {
+    border-color: #ffd700;
+}
+
+.hc-opponent-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hc-opponent-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid #d97706;
+    object-fit: cover;
+}
+
+.btn-hc-buff {
+    background: linear-gradient(180deg, #78350f, #451a03);
+    border: 1px solid #b45309;
+    color: #fde047;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.hc-buff-actions {
+    display: flex;
+    gap: 6px;
+}
+
+/* Modal 2: Đả Thông Kinh Mạch */
+.km-acupoints-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.km-acupoint-item {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 6px 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.km-acupoint-item:hover, .km-acupoint-item.active {
+    border-color: #ffd700;
+    background: rgba(180, 83, 9, 0.3);
+}
+
+.km-point-name {
+    font-size: 11px;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.km-point-lvl {
+    font-size: 10px;
+    color: #86efac;
+    margin-top: 2px;
+}
+
+.chankhi-equip-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+}
+
+.btn-ck-equip {
+    background: linear-gradient(180deg, #3b0764, #1e1b4b);
+    border: 1px solid #9333ea;
+    color: #e9d5ff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Modal 3: Truyền Công */
+.tc-select-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #78350f;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.tc-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tc-select {
+    width: 100%;
+    background: #291b10;
+    border: 1px solid #b45309;
+    color: #ffd700;
+    font-size: 12px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.tc-medicines-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tc-med-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #78350f;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Modal 5: Bế Quan */
+.bequan-card {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #b45309;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+
+/* Modal 6: Liên Minh */
+.lienminh-info-box {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #b45309;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lm-detail-item {
+    font-size: 12px;
+    color: #d6d3d1;
+}
+
+.lm-buff-text {
+    font-size: 11px;
+    color: #86efac;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid #059669;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+/* Modal 7: Thiên Hạ Vô Song */
+.topserver-header {
+    font-size: 12px;
+    color: #ffd700;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.topserver-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.topserver-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
+.topserver-rank-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #d97706, #92400e);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.duatop-banner-card {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #b45309;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.spending-tier-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #78350f;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+

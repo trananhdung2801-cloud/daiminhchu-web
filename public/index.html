@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Đại Minh Chủ - Web Game</title>
+    <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
+    <link rel="stylesheet" href="/css/style.css?v=6">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Floating GM Admin Tool Button -->
+        <button id="btn-floating-gm" class="btn-floating-gm" onclick="openAdminModal()">⚙️ GM Tool</button>
+
+        <!-- ================= SCREEN 1: AUTHENTIC LOGIN ================= -->
+        <div id="screen-login" class="screen active">
+            <div class="login-screen-bg">
+                <div class="login-brand-header anim-pop-in">
+                    <img class="login-app-icon" src="/assets/res/app_icon.png" alt="Đại Minh Chủ Icon">
+                    <div class="login-brand-meta">
+                        <span class="game-version">Phiên Bản 8.0.2</span>
+                        <span class="game-server">Máy Chủ: S1 - Đào Hoa Đảo</span>
+                    </div>
+                </div>
+
+                <img class="login-dragon-logo" src="/assets/ui/login_06.png" alt="Đại Minh Chủ Logo">
+                
+                <div class="login-card-panel anim-zoom-enter">
+                    <div class="login-input-wrap">
+                        <input type="text" id="login-username" class="login-input" placeholder="Nhập tên Minh Chủ..." value="MinhChu">
+                    </div>
+                    <button class="btn-login-game" onclick="doLogin()">VÀO GAME</button>
+                </div>
+
+                <div class="login-footer">
+                    <div class="footer-logos">
+                        <img src="/assets/res/logosoha.png" alt="SohaGame">
+                        <img src="/assets/res/vietid.png" alt="VietID">
+                    </div>
+                    <div class="footer-client-info">AppID: bfd6d7145f6b11f7015c9626629218e0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 2: STARTER SHOWCASE (NO OVERFLOW) ================= -->
+        <div id="screen-starter" class="screen">
+            <div class="starter-showcase-container">
+                <div class="starter-title-box">
+                    <h2>CHỌN ĐỆ TỬ KHỞI ĐẦU</h2>
+                    <p>Hãy chọn một đại hiệp xuất thế trợ giúp Minh Chủ:</p>
+                </div>
+
+                <!-- Featured Hero Display -->
+                <div class="featured-hero-display">
+                    <!-- Authentic Big Card -->
+                    <div class="hero-main-card">
+                        <img id="hero-showcase-img" class="hero-main-img" src="/assets/images/NV_LenhHoXung_ava_to.png" alt="Hero">
+                        <div id="hero-showcase-name" class="hero-main-name">Lệnh Hồ Xung [Giáp]</div>
+                        <div id="hero-showcase-skill" class="hero-main-skill">Độc Cô Cửu Kiếm</div>
+                    </div>
+
+                    <!-- Details Panel -->
+                    <div class="hero-details-panel">
+                        <h3 id="hero-detail-title">Lệnh Hồ Xung</h3>
+                        <div class="stat-item"><span>Phẩm chất:</span><b style="color: #ffd700;">Đệ Tử Giáp</b></div>
+                        <div class="stat-item"><span>Võ công:</span><b id="hero-detail-skill" style="color: #ffde59;">Độc Cô Cửu Kiếm</b></div>
+                        <div class="stat-item"><span>❤️ Khí Huyết:</span><b id="hero-detail-hp">180</b></div>
+                        <div class="stat-item"><span>⚔️ Vũ Lực:</span><b id="hero-detail-atk">180</b></div>
+                        <div class="stat-item"><span>🛡️ Hộ Thể:</span><b id="hero-detail-def">130</b></div>
+                        <div class="stat-item"><span>⚡ Nội Lực:</span><b id="hero-detail-inner">120</b></div>
+                    </div>
+                </div>
+
+                <!-- Selector Thumbnails Row -->
+                <div class="starter-selector-row">
+                    <!-- Quách Tĩnh -->
+                    <div class="starter-thumb-btn" onclick="selectStarterHero('NV_QuachTinh', this)">
+                        <img src="/assets/images/NV_QuachTinh_ava_to.png" alt="Quách Tĩnh">
+                        <span>Quách Tĩnh</span>
+                    </div>
+
+                    <!-- Dương Quá -->
+                    <div class="starter-thumb-btn" onclick="selectStarterHero('NV_DuongQua', this)">
+                        <img src="/assets/images/NV_DuongQua_ava_to.png" alt="Dương Quá">
+                        <span>Dương Quá</span>
+                    </div>
+
+                    <!-- Trương Vô Kỵ -->
+                    <div class="starter-thumb-btn" onclick="selectStarterHero('NV_TruongVoKy', this)">
+                        <img src="/assets/images/NV_TruongVoKy_ava_to.png" alt="Trương Vô Kỵ">
+                        <span>Trương Vô Kỵ</span>
+                    </div>
+
+                    <!-- Lệnh Hồ Xung (Selected by default) -->
+                    <div class="starter-thumb-btn selected" onclick="selectStarterHero('NV_LenhHoXung', this)">
+                        <img src="/assets/images/NV_LenhHoXung_ava_to.png" alt="Lệnh Hồ Xung">
+                        <span>Lệnh Hồ Xung</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button class="btn-wuxia-gold" onclick="confirmStarterSelection()">XÁC NHẬN</button>
+            </div>
+        </div>
+
+        <!-- ================= SCREEN 3: AUTHENTIC MAIN GAME (MATCHING IMAGE 2 & 3) ================= -->
+        <div id="screen-main" class="screen">
+            <!-- Top Marquee Banner -->
+            <div class="top-marquee-banner">
+                <div class="marquee-text">⚔️ '!SupPerZzz' đã thành công vượt ải giang hồ Linh Thứu Cung... 'Võ Lâm Chí Bảo' mở bảo rương nhận được Đồ Long Đao... Chúc mừng các vị Minh Chủ xuất thế!</div>
+            </div>
+
+            <!-- Authentic Top Header Bar -->
+            <div class="game-header-authentic">
+                <div class="header-left-group">
+                    <span id="header-player-name" class="player-wuxia-name">Ác Nhân Cốc</span>
+                    <span id="header-vip-badge" class="vip-gold-badge">VIP 2</span>
+                </div>
+
+                <div class="header-right-group">
+                    <div class="curr-badge" title="Vàng (KNB)">
+                        <img src="/assets/res/ico_coin.png" alt="Vàng">
+                        <span id="header-knb">3</span>
+                    </div>
+                    <div class="curr-badge" title="Bạc">
+                        <img src="/assets/ui/icon_bac.png" alt="Bạc">
+                        <span id="header-bac">4786534</span>
+                    </div>
+                    <div class="stamina-mini" title="Thể Lực">
+                        <span>🍗</span>
+                        <span id="header-stamina">30/30</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Disciple Carousel Strip -->
+            <div class="disciple-carousel-wrap">
+                <div id="disciple-carousel-list" class="disciple-carousel-list"></div>
+                <button class="btn-dan-tran" onclick="switchTab('formation')">Dàn Trận</button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Tab 1: Authentic Disciple Scroll Painting (Tr.chủ) -->
+                <div id="tab-home" class="tab-view">
+                    <div class="scroll-painting-stage">
+                        <!-- Left 3 Equip Slots -->
+                        <div class="equip-column-left">
+                            <div class="equip-slot-box" id="slot-skill-1" onclick="showItemDetail('skill')">
+                                <img src="/assets/images/VC_QuyHoaBaoDien_vo_cong_to.png" alt="Võ Công">
+                                <span class="slot-lvl">1</span>
+                            </div>
+                            <div class="equip-slot-box" id="slot-weapon" onclick="showItemDetail('weapon')">
+                                <img src="/assets/images/VK_DoLongDao_trang_bi_to.png" alt="Vũ Khí">
+                                <span class="slot-lvl">1</span>
+                            </div>
+                            <div class="equip-slot-box" id="slot-armor" onclick="showItemDetail('armor')">
+                                <img src="/assets/images/AG_CamVeHoangKimGiap_trang_bi_to.png" alt="Phòng Cụ">
+                                <span class="slot-lvl">2</span>
+                            </div>
+                        </div>
+
+                        <!-- Center Cuộn Tranh Trục Thư -->
+                        <div class="disciple-main-scroll">
+                            <!-- Background painting texture -->
+                            <div class="scroll-art-wrapper">
+                                <img id="disciple-scroll-portrait" class="scroll-hero-img" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đệ Tử">
+                                
+                                <!-- Calligraphy Vertical Name -->
+                                <div id="disciple-scroll-calligraphy" class="calligraphy-vertical-name">Đông Phương Bất Bại</div>
+
+                                <!-- Quality Badge -->
+                                <div id="disciple-scroll-quality" class="quality-badge-giap">GIÁP</div>
+
+                                <!-- Level & HP Bar -->
+                                <div class="scroll-level-hp-box">
+                                    <div class="hero-level-tag"><span id="disciple-scroll-level">32</span><small>+0</small></div>
+                                    <div class="scroll-hp-bar">
+                                        <div id="disciple-hp-fill" class="scroll-hp-fill" style="width: 46%;"></div>
+                                        <span id="disciple-hp-text" class="scroll-hp-text">1111/2418</span>
+                                    </div>
+                                </div>
+
+                                <!-- 4 Core Stats Row with Authentic Icons -->
+                                <div class="scroll-stats-quad">
+                                    <div class="stat-quad-item" title="Khí Huyết">
+                                        <span class="stat-icon-blood">🩸</span>
+                                        <span id="stat-val-hp">1021</span>
+                                    </div>
+                                    <div class="stat-quad-item" title="Vũ Lực">
+                                        <span class="stat-icon-sword">⚔️</span>
+                                        <span id="stat-val-atk">862</span>
+                                    </div>
+                                    <div class="stat-quad-item" title="Hộ Thể">
+                                        <span class="stat-icon-shield">🛡️</span>
+                                        <span id="stat-val-def">381</span>
+                                    </div>
+                                    <div class="stat-quad-item" title="Nội Lực">
+                                        <span class="stat-icon-inner">⚡</span>
+                                        <span id="stat-val-inner">548</span>
+                                    </div>
+                                </div>
+
+                                <!-- 6 Synergy Bonds (Duyên Phận) -->
+                                <div id="disciple-synergy-grid" class="synergy-bonds-grid">
+                                    <div class="synergy-bond-item active">• Ma giáo lãnh tụ</div>
+                                    <div class="synergy-bond-item">• Bất bại thần thoại</div>
+                                    <div class="synergy-bond-item active">• Quỳ hoa bảo điển</div>
+                                    <div class="synergy-bond-item">• Hồng châm tả lực</div>
+                                    <div class="synergy-bond-item">• Tham Lang thôn nhật</div>
+                                    <div class="synergy-bond-item active">• Cùng hung cực ác</div>
+                                </div>
+
+                                <!-- Scroll Footer: Giá trị & Action Buttons (img_28, img_35, img_36) -->
+                                <div class="scroll-footer-bar">
+                                    <div class="disciple-value-tag">
+                                        Giá trị : <span id="disciple-scroll-value" style="color: #ffd700; font-weight: bold;">6993 Vàng</span>
+                                    </div>
+                                    <div class="scroll-action-btns">
+                                        <button class="btn-mini-boiduong" onclick="openBoiDuongModal()">Bồi Dưỡng</button>
+                                        <button class="btn-mini-action" onclick="openKinhMachModal()">Kinh Mạch</button>
+                                        <button class="btn-mini-action" onclick="openTayDuyenModal()">Tẩy Duyên</button>
+                                        <button class="btn-mini-action" onclick="openBeQuanModal()">Bế Quan</button>
+                                    </div>
+                                    <div class="chan-khi-orb-btn" onclick="openKinhMachModal()">
+                                        <img src="/assets/ui/chan_khi_01.png" class="chan-khi-glow anim-rotate-spinner" alt="Chân Khí">
+                                        <span>Chân Khí</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right 3 Equip Slots -->
+                        <div class="equip-column-right">
+                            <div class="equip-slot-box" id="slot-trinket" onclick="showItemDetail('trinket')">
+                                <img src="/assets/images/VK_KimXaKiem_trang_bi_to.png" alt="Ám Khí">
+                                <span class="slot-lvl">49</span>
+                            </div>
+                            <div class="equip-slot-box" id="slot-robe" onclick="showItemDetail('robe')">
+                                <img src="/assets/images/AG_DaHanhY_trang_bi_to.png" alt="Y Phục">
+                                <span class="slot-lvl">51</span>
+                            </div>
+                            <div class="equip-slot-box" id="slot-skill-2" onclick="showItemDetail('book')">
+                                <img src="/assets/images/VC_DocCoCuuKiem_vo_cong_to.png" alt="Tâm Pháp">
+                                <span class="slot-lvl">49</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Authentic Bát Quái Trận Hình & Thất Tinh Trận (img_15 & img_30) -->
+                <div id="tab-formation" class="tab-view" style="display: none;">
+                    <div class="formation-power-banner">
+                        <div class="power-tag">Tổng Trị : <span id="formation-total-power" style="color: #ffd700; font-weight: 900;">2.524.651</span></div>
+                        <div class="power-tag">Khí Thế : <span id="formation-khi-the" style="color: #38bdf8; font-weight: 900;">99.990</span></div>
+                    </div>
+
+                    <div class="formation-sub-nav">
+                        <button class="sub-tab-btn active" id="subtab-btn-batquai" onclick="switchFormationSubTab('batquai')">Bát Quái Trận (8 Vị Trí)</button>
+                        <button class="sub-tab-btn" id="subtab-btn-thattinh" onclick="switchFormationSubTab('thattinh')">Thất Tinh Trận (Hỗ Trợ)</button>
+                    </div>
+
+                    <div class="formation-actions-row" style="display: flex; gap: 8px; margin-bottom: 10px;">
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 36px; font-size: 11px;" onclick="openHuyetChienModal()">⚔️ HUYẾT CHIẾN HẮC MỘC NHAI</button>
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 36px; font-size: 11px;" onclick="openTopServerModal()">🏆 THIÊN HẠ VÔ SONG (TOP)</button>
+                    </div>
+
+                    <div id="subtab-view-batquai" class="formation-board">
+                        <img class="bat-quai-watermark" src="/assets/ui/Background_bat_quai.png" alt="Bát Quái">
+                        <div id="formation-container" class="formation-slots-grid"></div>
+                    </div>
+
+                    <div id="subtab-view-thattinh" class="thattinh-board" style="display: none;">
+                        <div class="thattinh-desc">Thất Tinh Trận: 7 vị trí sao tương hỗ, gia tăng 25% Khí Huyết, Vũ Lực, Hộ Thể và Nội Lực cho toàn bộ đệ tử xuất chiến!</div>
+                        <div id="thattinh-slots-grid" class="thattinh-slots-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Giang Hồ Vượt Ải (Gi.hồ) -->
+                <div id="tab-giangho" class="tab-view" style="display: none;">
+                    <div class="giangho-banner">
+                        <h3 id="gh-chapter-name">Chương 1: Hạnh Tử Lâm</h3>
+                    </div>
+                    <div id="gh-mission-list"></div>
+                </div>
+
+                <!-- Tab 4: Luyện Công (L.công) -->
+                <div id="tab-luyencong" class="tab-view" style="display: none;">
+                    <div style="color: #ffd700; font-size: 13px; font-weight: 900; margin-bottom: 8px; text-shadow: 1px 1px 2px #000;">
+                        LUYỆN CÔNG & ĐỘT PHÁ TÂM PHÁP
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 38px; font-size: 11px;" onclick="openTruyenCongModal()">🔄 TRUYỀN CÔNG ĐỆ TỬ</button>
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 38px; font-size: 11px;" onclick="openKinhMachModal()">🔮 ĐẢ THÔNG KINH MẠCH</button>
+                    </div>
+                    <div id="luyencong-container" class="disciple-scroll-list"></div>
+                </div>
+
+                <!-- Tab 5: Kỳ Ngộ (Ăn Gà, Kho Báu, Chiêu Mộ - img_04, img_18, img_22) -->
+                <div id="tab-recruit" class="tab-view" style="display: none;">
+                    <!-- Activity 1: Ăn Gà Giờ Vàng (img_22) -->
+                    <div class="kyngo-card-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="/assets/images/VP_GaQuay_to.png" style="width: 44px; height: 44px; object-fit: contain;">
+                            <div>
+                                <h4 style="color: #ffd700; font-size: 13px;">Ăn Gà Giờ Vàng (12h-13h & 18h-19h)</h4>
+                                <p style="font-size: 11px; color: #a8a29e;">Thường xuyên ăn gà bồi bổ +20 Thể Lực & +10 Khí Lực!</p>
+                            </div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="doEatChicken()">ĂN GÀ</button>
+                    </div>
+
+                    <!-- Activity 2: Mở Rương Kho Báu Kỳ Ngộ (img_04, img_18) -->
+                    <div class="kyngo-card-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="/assets/ui/icon_PhongBao.png" style="width: 44px; height: 44px; object-fit: contain;">
+                            <div>
+                                <h4 style="color: #ffd700; font-size: 13px;">Kho Báu Kỳ Ngộ (Đào Hoa Đảo)</h4>
+                                <p style="font-size: 11px; color: #a8a29e;">Mở nhận KNB, Bách Niên Sâm, Bồi Dưỡng Đan, Tàn Hồn Giáp!</p>
+                            </div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="doOpenTreasure()">MỞ KHO BÁU</button>
+                    </div>
+
+                    <!-- Activity 3: Nhập Giftcode Quà Tặng Giáp Ngọ (img_19) -->
+                    <div class="kyngo-card-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 32px;">🎁</span>
+                            <div>
+                                <h4 style="color: #ffd700; font-size: 13px;">Nhập Mã Code Quà Tặng (GIAPNGO)</h4>
+                                <p style="font-size: 11px; color: #a8a29e;">Nhập mã nhận Vàng, Bách Niên Sâm, Đan Dược và Đệ Tử Giáp!</p>
+                            </div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openGiftcodeModal()">NHẬP CODE</button>
+                    </div>
+
+                    <!-- Activity 4: Đua Top Máy Chủ Mới & Vượt Map Huyết Cầm (img_17, img_34) -->
+                    <div class="kyngo-card-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 32px;">📜</span>
+                            <div>
+                                <h4 style="color: #ffd700; font-size: 13px;">Đua Top Server Mới - Huyết Cầm 1</h4>
+                                <p style="font-size: 11px; color: #a8a29e;">Vượt map nhận đại lượng Nguyên Bảo và Ngân Lượng cực lớn!</p>
+                            </div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openDuaTopModal()">XEM TOP</button>
+                    </div>
+
+                    <!-- Activity 5: Liên Minh Bang Hội (img_23) -->
+                    <div class="kyngo-card-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 32px;">🚩</span>
+                            <div>
+                                <h4 style="color: #ffd700; font-size: 13px;">Liên Minh Bang Hội (Cửu Châu Minh)</h4>
+                                <p style="font-size: 11px; color: #a8a29e;">Cống hiến bang hội, nhận bổng lộc và tăng chỉ số liên minh!</p>
+                            </div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openLienMinhModal()">LIÊN MINH</button>
+                    </div>
+
+                    <!-- Activity 3: Tầm Tiên Chiêu Mộ Cao Thủ -->
+                    <div style="color: #ffd700; font-size: 13px; font-weight: 900; margin: 12px 0 8px; text-shadow: 1px 1px 2px #000;">
+                        TẦM TIÊN CHIÊU MỘ CAO THỦ
+                    </div>
+                    <div class="recruit-box-item">
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 14px; margin-bottom: 2px;">Bách Lý Khiêu Nhất</h3>
+                            <p style="font-size: 11px; color: #bfa58a;">Tỉ lệ chiêu mộ cao thủ [Ất] & [Bính]</p>
+                            <div style="font-size: 12px; color: #ffde59; font-weight: bold; margin-top: 2px;">Giá: 100 Vàng</div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 38px; font-size: 11px;" onclick="doRecruit('bach_ly')">Chiêu Mộ</button>
+                    </div>
+
+                    <div class="recruit-box-item">
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 14px; margin-bottom: 2px;">Vạn Lý Khiêu Nhất</h3>
+                            <p style="font-size: 11px; color: #bfa58a;">Tỉ lệ chiêu mộ đại hiệp [Giáp] & [Ất]</p>
+                            <div style="font-size: 12px; color: #ffde59; font-weight: bold; margin-top: 2px;">Giá: 300 Vàng</div>
+                        </div>
+                        <button class="btn-wuxia-gold" style="width: 100px; height: 38px; font-size: 11px;" onclick="doRecruit('van_ly')">Chiêu Mộ</button>
+                    </div>
+                </div>
+
+                <!-- Tab 6: Chợ / Thương Thành (Chợ) -->
+                <div id="tab-market" class="tab-view" style="display: none;">
+                    <div style="color: #ffd700; font-size: 13px; font-weight: 900; margin-bottom: 8px; text-shadow: 1px 1px 2px #000;">
+                        CHỢ VÕ LÂM & BẢO KHỐ THƯƠNG THÀNH
+                    </div>
+                    <div class="market-quick-panel">
+                        <button class="btn-wuxia-gold" style="height: 44px; margin-bottom: 12px;" onclick="openPaymentModal()">💎 NẠP VÀNG / KNB VÀO GAME</button>
+                        <div id="market-items-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 7: Hoa Sơn Luận Kiếm - PvP (img_05, img_24, img_27) -->
+                <div id="tab-luankiem" class="tab-view" style="display: none;">
+                    <div class="luankiem-header-banner">
+                        <div class="luankiem-quote">"Đánh bại tất cả đối thủ để bổn môn lập luận kiếm thượng đỉnh"</div>
+                        <div class="luankiem-stats-row">
+                            <span>Thứ hạng: <b id="lk-user-rank" style="color: #ffd700;">3222</b></span>
+                            <span>Lượt: <b id="lk-remaining-fights" style="color: #86efac;">10</b></span>
+                            <span>Điểm: <b id="lk-user-points" style="color: #f59e0b;">94.185.286</b></span>
+                        </div>
+                        <div class="luankiem-subtext">Giữ vững thứ hạng này, cứ 10 phút được thưởng +900 điểm!</div>
+                    </div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: 900; margin: 10px 0 6px;">BẢNG VÀNG CAO THỦ LUẬN KIẾM:</div>
+                    <div id="luankiem-ranking-list" class="luankiem-list-container"></div>
+                </div>
+
+                <!-- Tab 8: Túi Đồ & Kho Vật Phẩm (img_02, img_21, img_33) -->
+                <div id="tab-items" class="tab-view" style="display: none;">
+                    <div class="items-category-tabs">
+                        <button class="item-cat-btn active" onclick="switchItemCategory('all', this)">Tất Cả</button>
+                        <button class="item-cat-btn" onclick="switchItemCategory('duocpham', this)">Dược Phẩm</button>
+                        <button class="item-cat-btn" onclick="switchItemCategory('trangbi', this)">Trang Bị</button>
+                        <button class="item-cat-btn" onclick="switchItemCategory('vocong', this)">Võ Công</button>
+                    </div>
+                    <div id="items-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                </div>
+            </div>
+
+            <!-- Authentic Giang Ho World Chat Dock (img_13) -->
+            <div class="world-chat-dock">
+                <span class="chat-prefix">[Thế Giới]</span>
+                <span id="world-chat-text" class="chat-content">S178.Gấu Đại Vương: Mới kiếm được 50k KNB chiến ải Hắc Mộc Nhai anh em ơi!</span>
+            </div>
+
+            <!-- Authentic 8-Tab Bottom Navigation Bar (Matching Image 2 & 3) -->
+            <div class="bottom-bar-authentic">
+                <button class="tab-btn-auth active" data-tab="home" onclick="switchTab('home')">
+                    <img src="/assets/ui/home_03_09.png" alt="Trang Chủ">
+                    <span>Tr.chủ</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="formation" onclick="switchTab('formation')">
+                    <img src="/assets/ui/home_03_20.png" alt="Dàn Trận">
+                    <span>D.trận</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="giangho" onclick="switchTab('giangho')">
+                    <img src="/assets/ui/home_03_27.png" alt="Giang Hồ">
+                    <span>Gi.hồ</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="luyencong" onclick="switchTab('luyencong')">
+                    <img src="/assets/ui/home_02_66.png" alt="Luyện Công">
+                    <span>L.công</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="recruit" onclick="switchTab('recruit')">
+                    <img src="/assets/ui/home_02_70.png" alt="Kỳ Ngộ">
+                    <span>Kỳ ngộ</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="market" onclick="switchTab('market')">
+                    <img src="/assets/ui/home_03_34.png" alt="Chợ">
+                    <span>Chợ</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="luankiem" onclick="switchTab('luankiem')">
+                    <img src="/assets/ui/home_02_72.png" alt="Luận Kiếm">
+                    <span>L.kiếm</span>
+                </button>
+                <button class="tab-btn-auth" data-tab="items" onclick="switchTab('items')">
+                    <img src="/assets/ui/home_03_42.png" alt="Cứu Minh">
+                    <span>C.minh</span>
+                </button>
+                
+                <!-- Watermark Logo Seal in Bottom Right Corner -->
+                <img class="bottom-watermark-logo" src="/assets/ui/login_06.png" alt="Đại Minh Chủ">
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC BATTLE ARENA (100% MATCHING IMAGE 1 & VIDEO) ================= -->
+        <div id="battle-overlay" class="battle-overlay-authentic">
+            <!-- Top Controls -->
+            <div class="battle-top-bar">
+                <span id="battle-round-title" class="battle-title-text">⚔️ HIỆP 1: QUYẾT ĐẤU GIANG HỒ</span>
+                <button class="btn-battle-skip" onclick="closeBattle()">BỎ QUA</button>
+            </div>
+
+            <!-- Battle Arena Screen -->
+            <div id="battle-stage-authentic" class="battle-stage-authentic">
+                <!-- Attacker Hero (Left) -->
+                <div class="battle-attacker-zone">
+                    <div id="attacker-damage-banner" class="attacker-damage-banner anim-pop-in">
+                        <span class="damage-title">Sát Thương</span>
+                        <span id="attacker-total-dmg" class="damage-number">10712</span>
+                    </div>
+
+                    <div class="attacker-portrait-wrapper">
+                        <!-- Dragon Fire Aura Glow -->
+                        <div class="dragon-fire-glow"></div>
+                        <img id="battle-attacker-img" class="battle-attacker-img" src="/assets/images/NV_QuachTinh_ava_to.png" alt="Attacker">
+                    </div>
+
+                    <div id="battle-attacker-name" class="battle-attacker-name">Quách Tĩnh</div>
+                </div>
+
+                <!-- Laser / Fire / Sword Beam VFX Layer -->
+                <div id="battle-fx-layer" class="battle-fx-layer"></div>
+
+                <!-- Vertical Column of 8 Target Enemy Heads (Right Side - Exactly as Image 1) -->
+                <div class="battle-targets-column">
+                    <div id="battle-targets-list" class="targets-list-wrapper">
+                        <!-- 8 Heads Rendered Dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Bottom Watermark Logo Seal -->
+                <img class="battle-watermark-seal" src="/assets/ui/login_06.png" alt="Đại Minh Chủ">
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC VICTORY MODAL ================= -->
+        <div id="battle-result-modal" class="battle-victory-modal">
+            <img class="victory-banner-img" src="/assets/ui/chien_dau%20(2).png" alt="Chiến Đấu Thắng Lợi">
+            <div id="result-stars" style="font-size: 22px; margin-bottom: 6px;">⭐⭐⭐</div>
+            <div id="result-rewards" class="victory-rewards-box"></div>
+            <button class="btn-wuxia-gold" style="width: 140px; height: 45px; margin-top: 5px;" onclick="closeBattle()">TIẾP TỤC</button>
+        </div>
+
+        <!-- ================= AUTHENTIC BẢO KHỐ / NẠP THẺ MODAL (res/layout/dialog_payment.xml) ================= -->
+        <div id="payment-modal" class="modal-overlay">
+            <div class="payment-dialog anim-zoom-enter">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="/assets/res/logosoha.png" style="height: 22px; object-fit: contain;" alt="SohaGame">
+                        <span class="dialog-title">BẢO KHỐ MINH CHỦ</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closePaymentModal()" alt="Đóng">
+                </div>
+
+                <div class="dialog-content-body">
+                    <div class="card-type-row">
+                        <div class="card-type-btn active" data-type="Viettel" onclick="selectCardType(this, 'Viettel')">
+                            <img src="/assets/res/ic_paymentcard_viettel_enable.png" alt="Viettel">
+                        </div>
+                        <div class="card-type-btn" data-type="Vinaphone" onclick="selectCardType(this, 'Vinaphone')">
+                            <img src="/assets/res/ic_paymentcard_vina_enable.png" alt="Vinaphone">
+                        </div>
+                        <div class="card-type-btn" data-type="Mobifone" onclick="selectCardType(this, 'Mobifone')">
+                            <img src="/assets/res/ic_paymentcard_mobi_enable.png" alt="Mobifone">
+                        </div>
+                        <div class="card-type-btn" data-type="ATM" onclick="selectCardType(this, 'ATM')">
+                            <img src="/assets/res/ic_atm_payment_selected.png" alt="ATM / Banking">
+                        </div>
+                        <div class="card-type-btn" data-type="Scoin" onclick="selectCardType(this, 'Scoin')">
+                            <img src="/assets/res/ic_game_scoin.png" alt="Scoin">
+                        </div>
+                    </div>
+
+                    <div class="amount-selection-box">
+                        <label class="form-label">CHỌN MỆNH GIÁ NẠP:</label>
+                        <div class="amount-grid">
+                            <button class="btn-amount" onclick="selectAmount(10000, this)">10.000 đ<br><small>+100 Vàng</small></button>
+                            <button class="btn-amount" onclick="selectAmount(20000, this)">20.000 đ<br><small>+200 Vàng</small></button>
+                            <button class="btn-amount active" onclick="selectAmount(50000, this)">50.000 đ<br><small>+550 Vàng</small></button>
+                            <button class="btn-amount" onclick="selectAmount(100000, this)">100.000 đ<br><small>+1200 Vàng</small></button>
+                            <button class="btn-amount" onclick="selectAmount(200000, this)">200.000 đ<br><small>+2500 Vàng</small></button>
+                            <button class="btn-amount" onclick="selectAmount(500000, this)">500.000 đ<br><small>+6500 Vàng</small></button>
+                        </div>
+                    </div>
+
+                    <div class="card-inputs-box">
+                        <div class="input-field-group">
+                            <label>Số Serial:</label>
+                            <input type="text" id="pay-serial" class="dialog-input" value="100029384756" placeholder="Nhập số Serial...">
+                        </div>
+                        <div class="input-field-group">
+                            <label>Mã Thẻ (PIN):</label>
+                            <input type="password" id="pay-pin" class="dialog-input" value="987654321012" placeholder="Nhập mã thẻ PIN...">
+                        </div>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 46px; margin-top: 10px;" onclick="submitRecharge()">NẠP VÀO GAME NGAY</button>
+                    <div id="pay-result-msg" class="pay-result-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC HƯỚNG DẪN / BÍ TỊCH MODAL (assets/welcome.html) ================= -->
+        <div id="guide-modal" class="modal-overlay">
+            <div class="guide-dialog anim-zoom-enter">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="/assets/res/app_icon.png" style="width: 24px; height: 24px;" alt="Logo">
+                        <span class="dialog-title">VÕ LÂM BÍ TỊCH - HƯỚNG DẪN</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeGuideModal()" alt="Đóng">
+                </div>
+
+                <div class="guide-dialog-body">
+                    <h4>⚔️ Chào mừng Minh Chủ quy tụ hào kiệt Võ Lâm!</h4>
+                    <p>Trong thế giới <b>Đại Minh Chủ</b>, các cao thủ võ lâm kiếm hiệp Kim Dung (Tiêu Phong, Quách Tĩnh, Dương Quá, Lệnh Hồ Xung, Đông Phương Bất Bại...) cùng tề tựu tranh hùng thiên hạ.</p>
+                    
+                    <h4>📜 Cẩm nang hành tẩu:</h4>
+                    <ul>
+                        <li><b>1. Trận Hình Bát Quái:</b> Sắp xếp tối đa 8 đệ tử theo các vị trí chiến lược. Đệ tử phòng ngự (Máu/Thủ cao) nên xếp hàng trước, sát thương (Vũ Lực/Nội Lực cao) xếp phía sau.</li>
+                        <li><b>2. Vượt Ải Giang Hồ:</b> Vượt các chương hồi (Hạnh Tử Lâm, Đào Hoa Đảo, Quang Minh Đỉnh...) để thu thập Bạc, Kinh Nghiệm và Trang Bị quý giá.</li>
+                        <li><b>3. Tầm Tiên Chiêu Mộ:</b> Dùng Vàng tầm tiên để đón nhận các đệ tử phẩm chất <b>Giáp (Hoàng Kim)</b> và <b>Ất (Tử Sắc)</b> vang danh thiên hạ.</li>
+                        <li><b>4. Bảo Khố Minh Chủ:</b> Nạp KNB/Vàng để bồi dưỡng võ công, mua Gà Quay hồi phục thể lực hành hiệp.</li>
+                    </ul>
+
+                    <div style="text-align: center; margin-top: 16px;">
+                        <img src="/assets/res/logosoha.png" style="height: 24px; display: inline-block; margin-right: 10px;" alt="Soha">
+                        <img src="/assets/res/vietid.png" style="height: 24px; display: inline-block;" alt="VietID">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC ADMIN GM TOOL MODAL ================= -->
+        <div id="admin-modal" class="modal-overlay">
+            <div class="admin-dialog anim-zoom-enter">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 20px;">⚙️</span>
+                        <span class="dialog-title">ADMIN GM TOOL - KIỂM THỬ GAME</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeAdminModal()" alt="Đóng">
+                </div>
+
+                <div class="admin-dialog-body">
+                    <p style="font-size: 11px; color: #ffd700; margin-bottom: 12px; text-align: center;">Bộ công cụ hỗ trợ GM kiểm thử toàn diện mọi tính năng & trận chiến:</p>
+                    
+                    <div class="gm-action-grid">
+                        <button class="btn-gm-btn" onclick="execGmAction('add_currency')">
+                            💰 <b>+50.000 Vàng & +50M Bạc</b>
+                            <small>Bổ sung ngân lượng vô hạn</small>
+                        </button>
+                        <button class="btn-gm-btn" onclick="execGmAction('max_stamina')">
+                            🍗 <b>Hồi Phục 100 Thể Lực</b>
+                            <small>Đầy thể lực & khí lực</small>
+                        </button>
+                        <button class="btn-gm-btn" onclick="execGmAction('set_level')">
+                            👑 <b>Cấp Độ Lv.50 & VIP 5</b>
+                            <small>Mở khóa toàn bộ tính năng</small>
+                        </button>
+                        <button class="btn-gm-btn highlight" onclick="execGmAction('add_legendary_disciples')">
+                            👥 <b>Nhận 10 Đệ Tử Giáp Thần Thoại</b>
+                            <small>Đông Phương, Độc Cô, Tiêu Phong...</small>
+                        </button>
+                        <button class="btn-gm-btn" onclick="execGmAction('add_all_items')">
+                            🎒 <b>+50 Gà Quay & Nữ Nhi Hồng</b>
+                            <small>Thêm dược phẩm vào túi</small>
+                        </button>
+                        <button class="btn-gm-btn test-battle-btn" onclick="triggerTestBattle()">
+                            ⚔️ <b>TEST CHIẾN ĐẤU CHUẨN GỐC (Ảnh 1)</b>
+                            <small>Bắn chưởng rồng & 8 đầu avatar đối thủ</small>
+                        </button>
+                        <button class="btn-gm-btn reset-btn" onclick="execGmAction('reset_player')">
+                            🔄 <b>Reset Nhân Vật Về Ban Đầu</b>
+                            <small>Bắt đầu lại hành trình tân thủ</small>
+                        </button>
+                    </div>
+
+                    <div id="gm-result-msg" class="gm-result-msg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC BỒI DƯỠNG ĐỆ TỬ MODAL (img_35.jpg) ================= -->
+        <div id="boiduong-modal" class="modal-overlay">
+            <div class="boiduong-dialog anim-zoom-enter">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">⚡</span>
+                        <span class="dialog-title">BỒI DƯỠNG ĐỆ TỬ</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeBoiDuongModal()" alt="Đóng">
+                </div>
+
+                <div class="boiduong-dialog-body">
+                    <p class="boiduong-hint">Mỗi lần sử dụng 10 dưỡng đan, kích thích được tiềm lực của đệ tử</p>
+                    
+                    <div class="boiduong-info-card">
+                        <div class="boiduong-avatar-col">
+                            <img id="bd-hero-avatar" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Hero">
+                            <span id="bd-hero-name" class="bd-hero-name">Đông Phương</span>
+                        </div>
+                        <div class="boiduong-stats-col">
+                            <div>Phẩm chất: <b id="bd-hero-tier" style="color: #c084fc;">Đệ Tử Giáp</b></div>
+                            <div>Cấp độ: <b id="bd-hero-lvl" style="color: #ffd700;">Lv.35</b></div>
+                            <div>Tiềm lực: <b id="bd-hero-tiemluc" style="color: #86efac;">+925</b></div>
+                            <div class="bd-dan-count">Bồi dưỡng đan: <b id="bd-dan-qty" style="color: #f59e0b;">5.121.196</b></div>
+                        </div>
+                    </div>
+
+                    <div class="boiduong-btn-grid">
+                        <button class="btn-bd-action" onclick="submitBoiDuong(5, false)">
+                            <span>Bồi dưỡng 5 lần</span>
+                            <small>(50 Đan)</small>
+                        </button>
+                        <button class="btn-bd-action" onclick="submitBoiDuong(25, false)">
+                            <span>Bồi dưỡng 25 lần</span>
+                            <small>(250 Đan)</small>
+                        </button>
+                        <button class="btn-bd-action high" onclick="submitBoiDuong(5, true)">
+                            <span>Bồi dưỡng cao cấp 5 lần</span>
+                            <small>(25 Vàng)</small>
+                        </button>
+                        <button class="btn-bd-action high" onclick="submitBoiDuong(25, true)">
+                            <span>Bồi dưỡng cao cấp 25 lần</span>
+                            <small>(125 Vàng)</small>
+                        </button>
+                    </div>
+
+                    <div id="bd-result-msg" class="bd-result-msg"></div>
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 10px;" onclick="closeBoiDuongModal()">QUAY LẠI</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 1: HUYẾT CHIẾN HẮC MỘC NHAI (img_21, img_25) ================= -->
+        <div id="huyetchien-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">⚔️</span>
+                        <span class="dialog-title">HUYẾT CHIẾN HẮC MỘC NHAI</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeHuyetChienModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <div class="hc-status-card">
+                        <div class="hc-stat-row">
+                            <span>Ải Hiện Tại: <b id="hc-stage-num" style="color: #ffd700; font-size: 15px;">Ải 1</b></span>
+                            <span>⭐ Số Sao: <b id="hc-stars-num" style="color: #fbbf24; font-size: 15px;">0</b></span>
+                        </div>
+                        <div class="hc-buff-tags">
+                            <span id="hc-buff-atk">⚔️ Công: +0%</span>
+                            <span id="hc-buff-def">🛡️ Thủ: +0%</span>
+                            <span id="hc-buff-hp">❤️ Máu: +0%</span>
+                        </div>
+                    </div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 10px 0 6px;">CHỌN ĐỐI THỦ VƯỢT ẢI:</div>
+                    <div id="hc-opponents-list" class="hc-opponents-grid"></div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 12px 0 6px;">ĐỔI CHÚC PHÚC (TỐN 3 SAO):</div>
+                    <div class="hc-buff-actions">
+                        <button class="btn-hc-buff" onclick="buyHuyetChienBuff('atk')">+15% Vũ Lực</button>
+                        <button class="btn-hc-buff" onclick="buyHuyetChienBuff('def')">+15% Hộ Thể</button>
+                        <button class="btn-hc-buff" onclick="buyHuyetChienBuff('hp')">+20% Khí Huyết</button>
+                    </div>
+
+                    <div id="hc-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 10px;" onclick="closeHuyetChienModal()">ĐÓNG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 2: ĐẢ THÔNG KINH MẠCH & CHÂN KHÍ (img_28, img_36) ================= -->
+        <div id="kinhmach-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🔮</span>
+                        <span class="dialog-title">ĐẢ THÔNG KINH MẠCH & CHÂN KHÍ</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeKinhMachModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <div class="boiduong-info-card">
+                        <div class="boiduong-avatar-col">
+                            <img id="km-hero-avatar" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Hero">
+                            <span id="km-hero-name" class="bd-hero-name">Đông Phương</span>
+                        </div>
+                        <div class="boiduong-stats-col">
+                            <div>Kinh Mạch: <b style="color: #86efac;">Bát Mạch Tề Thông</b></div>
+                            <div>Kim Châm: <b id="km-needle-count" style="color: #ffd700;">80 Cái</b></div>
+                            <div>Chân Khí Khảm: <b id="km-orb-count" style="color: #c084fc;">4/8 Ô</b></div>
+                        </div>
+                    </div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 10px 0 6px;">8 HUYỆT ĐẠO KINH MẠCH:</div>
+                    <div id="km-acupoints-grid" class="km-acupoints-grid"></div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 12px 0 6px;">KHẢM CHÂN KHÍ NGŨ SẮC:</div>
+                    <div class="chankhi-equip-row">
+                        <button class="btn-ck-equip" onclick="equipChanKhiOrb('Hấp Huyết Chân Khí')">🔮 Hấp Huyết</button>
+                        <button class="btn-ck-equip" onclick="equipChanKhiOrb('Cương Khí Hộ Thể')">🔮 Cương Khí</button>
+                        <button class="btn-ck-equip" onclick="equipChanKhiOrb('Phản Chấn Kim Cương')">🔮 Phản Chấn</button>
+                        <button class="btn-ck-equip" onclick="equipChanKhiOrb('Phá Chấn Thần Lực')">🔮 Phá Chấn</button>
+                    </div>
+
+                    <div id="km-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 10px;" onclick="closeKinhMachModal()">QUAY LẠI</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 3: TRUYỀN CÔNG ĐỆ TỬ (img_33) ================= -->
+        <div id="truyencong-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🔄</span>
+                        <span class="dialog-title">TRUYỀN CÔNG ĐỆ TỬ</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeTruyenCongModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <p style="font-size: 11px; color: #a8a29e; margin-bottom: 8px;">Truyền toàn bộ công lực & cấp độ từ đệ tử cho sang đệ tử nhận</p>
+                    
+                    <div class="tc-select-row">
+                        <div class="tc-col">
+                            <span style="color: #ffd700; font-size: 11px; font-weight: bold;">Đệ Tử Cho Công:</span>
+                            <select id="tc-source-select" class="tc-select"></select>
+                        </div>
+                        <span style="font-size: 20px; color: #ffd700;">➔</span>
+                        <div class="tc-col">
+                            <span style="color: #ffd700; font-size: 11px; font-weight: bold;">Đệ Tử Nhận Công:</span>
+                            <select id="tc-target-select" class="tc-select"></select>
+                        </div>
+                    </div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 12px 0 6px;">CHỌN LOẠI THẦN DƯỢC BẢO HỘ:</div>
+                    <div class="tc-medicines-list">
+                        <label class="tc-med-item">
+                            <input type="radio" name="tc-medicine" value="normal" checked>
+                            <div>
+                                <b style="color: #e2e8f0;">Dược Thông Thường (Hiệu suất 80%)</b>
+                                <small style="display: block; color: #94a3b8;">Đệ tử cho công sẽ rời khỏi môn phái</small>
+                            </div>
+                        </label>
+                        <label class="tc-med-item">
+                            <input type="radio" name="tc-medicine" value="tien_duoc">
+                            <div>
+                                <b style="color: #38bdf8;">Truyền Công Tiễn Dược (Hiệu suất 100%)</b>
+                                <small style="display: block; color: #94a3b8;">Bảo vệ đệ tử cho công không bị hy sinh</small>
+                            </div>
+                        </label>
+                        <label class="tc-med-item">
+                            <input type="radio" name="tc-medicine" value="than_duoc">
+                            <div>
+                                <b style="color: #fbbf24;">Truyền Công Thần Dược (Hiệu suất 100%)</b>
+                                <small style="display: block; color: #94a3b8;">Giữ đệ tử + Hoàn trả 80% số Bách Niên Sâm đã dùng</small>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 42px; font-size: 13px; margin-top: 10px;" onclick="submitTruyenCong()">TIẾN HÀNH TRUYỀN CÔNG</button>
+                    <div id="tc-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 4: TẨY DUYÊN PHẬN (img_21) ================= -->
+        <div id="tayduyen-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🔄</span>
+                        <span class="dialog-title">THOÁT THAI HOÀN CỐT - TẨY DUYÊN</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeTayDuyenModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <p style="font-size: 11px; color: #a8a29e; margin-bottom: 8px;">Sử dụng Linh Đơn Diệu Dược để ngẫu nhiên biến đổi và kích hoạt duyên phận thần thánh mới!</p>
+                    
+                    <div class="boiduong-info-card">
+                        <div class="boiduong-avatar-col">
+                            <img id="td-hero-avatar" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Hero">
+                            <span id="td-hero-name" class="bd-hero-name">Đông Phương</span>
+                        </div>
+                        <div class="boiduong-stats-col">
+                            <div>Linh Đơn Diệu Dược: <b style="color: #ffd700;">16.457 Viên</b></div>
+                            <div>Duyên Hiện Tại: <b id="td-current-bond" style="color: #38bdf8;">Ma giáo lãnh tụ (+35% Công)</b></div>
+                        </div>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 42px; font-size: 13px; margin-top: 12px;" onclick="submitTayDuyen()">TẨY DUYÊN PHẬN NGAY (1 LINH ĐƠN)</button>
+                    <div id="td-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 5: BẾ QUAN TU LUYỆN (img_20) ================= -->
+        <div id="bequan-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🧘</span>
+                        <span class="dialog-title">THẠCH THẤT BẾ QUAN - QUY ẨN</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeBeQuanModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <p style="font-size: 11px; color: #a8a29e; margin-bottom: 8px;">Quy ẩn giang hồ, tĩnh tâm tu luyện võ học tối thượng để đột phá cảnh giới</p>
+                    
+                    <div class="bequan-card">
+                        <span style="font-size: 40px;">🏛️</span>
+                        <h4 style="color: #ffd700; margin: 4px 0;">Mật Thất Tĩnh Tâm Tu Luyện</h4>
+                        <p id="bequan-status-text" style="font-size: 12px; color: #86efac;">Thạch thất đang trống, sẵn sàng tiếp nhận đệ tử bế quan!</p>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; margin-top: 12px;">
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 40px; font-size: 12px;" onclick="submitBeQuan('start')">VÀO BẾ QUAN</button>
+                        <button class="btn-wuxia-gold" style="flex: 1; height: 40px; font-size: 12px;" onclick="submitBeQuan('claim')">XUẤT QUAN LĨNH THƯỞNG</button>
+                    </div>
+                    <div id="bq-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 6: LIÊN MINH BANG HỘI (img_23) ================= -->
+        <div id="lienminh-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🚩</span>
+                        <span class="dialog-title">LIÊN MINH BANG HỘI</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeLienMinhModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <div class="lienminh-info-box">
+                        <h3 id="lm-name" style="color: #ffd700; font-size: 16px; margin-bottom: 4px;">Cửu Châu Minh (S1)</h3>
+                        <div class="lm-detail-item">Bang Chủ: <b id="lm-leader" style="color: #38bdf8;">S1.Tà Vương</b></div>
+                        <div class="lm-detail-item">Cấp Độ Bang: <b id="lm-level" style="color: #86efac;">Cấp 5</b></div>
+                        <div class="lm-detail-item">Cống Hiến Của Bạn: <b id="lm-my-contrib" style="color: #fbbf24;">350 Điểm</b></div>
+                        <div class="lm-detail-item">Thành Viên: <b id="lm-members" style="color: #e2e8f0;">38/40</b></div>
+                        <div class="lm-buff-text" id="lm-buff">Toàn thể thành viên tăng +10% Công, +10% Thủ trong Hắc Mộc Nhai!</div>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 42px; font-size: 13px; margin-top: 12px;" onclick="submitLienMinhCongHien()">CỐNG HIẾN 100 KNB CHO BANG</button>
+                    <div id="lm-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 7: THIÊN HẠ VÔ SONG - BẢNG XẾP HẠNG TOÀN SERVER (img_26) ================= -->
+        <div id="topserver-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🏆</span>
+                        <span class="dialog-title">THIÊN HẠ VÔ SONG - TOP SERVER</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeTopServerModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <div class="topserver-header">BẢNG VÀNG CAO THỦ CHIẾN LỰC TOÀN CÕI VÕ LÂM</div>
+                    <div id="topserver-list" class="topserver-list-container"></div>
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 10px;" onclick="closeTopServerModal()">ĐÓNG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 8: NHẬP GIFTCODE (img_19) ================= -->
+        <div id="giftcode-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 400px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🎁</span>
+                        <span class="dialog-title">NHẬP MÃ GIFTCODE QUÀ TẶNG</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeGiftcodeModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll" style="text-align: center;">
+                    <p style="font-size: 12px; color: #a8a29e; margin-bottom: 12px;">Nhập mã GiftCode để nhận Nguyên Bảo, Bách Niên Sâm và Đệ Tử Giáp</p>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <input type="text" id="giftcode-input" class="login-input" placeholder="Nhập mã code... (VD: GIAPNGO)" style="text-transform: uppercase;">
+                    </div>
+
+                    <div style="font-size: 11px; color: #ffd700; margin-bottom: 12px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+                        Mã công khai dùng thử:<br>
+                        <b>GIAPNGO</b> | <b>DAIMINHCHU</b> | <b>VIP999</b>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 42px; font-size: 13px;" onclick="submitGiftcode()">NHẬN QUÀ NGAY</button>
+                    <div id="gc-result-msg" style="margin-top: 10px; font-size: 12px; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL 9: ĐUA TOP MÁY CHỦ MỚI (img_17, img_34) ================= -->
+        <div id="duatop-modal" class="modal-overlay">
+            <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
+                <div class="dialog-header-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">📜</span>
+                        <span class="dialog-title">ĐUA TOP SERVER MỚI - HUYẾT CẦM</span>
+                    </div>
+                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeDuaTopModal()" alt="Đóng">
+                </div>
+                <div class="dialog-body-scroll">
+                    <div class="duatop-banner-card">
+                        <h4 style="color: #ffd700;">Dành Cho Máy Chủ Mới Vượt Map Huyết Cầm 1</h4>
+                        <p style="font-size: 11px; color: #a8a29e; margin-top: 4px;">Chỉ cần chưởng môn tiến vào bảng xếp hạng, ở ngày tiếp theo sẽ đạt được lượng Nguyên Bảo cùng Ngân Lượng cực lớn!</p>
+                        <div style="color: #86efac; font-size: 12px; font-weight: bold; margin-top: 6px;">Liên tục vào bảng: 537 ngày</div>
+                    </div>
+
+                    <div style="color: #ffd700; font-size: 12px; font-weight: bold; margin: 10px 0 6px;">MỐC TÍCH LŨY TIÊU PHÍ KNB:</div>
+                    <div class="spending-tier-item">
+                        <div>
+                            <b style="color: #ffd700;">Mốc 5.000 Vàng</b>
+                            <small style="display: block; color: #94a3b8;">Nhận Rương Thần Bí Ngũ Nhạc Sơn + 10 Bách Niên Sâm</small>
+                        </div>
+                        <span style="color: #86efac; font-size: 11px;">Đã Đạt</span>
+                    </div>
+                    <div class="spending-tier-item">
+                        <div>
+                            <b style="color: #ffd700;">Mốc 10.000 Vàng</b>
+                            <small style="display: block; color: #94a3b8;">Nhận Bí Kíp Càn Khôn Đại Na Di + 50 Bồi Dưỡng Đan</small>
+                        </div>
+                        <span style="color: #fbbf24; font-size: 11px;">Chưa Đạt</span>
+                    </div>
+
+                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 12px;" onclick="closeDuaTopModal()">ĐÓNG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AUTHENTIC LOADING OVERLAY ================= -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-box anim-pop-in">
+                <img src="/assets/res/loadding.png" class="loading-spinner anim-rotate-spinner" alt="Đang tải">
+                <span id="loading-text">Đang tải dữ liệu võ lâm...</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/game.js?v=6"></script>
+</body>
+</html>

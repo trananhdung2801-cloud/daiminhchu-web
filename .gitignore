@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+temp_*
+*.pyc
+__pycache__/
+video_frames/
+inspect_crops/
+video_thumbs/
+*.webm

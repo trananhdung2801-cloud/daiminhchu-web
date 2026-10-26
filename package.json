@@ -1,0 +1,16 @@
+{
+  "name": "dai-minh-chu-server",
+  "version": "1.0.0",
+  "description": "Private Server Emulator for Dai Minh Chu 8.0.2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "daiminhchu",
+    "emulator",
+    "private-server"
+  ],
+  "author": "",
+  "license": "ISC"
+}
