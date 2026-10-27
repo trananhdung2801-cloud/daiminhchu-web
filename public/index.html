@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=34">
+    <link rel="stylesheet" href="/css/style.css?v=35">
 </head>
 <body>
     <div id="game-container">
@@ -2098,6 +2098,42 @@
 
 
 
+
+        <!-- ================= 100% AUTHENTIC CHỌN KIM CHÂM SCREEN (media_1793093216538_cc6f4b70.jpg) ================= -->
+        <div id="chon-kimcham-screen" class="chon-kimcham-container">
+            <!-- Header Bar -->
+            <div class="km-header-bar">
+                <div class="km-back-btn" onclick="closeChonKimChamScreen()" title="Quay lại">
+                    <img src="/assets/ui/chankhi_authentic/btn_back_header.png" alt="Back" />
+                </div>
+                
+                <div class="km-top-stats">
+                    <div class="km-vip-badge">12★</div>
+                    <div class="km-stat-chip">
+                        <img src="/assets/ui/icon_KNB.png" alt="Vàng" />
+                        <span>51,829</span>
+                    </div>
+                    <div class="km-stat-chip">
+                        <img src="/assets/images/icon_bac.png" alt="Bạc" />
+                        <span>8,152,400</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subheader Bar (Tab & OK) -->
+            <div class="ckc-subheader-bar">
+                <img class="ckc-tab-title-img" src="/assets/ui/kinhmach_authentic/tab_chon_kim_cham.png" alt="Chọn kim châm" />
+                <div class="ckc-btn-ok-wrap" onclick="confirmSelectedKimCham()" title="Xác nhận">
+                    <img src="/assets/ui/kinhmach_authentic/clean_btn_ok.png" alt="OK" />
+                </div>
+            </div>
+
+            <!-- Scrollable List of Needles -->
+            <div class="ckc-list-container" id="ckc-needles-list">
+                <!-- Dynamically populated from AUTHENTIC_KIMCHAM_DATABASE -->
+            </div>
+        </div>
+
         <!-- ================= 100% AUTHENTIC KINH MẠCH SCREEN (MATCHING 4 ORIGINAL SCREENSHOTS) ================= -->
         <div id="kinhmach-screen" class="kinhmach-screen-container">
             <!-- Header Bar -->
@@ -2455,6 +2491,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=34"></script>
+    <script src="/js/game.js?v=35"></script>
 </body>
 </html>

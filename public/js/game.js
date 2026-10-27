@@ -5135,7 +5135,7 @@ function openKimChamDetailModal(slotIdx) {
 
     if (!s) {
         // Empty slot with question box -> Open needle inventory to pierce
-        openKimChamInventory();
+        openChonKimChamScreen(currentSelectedNeedleSlot);
         return;
     }
 
@@ -5147,7 +5147,7 @@ function openKimChamDetailModal(slotIdx) {
             d.slots[slotIdx] = null; // Unblocked into open slot
             renderKinhMachScreen();
             alert('✨ Chúc mừng! Đã đả thông huyệt đạo thành công! Hãy chọn Kim Châm để châm cứu gia tăng công lực.');
-            openKimChamInventory();
+            openChonKimChamScreen(currentSelectedNeedleSlot);
         }
         return;
     }
@@ -5251,4 +5251,174 @@ function equipKimChamToSlot(needleId) {
     closeKimChamInventory();
     renderKinhMachScreen();
     alert(`✨ Châm cứu thành công! [${item.name}] đã đả thông huyệt vị và gia tăng ${bonus} điểm ${item.statLabel} cho ${d.name}!`);
+}
+
+// ================= 100% AUTHENTIC CHỌN KIM CHÂM SYSTEM (media_1793093216538_cc6f4b70.jpg) =================
+let currentSelectedKimChamId = 'KC_HanThiet';
+
+const EXTENDED_KIMCHAM_LIST = [
+    {
+        id: 'KC_HanThiet',
+        name: 'Hàn Thiết Châm',
+        statType: 'PhongBao',
+        statTag: 'Phòng bạo',
+        statVal: '+144',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_hanthiet.png'
+    },
+    {
+        id: 'KC_HanThiet_2',
+        name: 'Hàn Thiết Châm',
+        statType: 'PhongBao',
+        statTag: 'Phòng bạo',
+        statVal: '+144',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_hanthiet.png'
+    },
+    {
+        id: 'KC_HoaThach',
+        name: 'Hỏa Thạch Châm',
+        statType: 'Cong',
+        statTag: null,
+        statVal: '480',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_hoathach.png'
+    },
+    {
+        id: 'KC_HoaThach_2',
+        name: 'Hỏa Thạch Châm',
+        statType: 'Cong',
+        statTag: null,
+        statVal: '480',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_hoathach.png'
+    },
+    {
+        id: 'KC_HuyenThiet',
+        name: 'Huyền Thiết Châm',
+        statType: 'BaoKich',
+        statTag: 'Bạo kích',
+        statVal: '+120',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_huyenthiet.png'
+    },
+    {
+        id: 'KC_HuyenThiet_2',
+        name: 'Huyền Thiết Châm',
+        statType: 'BaoKich',
+        statTag: 'Bạo kích',
+        statVal: '+120',
+        icon: '/assets/ui/kinhmach_authentic/clean_needle_huyenthiet.png'
+    },
+    {
+        id: 'KC_ThanMoc',
+        name: 'Thần Mộc Châm',
+        statType: 'Mau',
+        statTag: 'Khí huyết',
+        statVal: '+1000',
+        icon: '/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png'
+    },
+    {
+        id: 'KC_TuKim',
+        name: 'Tử Kim Châm',
+        statType: 'NoiLuc',
+        statTag: 'Nội công',
+        statVal: '+500',
+        icon: '/assets/ui/kinhmach_authentic/clean_slot_l4_equipped.png'
+    },
+    {
+        id: 'KC_HacMoc',
+        name: 'Hắc Mộc Châm',
+        statType: 'ChinhXac',
+        statTag: 'Chính xác',
+        statVal: '+144',
+        icon: '/assets/ui/kinhmach_authentic/clean_slot_r1_equipped.png'
+    },
+    {
+        id: 'KC_LinhMoc',
+        name: 'Linh Mộc Châm',
+        statType: 'TranhNe',
+        statTag: 'Né tránh',
+        statVal: '+120',
+        icon: '/assets/ui/kinhmach_authentic/clean_slot_r2_equipped.png'
+    }
+];
+
+function openChonKimChamScreen(targetSlotIdx) {
+    sound.play('click');
+    if (targetSlotIdx !== undefined) {
+        currentSelectedNeedleSlot = targetSlotIdx;
+    }
+    const scr = document.getElementById('chon-kimcham-screen');
+    if (scr) {
+        scr.classList.add('active');
+        renderChonKimChamList();
+    }
+}
+
+function closeChonKimChamScreen() {
+    sound.play('click');
+    const scr = document.getElementById('chon-kimcham-screen');
+    if (scr) scr.classList.remove('active');
+}
+
+function renderChonKimChamList() {
+    const listEl = document.getElementById('ckc-needles-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = EXTENDED_KIMCHAM_LIST.map(item => {
+        const isSelected = item.id === currentSelectedKimChamId;
+        const tagHtml = item.statTag ? `<span class="ckc-stat-tag">${item.statTag}</span>` : `<span class="km-stat-icon-circle" style="width: 18px; height: 18px; font-size: 10px;">⚔️</span>`;
+        return `
+            <div class="ckc-card-row ${isSelected ? 'selected' : ''}" onclick="selectKimChamCard('${item.id}')">
+                <div class="ckc-card-left">
+                    <div class="ckc-needle-icon-box">
+                        <img src="${item.icon}" alt="${item.name}" />
+                    </div>
+                    <div class="ckc-needle-info">
+                        <div class="ckc-needle-name">${item.name}</div>
+                        <div class="ckc-needle-stat-row">
+                            ${tagHtml}
+                            <span class="ckc-stat-value">${item.statVal}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ckc-card-right">
+                    <img class="ckc-ink-splash-bg" src="/assets/ui/kinhmach_authentic/clean_ink_splash.png" alt="Ink" />
+                    <div class="ckc-select-indicator">✓</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function selectKimChamCard(needleId) {
+    sound.play('click');
+    currentSelectedKimChamId = needleId;
+    renderChonKimChamList();
+}
+
+function confirmSelectedKimCham() {
+    sound.play('equip');
+    const needle = EXTENDED_KIMCHAM_LIST.find(x => x.id === currentSelectedKimChamId);
+    if (!needle) {
+        closeChonKimChamScreen();
+        return;
+    }
+
+    const d = KINHMACH_DISCIPLES[currentKinhMachDiscipleIndex];
+    if (d && currentSelectedNeedleSlot !== undefined) {
+        const isLeft = currentSelectedNeedleSlot < 4;
+        const slotIdx1 = (currentSelectedNeedleSlot % 4) + 1;
+        const icon = isLeft ? `/assets/ui/kinhmach_authentic/clean_slot_l${slotIdx1}_equipped.png` : `/assets/ui/kinhmach_authentic/clean_slot_r${slotIdx1}_equipped.png`;
+
+        d.slots[currentSelectedNeedleSlot] = {
+            id: needle.id,
+            name: needle.name,
+            stat: `${needle.statTag ? needle.statTag : 'Chỉ số'} ${needle.statVal}`,
+            statType: needle.statType,
+            bonus: parseInt(needle.statVal.replace(/[^0-9]/g, '')) || 500,
+            desc: `Kim châm truyền thế hấp thụ linh khí đất trời, gia tăng uy lực kinh mạch.`,
+            icon: icon
+        };
+        renderKinhMachScreen();
+    }
+
+    closeChonKimChamScreen();
+    alert(`✨ Chúc mừng! Đã chọn [${needle.name}] và châm cứu thành công vào huyệt đạo của ${d.name}!`);
 }

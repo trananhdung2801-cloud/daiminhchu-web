@@ -9370,3 +9370,193 @@ img {
 .km-inv-item:hover {
     background: rgba(255, 255, 255, 0.95);
 }
+
+/* ================= 100% AUTHENTIC CHỌN KIM CHÂM GUI (media_1793093216538_cc6f4b70.jpg) ================= */
+#chon-kimcham-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 110;
+    background: url('/assets/ui/bg_dantran.png') center top / cover no-repeat #1a1614;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+}
+
+#chon-kimcham-screen.active {
+    display: flex;
+}
+
+/* Subheader bar */
+.ckc-subheader-bar {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background: rgba(30, 20, 10, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+.ckc-tab-title-img {
+    height: 38px;
+    object-fit: contain;
+}
+
+.ckc-btn-ok-wrap {
+    height: 38px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: flex;
+    align-items: center;
+}
+.ckc-btn-ok-wrap:active {
+    transform: scale(0.92);
+}
+.ckc-btn-ok-wrap img {
+    height: 36px;
+    object-fit: contain;
+}
+
+/* List container */
+.ckc-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ckc-card-row {
+    width: 100%;
+    height: 82px;
+    background: linear-gradient(180deg, #f0e4d0 0%, #dfc8a2 100%);
+    border: 1px solid #b58c54;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.1s, border-color 0.15s, box-shadow 0.15s;
+    overflow: hidden;
+}
+
+.ckc-card-row:active {
+    transform: scale(0.98);
+}
+
+.ckc-card-row.selected {
+    border: 2px solid #b91c1c;
+    box-shadow: 0 0 10px rgba(185, 28, 28, 0.5), inset 0 0 8px rgba(185, 28, 28, 0.2);
+    background: linear-gradient(180deg, #fdf6ed 0%, #ecdcb9 100%);
+}
+
+.ckc-card-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+}
+
+.ckc-needle-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+    background: #2a1a10;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.ckc-needle-icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ckc-needle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ckc-needle-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #292524;
+}
+
+.ckc-needle-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ckc-stat-tag {
+    background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #f87171;
+    white-space: nowrap;
+}
+
+.ckc-stat-value {
+    color: #451a03;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+/* Right ink splash & checkmark */
+.ckc-card-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.ckc-ink-splash-bg {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    opacity: 0.65;
+    z-index: 1;
+}
+
+.ckc-select-indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #78350f;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 900;
+    color: transparent;
+}
+
+.ckc-card-row.selected .ckc-select-indicator {
+    background: #b91c1c;
+    border-color: #ffd700;
+    color: #fff;
+    box-shadow: 0 0 6px #b91c1c;
+}
