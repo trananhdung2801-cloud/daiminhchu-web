@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=23">
+    <link rel="stylesheet" href="/css/style.css?v=24">
 </head>
 <body>
     <div id="game-container">
@@ -853,54 +853,115 @@
             </div>
         </div>
 
-        <!-- ================= AUTHENTIC BỒI DƯỠNG ĐỆ TỬ MODAL (img_35.jpg) ================= -->
+        <!-- ================= 100% AUTHENTIC BỒI DƯỠNG ĐỆ TỬ GUI (media_1793066806740_cfde29ed.jpg) ================= -->
         <div id="boiduong-modal" class="modal-overlay">
-            <div class="boiduong-dialog anim-zoom-enter">
-                <div class="dialog-header-bar">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 18px;">⚡</span>
-                        <span class="dialog-title">BỒI DƯỠNG ĐỆ TỬ</span>
-                    </div>
-                    <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeBoiDuongModal()" alt="Đóng">
+            <div class="boiduong-authentic-screen anim-zoom-enter">
+                <!-- Top Landscape Header -->
+                <div class="bd-auth-header-strip">
+                    <img src="/assets/ui/boiduong_authentic/top_landscape.png" class="bd-auth-top-bg" alt="Landscape"/>
+                    <img src="/assets/ui/boiduong_authentic/tab_title_boiduong.png" class="bd-auth-tab-plaque" alt="Bồi dưỡng đệ tử"/>
                 </div>
 
-                <div class="boiduong-dialog-body">
-                    <p class="boiduong-hint">Mỗi lần sử dụng 10 dưỡng đan, kích thích được tiềm lực của đệ tử</p>
-                    
-                    <div class="boiduong-info-card">
-                        <div class="boiduong-avatar-col">
-                            <img id="bd-hero-avatar" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Hero">
-                            <span id="bd-hero-name" class="bd-hero-name">Đông Phương</span>
+                <div class="bd-auth-content-body">
+                    <!-- Instruction Text -->
+                    <div class="bd-auth-hint">
+                        Mỗi lần sử dụng 10 bồi dưỡng đan, sẽ kích thích được<br/>tiềm lực của đệ tử
+                    </div>
+
+                    <!-- Disciple Profile Area -->
+                    <div class="bd-auth-hero-row">
+                        <!-- Avatar Frame with Purple/Gold Glow -->
+                        <div class="bd-auth-avatar-box">
+                            <img id="bd-hero-avatar" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" class="bd-auth-avatar-img" alt="Avatar"/>
                         </div>
-                        <div class="boiduong-stats-col">
-                            <div>Phẩm chất: <b id="bd-hero-tier" style="color: #c084fc;">Đệ Tử Giáp</b></div>
-                            <div>Cấp độ: <b id="bd-hero-lvl" style="color: #ffd700;">Lv.35</b></div>
-                            <div>Tiềm lực: <b id="bd-hero-tiemluc" style="color: #86efac;">+925</b></div>
-                            <div class="bd-dan-count">Bồi dưỡng đan: <b id="bd-dan-qty" style="color: #f59e0b;">5.121.196</b></div>
+
+                        <!-- Info Grid -->
+                        <div class="bd-auth-info-grid">
+                            <div class="bd-info-line bd-line-1">
+                                <span id="bd-hero-name" class="bd-hero-name-text">Đông Phương Bất Bại</span>
+                                <div class="bd-stat-item">
+                                    <img src="/assets/ui/boiduong_authentic/stat_hp.png" class="bd-stat-badge" alt="HP"/>
+                                    <span id="bd-hero-hp" class="bd-stat-val">4370186</span>
+                                </div>
+                                <div class="bd-stat-item">
+                                    <img src="/assets/ui/boiduong_authentic/stat_atk.png" class="bd-stat-badge" alt="ATK"/>
+                                    <span id="bd-hero-atk" class="bd-stat-val">19463</span>
+                                </div>
+                            </div>
+
+                            <div class="bd-info-line bd-line-2">
+                                <div class="bd-quality-wrapper">
+                                    <span>Phẩm chất :</span>
+                                    <img id="bd-badge-tier-img" src="/assets/ui/boiduong_authentic/badge_giap1.png" class="bd-badge-giap-img" alt="Giáp 1"/>
+                                    <span id="bd-hero-tier-text" class="bd-tier-fallback" style="display: none;">Giáp 1</span>
+                                </div>
+                                <div class="bd-stat-item">
+                                    <img src="/assets/ui/boiduong_authentic/stat_def.png" class="bd-stat-badge" alt="DEF"/>
+                                    <span id="bd-hero-def" class="bd-stat-val">46353</span>
+                                </div>
+                                <div class="bd-stat-item">
+                                    <img src="/assets/ui/boiduong_authentic/stat_int.png" class="bd-stat-badge" alt="INT"/>
+                                    <span id="bd-hero-int" class="bd-stat-val">92604</span>
+                                </div>
+                            </div>
+
+                            <div class="bd-info-line bd-line-3">
+                                <span class="bd-level-text">Cấp độ : <b id="bd-hero-lvl">514</b></span>
+                            </div>
+
+                            <div class="bd-info-line bd-line-4">
+                                <span class="bd-tiemluc-text">Tiềm lực : <b id="bd-hero-tiemluc">-925</b></span>
+                                <span class="bd-dan-text">Bồi dưỡng đan : <b id="bd-dan-qty">516921196</b></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="boiduong-btn-grid">
-                        <button class="btn-bd-action" onclick="submitBoiDuong(5, false)">
-                            <span>Bồi dưỡng 5 lần</span>
-                            <small>(50 Đan)</small>
-                        </button>
-                        <button class="btn-bd-action" onclick="submitBoiDuong(25, false)">
-                            <span>Bồi dưỡng 25 lần</span>
-                            <small>(250 Đan)</small>
-                        </button>
-                        <button class="btn-bd-action high" onclick="submitBoiDuong(5, true)">
-                            <span>Bồi dưỡng cao cấp 5 lần</span>
-                            <small>(25 Vàng)</small>
-                        </button>
-                        <button class="btn-bd-action high" onclick="submitBoiDuong(25, true)">
-                            <span>Bồi dưỡng cao cấp 25 lần</span>
-                            <small>(125 Vàng)</small>
-                        </button>
+                    <!-- Filigree Wooden Carved Options Board -->
+                    <div class="bd-auth-board-container">
+                        <img src="/assets/ui/boiduong_authentic/board_boiduong_clean.png" class="bd-board-bg" alt="Board"/>
+                        <div class="bd-board-options-grid">
+                            <!-- Option 1: Bồi dưỡng 5 lần -->
+                            <div class="bd-board-opt" id="bd-opt-5" onclick="selectBoiDuongOption(5, false)">
+                                <img src="/assets/ui/boiduong_authentic/radio_pearl_inactive.png" class="bd-radio-icon" id="bd-radio-5" alt="Radio"/>
+                                <span class="bd-opt-label">Bồi dưỡng 5 lần</span>
+                            </div>
+
+                            <!-- Option 2: Bồi dưỡng cao cấp 5 lần -->
+                            <div class="bd-board-opt" id="bd-opt-5-vip" onclick="selectBoiDuongOption(5, true)">
+                                <img src="/assets/ui/boiduong_authentic/radio_pearl_inactive.png" class="bd-radio-icon" id="bd-radio-5-vip" alt="Radio"/>
+                                <span class="bd-opt-label">Bồi dưỡng cao cấp 5 lần</span>
+                                <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" class="bd-knb-icon" alt="KNB"/>
+                                <span class="bd-knb-num">5</span>
+                            </div>
+
+                            <!-- Option 3: Bồi dưỡng 25 lần (SELECTED BY DEFAULT) -->
+                            <div class="bd-board-opt selected" id="bd-opt-25" onclick="selectBoiDuongOption(25, false)">
+                                <img src="/assets/ui/boiduong_authentic/radio_pearl_active.png" class="bd-radio-icon" id="bd-radio-25" alt="Radio"/>
+                                <span class="bd-opt-label">Bồi dưỡng 25 lần</span>
+                            </div>
+
+                            <!-- Option 4: Bồi dưỡng cao cấp 25 lần -->
+                            <div class="bd-board-opt" id="bd-opt-25-vip" onclick="selectBoiDuongOption(25, true)">
+                                <img src="/assets/ui/boiduong_authentic/radio_pearl_inactive.png" class="bd-radio-icon" id="bd-radio-25-vip" alt="Radio"/>
+                                <span class="bd-opt-label">Bồi dưỡng cao cấp 25 lần</span>
+                                <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" class="bd-knb-icon" alt="KNB"/>
+                                <span class="bd-knb-num">25</span>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- Result feedback message -->
                     <div id="bd-result-msg" class="bd-result-msg"></div>
-                    <button class="btn-wuxia-gold" style="width: 100%; height: 38px; margin-top: 10px;" onclick="closeBoiDuongModal()">QUAY LẠI</button>
+
+                    <!-- Bottom Action Buttons: Quay lại & Bồi dưỡng -->
+                    <div class="bd-auth-actions-row">
+                        <button type="button" class="bd-btn-img-wrapper" onclick="closeBoiDuongModal()" title="Quay lại">
+                            <img src="/assets/ui/boiduong_authentic/btn_quaylai.png" class="bd-auth-action-btn" alt="Quay lại"/>
+                        </button>
+                        <button type="button" class="bd-btn-img-wrapper" onclick="executeSelectedBoiDuong()" title="Bồi dưỡng">
+                            <img src="/assets/ui/boiduong_authentic/btn_boiduong.png" class="bd-auth-action-btn" alt="Bồi dưỡng"/>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1686,6 +1747,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=23"></script>
+    <script src="/js/game.js?v=24"></script>
 </body>
 </html>
