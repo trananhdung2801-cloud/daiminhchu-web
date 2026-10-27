@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=33">
+    <link rel="stylesheet" href="/css/style.css?v=34">
 </head>
 <body>
     <div id="game-container">
@@ -2097,6 +2097,171 @@
     </div>
 
 
+
+        <!-- ================= 100% AUTHENTIC KINH MẠCH SCREEN (MATCHING 4 ORIGINAL SCREENSHOTS) ================= -->
+        <div id="kinhmach-screen" class="kinhmach-screen-container">
+            <!-- Header Bar -->
+            <div class="km-header-bar">
+                <div class="km-back-btn" onclick="closeKinhMachScreen()" title="Quay lại">
+                    <img src="/assets/ui/chankhi_authentic/btn_back_header.png" alt="Back" />
+                </div>
+                
+                <div class="km-top-stats">
+                    <div class="km-vip-badge">12★</div>
+                    <div class="km-stat-chip">
+                        <img src="/assets/ui/icon_KNB.png" alt="Vàng" />
+                        <span id="km-gold-val">51,829</span>
+                    </div>
+                    <div class="km-stat-chip">
+                        <img src="/assets/images/icon_bac.png" alt="Bạc" />
+                        <span id="km-silver-val">8,152,400</span>
+                    </div>
+                </div>
+
+                <!-- Top Right Disciple Roster Row -->
+                <div class="km-disciple-roster-row">
+                    <div class="km-roster-avatar-btn active" id="km-roster-btn-0" onclick="switchKinhMachDisciple(0)" title="Hùng Bá">
+                        <img src="/assets/images/NV_HungBa_ava_to.png" alt="Hùng Bá" />
+                    </div>
+                    <div class="km-roster-avatar-btn" id="km-roster-btn-1" onclick="switchKinhMachDisciple(1)" title="Đông Phương Bất Bại">
+                        <img src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đông Phương Bất Bại" />
+                    </div>
+                    <div class="km-roster-avatar-btn" id="km-roster-btn-2" onclick="switchKinhMachDisciple(2)" title="Tây Môn Xuy Tuyết">
+                        <img src="/assets/images/NV_TayMonXuyTuyet_ava_to.png" alt="Tây Môn Xuy Tuyết" />
+                    </div>
+                    <div class="km-tag-dantran" onclick="switchTab('dantran')" title="Dàn Trận">
+                        <img src="/assets/ui/kinhmach_authentic/tag_dantran.png" alt="Dàn Trận" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Arena -->
+            <div class="km-main-arena">
+                <!-- Left 4 Slots -->
+                <div class="km-slot-column left">
+                    <div class="km-needle-slot" id="km-slot-0" onclick="openKimChamDetailModal(0)">
+                        <img id="km-slot-img-0" src="/assets/ui/kinhmach_authentic/clean_slot_l1_equipped.png" alt="Slot 1" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-1" onclick="openKimChamDetailModal(1)">
+                        <img id="km-slot-img-1" src="/assets/ui/kinhmach_authentic/clean_slot_l2_equipped.png" alt="Slot 2" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-2" onclick="openKimChamDetailModal(2)">
+                        <img id="km-slot-img-2" src="/assets/ui/kinhmach_authentic/clean_slot_l3_equipped.png" alt="Slot 3" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-3" onclick="openKimChamDetailModal(3)">
+                        <img id="km-slot-img-3" src="/assets/ui/kinhmach_authentic/clean_slot_l4_equipped.png" alt="Slot 4" />
+                    </div>
+                </div>
+
+                <!-- Center Scroll Painting -->
+                <div class="km-center-scroll-container">
+                    <img class="km-scroll-roller-top" src="/assets/ui/chankhi_authentic/scroll_rod_top.png" alt="Rod Top" />
+                    <div class="km-scroll-body" id="km-scroll-body">
+                        <!-- Stats Overlay at Bottom of Scroll -->
+                        <div class="km-scroll-bottom-overlay">
+                            <div class="km-main-stats-row">
+                                <div class="km-main-stat-item" title="Khí huyết"><span class="km-stat-icon-circle">🩸</span><span id="km-stat-hp">103198</span></div>
+                                <div class="km-main-stat-item" title="Võ công"><span class="km-stat-icon-circle">⚔️</span><span id="km-stat-atk">52101</span></div>
+                                <div class="km-main-stat-item" title="Phòng thủ"><span class="km-stat-icon-circle">🛡️</span><span id="km-stat-def">455995</span></div>
+                                <div class="km-main-stat-item" title="Nội lực"><span class="km-stat-icon-circle">🌀</span><span id="km-stat-int">8388513</span></div>
+                            </div>
+                            <div class="km-meridian-text-grid">
+                                <div class="km-meridian-item"><span>Nhâm Mạch</span> <span id="km-meridian-lvl-0" class="km-meridian-lvl">10</span></div>
+                                <div class="km-meridian-item"><span>Đốc Mạch</span> <span id="km-meridian-lvl-1" class="km-meridian-lvl"></span></div>
+                                <div class="km-meridian-item"><span>Xung Mạch</span> <span id="km-meridian-lvl-2" class="km-meridian-lvl">11</span></div>
+                                <div class="km-meridian-item"><span>Âm Kiều Mạch</span> <span id="km-meridian-lvl-3" class="km-meridian-lvl">10</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Button Đệ Tử Round -->
+                        <div class="km-btn-detu-wrap" onclick="openDiscipleDetailModal()" title="Thông tin Đệ Tử">
+                            <img src="/assets/ui/kinhmach_authentic/clean_btn_detu_round.png" alt="Đệ Tử" />
+                        </div>
+                    </div>
+                    <img class="km-scroll-roller-bottom" src="/assets/ui/chankhi_authentic/scroll_rod_bottom.png" alt="Rod Bottom" />
+                </div>
+
+                <!-- Right 4 Slots -->
+                <div class="km-slot-column right">
+                    <div class="km-needle-slot" id="km-slot-4" onclick="openKimChamDetailModal(4)">
+                        <img id="km-slot-img-4" src="/assets/ui/kinhmach_authentic/clean_slot_r1_equipped.png" alt="Slot 5" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-5" onclick="openKimChamDetailModal(5)">
+                        <img id="km-slot-img-5" src="/assets/ui/kinhmach_authentic/clean_slot_r2_equipped.png" alt="Slot 6" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-6" onclick="openKimChamDetailModal(6)">
+                        <img id="km-slot-img-6" src="/assets/ui/kinhmach_authentic/clean_slot_r3_equipped.png" alt="Slot 7" />
+                    </div>
+                    <div class="km-needle-slot" id="km-slot-7" onclick="openKimChamDetailModal(7)">
+                        <img id="km-slot-img-7" src="/assets/ui/kinhmach_authentic/clean_slot_r4_equipped.png" alt="Slot 8" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: THÔNG TIN KIM CHÂM ================= -->
+        <div id="modal-kimcham-detail" class="km-modal-backdrop">
+            <div class="km-detail-card">
+                <div class="km-modal-header">
+                    <div class="km-modal-header-title">Thông tin Kim châm</div>
+                    <div class="km-modal-close-btn" onclick="closeKimChamDetailModal()">
+                        <img src="/assets/ui/chankhi_authentic/btn_close_x.png" alt="Close" />
+                    </div>
+                </div>
+                <div class="km-detail-body">
+                    <div class="km-detail-top-row">
+                        <div class="km-item-icon-frame">
+                            <img id="km-modal-needle-icon" src="/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png" alt="Needle" />
+                        </div>
+                        <div class="km-item-meta">
+                            <div id="km-modal-needle-name" class="km-item-name">Thần Mộc Châm</div>
+                            <div id="km-modal-needle-stat" class="km-item-stat">🩸 Khí huyết +1000</div>
+                            <div id="km-modal-needle-inuse" class="km-item-inuse">Hùng Bá đang sử dụng</div>
+                        </div>
+                    </div>
+                    <div id="km-modal-needle-desc" class="km-item-desc">
+                        Chế tạo từ thần mộc ngàn năm ở Thiên Sơn, cứng cáp mà dẻo dai lạ thường.
+                    </div>
+                    <div class="km-modal-actions">
+                        <div class="km-action-btn-col">
+                            <div class="km-action-btn-img" onclick="doRemoveKimCham()" title="Rút châm">
+                                <img src="/assets/ui/kinhmach_authentic/clean_btn_rutcham.png" alt="Rút châm" />
+                            </div>
+                            <div class="km-action-fee">
+                                <img src="/assets/images/icon_bac.png" alt="Bạc" />
+                                <span>500,000,000</span>
+                            </div>
+                        </div>
+                        <div class="km-action-btn-col">
+                            <div class="km-action-btn-img" onclick="closeKimChamDetailModal()" title="Đóng">
+                                <img src="/assets/ui/kinhmach_authentic/clean_btn_dong.png" alt="Đóng" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: KHO KIM CHÂM (CHÂM HUYỆT) ================= -->
+        <div id="modal-kimcham-inventory" class="km-modal-backdrop">
+            <div class="km-detail-card">
+                <div class="km-modal-header">
+                    <div class="km-modal-header-title">Kho Kim Châm</div>
+                    <div class="km-modal-close-btn" onclick="closeKimChamInventory()">
+                        <img src="/assets/ui/chankhi_authentic/btn_close_x.png" alt="Close" />
+                    </div>
+                </div>
+                <div class="km-detail-body">
+                    <div style="font-size: 12px; color: #78350f; font-weight: bold; width: 100%; text-align: left;">
+                        Chọn Kim Châm để đả thông huyệt vị này:
+                    </div>
+                    <div class="km-inv-list" id="km-inventory-list">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ================= 100% AUTHENTIC CHÂN KHÍ SCREEN (MATCHING 3 ORIGINAL SCREENSHOTS) ================= -->
         <div id="chankhi-screen" class="chankhi-screen-container">
             <!-- Header Bar -->
@@ -2290,6 +2455,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=33"></script>
+    <script src="/js/game.js?v=34"></script>
 </body>
 </html>

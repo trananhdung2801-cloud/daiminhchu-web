@@ -8872,3 +8872,501 @@ img {
 .ck-inv-item:hover {
     background: rgba(255, 255, 255, 0.95);
 }
+
+/* ================= 100% AUTHENTIC KINH MẠCH GUI (MATCHING 4 ORIGINAL SCREENSHOTS) ================= */
+#kinhmach-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 105;
+    background: url('/assets/ui/bg_dantran.png') center top / cover no-repeat #1a1614;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+}
+
+#kinhmach-screen.active {
+    display: flex;
+}
+
+/* Header bar */
+.km-header-bar {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background: linear-gradient(180deg, rgba(30, 20, 10, 0.95) 0%, rgba(15, 10, 5, 0.75) 100%);
+    border-bottom: 2px solid #8e622b;
+    position: relative;
+    z-index: 10;
+}
+
+.km-back-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #d4a359;
+    border-radius: 6px;
+    transition: transform 0.1s;
+}
+.km-back-btn:active {
+    transform: scale(0.92);
+}
+.km-back-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.km-top-stats {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.km-vip-badge {
+    background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+    border: 1px solid #fef08a;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 1px 2px #000;
+}
+.km-stat-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #785327;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fef08a;
+}
+.km-stat-chip img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Disciple Roster Selectors Top Right */
+.km-disciple-roster-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+.km-roster-avatar-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 2px solid #ffd700;
+    overflow: hidden;
+    background: #2a1a10;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+    transition: transform 0.15s, border-color 0.15s;
+    position: relative;
+}
+.km-roster-avatar-btn.active {
+    border-color: #f59e0b;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+    transform: scale(1.06);
+}
+.km-roster-avatar-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.km-tag-dantran {
+    width: 28px;
+    height: 38px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.km-tag-dantran:active {
+    transform: scale(0.92);
+}
+.km-tag-dantran img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Main Arena Body */
+.km-main-arena {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 4 Slots Left & Right */
+.km-slot-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 92%;
+    width: 72px;
+    z-index: 5;
+}
+
+.km-needle-slot {
+    width: 66px;
+    height: 66px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+    margin: 3px 0;
+}
+.km-needle-slot:active {
+    transform: scale(0.92);
+}
+.km-needle-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.7));
+}
+
+/* Center Scroll Container */
+.km-center-scroll-container {
+    flex: 1;
+    max-width: 330px;
+    height: 96%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin: 0 2px;
+}
+
+.km-scroll-roller-top, .km-scroll-roller-bottom {
+    width: 100%;
+    height: 18px;
+    object-fit: fill;
+    z-index: 3;
+}
+
+.km-scroll-body {
+    flex: 1;
+    width: 96%;
+    background: url('/assets/ui/kinhmach_authentic/scroll_kinhmach_hungba.png') center top / cover no-repeat #e3cca6;
+    border-left: 2px solid #8e622b;
+    border-right: 2px solid #8e622b;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+}
+
+/* Stats overlay at bottom of scroll */
+.km-scroll-bottom-overlay {
+    width: 100%;
+    background: rgba(248, 241, 230, 0.96);
+    border-top: 1px solid #b58c54;
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 4;
+}
+
+.km-main-stats-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    padding: 2px 0;
+}
+.km-main-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #292524;
+}
+.km-stat-icon-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #78350f;
+    color: #fef08a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    border: 1px solid #d4a359;
+}
+
+/* 4 Meridian Names Rows */
+.km-meridian-text-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+    padding: 2px 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #451a03;
+}
+.km-meridian-item {
+    display: flex;
+    justify-content: space-between;
+}
+.km-meridian-lvl {
+    color: #b91c1c;
+    font-weight: 900;
+}
+
+/* Button Đệ Tử Round */
+.km-btn-detu-wrap {
+    position: absolute;
+    bottom: 52px;
+    right: 8px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s;
+}
+.km-btn-detu-wrap:active {
+    transform: scale(0.92);
+}
+.km-btn-detu-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7));
+}
+
+/* ================= MODAL: THÔNG TIN KIM CHÂM ================= */
+.km-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 120;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.km-modal-backdrop.active {
+    display: flex;
+}
+
+.km-detail-card {
+    width: 360px;
+    max-width: 92%;
+    background: url('/assets/ui/hero_info_authentic/scroll_painting_sample.png') center center / cover no-repeat #e3cca6;
+    border: 3px solid #78350f;
+    border-radius: 10px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: kmModalPop 0.2s ease-out;
+    position: relative;
+}
+
+@keyframes kmModalPop {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.km-modal-header {
+    height: 46px;
+    background: linear-gradient(180deg, #78350f 0%, #451a03 100%);
+    border-bottom: 2px solid #d97706;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+.km-modal-header-title {
+    color: #fef08a;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 1px 3px #000;
+    letter-spacing: 0.5px;
+}
+.km-modal-close-btn {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.km-modal-close-btn:active {
+    transform: scale(0.9);
+}
+.km-modal-close-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.km-detail-body {
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.km-detail-top-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+}
+
+.km-item-icon-frame {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+    background: #2a1a10;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.km-item-icon-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.km-item-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.km-item-name {
+    font-size: 17px;
+    font-weight: 900;
+    color: #451a03;
+}
+.km-item-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #78350f;
+}
+.km-item-inuse {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.km-item-desc {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid #a87948;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #292524;
+    line-height: 1.4;
+}
+
+.km-modal-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.km-action-btn-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.km-action-btn-img {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.km-action-btn-img:active {
+    transform: scale(0.94);
+}
+.km-action-btn-img img {
+    width: 100%;
+    height: 44px;
+    object-fit: fill;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.km-action-fee {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #78350f;
+}
+.km-action-fee img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Modal Kho Kim Châm */
+.km-inv-list {
+    max-height: 290px;
+    overflow-y: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 4px;
+}
+.km-inv-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #8e622b;
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.km-inv-item:hover {
+    background: rgba(255, 255, 255, 0.95);
+}

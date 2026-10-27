@@ -2271,10 +2271,8 @@ async function buyHuyetChienBuff(buffType) {
 }
 
 // 2. ĐẢ THÔNG KINH MẠCH & CHÂN KHÍ
-async function openKinhMachModal() {
-    sound.play('click');
-    document.getElementById('kinhmach-modal').classList.add('active');
-    loadKinhMach();
+function openKinhMachModal() {
+    openKinhMachScreen();
 }
 
 function closeKinhMachModal() {
@@ -4864,4 +4862,393 @@ function equipChanKhiToSlot(ckId) {
     closeChanKhiInventory();
     openChanKhiDetailModal(currentSelectedChanKhiSlot);
     renderChanKhiScreen();
+}
+
+// ================= 100% AUTHENTIC KINH MẠCH SYSTEM (MATCHING 4 ORIGINAL SCREENSHOTS) =================
+const AUTHENTIC_KIMCHAM_DATABASE = [
+  {
+    "id": "KC_ThanMoc",
+    "name": "Thần Mộc Châm",
+    "desc": "Chế tạo từ thần mộc ngàn năm ở Thiên Sơn, cứng cáp mà dẻo dai lạ thường.",
+    "statType": "Mau",
+    "statLabel": "Khí huyết",
+    "statIcon": "🩸",
+    "base": 40,
+    "growth": 40,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HoaThach",
+    "name": "Hỏa Thạch Châm",
+    "desc": "Chế tạo từ đá núi lửa ngoài khơi Đông Hải, chịu nhiệt cực tốt.",
+    "statType": "Cong",
+    "statLabel": "Võ công",
+    "statIcon": "⚔️",
+    "base": 20,
+    "growth": 20,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HanNgan",
+    "name": "Hàn Ngân Châm",
+    "desc": "Chế tạo từ bạc nguyên chất đã tôi luyện ngàn năm ở Tuyết Sơn.",
+    "statType": "Thu",
+    "statLabel": "Phòng thủ",
+    "statIcon": "🛡️",
+    "base": 20,
+    "growth": 20,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_TuKim",
+    "name": "Tử Kim Châm",
+    "desc": "Chế tạo từ kim loại đỏ quý hiếm núi Côn Lôn, đã hấp thụ tinh hoa trời đất.",
+    "statType": "NoiLuc",
+    "statLabel": "Nội công",
+    "statIcon": "🌀",
+    "base": 20,
+    "growth": 20,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HacMoc",
+    "name": "Hắc Mộc Châm",
+    "desc": "Chế tạo từ gỗ đen ngàn năm tại Tây Vực, đao thương bất nhập, thủy hỏa bất xâm.",
+    "statType": "ChinhXac",
+    "statLabel": "Chính xác",
+    "statIcon": "🎯",
+    "base": 6,
+    "growth": 6,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_LinhMoc",
+    "name": "Linh Mộc Châm",
+    "desc": "Chế tạo từ cây thần ở dãy núi Trường Bạch ngàn năm, tự bản thân có linh tính dị thường.",
+    "statType": "TranhNe",
+    "statLabel": "Né tránh",
+    "statIcon": "💨",
+    "base": 5,
+    "growth": 5,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_TinhThach",
+    "name": "Tinh Thạch Châm",
+    "desc": "Chế tạo từ thiên thạch từ thiên ngoại xa xăm bay đến, vô cùng rắn chắc.",
+    "statType": "PhanKich",
+    "statLabel": "Phản đòn",
+    "statIcon": "🔄",
+    "base": 5,
+    "growth": 5,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HuyetThach",
+    "name": "Huyết Thạch Châm",
+    "desc": "Chế tạo từ Huyết Thạch trong truyền thuyết, có thể hút và tích tụ máu người.",
+    "statType": "PhaPhan",
+    "statLabel": "Phá phản",
+    "statIcon": "⚡",
+    "base": 6,
+    "growth": 6,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HuyenThiet",
+    "name": "Huyền Thiết Châm",
+    "desc": "Chế tạo từ Huyền Thiết, cùng loại với thanh danh kiếm của Độc Cô Cầu Bại. ",
+    "statType": "BaoKich",
+    "statLabel": "Bạo kích",
+    "statIcon": "💥",
+    "base": 5,
+    "growth": 5,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  },
+  {
+    "id": "KC_HanThiet",
+    "name": "Hàn Thiết Châm",
+    "desc": "Chế tạo từ kim loại ở Bắc Cực, đã hấp thụ hàn khí ngàn năm, tự bản thân tỏa khí lạnh dị thường.",
+    "statType": "PhongBao",
+    "statLabel": "Phòng bạo",
+    "statIcon": "🔰",
+    "base": 6,
+    "growth": 6,
+    "icon": "/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png"
+  }
+];
+
+let currentKinhMachDiscipleIndex = 0;
+let currentSelectedNeedleSlot = 0;
+
+const KINHMACH_DISCIPLES = [
+    {
+        code: 'NV_HungBa',
+        name: 'Hùng Bá',
+        scrollBg: '/assets/ui/kinhmach_authentic/scroll_kinhmach_hungba.png',
+        hpVal: 103198,
+        atkVal: 52101,
+        defVal: 455995,
+        intVal: 8388513,
+        meridians: ['10', '', '11', '10'],
+        slots: [
+            { id: 'KC_ThanMoc', name: 'Thần Mộc Châm', stat: '🩸 Khí huyết +1000', statType: 'Mau', bonus: 1000, desc: 'Chế tạo từ thần mộc ngàn năm ở Thiên Sơn, cứng cáp mà dẻo dai lạ thường.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l1_equipped.png' },
+            { id: 'KC_HoaThach', name: 'Hỏa Thạch Châm', stat: '⚔️ Võ công +500', statType: 'Cong', bonus: 500, desc: 'Chế tạo từ đá núi lửa ngoài khơi Đông Hải, chịu nhiệt cực tốt.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l2_equipped.png' },
+            { id: 'KC_HanNgan', name: 'Hàn Ngân Châm', stat: '🛡️ Phòng thủ +500', statType: 'Thu', bonus: 500, desc: 'Chế tạo từ bạc nguyên chất đã tôi luyện ngàn năm ở Tuyết Sơn.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l3_equipped.png' },
+            { id: 'KC_TuKim', name: 'Tử Kim Châm', stat: '🌀 Nội công +500', statType: 'NoiLuc', bonus: 500, desc: 'Chế tạo từ kim loại đỏ quý hiếm núi Côn Lôn, đã hấp thụ tinh hoa trời đất.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l4_equipped.png' },
+            { id: 'KC_HacMoc', name: 'Hắc Mộc Châm', stat: '🎯 Chính xác +150', statType: 'ChinhXac', bonus: 150, desc: 'Chế tạo từ gỗ đen ngàn năm tại Tây Vực, đao thương bất nhập, thủy hỏa bất xâm.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r1_equipped.png' },
+            { id: 'KC_LinhMoc', name: 'Linh Mộc Châm', stat: '💨 Né tránh +125', statType: 'TranhNe', bonus: 125, desc: 'Chế tạo từ cây thần ở dãy núi Trường Bạch ngàn năm, tự bản thân có linh tính dị thường.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r2_equipped.png' },
+            { id: 'KC_TinhThach', name: 'Tinh Thạch Châm', stat: '🔄 Phản đòn +125', statType: 'PhanKich', bonus: 125, desc: 'Chế tạo từ thiên thạch từ thiên ngoại xa xăm bay đến, vô cùng rắn chắc.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r3_equipped.png' },
+            { id: 'KC_HuyetThach', name: 'Huyết Thạch Châm', stat: '⚡ Phá phản +150', statType: 'PhaPhan', bonus: 150, desc: 'Chế tạo từ Huyết Thạch trong truyền thuyết, có thể hút và tích tụ máu người.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r4_equipped.png' }
+        ]
+    },
+    {
+        code: 'NV_DongPhuongBatBai',
+        name: 'Đông Phương Bất Bại',
+        scrollBg: '/assets/ui/kinhmach_authentic/scroll_kinhmach_alt.png',
+        hpVal: 335794,
+        atkVal: 8629,
+        defVal: 14842,
+        intVal: 34728,
+        meridians: ['', '', '', ''],
+        slots: [
+            null,
+            null,
+            null,
+            { cracked: true },
+            null,
+            { cracked: true },
+            null,
+            null
+        ]
+    },
+    {
+        code: 'NV_TayMonXuyTuyet',
+        name: 'Tây Môn Xuy Tuyết',
+        scrollBg: '/assets/ui/kinhmach_authentic/scroll_kinhmach_hungba.png',
+        hpVal: 309221,
+        atkVal: 12913,
+        defVal: 12401,
+        intVal: 43487,
+        meridians: ['', '', '11', ''],
+        slots: [
+            { id: 'KC_ThanMoc', name: 'Thần Mộc Châm', stat: '🩸 Khí huyết +1000', statType: 'Mau', bonus: 1000, desc: 'Chế tạo từ thần mộc ngàn năm ở Thiên Sơn, cứng cáp mà dẻo dai lạ thường.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l1_equipped.png' },
+            { id: 'KC_HoaThach', name: 'Hỏa Thạch Châm', stat: '⚔️ Võ công +500', statType: 'Cong', bonus: 500, desc: 'Chế tạo từ đá núi lửa ngoài khơi Đông Hải, chịu nhiệt cực tốt.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l2_equipped.png' },
+            { id: 'KC_HanNgan', name: 'Hàn Ngân Châm', stat: '🛡️ Phòng thủ +500', statType: 'Thu', bonus: 500, desc: 'Chế tạo từ bạc nguyên chất đã tôi luyện ngàn năm ở Tuyết Sơn.', icon: '/assets/ui/kinhmach_authentic/clean_slot_l3_equipped.png' },
+            null,
+            { id: 'KC_TuKim', name: 'Tử Kim Châm', stat: '🌀 Nội công +500', statType: 'NoiLuc', bonus: 500, desc: 'Chế tạo từ kim loại đỏ quý hiếm núi Côn Lôn, đã hấp thụ tinh hoa trời đất.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r1_equipped.png' },
+            { id: 'KC_HacMoc', name: 'Hắc Mộc Châm', stat: '🎯 Chính xác +150', statType: 'ChinhXac', bonus: 150, desc: 'Chế tạo từ gỗ đen ngàn năm tại Tây Vực, đao thương bất nhập, thủy hỏa bất xâm.', icon: '/assets/ui/kinhmach_authentic/clean_slot_r2_equipped.png' },
+            null,
+            null
+        ]
+    }
+];
+
+function openKinhMachScreen(discipleIdx) {
+    sound.play('click');
+    if (discipleIdx !== undefined) {
+        currentKinhMachDiscipleIndex = discipleIdx;
+    }
+    const scr = document.getElementById('kinhmach-screen');
+    if (scr) {
+        scr.classList.add('active');
+        renderKinhMachScreen();
+    }
+}
+
+function closeKinhMachScreen() {
+    sound.play('click');
+    const scr = document.getElementById('kinhmach-screen');
+    if (scr) scr.classList.remove('active');
+}
+
+// Override openKinhMachModal to open authentic Kinh Mạch screen
+function openKinhMachModal() {
+    openKinhMachScreen();
+}
+
+function switchKinhMachDisciple(idx) {
+    sound.play('click');
+    currentKinhMachDiscipleIndex = idx;
+    renderKinhMachScreen();
+}
+
+function renderKinhMachScreen() {
+    const d = KINHMACH_DISCIPLES[currentKinhMachDiscipleIndex];
+    if (!d) return;
+
+    // Update active border on top roster avatars
+    for (let i = 0; i < 3; i++) {
+        const btn = document.getElementById(`km-roster-btn-${i}`);
+        if (btn) {
+            if (i === currentKinhMachDiscipleIndex) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+    }
+
+    // Update center scroll background
+    const scrollBody = document.getElementById('km-scroll-body');
+    if (scrollBody) {
+        scrollBody.style.backgroundImage = `url('${d.scrollBg}')`;
+    }
+
+    // Update primary stats
+    const statHp = document.getElementById('km-stat-hp');
+    if (statHp) statHp.textContent = d.hpVal;
+
+    const statAtk = document.getElementById('km-stat-atk');
+    if (statAtk) statAtk.textContent = d.atkVal;
+
+    const statDef = document.getElementById('km-stat-def');
+    if (statDef) statDef.textContent = d.defVal;
+
+    const statInt = document.getElementById('km-stat-int');
+    if (statInt) statInt.textContent = d.intVal;
+
+    // Update 4 Meridian level texts
+    for (let m = 0; m < 4; m++) {
+        const mEl = document.getElementById(`km-meridian-lvl-${m}`);
+        if (mEl) mEl.textContent = d.meridians[m] || '';
+    }
+
+    // Update 8 slots
+    d.slots.forEach((s, idx) => {
+        const imgEl = document.getElementById(`km-slot-img-${idx}`);
+        if (!imgEl) return;
+
+        if (s && !s.cracked) {
+            imgEl.src = s.icon || '/assets/ui/kinhmach_authentic/clean_slot_l1_equipped.png';
+        } else if (s && s.cracked) {
+            imgEl.src = '/assets/ui/kinhmach_authentic/clean_slot_cracked_seal.png';
+        } else {
+            imgEl.src = '/assets/ui/kinhmach_authentic/clean_slot_question_box.png';
+        }
+    });
+}
+
+// ================= MODAL: THÔNG TIN KIM CHÂM =================
+function openKimChamDetailModal(slotIdx) {
+    sound.play('click');
+    currentSelectedNeedleSlot = slotIdx;
+    const d = KINHMACH_DISCIPLES[currentKinhMachDiscipleIndex];
+    const s = d.slots[slotIdx];
+
+    if (!s) {
+        // Empty slot with question box -> Open needle inventory to pierce
+        openKimChamInventory();
+        return;
+    }
+
+    if (s.cracked) {
+        // Cracked seal -> Prompt to unblock/pierce meridian
+        const confirmUnblock = confirm(`Huyệt vị này đang bị phong ấn bế tắc! Chưởng môn có muốn dùng Chân Khí để đả thông khai mở ô này không?`);
+        if (confirmUnblock) {
+            sound.play('renxong');
+            d.slots[slotIdx] = null; // Unblocked into open slot
+            renderKinhMachScreen();
+            alert('✨ Chúc mừng! Đã đả thông huyệt đạo thành công! Hãy chọn Kim Châm để châm cứu gia tăng công lực.');
+            openKimChamInventory();
+        }
+        return;
+    }
+
+    // Occupied needle slot -> Open detail modal
+    const modal = document.getElementById('modal-kimcham-detail');
+    if (!modal) return;
+
+    const nameEl = document.getElementById('km-modal-needle-name');
+    if (nameEl) nameEl.textContent = s.name;
+
+    const statEl = document.getElementById('km-modal-needle-stat');
+    if (statEl) statEl.textContent = s.stat;
+
+    const inuseEl = document.getElementById('km-modal-needle-inuse');
+    if (inuseEl) inuseEl.textContent = `${d.name} đang sử dụng`;
+
+    const descEl = document.getElementById('km-modal-needle-desc');
+    if (descEl) descEl.textContent = s.desc;
+
+    modal.classList.add('active');
+}
+
+function closeKimChamDetailModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-kimcham-detail');
+    if (modal) modal.classList.remove('active');
+}
+
+function doRemoveKimCham() {
+    sound.play('click');
+    const d = KINHMACH_DISCIPLES[currentKinhMachDiscipleIndex];
+    const s = d.slots[currentSelectedNeedleSlot];
+    if (!s) return;
+
+    const needleName = s.name;
+    d.slots[currentSelectedNeedleSlot] = null; // Revert to empty question slot
+
+    closeKimChamDetailModal();
+    renderKinhMachScreen();
+    alert(`✨ Đã rút [${needleName}] thành công! Đã trả về túi Kim Châm của môn phái.`);
+}
+
+// ================= MODAL: KHO KIM CHÂM =================
+function openKimChamInventory() {
+    sound.play('click');
+    const invModal = document.getElementById('modal-kimcham-inventory');
+    if (!invModal) return;
+
+    const listEl = document.getElementById('km-inventory-list');
+    if (listEl) {
+        listEl.innerHTML = AUTHENTIC_KIMCHAM_DATABASE.map(item => {
+            return `
+                <div class="km-inv-item" onclick="equipKimChamToSlot('${item.id}')">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="/assets/ui/kinhmach_authentic/clean_item_thanmoc_frame.png" style="width: 44px; height: 44px; object-fit: contain; border-radius: 6px;" />
+                        <div>
+                            <div style="font-weight: 900; color: #451a03; font-size: 14px;">${item.name}</div>
+                            <div style="font-size: 11px; color: #b91c1c; font-weight: bold;">${item.statIcon} ${item.statLabel} +${item.growth * 25}</div>
+                            <div style="font-size: 10px; color: #78350f; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.desc}</div>
+                        </div>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 76px; height: 32px; font-size: 11px; padding: 0;">Châm huyệt</button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    invModal.classList.add('active');
+}
+
+function closeKimChamInventory() {
+    sound.play('click');
+    const invModal = document.getElementById('modal-kimcham-inventory');
+    if (invModal) invModal.classList.remove('active');
+}
+
+function equipKimChamToSlot(needleId) {
+    sound.play('equip');
+    const item = AUTHENTIC_KIMCHAM_DATABASE.find(x => x.id === needleId);
+    if (!item) return;
+
+    const d = KINHMACH_DISCIPLES[currentKinhMachDiscipleIndex];
+    const bonus = item.growth * 25;
+
+    // Pick a clean equipped frame based on slot side
+    const isLeft = currentSelectedNeedleSlot < 4;
+    const slotIdx1 = (currentSelectedNeedleSlot % 4) + 1;
+    const icon = isLeft ? `/assets/ui/kinhmach_authentic/clean_slot_l${slotIdx1}_equipped.png` : `/assets/ui/kinhmach_authentic/clean_slot_r${slotIdx1}_equipped.png`;
+
+    d.slots[currentSelectedNeedleSlot] = {
+        id: item.id,
+        name: item.name,
+        stat: `${item.statIcon} ${item.statLabel} +${bonus}`,
+        statType: item.statType,
+        bonus: bonus,
+        desc: item.desc,
+        icon: icon
+    };
+
+    closeKimChamInventory();
+    renderKinhMachScreen();
+    alert(`✨ Châm cứu thành công! [${item.name}] đã đả thông huyệt vị và gia tăng ${bonus} điểm ${item.statLabel} cho ${d.name}!`);
 }
