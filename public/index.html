@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=25">
+    <link rel="stylesheet" href="/css/style.css?v=27">
 </head>
 <body>
     <div id="game-container">
@@ -425,18 +425,70 @@
                     <div id="gh-mission-list" class="gh-mission-planks-container"></div>
                 </div>
 
-                <!-- Tab 4: Luyện Công (L.công) -->
-                <div id="tab-luyencong" class="tab-view" style="display: none;">
-                    <div style="color: #ffd700; font-size: 13px; font-weight: 900; margin-bottom: 8px; text-shadow: 1px 1px 2px #000;">
-                        LUYỆN CÔNG & ĐỘT PHÁ TÂM PHÁP
+                <!-- Tab 4: 100% Authentic Luyện Công & Luyện Điêu GUI Matching Original Game Screenshot media_1793068206949_7469be7e.jpg -->
+                <div id="tab-luyencong" class="tab-view luyencong-authentic-view" style="display: none;">
+                    <!-- Top Notice / Ticker Bar -->
+                    <div class="lc-ticker-bar">
+                        <span class="lc-ticker-text">'Qui Ẩn Giang Hồ' sau khi tĩnh tâm trong sáng, đã luyện điêu vượt mốc 1234 điểm, vinh danh Đệ Nhất Thần Điêu Võ Lâm!</span>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-                        <button class="btn-wuxia-gold" style="height: 38px; font-size: 11px;" onclick="openTruyenCongModal()">🔄 TRUYỀN CÔNG</button>
-                        <button class="btn-wuxia-gold" style="height: 38px; font-size: 11px;" onclick="openKinhMachModal()">🔮 KINH MẠCH</button>
-                        <button class="btn-wuxia-gold" style="height: 38px; font-size: 11px;" onclick="openBoiDuongModal()">🌟 BỒI DƯỠNG</button>
-                        <button class="btn-wuxia-gold" style="height: 38px; font-size: 11px;" onclick="openTinhLuyenModal()">⚒️ TINH LUYỆN</button>
+
+                    <!-- Top Sub-feature Icons Track -->
+                    <div class="lc-top-icons-row">
+                        <button class="lc-icon-btn active" id="btn-lc-luyendieu" onclick="switchLuyencongSubTab('luyendieu')" title="Luyện Điêu - Thần Điêu Hành Hiệp">
+                            <img src="/assets/ui/luyencong_authentic/icon_luyendieu.png" class="lc-feature-icon" alt="Luyện Điêu"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-ngunhac" onclick="switchLuyencongSubTab('ngunhac')" title="Ngũ Nhạc Kiếm Phái">
+                            <img src="/assets/ui/luyencong_authentic/icon_ngunhac.png" class="lc-feature-icon" alt="Ngũ Nhạc"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-vantieu" onclick="switchLuyencongSubTab('vantieu')" title="Vận Tiêu Võ Lâm">
+                            <img src="/assets/ui/luyencong_authentic/icon_vantieu.png" class="lc-feature-icon" alt="Vận Tiêu"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-tucung" onclick="switchLuyencongSubTab('tucung')" title="Tử Cung - Hắc Mộc Nhai">
+                            <img src="/assets/ui/luyencong_authentic/icon_tu_cung.png" class="lc-feature-icon" alt="Tử Cung"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-tongkim" onclick="switchLuyencongSubTab('tongkim')" title="Tống Kim Chiến Trường">
+                            <img src="/assets/ui/luyencong_authentic/icon_tongkim.png" class="lc-feature-icon" alt="Tống Kim"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-boiduong" onclick="openBoiDuongModal()" title="Bồi Dưỡng Đệ Tử">
+                            <img src="/assets/ui/boiduong_authentic/tab_title_boiduong.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="Bồi Dưỡng"/>
+                        </button>
                     </div>
-                    <div id="luyencong-container" class="disciple-scroll-list"></div>
+
+                    <!-- Main Scenic Stage: Luyện Điêu Authentic GUI -->
+                    <div id="luyencong-view-luyendieu" class="kyngo-stage-scene">
+                        <img src="/assets/ui/luyencong_authentic/scene_luyendieu_clean.png" class="ld-scene-bg" alt="Luyện Điêu"/>
+
+                        <!-- Animated Baby Eagle Character -->
+                        <div id="ld-bird-box" class="ld-bird-character">
+                            <img src="/assets/ui/luyencong_authentic/bird_ld.png" class="ld-bird-img" alt="Thần Điêu"/>
+                        </div>
+
+                        <!-- Action Buttons: Bắt đầu & Top -->
+                        <div id="ld-buttons-row" class="ld-action-buttons-row">
+                            <button type="button" class="ld-btn-img-wrapper" onclick="startLuyenDieuMiniGame()" title="Bắt đầu luyện điêu">
+                                <img src="/assets/ui/luyencong_authentic/btn_batdau_ld.png" class="ld-action-btn-img" alt="Bắt đầu"/>
+                            </button>
+                            <button type="button" class="ld-btn-img-wrapper" onclick="openLuyenDieuLeaderboard()" title="Bảng xếp hạng Top">
+                                <img src="/assets/ui/luyencong_authentic/btn_top_ld.png" class="ld-action-btn-img" alt="Top"/>
+                            </button>
+                        </div>
+
+                        <!-- Ground Stats Overlay -->
+                        <div class="ld-ground-stats-overlay">
+                            <div class="ld-stat-line-1">
+                                Chưởng môn hôm nay đã chơi <span id="ld-plays-count">1</span> lượt.
+                            </div>
+                            <div class="ld-stat-line-2">
+                                Điểm cao nhất: <span id="ld-highscore-val" class="ld-score-highlight">1234</span>
+                            </div>
+                        </div>
+
+                        <!-- Flappy Bird Interactive HTML5 Canvas Game -->
+                        <canvas id="ld-flappy-canvas" class="ld-game-canvas"></canvas>
+                    </div>
+
+                    <!-- Hidden Disciple List Container for Background Logic -->
+                    <div id="luyencong-container" style="display: none;"></div>
                 </div>
 
                 <!-- Tab 5: 100% Authentic Kỳ Ngộ, Thể Lực (Ăn Gà) & Thưởng Tiêu (Tích Lũy Tiêu) Matching Original Game Screenshots media_1793066635941_fb2af011.jpg & media_1793066770174_4d94b8e6.jpg -->
@@ -704,44 +756,50 @@
             </div>
         </div>
 
-        <!-- ================= AUTHENTIC BATTLE ARENA (100% MATCHING IMAGE 1 & VIDEO) ================= -->
-        <div id="battle-overlay" class="battle-overlay-authentic">
-            <!-- Top Controls -->
-            <div class="battle-top-bar">
-                <span id="battle-round-title" class="battle-title-text">⚔️ HIỆP 1: QUYẾT ĐẤU GIANG HỒ</span>
-                <button class="btn-battle-skip" onclick="closeBattle()">BỎ QUA</button>
+        <!-- ================= 100% AUTHENTIC 8V8 BATTLE ARENA WITH BUFF ACTIVATION (media_1793068311069_68fd0f94.jpg) ================= -->
+        <div id="battle-overlay" class="battle-overlay-authentic" style="display: none;">
+            <!-- Background Artwork -->
+            <img src="/assets/ui/battle_authentic/battle_bg_authentic.png" class="battle-bg-art" alt="Battle Arena"/>
+
+            <!-- Top Speed & Skip Controls -->
+            <div class="battle-top-controls">
+                <button type="button" class="battle-skip-btn" onclick="skipBattleToResult()">Bỏ qua</button>
+                <button type="button" class="battle-speed-btn" onclick="toggleBattleSpeed()" title="Đổi tốc độ trận đấu">
+                    <span id="battle-speed-val">1X</span>
+                </button>
             </div>
 
-            <!-- Battle Arena Screen -->
-            <div id="battle-stage-authentic" class="battle-stage-authentic">
-                <!-- Attacker Hero (Left) -->
-                <div class="battle-attacker-zone">
-                    <div id="attacker-damage-banner" class="attacker-damage-banner anim-pop-in">
-                        <span class="damage-title">Sát Thương</span>
-                        <span id="attacker-total-dmg" class="damage-number">10712</span>
-                    </div>
+            <!-- 8 vs 8 Duel Rows Container -->
+            <div class="battle-8v8-stage" id="battle-8v8-stage">
+                <!-- 8 Duel Rows dynamically populated by JS -->
+            </div>
 
-                    <div class="attacker-portrait-wrapper">
-                        <!-- Dragon Fire Aura Glow -->
-                        <div class="dragon-fire-glow"></div>
-                        <img id="battle-attacker-img" class="battle-attacker-img" src="/assets/images/NV_QuachTinh_ava_to.png" alt="Attacker">
-                    </div>
+            <!-- VFX & Skill Slash Animation Layer -->
+            <div id="battle-fx-stage" class="battle-fx-stage"></div>
 
-                    <div id="battle-attacker-name" class="battle-attacker-name">Quách Tĩnh</div>
+            <!-- Bottom 'Khí Thế' Status Bar -->
+            <div class="battle-khithe-bar">
+                <!-- Left (Player Team) -->
+                <div class="khithe-team-box left">
+                    <div class="khithe-header-row">
+                        <img src="/assets/ui/battle_authentic/khithe_left.png" class="khithe-calligraphy-img" alt="Khí Thế"/>
+                        <div class="khithe-bars-wrapper">
+                            <span class="khithe-energy-pips">|||||||</span>
+                        </div>
+                    </div>
+                    <div class="khithe-player-name" id="khithe-name-left">Đại Tà Vương</div>
                 </div>
 
-                <!-- Laser / Fire / Sword Beam VFX Layer -->
-                <div id="battle-fx-layer" class="battle-fx-layer"></div>
-
-                <!-- Vertical Column of 8 Target Enemy Heads (Right Side - Exactly as Image 1) -->
-                <div class="battle-targets-column">
-                    <div id="battle-targets-list" class="targets-list-wrapper">
-                        <!-- 8 Heads Rendered Dynamically by JS -->
+                <!-- Right (Enemy Team) -->
+                <div class="khithe-team-box right">
+                    <div class="khithe-header-row">
+                        <div class="khithe-bars-wrapper">
+                            <span class="khithe-energy-pips enemy">????</span>
+                        </div>
+                        <img src="/assets/ui/battle_authentic/khithe_left.png" class="khithe-calligraphy-img flip" alt="Khí Thế"/>
                     </div>
+                    <div class="khithe-player-name" id="khithe-name-right">Miêu Nhân Phụng</div>
                 </div>
-
-                <!-- Bottom Watermark Logo Seal -->
-                <img class="battle-watermark-seal" src="/assets/ui/login_06.png" alt="Đại Minh Chủ">
             </div>
         </div>
 
@@ -1832,6 +1890,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=25"></script>
+    <script src="/js/game.js?v=27"></script>
 </body>
 </html>
