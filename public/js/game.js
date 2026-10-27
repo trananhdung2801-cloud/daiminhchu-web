@@ -165,7 +165,7 @@ function switchScreen(screenId) {
 function switchTab(tabName) {
     sound.play('click');
     GameState.activeTab = tabName;
-    document.querySelectorAll('.tab-btn-auth').forEach(btn => {
+    document.querySelectorAll('.bottom-tab-auth-btn, .tab-btn-auth').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tabName);
     });
 

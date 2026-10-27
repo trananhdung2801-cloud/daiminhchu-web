@@ -3557,3 +3557,37 @@ img {
 .bottom-tab-auth-btn:hover {
     transform: translateY(-2px);
 }
+
+
+/* ================= FINE-TUNED HOME & CONTAINER FIXES ================= */
+.game-container {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.content-area {
+    padding: 0 !important;
+}
+
+#tab-home {
+    padding-bottom: 75px;
+}
+
+.home-cloud-stage {
+    height: 200px;
+}
+
+.home-cloud-disciples-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    padding-bottom: 8px;
+}
+
+.home-cloud-disciple-item img {
+    height: 145px;
+    object-fit: contain;
+}
