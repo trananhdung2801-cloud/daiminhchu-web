@@ -263,78 +263,189 @@ function renderTopCarousel() {
 }
 
 function renderScrollPainting() {
-    if (!GameState.playerData || !GameState.playerData.NhanVat) return;
-    const disciples = GameState.playerData.NhanVat;
-    const current = disciples.find(d => (d.id || d.Id) === GameState.selectedDiscipleId) || disciples[0];
-    if (!current) return;
+    let current = null;
+    if (GameState.selectedDiscipleCode) {
+        current = {
+            name: GameState.selectedDiscipleCode,
+            level: 495,
+            mau: 3542428,
+            cong: 194374,
+            thu: 6362385,
+            noicong: 787139464,
+            CaiTao: 0,
+            exp: 27256563248,
+            expMax: 154269351936,
+            giaTri: 11995335,
+            skillLvl: 41
+        };
+    } else if (GameState.playerData && GameState.playerData.NhanVat) {
+        const disciples = GameState.playerData.NhanVat;
+        current = disciples.find(d => (d.id || d.Id) === (GameState.selectedDiscipleId || GameState.selectedFormationDiscipleId)) || disciples[0];
+    }
+    if (!current) {
+        current = {
+            name: 'NV_HuongHuongCongChua',
+            level: 495,
+            mau: 3542428,
+            cong: 194374,
+            thu: 6362385,
+            noicong: 787139464,
+            CaiTao: 0,
+            exp: 27256563248,
+            expMax: 154269351936,
+            giaTri: 11995335,
+            skillLvl: 41
+        };
+    }
 
-    const code = current.name || current.Code;
+    const code = current.name || current.Code || 'NV_HuongHuongCongChua';
     const cfg = getDiscipleCfg(code);
     const tier = getTierInfo(cfg.Hang || 1);
 
-    // Portrait & Calligraphy Name
-    const portraitEl = document.getElementById('disciple-scroll-portrait');
+    // 1. Portrait image
+    const portraitEl = document.getElementById('hero-detail-portrait');
     if (portraitEl) {
         portraitEl.src = getAvatarUrl(code);
-        portraitEl.onerror = () => { portraitEl.src = '/assets/res/avatar_default.png'; };
+        portraitEl.onerror = () => { portraitEl.src = '/assets/images/NV_HuongHuongCongChua_ava_to.png'; };
     }
 
-    const nameEl = document.getElementById('disciple-scroll-calligraphy');
-    if (nameEl) nameEl.innerText = cfg.TenHienThi || code;
+    // 2. Calligraphy Name
+    const nameEl = document.getElementById('hero-detail-calligraphy-name');
+    if (nameEl) {
+        nameEl.innerText = cfg.TenHienThi || code;
+    }
 
-    const qualityEl = document.getElementById('disciple-scroll-quality');
-    if (qualityEl) qualityEl.innerText = tier.text.toUpperCase();
+    // 3. Quality Badge (KIM / GIAP)
+    const badgeImg = document.getElementById('hero-detail-badge-img');
+    if (badgeImg) {
+        badgeImg.src = '/assets/ui/hero_info_authentic/badge_kim.png';
+    }
 
-    // Level & HP Bar
-    const lvlEl = document.getElementById('disciple-scroll-level');
-    if (lvlEl) lvlEl.innerText = current.level || current.Level || 1;
+    // 4. Level & Exp
+    const caitaoEl = document.getElementById('hero-detail-caitao');
+    if (caitaoEl) caitaoEl.innerText = '+' + (current.CaiTao || current.dotpha || 0);
 
-    const hpVal = current.mau || current.MauCoSo || 1021;
-    const maxHpVal = hpVal * 2;
-    const hpTextEl = document.getElementById('disciple-hp-text');
-    if (hpTextEl) hpTextEl.innerText = `${hpVal}/${maxHpVal}`;
+    const lvlEl = document.getElementById('hero-detail-level');
+    const curLevel = current.level || current.Level || 495;
+    if (lvlEl) lvlEl.innerText = curLevel;
 
-    // 4 Core Stats
-    const atkVal = current.cong || current.CongCoSo || 862;
-    const defVal = current.thu || current.ThuCoSo || 381;
-    const innerVal = current.noicong || current.NoiLucCoSo || 548;
+    const expEl = document.getElementById('hero-detail-exp');
+    if (expEl) {
+        const curExp = current.exp || 27256563248;
+        const maxExp = current.expMax || 154269351936;
+        expEl.innerText = curExp + '/' + maxExp;
+    }
 
-    const hpStat = document.getElementById('stat-val-hp');
-    if (hpStat) hpStat.innerText = hpVal;
-    const atkStat = document.getElementById('stat-val-atk');
-    if (atkStat) atkStat.innerText = atkVal;
-    const defStat = document.getElementById('stat-val-def');
-    if (defStat) defStat.innerText = defVal;
-    const innerStat = document.getElementById('stat-val-inner');
-    if (innerStat) innerStat.innerText = innerVal;
+    // 5. 4 Core Stats
+    const mauEl = document.getElementById('hero-stat-val-mau');
+    if (mauEl) mauEl.innerText = (current.mau || current.MauCoSo || 3542428);
 
-    // 6 Synergy Bonds (Duyên Phận)
-    const synergyContainer = document.getElementById('disciple-synergy-grid');
-    if (synergyContainer) {
-        synergyContainer.innerHTML = '';
-        const defaultBonds = [
-            { text: `• ${cfg.TenHienThi || 'Võ lâm'} truyền nhân`, active: true },
-            { text: `• Bất bại thần thoại`, active: false },
-            { text: `• ${cfg.VoCongMacDinh ? 'Chính tông tâm pháp' : 'Tuyệt kỹ giang hồ'}`, active: true },
-            { text: `• Thần binh hộ thể`, active: false },
-            { text: `• Tham Lang thôn nhật`, active: false },
-            { text: `• Vạn chúng quy tâm`, active: true }
-        ];
-        defaultBonds.forEach(b => {
+    const congEl = document.getElementById('hero-stat-val-cong');
+    if (congEl) congEl.innerText = (current.cong || current.CongCoSo || 194374);
+
+    const thuEl = document.getElementById('hero-stat-val-thu');
+    if (thuEl) thuEl.innerText = (current.thu || current.ThuCoSo || 6362385);
+
+    const noiEl = document.getElementById('hero-stat-val-noi');
+    if (noiEl) noiEl.innerText = (current.noicong || current.NoiLucCoSo || 787139464);
+
+    // 6. Bio & Breakthrough description
+    const bioEl = document.getElementById('hero-detail-bio');
+    if (bioEl) {
+        if (code === 'NV_HuongHuongCongChua' || (cfg.TenHienThi && cfg.TenHienThi.includes('Hương Hương'))) {
+            bioEl.innerText = 'Mỹ nữ người Hồi, sắc đẹp vạn người mê. Càng tấn công càng tăng tỷ lệ xuất chiêu, sức phòng ngự và nội lực (tính cả phản). Đột phá tầng 1 tăng thêm phòng ngự, tầng 2 gây ra sát thương chiêu bạo kích, tầng 5 tăng hộ thể.';
+        } else {
+            bioEl.innerText = (cfg.MoTa || 'Tuyệt đỉnh cao thủ danh chấn giang hồ.') + ' Càng tấn công càng tăng tỷ lệ xuất chiêu, sức phòng ngự và nội lực (tính cả phản). Đột phá tầng 1 tăng thêm phòng ngự, tầng 2 gây ra sát thương chiêu bạo kích, tầng 5 tăng hộ thể.';
+        }
+    }
+
+    // 7. Võ công Skill
+    const skillCard = document.getElementById('hero-detail-skill-card');
+    const skillIcon = document.getElementById('hero-detail-skill-icon');
+    const skillLvl = document.getElementById('hero-detail-skill-lvl');
+    const skillCode = cfg.VoCongMacDinh || 'VC_DiepVuCuuThien';
+    if (skillIcon) {
+        if (code === 'NV_HuongHuongCongChua') {
+            skillIcon.src = '/assets/ui/hero_info_authentic/skill_sample.png';
+        } else {
+            skillIcon.src = '/assets/images/' + skillCode + '_vo_cong_to.png';
+            skillIcon.onerror = () => { skillIcon.src = '/assets/ui/hero_info_authentic/skill_sample.png'; };
+        }
+    }
+    if (skillLvl) {
+        skillLvl.innerText = current.skillLvl || 41;
+    }
+    if (skillCard) {
+        skillCard.onclick = () => {
+            sound.play('click');
+            alert('Võ Công Thiên Phú: ' + (cfg.VoCongMacDinh || 'Điệp Vũ Cửu Thiên') + ' (Cấp ' + (current.skillLvl || 41) + ')\nUy lực cực mạnh, tăng tỷ lệ xuất chiêu và sát thương bạo kích.');
+        };
+    }
+
+    // 8. Giá trị
+    const valEl = document.getElementById('hero-detail-value-num');
+    if (valEl) {
+        valEl.innerText = current.giaTri || 11995335;
+    }
+
+    // 9. Duyên phận (Bonds)
+    const duyenContainer = document.getElementById('hero-detail-duyenphan-list');
+    if (duyenContainer) {
+        duyenContainer.innerHTML = '';
+        
+        let bonds = [];
+        if (code === 'NV_HuongHuongCongChua' || (cfg.TenHienThi && cfg.TenHienThi.includes('Hương Hương'))) {
+            bonds = [
+                { name: 'Khuynh Nước Khuynh Thành', req: 'Đệ Nhị Mộng', effect: '+200% máu', active: true, type: 'hero' },
+                { name: 'Tịch Tà - Kiếp Vượng', req: 'Đại Tà Vương', effect: '+200% nội lực', active: false, type: 'equip' },
+                { name: 'Hàm Hương Bảo Y', req: 'Hàm Hương Bảo Y', effect: '+220% thủ', active: false, type: 'equip' },
+                { name: 'Hỏa Phụng Ngọc Bội', req: 'Hỏa Phụng ngọc bội', effect: '+220% thủ', active: false, type: 'equip' },
+                { name: 'Truy Hồn Đoạt Mệnh', req: 'Hoa Vô Khuyết', effect: '+230% nội lực', active: false, type: 'hero' },
+                { name: 'Mỹ Nhân Ẩn Hiện', req: 'Phong Tứ Nương', effect: '+230% nội lực', active: false, type: 'hero' }
+            ];
+        } else if (cfg.DuyenPhan && Array.isArray(cfg.DuyenPhan) && cfg.DuyenPhan.length > 0) {
+            bonds = cfg.DuyenPhan.map((dp, idx) => {
+                const partnerCode = (dp.DoiTuong && dp.DoiTuong[0]) ? dp.DoiTuong[0] : '';
+                const partnerCfg = getDiscipleCfg(partnerCode);
+                const reqName = partnerCfg.TenHienThi || partnerCode || 'Đồng đội';
+                const isHero = dp.LoaiDuyenPhanStr === 'CungDoi';
+                const statMap = { 'Mau': 'máu', 'Cong': 'công', 'Thu': 'thủ', 'NoiLuc': 'nội lực' };
+                const statTxt = statMap[dp.LoaiPhuTroStr] || 'thuộc tính';
+                return {
+                    name: dp.TenHienThi || ('Duyên phận ' + (idx + 1)),
+                    req: reqName,
+                    effect: '+' + (dp.HeSo || 200) + '% ' + statTxt,
+                    active: idx === 0,
+                    type: isHero ? 'hero' : 'equip'
+                };
+            });
+        } else {
+            bonds = [
+                { name: 'Khí Quán Trường Hồng', req: 'Trương Tam Phong', effect: '+200% nội lực', active: true, type: 'hero' },
+                { name: 'Chính Tà Lưỡng Phân', req: 'Tạ Tốn', effect: '+180% công', active: false, type: 'hero' },
+                { name: 'Ỷ Thiên Kiếm', req: 'Ỷ Thiên Kiếm', effect: '+220% công', active: false, type: 'equip' },
+                { name: 'Bát Quái Bào', req: 'Thái Cực Bát Quái Bào', effect: '+210% thủ', active: false, type: 'equip' },
+                { name: 'Thần Điêu Hiệp Lữ', req: 'Tiểu Long Nữ', effect: '+250% máu', active: false, type: 'hero' },
+                { name: 'Thái Cực Hộ Thể', req: 'Thái Cực Quyền', effect: '+230% thủ', active: false, type: 'skill' }
+            ];
+        }
+
+        bonds.forEach(b => {
             const item = document.createElement('div');
-            item.className = `synergy-bond-item ${b.active ? 'active' : ''}`;
-            item.innerText = b.text;
-            synergyContainer.appendChild(item);
+            item.className = 'duyen-item ' + (b.active ? 'active-bond' : 'inactive-bond');
+            
+            const reqHtml = b.active 
+                ? '<b>' + b.req + '</b>' 
+                : b.req;
+            
+            const condPrefix = (b.type === 'hero') ? 'Ra trận cùng ' : 'Trang bị ';
+            
+            item.innerHTML = '-' + b.name + ': ' + condPrefix + reqHtml + ' được <span class="duyen-buff-val">' + b.effect + '</span>';
+            duyenContainer.appendChild(item);
         });
     }
-
-    // Disciple Value in Vàng
-    const valEl = document.getElementById('disciple-scroll-value');
-    if (valEl) {
-        const val = ((current.level || 1) * 150 + 2000);
-        valEl.innerText = `${val.toLocaleString()} Vàng`;
-    }
 }
+
 
 function openChanKhiModal() {
     sound.play('click');
@@ -2840,9 +2951,23 @@ function openDiscipleDetailModal(code) {
     sound.play('click');
     const modal = document.getElementById('disciple-detail-modal');
     if (!modal) return;
-    if (code && GameState.playerData && GameState.playerData.NhanVat) {
-        const found = GameState.playerData.NhanVat.find(d => (d.name || d.Code) === code);
-        if (found) GameState.selectedDiscipleId = found.id || found.Id;
+    if (code) {
+        if (GameState.playerData && GameState.playerData.NhanVat) {
+            const found = GameState.playerData.NhanVat.find(d => (d.name || d.Code) === code);
+            if (found) {
+                GameState.selectedDiscipleId = found.id || found.Id;
+                GameState.selectedDiscipleCode = null;
+            } else {
+                GameState.selectedDiscipleCode = code;
+            }
+        } else {
+            GameState.selectedDiscipleCode = code;
+        }
+    } else {
+        GameState.selectedDiscipleCode = null;
+        if (GameState.selectedFormationDiscipleId) {
+            GameState.selectedDiscipleId = GameState.selectedFormationDiscipleId;
+        }
     }
     renderScrollPainting();
     modal.classList.add('active');

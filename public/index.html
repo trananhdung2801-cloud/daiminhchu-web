@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=27">
+    <link rel="stylesheet" href="/css/style.css?v=28">
 </head>
 <body>
     <div id="game-container">
@@ -280,7 +280,7 @@
 
                         <!-- Center Hanging Scroll Painting -->
                         <div class="dt-center-scroll">
-                            <div class="dt-scroll-canvas" id="dt-scroll-canvas">
+                            <div class="dt-scroll-canvas" id="dt-scroll-canvas" onclick="openDiscipleDetailModal()" style="cursor: pointer;" title="Ấn để xem chi tiết nhân vật">
                                 <!-- Top Row: Calligraphy Name & Tier Badge -->
                                 <div class="dt-hero-top-row">
                                     <div class="dt-hero-calligraphy" id="dt-hero-name-calligraphy">Trương Tam Phong</div>
@@ -288,7 +288,7 @@
                                 </div>
 
                                 <!-- Full Figure Image in Center -->
-                                <div class="dt-hero-figure-wrap">
+                                <div class="dt-hero-figure-wrap" onclick="openDiscipleDetailModal()" style="cursor: pointer;" title="Ấn để xem chi tiết nhân vật">
                                     <img id="dt-hero-figure-img" class="dt-hero-figure-img" src="/assets/images/NV_TruongTamPhong_ava_to.png" alt="Hero"/>
                                 </div>
 
@@ -1635,105 +1635,113 @@
     
     <!-- ================= MODAL CUỘN TRANH TRỤC THƯ ĐỆ TỬ ================= -->
     <div style="display:none;" id="disciple-carousel-list"></div>
+        <!-- ================= 100% AUTHENTIC THÔNG TIN NHÂN VẬT (TAB DÀN TRẬN) ================= -->
     <div id="disciple-detail-modal" class="modal-overlay">
-        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 480px; padding: 6px;">
-            <div class="dialog-header-bar">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 18px;">📜</span>
-                    <span class="dialog-title">CHI TIẾT ĐỆ TỬ - TRỤC THƯ KIM DUNG</span>
+        <div class="hero-detail-authentic-dialog anim-zoom-enter">
+            <!-- Close Button (Red carved square with white X) -->
+            <button class="hero-detail-close-btn" onclick="closeDiscipleDetailModal()" title="Đóng">
+                <img src="/assets/ui/hero_info_authentic/btn_close.png" alt="Đóng"/>
+            </button>
+
+            <!-- Top Section: Left Hanging Scroll + Right Story & Skill & Price -->
+            <div class="hero-detail-top-section">
+                <!-- Left: Hanging Scroll (Tranh Cuộn) -->
+                <div class="hero-detail-scroll-frame">
+                    <img src="/assets/ui/hero_info_authentic/scroll_top_rod.png" class="scroll-rod-top" alt="Trục trên"/>
+                    
+                    <div class="hero-detail-scroll-painting">
+                        <!-- Hero Portrait Image -->
+                        <img id="hero-detail-portrait" src="/assets/images/NV_HuongHuongCongChua_ava_to.png" class="hero-detail-portrait-img" alt="Nhân vật"/>
+                        
+                        <!-- Top-Left Vertical Calligraphy Name -->
+                        <div id="hero-detail-calligraphy-name" class="hero-detail-vert-name">
+                            Hương Hương Công Chúa
+                        </div>
+
+                        <!-- Top-Right Quality Badge (KIM / GIÁP / ẤT / BÍNH) -->
+                        <div id="hero-detail-quality-badge" class="hero-detail-badge-kim">
+                            <img id="hero-detail-badge-img" src="/assets/ui/hero_info_authentic/badge_kim.png" alt="KIM"/>
+                        </div>
+
+                        <!-- Bottom Stats Overlay -->
+                        <div class="hero-detail-stats-overlay">
+                            <!-- Level & Exp -->
+                            <div class="hero-detail-level-row">
+                                <span class="hero-detail-breakthrough" id="hero-detail-caitao">+0</span>
+                                <span class="hero-detail-level-num" id="hero-detail-level">495</span>
+                                <span class="hero-detail-exp-text" id="hero-detail-exp">27256563248/154269351936</span>
+                            </div>
+
+                            <!-- 4 Core Stats Grid (2x2) -->
+                            <div class="hero-detail-stats-grid">
+                                <div class="hero-stat-cell">
+                                    <img src="/assets/ui/hero_info_authentic/icon_stat_blood.png" class="hero-stat-icon" alt="Máu"/>
+                                    <span id="hero-stat-val-mau">3542428</span>
+                                </div>
+                                <div class="hero-stat-cell">
+                                    <img src="/assets/ui/hero_info_authentic/icon_stat_sword.png" class="hero-stat-icon" alt="Công"/>
+                                    <span id="hero-stat-val-cong">194374</span>
+                                </div>
+                                <div class="hero-stat-cell">
+                                    <img src="/assets/ui/hero_info_authentic/icon_stat_shield.png" class="hero-stat-icon" alt="Thủ"/>
+                                    <span id="hero-stat-val-thu">6362385</span>
+                                </div>
+                                <div class="hero-stat-cell">
+                                    <img src="/assets/ui/hero_info_authentic/icon_stat_palm.png" class="hero-stat-icon" alt="Nội"/>
+                                    <span id="hero-stat-val-noi">787139464</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img src="/assets/ui/hero_info_authentic/scroll_bottom_rod.png" class="scroll-rod-bottom" alt="Trục dưới"/>
                 </div>
-                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeDiscipleDetailModal()" alt="Đóng">
+
+                <!-- Right: Bio Description, Võ Công & Giá Trị -->
+                <div class="hero-detail-right-col">
+                    <!-- Bio & Breakthrough Story -->
+                    <div class="hero-detail-bio-box" id="hero-detail-bio">
+                        Mỹ nữ người Hồi, sắc đẹp vạn người mê. Càng tấn công càng tăng tỷ lệ xuất chiêu, sức phòng ngự và nội lực (tính cả phản). Đột phá tầng 1 tăng thêm phòng ngự, tầng 2 gây ra sát thương chiêu bạo kích, tầng 5 tăng hộ thể.
+                    </div>
+
+                    <!-- Võ công -->
+                    <div class="hero-detail-skill-section">
+                        <div class="hero-detail-section-title">Võ công :</div>
+                        <div class="hero-detail-skill-card" id="hero-detail-skill-card" onclick="alert('Võ Công Thiên Phú: Điệp Vũ Cửu Thiên (Lv.41)')" title="Võ Công Thiên Phú">
+                            <img id="hero-detail-skill-icon" src="/assets/ui/hero_info_authentic/skill_sample.png" alt="Võ công"/>
+                            <span class="hero-detail-skill-lvl" id="hero-detail-skill-lvl">41</span>
+                        </div>
+                    </div>
+
+                    <!-- Giá trị -->
+                    <div class="hero-detail-value-section">
+                        <div class="hero-detail-section-title">Giá trị :</div>
+                        <div class="hero-detail-value-row">
+                            <span id="hero-detail-value-num">11995335</span>
+                            <img src="/assets/ui/hero_info_authentic/icon_gold_ingot_clean.png" class="hero-detail-ingot-icon" alt="Vàng"/>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="dialog-body-scroll" style="padding: 4px;">
-                <div class="scroll-painting-stage" style="margin: 0 auto;">
-                    <!-- Left 3 Equip Slots -->
-                    <div class="equip-column-left">
-                        <div class="equip-slot-box" id="slot-skill-1" onclick="showItemDetail('skill')">
-                            <img src="/assets/images/VC_QuyHoaBaoDien_vo_cong_to.png" alt="Võ Công">
-                            <span class="slot-lvl">1</span>
-                        </div>
-                        <div class="equip-slot-box" id="slot-weapon" onclick="showItemDetail('weapon')">
-                            <img src="/assets/images/VK_DoLongDao_trang_bi_to.png" alt="Vũ Khí">
-                            <span class="slot-lvl">1</span>
-                        </div>
-                        <div class="equip-slot-box" id="slot-armor" onclick="showItemDetail('armor')">
-                            <img src="/assets/images/AG_CamVeHoangKimGiap_trang_bi_to.png" alt="Phòng Cụ">
-                            <span class="slot-lvl">2</span>
-                        </div>
-                    </div>
 
-                    <!-- Center Cuộn Tranh Trục Thư -->
-                    <div class="disciple-main-scroll">
-                        <div class="scroll-art-wrapper">
-                            <img id="disciple-scroll-portrait" class="scroll-hero-img" src="/assets/images/NV_DongPhuongBatBai_ava_to.png" alt="Đệ Tử">
-                            <div id="disciple-scroll-calligraphy" class="calligraphy-vertical-name">Đông Phương Bất Bại</div>
-                            <div id="disciple-scroll-quality" class="quality-badge-giap">GIÁP</div>
+            <!-- Middle Action Bar: Đổi nhân vật khác - Crest - Truyền công lực -->
+            <div class="hero-detail-action-bar">
+                <button class="hero-detail-btn-action btn-swap" onclick="closeDiscipleDetailModal(); openFormationOverviewModal();" title="Đổi nhân vật khác">
+                    <img src="/assets/ui/hero_info_authentic/btn_swap_hero.png" alt="Đổi nhân vật khác"/>
+                </button>
+                <div class="hero-detail-center-crest">
+                    <img src="/assets/ui/hero_info_authentic/center_crest.png" alt="Crest"/>
+                </div>
+                <button class="hero-detail-btn-action btn-transfer" onclick="closeDiscipleDetailModal(); openBoiDuongModal();" title="Truyền công lực">
+                    <img src="/assets/ui/hero_info_authentic/btn_transfer.png" alt="Truyền công lực"/>
+                </button>
+            </div>
 
-                            <div class="scroll-level-hp-box">
-                                <div class="hero-level-tag"><span id="disciple-scroll-level">32</span><small>+0</small></div>
-                                <div class="scroll-hp-bar">
-                                    <div id="disciple-hp-fill" class="scroll-hp-fill" style="width: 46%;"></div>
-                                    <span id="disciple-hp-text" class="scroll-hp-text">1111/2418</span>
-                                </div>
-                            </div>
-
-                            <div class="scroll-stats-quad">
-                                <div class="stat-quad-item" title="Khí Huyết">
-                                    <span class="stat-icon-blood">🩸</span>
-                                    <span id="stat-val-hp">1021</span>
-                                </div>
-                                <div class="stat-quad-item" title="Vũ Lực">
-                                    <span class="stat-icon-sword">⚔️</span>
-                                    <span id="stat-val-atk">862</span>
-                                </div>
-                                <div class="stat-quad-item" title="Hộ Thể">
-                                    <span class="stat-icon-shield">🛡️</span>
-                                    <span id="stat-val-def">381</span>
-                                </div>
-                                <div class="stat-quad-item" title="Nội Lực">
-                                    <span class="stat-icon-inner">⚡</span>
-                                    <span id="stat-val-inner">548</span>
-                                </div>
-                            </div>
-
-                            <div id="disciple-synergy-grid" class="synergy-bonds-grid">
-                                <div class="synergy-bond-item active">• Ma giáo lãnh tụ</div>
-                                <div class="synergy-bond-item">• Bất bại thần thoại</div>
-                                <div class="synergy-bond-item active">• Quỳ hoa bảo điển</div>
-                                <div class="synergy-bond-item">• Hồng châm tả lực</div>
-                                <div class="synergy-bond-item">• Tham Lang thôn nhật</div>
-                                <div class="synergy-bond-item active">• Cùng hung cực ác</div>
-                            </div>
-
-                            <div class="scroll-footer-bar">
-                                <div class="disciple-value-tag">
-                                    Giá trị : <span id="disciple-scroll-value" style="color: #ffd700; font-weight: bold;">6993 Vàng</span>
-                                </div>
-                                <div class="scroll-action-btns">
-                                    <button class="btn-mini-boiduong" onclick="openBoiDuongModal()">Bồi Dưỡng</button>
-                                    <button class="btn-mini-action" onclick="openKinhMachModal()">Kinh Mạch</button>
-                                    <button class="btn-mini-action" onclick="openTayDuyenModal()">Tẩy Duyên</button>
-                                    <button class="btn-mini-action" onclick="openBeQuanModal()">Bế Quan</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right 3 Equip Slots -->
-                    <div class="equip-column-right">
-                        <div class="equip-slot-box" id="slot-trinket" onclick="showItemDetail('trinket')">
-                            <img src="/assets/images/VK_KimXaKiem_trang_bi_to.png" alt="Ám Khí">
-                            <span class="slot-lvl">49</span>
-                        </div>
-                        <div class="equip-slot-box" id="slot-robe" onclick="showItemDetail('robe')">
-                            <img src="/assets/images/AG_DaHanhY_trang_bi_to.png" alt="Y Phục">
-                            <span class="slot-lvl">51</span>
-                        </div>
-                        <div class="equip-slot-box" id="slot-skill-2" onclick="showItemDetail('book')">
-                            <img src="/assets/images/VC_DocCoCuuKiem_vo_cong_to.png" alt="Tâm Pháp">
-                            <span class="slot-lvl">49</span>
-                        </div>
-                    </div>
+            <!-- Bottom Section: Duyên Phận (Bonds) -->
+            <div class="hero-detail-bottom-section">
+                <div class="hero-detail-duyenphan-title">Duyên phận :</div>
+                <div class="hero-detail-duyenphan-list" id="hero-detail-duyenphan-list">
+                    <!-- Dynamic bonds rendered from JS -->
                 </div>
             </div>
         </div>
@@ -1890,6 +1898,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=27"></script>
+    <script src="/js/game.js?v=28"></script>
 </body>
 </html>
