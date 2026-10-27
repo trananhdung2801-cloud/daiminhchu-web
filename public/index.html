@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=15">
+    <link rel="stylesheet" href="/css/style.css?v=16">
 </head>
 <body>
     <div id="game-container">
@@ -217,30 +217,117 @@
                     </div>
                 </div>
 
-                <div id="tab-formation" class="tab-view" style="display: none;">
-                    <div class="formation-power-banner">
-                        <div class="power-tag">Tổng Trị : <span id="formation-total-power" style="color: #ffd700; font-weight: 900;">2.524.651</span></div>
-                        <div class="power-tag">Khí Thế : <span id="formation-khi-the" style="color: #38bdf8; font-weight: 900;">99.990</span></div>
+                <div id="tab-formation" class="tab-view dantran-authentic-view" style="display: none;">
+                    <!-- Top Disciple Roster Strip + "Dàn Trận" Button (Matching Original Game) -->
+                    <div class="dt-top-roster-row">
+                        <div class="dt-disciple-avatars-track" id="dt-disciple-avatars-track"></div>
+                        <div class="dt-btn-dantran-wrapper" onclick="openFormationOverviewModal()" title="Bát Quái Trận (8 Vị Trí) & Thất Tinh Trận">
+                            <img src="/assets/ui/dantran_authentic/btn_dantran.png" class="dt-btn-dantran-img" alt="Dàn Trận"/>
+                        </div>
                     </div>
 
-                    <div class="formation-sub-nav">
-                        <button class="sub-tab-btn active" id="subtab-btn-batquai" onclick="switchFormationSubTab('batquai')">Bát Quái Trận (8 Vị Trí)</button>
-                        <button class="sub-tab-btn" id="subtab-btn-thattinh" onclick="switchFormationSubTab('thattinh')">Thất Tinh Trận (Hỗ Trợ)</button>
-                    </div>
+                    <!-- Main Center Stage: Flanked by 4 Skills (Left) and 4 Equipment (Right), with Hanging Scroll in Center -->
+                    <div class="dt-main-stage">
+                        <!-- Left Column: 4 Võ Công Skills Slots + Orbs -->
+                        <div class="dt-left-column">
+                            <div class="dt-slot-box" id="dt-skill-slot-0" onclick="handleSkillSlotClick(0)" title="Võ công thiên phú"></div>
+                            <div class="dt-slot-box" id="dt-skill-slot-1" onclick="handleSkillSlotClick(1)" title="Võ công phụ 1"></div>
+                            <div class="dt-slot-box" id="dt-skill-slot-2" onclick="handleSkillSlotClick(2)" title="Võ công phụ 2"></div>
+                            <div class="dt-slot-box" id="dt-skill-slot-3" onclick="handleSkillSlotClick(3)" title="Võ công phụ 3"></div>
+                            <!-- Bottom Left Orbs -->
+                            <div class="dt-orb-longchau" onclick="openLongChauModal()" title="Long Châu">
+                                <img src="/assets/ui/dantran_authentic/orb_longchau.png" alt="Long Châu"/>
+                            </div>
+                            <div class="dt-orb-amkhi" onclick="openAmKhiModal()" title="Ám Khí">
+                                <img src="/assets/ui/dantran_authentic/orb_amkhi.png" alt="Ám Khí"/>
+                            </div>
+                        </div>
 
-                    <div class="formation-actions-row" style="display: flex; gap: 8px; margin-bottom: 10px;">
-                        <button class="btn-wuxia-gold" style="flex: 1; height: 36px; font-size: 11px;" onclick="openHuyetChienModal()">⚔️ HUYẾT CHIẾN HẮC MỘC NHAI</button>
-                        <button class="btn-wuxia-gold" style="flex: 1; height: 36px; font-size: 11px;" onclick="openTopServerModal()">🏆 THIÊN HẠ VÔ SONG (TOP)</button>
-                    </div>
+                        <!-- Center Hanging Scroll Painting -->
+                        <div class="dt-center-scroll">
+                            <div class="dt-scroll-canvas" id="dt-scroll-canvas">
+                                <!-- Top Row: Calligraphy Name & Tier Badge -->
+                                <div class="dt-hero-top-row">
+                                    <div class="dt-hero-calligraphy" id="dt-hero-name-calligraphy">Trương Tam Phong</div>
+                                    <div class="dt-hero-tier-badge" id="dt-hero-tier-badge">GIÁP</div>
+                                </div>
 
-                    <div id="subtab-view-batquai" class="formation-board">
-                        <img class="bat-quai-watermark" src="/assets/ui/Background_bat_quai.png" alt="Bát Quái">
-                        <div id="formation-container" class="formation-slots-grid"></div>
-                    </div>
+                                <!-- Full Figure Image in Center -->
+                                <div class="dt-hero-figure-wrap">
+                                    <img id="dt-hero-figure-img" class="dt-hero-figure-img" src="/assets/images/NV_TruongTamPhong_ava_to.png" alt="Hero"/>
+                                </div>
 
-                    <div id="subtab-view-thattinh" class="thattinh-board" style="display: none;">
-                        <div class="thattinh-desc">Thất Tinh Trận: 7 vị trí sao tương hỗ, gia tăng 25% Khí Huyết, Vũ Lực, Hộ Thể và Nội Lực cho toàn bộ đệ tử xuất chiến!</div>
-                        <div id="thattinh-slots-grid" class="thattinh-slots-grid"></div>
+                                <!-- Level, Breakthrough & EXP Bar -->
+                                <div class="dt-hero-level-row">
+                                    <span id="dt-hero-level-text" class="dt-hero-level-text">Lv.1 +0</span>
+                                    <div class="dt-hero-exp-bar">
+                                        <div id="dt-hero-exp-fill" class="dt-hero-exp-fill"></div>
+                                        <span id="dt-hero-exp-text" class="dt-hero-exp-text">0 / 100</span>
+                                    </div>
+                                </div>
+
+                                <!-- 4 Core Stats Row with Authentic Icons -->
+                                <div class="dt-stats-bar">
+                                    <div class="dt-stat-item">
+                                        <img src="/assets/ui/BM_mau1.png" class="dt-stat-icon" alt="Khí Huyết"/>
+                                        <span id="dt-stat-mau">0</span>
+                                    </div>
+                                    <div class="dt-stat-item">
+                                        <img src="/assets/ui/BM_cong1.png" class="dt-stat-icon" alt="Vũ Lực"/>
+                                        <span id="dt-stat-cong">0</span>
+                                    </div>
+                                    <div class="dt-stat-item">
+                                        <img src="/assets/ui/BM_thu1.png" class="dt-stat-icon" alt="Hộ Thể"/>
+                                        <span id="dt-stat-thu">0</span>
+                                    </div>
+                                    <div class="dt-stat-item">
+                                        <img src="/assets/ui/BM_noi1.png" class="dt-stat-icon" alt="Nội Lực"/>
+                                        <span id="dt-stat-noi">0</span>
+                                    </div>
+                                </div>
+
+                                <!-- 6 Duyên Phận (Bonds) 2-Column Grid -->
+                                <div class="dt-duyenphan-grid" id="dt-duyenphan-grid"></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: 4 Trang Bị Equipment Slots + Chân Khí Orb -->
+                        <div class="dt-right-column">
+                            <div class="dt-slot-box" id="dt-item-slot-0" onclick="handleItemSlotClick('VuKhi')" title="Vũ khí"></div>
+                            <div class="dt-slot-box" id="dt-item-slot-1" onclick="handleItemSlotClick('AoGiap')" title="Áo giáp"></div>
+                            <div class="dt-slot-box" id="dt-item-slot-2" onclick="handleItemSlotClick('TrangSuc')" title="Trang sức"></div>
+                            <div class="dt-slot-box" id="dt-item-slot-3" onclick="handleItemSlotClick('BaoBoi')" title="Bảo bối"></div>
+                            <!-- Bottom Right Chân Khí Orb -->
+                            <div class="dt-orb-chankhi" onclick="openChanKhiModal()" title="Chân Khí">
+                                <img src="/assets/ui/dantran_authentic/orb_chankhi.png" alt="Chân Khí"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bát Quái Trận & Thất Tinh Trận Overview Modal (Triggered by 'Dàn Trận' button) -->
+                <div id="dantran-overview-modal" class="modal-overlay">
+                    <div class="modal-box-wuxia" style="width: 94%; max-width: 440px; max-height: 90vh; overflow-y: auto;">
+                        <div class="modal-header">
+                            <h3>⚔️ BÁT QUÁI TRẬN (8 VỊ TRÍ) & THẤT TINH</h3>
+                            <button class="btn-close-modal" onclick="closeFormationOverviewModal()">✕</button>
+                        </div>
+                        <div class="formation-power-banner" style="margin: 8px 0;">
+                            <div class="power-tag">Tổng Trị: <span id="formation-total-power" style="color: #ffd700; font-weight: 900;">2.524.651</span></div>
+                            <div class="power-tag">Khí Thế: <span id="formation-khi-the" style="color: #38bdf8; font-weight: 900;">99.990</span></div>
+                        </div>
+                        <div class="formation-sub-nav" style="margin-bottom: 8px;">
+                            <button class="sub-tab-btn active" id="subtab-btn-batquai" onclick="switchFormationSubTab('batquai')">Bát Quái Trận (8 Vị Trí)</button>
+                            <button class="sub-tab-btn" id="subtab-btn-thattinh" onclick="switchFormationSubTab('thattinh')">Thất Tinh Trận (Hỗ Trợ)</button>
+                        </div>
+                        <div id="subtab-view-batquai" class="formation-board">
+                            <img class="bat-quai-watermark" src="/assets/ui/Background_bat_quai.png" alt="Bát Quái">
+                            <div id="formation-container" class="formation-slots-grid"></div>
+                        </div>
+                        <div id="subtab-view-thattinh" class="thattinh-board" style="display: none;">
+                            <div class="thattinh-desc">Thất Tinh Trận: 7 vị trí sao tương hỗ, gia tăng 25% Khí Huyết, Vũ Lực, Hộ Thể và Nội Lực cho toàn bộ đệ tử xuất chiến!</div>
+                            <div id="thattinh-slots-grid" class="thattinh-slots-grid"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1534,6 +1621,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=15"></script>
+    <script src="/js/game.js?v=16"></script>
 </body>
 </html>

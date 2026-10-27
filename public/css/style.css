@@ -4244,3 +4244,372 @@ img {
     font-family: 'Times New Roman', serif;
     letter-spacing: 0.5px;
 }
+
+
+/* ================= AUTHENTIC DÀN TRẬN GUI (MATCHING 4 ORIGINAL SCREENSHOTS) ================= */
+.dantran-authentic-view {
+    padding: 6px 8px 10px 8px !important;
+    background: #140b06 url('/assets/ui/Background.png') no-repeat center top;
+    background-size: cover;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+/* 1. Top Disciple Roster Strip + "Dàn Trận" Button */
+.dt-top-roster-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.dt-disciple-avatars-track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 1;
+    height: 100%;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px 2px;
+}
+
+.dt-disciple-avatars-track::-webkit-scrollbar {
+    display: none;
+}
+
+.dt-disciple-box {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border: 2px solid #b45309;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #1e110a;
+    position: relative;
+    cursor: pointer;
+    scroll-snap-align: center;
+    transition: transform 0.12s ease, border-color 0.12s ease;
+    user-select: none;
+}
+
+.dt-disciple-box:active {
+    transform: scale(0.95);
+}
+
+.dt-disciple-box.active {
+    border: 2px solid #c084fc;
+    box-shadow: 0 0 10px #a855f7;
+    transform: scale(1.06);
+}
+
+.dt-disciple-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dt-disciple-level-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffd700;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 0 3px;
+    border-radius: 0 4px 0 0;
+    line-height: 12px;
+}
+
+.dt-btn-dantran-wrapper {
+    width: 40px;
+    height: 52px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease;
+}
+
+.dt-btn-dantran-wrapper:active {
+    transform: scale(0.94);
+}
+
+.dt-btn-dantran-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.7));
+}
+
+/* 2. Main Center Stage */
+.dt-main-stage {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    flex: 1;
+    position: relative;
+    gap: 4px;
+}
+
+.dt-left-column, .dt-right-column {
+    width: 54px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+}
+
+.dt-slot-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('/assets/ui/dantran_authentic/slot_empty_question.png') no-repeat center center;
+    background-size: 100% 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    transition: transform 0.12s ease;
+}
+
+.dt-slot-box:hover {
+    transform: scale(1.05);
+}
+
+.dt-slot-box img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.dt-slot-level-badge {
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffd700;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 0 3px;
+    border-radius: 3px;
+    border: 1px solid #78350f;
+    line-height: 12px;
+}
+
+.dt-orb-longchau, .dt-orb-amkhi, .dt-orb-chankhi {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.12s ease;
+}
+
+.dt-orb-longchau:hover, .dt-orb-amkhi:hover, .dt-orb-chankhi:hover {
+    transform: scale(1.08);
+}
+
+.dt-orb-longchau img, .dt-orb-amkhi img, .dt-orb-chankhi img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* 3. Center Hanging Scroll Painting */
+.dt-center-scroll {
+    flex: 1;
+    max-width: 326px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('/assets/ui/dantran_authentic/hanging_scroll_clean.png') no-repeat center center;
+    background-size: 100% 100%;
+    aspect-ratio: 350 / 560;
+    padding: 24px 14px 22px 14px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.65);
+}
+
+.dt-scroll-canvas {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.dt-hero-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 26px;
+}
+
+.dt-hero-calligraphy {
+    font-family: 'Times New Roman', cursive, serif;
+    font-size: 19px;
+    font-weight: 900;
+    color: #1c0a00;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75%;
+}
+
+.dt-hero-tier-badge {
+    font-size: 10px;
+    font-weight: 900;
+    color: #ffd700;
+    background: #6b21a8;
+    border: 1px solid #d8b4fe;
+    border-radius: 3px;
+    padding: 1px 6px;
+    line-height: 14px;
+    text-shadow: 1px 1px 1px #000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dt-hero-figure-wrap {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 175px;
+    overflow: hidden;
+}
+
+.dt-hero-figure-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.65));
+}
+
+.dt-hero-level-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 18px;
+    margin-bottom: 3px;
+}
+
+.dt-hero-level-text {
+    font-size: 11px;
+    font-weight: 900;
+    color: #1c0a00;
+    font-family: 'Times New Roman', serif;
+}
+
+.dt-hero-exp-bar {
+    flex: 1;
+    height: 14px;
+    background: #3b1d11;
+    border-radius: 7px;
+    border: 1px solid #78350f;
+    position: relative;
+    overflow: hidden;
+}
+
+.dt-hero-exp-fill {
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(90deg, #ea580c, #f59e0b);
+    transition: width 0.3s ease;
+}
+
+.dt-hero-exp-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 8px;
+    line-height: 14px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.dt-stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid #c2a682;
+    border-radius: 4px;
+    padding: 2px 4px;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+}
+
+.dt-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 9.5px;
+    font-weight: 900;
+    color: #2b1104;
+}
+
+.dt-stat-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.dt-duyenphan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 6px;
+    width: 100%;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.dt-duyen-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dt-duyen-item.active {
+    color: #d97706;
+    text-shadow: 0 0 3px rgba(245, 158, 11, 0.4);
+}
+
+.dt-duyen-item.inactive {
+    color: #4a2711;
+    opacity: 0.8;
+}

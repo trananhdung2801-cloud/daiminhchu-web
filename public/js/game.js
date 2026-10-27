@@ -364,8 +364,28 @@ function renderMarket() {
     `;
 }
 
-// 1. Formation Tab (8 Slots Bát Quái with Authentic Card Frames & Level Unlock Limits)
-function renderFormation() {
+// 1. Formation Tab (100% AUTHENTIC DÀN TRẬN GUI MATCHING 4 ORIGINAL SCREENSHOTS)
+function selectFormationDisciple(dId) {
+    sound.play('click');
+    GameState.selectedFormationDiscipleId = Number(dId);
+    renderFormation();
+}
+
+function openFormationOverviewModal() {
+    sound.play('click');
+    const modal = document.getElementById('dantran-overview-modal');
+    if (!modal) return;
+    renderFormationOverviewBoard();
+    modal.classList.add('active');
+}
+
+function closeFormationOverviewModal() {
+    sound.play('click');
+    const modal = document.getElementById('dantran-overview-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function renderFormationOverviewBoard() {
     const container = document.getElementById('formation-container');
     if (!container || !GameState.playerData) return;
     container.innerHTML = '';
@@ -375,9 +395,9 @@ function renderFormation() {
 
     for (let slot = 1; slot <= 8; slot++) {
         const isUnlocked = slot <= maxSlots;
-        const discipleId = dh['slot' + slot];
+        const discipleId = Number(dh['slot' + slot] || 0);
         const disciple = (isUnlocked && discipleId > 0)
-            ? (GameState.playerData.NhanVat || []).find(nv => (nv.id || nv.Id) === discipleId)
+            ? (GameState.playerData.NhanVat || []).find(nv => Number(nv.id || nv.Id) === discipleId)
             : null;
 
         const slotEl = document.createElement('div');
@@ -388,8 +408,8 @@ function renderFormation() {
             const cfg = getDiscipleCfg(code);
             const tier = getTierInfo(cfg.Hang || 1);
             slotEl.style.backgroundImage = `url('${UI_BASE}${tier.bg}')`;
-            slotEl.onclick = () => openDisciplePickerForSlot(slot);
-            slotEl.title = `Vị trí #${slot}: ${cfg.TenHienThi || code} (Ấn để thay đổi)`;
+            slotEl.onclick = () => { closeFormationOverviewModal(); selectFormationDisciple(disciple.id || disciple.Id); };
+            slotEl.title = `Vị trí #${slot}: ${cfg.TenHienThi || code}`;
             slotEl.innerHTML = `
                 <span class="slot-order-tag">#${slot}</span>
                 <img class="card-avatar-img" src="${getAvatarUrl(code)}" onerror="this.src='${IMG_BASE}Default-Particle.png'"/>
@@ -398,7 +418,7 @@ function renderFormation() {
             `;
         } else if (isUnlocked) {
             slotEl.onclick = () => openDisciplePickerForSlot(slot);
-            slotEl.title = `Vị trí #${slot} còn trống, ấn để chọn đệ tử xuất chiến`;
+            slotEl.title = `Vị trí #${slot} còn trống, ấn để chọn đệ tử`;
             slotEl.innerHTML = `
                 <span class="slot-order-tag">#${slot}</span>
                 <span style="font-size: 22px; color: #ffd700; font-weight: 900;">+</span>
@@ -422,72 +442,190 @@ function renderFormation() {
     }
 }
 
-// Disciple picker for formation slot
-function openDisciplePickerForSlot(slot) {
-    sound.play('click');
-    if (!GameState.playerData || !GameState.playerData.NhanVat) return;
-    const currentLevel = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
-    const maxSlots = getMaxSlotDoiHinh(currentLevel);
-    if (slot > maxSlots) {
-        const req = getRequiredLevelForSlot(slot);
-        alert(`🔒 Vị trí #${slot} cần đạt Đẳng cấp ${req} để mở khóa!`);
-        return;
-    }
-
+function renderFormation() {
+    if (!GameState.playerData) return;
     const dh = GameState.playerData.DoiHinh || {};
-    const assignedIds = new Set(Object.entries(dh).filter(([k, v]) => k.startsWith('slot') && Number(v) > 0).map(([k, v]) => Number(v)));
-    const currentAssignedId = Number(dh['slot' + slot] || 0);
+    const level = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
+    const maxSlots = getMaxSlotDoiHinh(level);
 
-    const available = GameState.playerData.NhanVat.filter(nv => {
-        const id = Number(nv.id || nv.Id);
-        return id === currentAssignedId || !assignedIds.has(id);
-    });
-
-    if (available.length === 0) {
-        alert('Không có đệ tử dự bị nào! Hãy vào Kỳ Ngộ để chiêu mộ thêm đệ tử.');
-        return;
+    // 1. Collect formation disciples
+    const formationDisciples = [];
+    for (let s = 1; s <= maxSlots; s++) {
+        const dId = Number(dh['slot' + s] || 0);
+        if (dId > 0) {
+            const found = (GameState.playerData.NhanVat || []).find(nv => Number(nv.id || nv.Id) === dId);
+            if (found) formationDisciples.push({ slot: s, disciple: found });
+        }
     }
 
-    let menu = `=== CHỌN ĐỆ TỬ CHO VỊ TRÍ #${slot} ===\n`;
-    if (currentAssignedId > 0) {
-        menu += `0. [Hạ đệ tử xuống dự bị]\n`;
+    if (formationDisciples.length === 0 && GameState.playerData.NhanVat.length > 0) {
+        formationDisciples.push({ slot: 1, disciple: GameState.playerData.NhanVat[0] });
     }
-    available.forEach((nv, idx) => {
-        const code = nv.name || nv.Code;
+
+    // Determine current selected disciple
+    if (!GameState.selectedFormationDiscipleId || !formationDisciples.find(f => Number(f.disciple.id || f.disciple.Id) === GameState.selectedFormationDiscipleId)) {
+        if (formationDisciples.length > 0) {
+            GameState.selectedFormationDiscipleId = Number(formationDisciples[0].disciple.id || formationDisciples[0].disciple.Id);
+        }
+    }
+
+    // 2. Render Top Disciple Avatars Track
+    const track = document.getElementById('dt-disciple-avatars-track');
+    if (track) {
+        track.innerHTML = '';
+        formationDisciples.forEach(f => {
+            const nv = f.disciple;
+            const code = nv.name || nv.Code;
+            const cfg = getDiscipleCfg(code);
+            const isSel = Number(nv.id || nv.Id) === GameState.selectedFormationDiscipleId;
+
+            const box = document.createElement('div');
+            box.className = `dt-disciple-box ${isSel ? 'active' : ''}`;
+            box.title = `${cfg.TenHienThi || code} (Slot #${f.slot})`;
+            box.onclick = () => selectFormationDisciple(nv.id || nv.Id);
+
+            box.innerHTML = `
+                <img src="${getAvatarUrl(code)}" onerror="this.src='${IMG_BASE}Default-Particle.png'"/>
+                <span class="dt-disciple-level-badge">${nv.level || nv.Level || 1}</span>
+            `;
+            track.appendChild(box);
+        });
+    }
+
+    // 3. Render Center Hanging Scroll with Selected Disciple
+    const curObj = formationDisciples.find(f => Number(f.disciple.id || f.disciple.Id) === GameState.selectedFormationDiscipleId);
+    const curDisciple = curObj ? curObj.disciple : (GameState.playerData.NhanVat[0] || null);
+
+    if (curDisciple) {
+        const code = curDisciple.name || curDisciple.Code;
         const cfg = getDiscipleCfg(code);
-        menu += `${idx + 1}. [Lv.${nv.level || nv.Level || 1}] ${cfg.TenHienThi || code} ${Number(nv.id || nv.Id) === currentAssignedId ? '(Hiện tại)' : ''}\n`;
-    });
+        const tier = getTierInfo(cfg.Hang || 1);
 
-    const choice = prompt(menu + '\nNhập số thứ tự đệ tử muốn chọn:');
-    if (choice === null) return;
-    const chosenIdx = parseInt(choice.trim());
-    if (isNaN(chosenIdx)) return;
+        // Name calligraphy & tier badge
+        const nameEl = document.getElementById('dt-hero-name-calligraphy');
+        if (nameEl) nameEl.innerText = cfg.TenHienThi || code;
 
-    if (chosenIdx === 0 && currentAssignedId > 0) {
-        assignDiscipleToSlot(slot, 0);
-        return;
-    }
+        const tierEl = document.getElementById('dt-hero-tier-badge');
+        if (tierEl) tierEl.innerText = tier.text;
 
-    const selectedNv = available[chosenIdx - 1];
-    if (selectedNv) {
-        assignDiscipleToSlot(slot, Number(selectedNv.id || selectedNv.Id));
+        // Figure image
+        const figImg = document.getElementById('dt-hero-figure-img');
+        if (figImg) {
+            figImg.src = getAvatarUrl(code);
+            figImg.onerror = () => { figImg.src = '/assets/images/NV_QuachTinh_ava_to.png'; };
+        }
+
+        // Level & Breakthrough
+        const lvText = document.getElementById('dt-hero-level-text');
+        if (lvText) lvText.innerText = `Lv.${curDisciple.level || curDisciple.Level || 1} +${curDisciple.CaiTao || 0}`;
+
+        // EXP Bar
+        const expFill = document.getElementById('dt-hero-exp-fill');
+        const expText = document.getElementById('dt-hero-exp-text');
+        const expCur = curDisciple.exp || 0;
+        const expMax = curDisciple.expMax || 100;
+        if (expFill) expFill.style.width = Math.min(100, Math.round(expCur * 100 / expMax)) + '%';
+        if (expText) expText.innerText = `${expCur.toLocaleString()} / ${expMax.toLocaleString()}`;
+
+        // 4 Core Stats
+        const statMau = document.getElementById('dt-stat-mau');
+        const statCong = document.getElementById('dt-stat-cong');
+        const statThu = document.getElementById('dt-stat-thu');
+        const statNoi = document.getElementById('dt-stat-noi');
+        if (statMau) statMau.innerText = (curDisciple.mau || 500).toLocaleString();
+        if (statCong) statCong.innerText = (curDisciple.cong || 300).toLocaleString();
+        if (statThu) statThu.innerText = (curDisciple.thu || 200).toLocaleString();
+        if (statNoi) statNoi.innerText = (curDisciple.noicong || 250).toLocaleString();
+
+        // 6 Duyên Phận (Bonds)
+        const duyenGrid = document.getElementById('dt-duyenphan-grid');
+        if (duyenGrid) {
+            duyenGrid.innerHTML = '';
+            const duyenList = cfg.DuyenPhan || [];
+            duyenList.forEach(d => {
+                // Check if active: if CungDoi, check if any target hero is in formation
+                let isActive = false;
+                if (d.LoaiDuyenPhanStr === 'CungDoi') {
+                    const targets = d.DoiTuong || [];
+                    isActive = targets.some(targetCode => {
+                        return formationDisciples.some(f => (f.disciple.name || f.disciple.Code) === targetCode);
+                    });
+                } else if (d.LoaiDuyenPhanStr === 'TrangBiDo') {
+                    const targets = d.DoiTuong || [];
+                    isActive = targets.some(t => curDisciple.VuKhi === t || curDisciple.AoGiap === t || curDisciple.TrangSuc === t);
+                } else if (d.LoaiDuyenPhanStr === 'TrangBiVoCong') {
+                    const targets = d.DoiTuong || [];
+                    isActive = targets.some(t => (curDisciple.VoCong || []).includes(t));
+                }
+
+                const item = document.createElement('div');
+                item.className = `dt-duyen-item ${isActive ? 'active' : 'inactive'}`;
+                item.title = `${d.TenHienThi}: ${d.LoaiPhuTroStr} +${d.HeSo}%`;
+                item.innerText = `* ${d.TenHienThi}`;
+                duyenGrid.appendChild(item);
+            });
+        }
+
+        // 4 Skills Slots (Left Column)
+        const skills = [cfg.VoCongMacDinh || 'VC_VoDanhChuongPhap', ...(curDisciple.VoCong || [])];
+        for (let s = 0; s < 4; s++) {
+            const slotEl = document.getElementById(`dt-skill-slot-${s}`);
+            if (slotEl) {
+                const skCode = skills[s];
+                if (skCode) {
+                    const skCfg = (GameState.staticData && GameState.staticData.skills) ? GameState.staticData.skills[skCode] : {};
+                    slotEl.style.background = `rgba(38, 21, 11, 0.85)`;
+                    slotEl.style.border = '2px solid #b45309';
+                    slotEl.innerHTML = `
+                        <img src="/assets/ui/${skCode}_vo_cong_nho.png" onerror="this.src='/assets/images/${skCode}_vo_cong_to.png'"/>
+                        <span class="dt-slot-level-badge">${s === 0 ? (curDisciple.level || 1) : 10}</span>
+                    `;
+                } else {
+                    slotEl.style.background = `url('/assets/ui/dantran_authentic/slot_empty_question.png') no-repeat center center`;
+                    slotEl.style.backgroundSize = '100% 100%';
+                    slotEl.style.border = 'none';
+                    slotEl.innerHTML = '';
+                }
+            }
+        }
+
+        // 4 Equipment Slots (Right Column)
+        const equips = [
+            { type: 'VuKhi', code: curDisciple.VuKhi },
+            { type: 'AoGiap', code: curDisciple.AoGiap },
+            { type: 'TrangSuc', code: curDisciple.TrangSuc },
+            { type: 'BaoBoi', code: curDisciple.BaoBoi }
+        ];
+
+        equips.forEach((eq, idx) => {
+            const slotEl = document.getElementById(`dt-item-slot-${idx}`);
+            if (slotEl) {
+                if (eq.code) {
+                    slotEl.style.background = `rgba(38, 21, 11, 0.85)`;
+                    slotEl.style.border = '2px solid #d97706';
+                    slotEl.innerHTML = `
+                        <img src="/assets/images/${eq.code}_trang_bi_to.png" onerror="this.src='/assets/ui/icon_longchau.png'"/>
+                        <span class="dt-slot-level-badge">Lv.1</span>
+                    `;
+                } else {
+                    slotEl.style.background = `url('/assets/ui/dantran_authentic/slot_empty_question.png') no-repeat center center`;
+                    slotEl.style.backgroundSize = '100% 100%';
+                    slotEl.style.border = 'none';
+                    slotEl.innerHTML = '';
+                }
+            }
+        });
     }
 }
 
-async function assignDiscipleToSlot(slot, discipleId) {
-    const res = await apiPost('set_formation', {
-        aid: getEffectiveAid(),
-        slot,
-        discipleId
-    });
-    if (!res.success) {
-        alert(res.error || 'Cài đặt đội hình thất bại!');
-        return;
-    }
-    GameState.playerData = res.playerData;
-    renderFormation();
-    renderHomeCloudDisciples();
-    updateHeader();
+function handleSkillSlotClick(idx) {
+    sound.play('click');
+    openVoCongModal();
+}
+
+function handleItemSlotClick(itemType) {
+    sound.play('click');
+    openTinhLuyenModal();
 }
 
 // 2. Disciples Tab (Luyện Công)
