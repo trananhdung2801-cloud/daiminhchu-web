@@ -3457,22 +3457,33 @@ function switchKyngoSubTab(tab) {
     const theLucEl = document.getElementById('kyngo-view-theluc');
     const thuongTieuEl = document.getElementById('kyngo-view-thuongtieu');
     const bauCuaEl = document.getElementById('kyngo-view-baucua');
+    const khieuChienEl = document.getElementById('kyngo-view-khieuchien');
 
     if (tab === 'theluc') {
         if (theLucEl) theLucEl.style.display = 'block';
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
         if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
     } else if (tab === 'thuongtieu') {
         if (theLucEl) theLucEl.style.display = 'none';
         if (thuongTieuEl) thuongTieuEl.style.display = 'block';
         if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
         startTltCountdown();
         updateTltSpentAmount();
     } else if (tab === 'baucua') {
         if (theLucEl) theLucEl.style.display = 'none';
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
         if (bauCuaEl) bauCuaEl.style.display = 'block';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
         initBauCuaState();
+    } else if (tab === 'khieuchien') {
+        if (theLucEl) theLucEl.style.display = 'none';
+        if (thuongTieuEl) thuongTieuEl.style.display = 'none';
+        if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'flex';
+        startKhieuChienCountdown();
     } else if (tab === 'bequan') {
         openBeQuanModal();
     } else if (tab === 'thambai') {
@@ -5421,4 +5432,54 @@ function confirmSelectedKimCham() {
 
     closeChonKimChamScreen();
     alert(`✨ Chúc mừng! Đã chọn [${needle.name}] và châm cứu thành công vào huyệt đạo của ${d.name}!`);
+}
+
+
+// ================= KHIÊU CHIẾN STAGE LOGIC (media_1793093271284_a9a0215e.jpg) =================
+let currentBossLevel = 5;
+let khieuChienCountdownInterval = null;
+
+function startKhieuChienCountdown() {
+    if (khieuChienCountdownInterval) clearInterval(khieuChienCountdownInterval);
+    let totalSeconds = 2 * 86400 + 22 * 3600 + 21 * 60 + 5;
+    const timerEl = document.getElementById('kc-countdown-timer');
+    if (!timerEl) return;
+
+    khieuChienCountdownInterval = setInterval(() => {
+        if (totalSeconds <= 0) {
+            clearInterval(khieuChienCountdownInterval);
+            timerEl.textContent = '0 ngày 00 giờ 00 phút 00 giây';
+            return;
+        }
+        totalSeconds--;
+        const d = Math.floor(totalSeconds / 86400);
+        const h = Math.floor((totalSeconds % 86400) / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+        timerEl.textContent = `${d} ngày ${String(h).padStart(2, '0')} giờ ${String(m).padStart(2, '0')} phút ${String(s).padStart(2, '0')} giây`;
+    }, 1000);
+}
+
+function doBossAction(action) {
+    if (action === 'chien') {
+        sound.play('click');
+        const confirmFight = confirm(`⚔️ Quyết chiến với Triệu Công Tử Cấp ${currentBossLevel}?\nTiêu hao: 20 Vàng`);
+        if (!confirmFight) return;
+
+        sound.play('renxong');
+        currentBossLevel++;
+        const lvlEl = document.getElementById('kc-boss-level-text');
+        if (lvlEl) lvlEl.textContent = `Cấp ${currentBossLevel}`;
+        alert(`🎉 CHIẾN THẮNG RỰC RỠ!\nBạn đã đánh bại Triệu Công Tử!\n\nPhần thưởng:\n• Bạc: +50.000\n• Kinh Nghiệm: +10.000\n• Thần Mộc Châm x1\nBoss đã thăng lên Cấp ${currentBossLevel}!`);
+    } else if (action === 'tranap') {
+        sound.play('click');
+        const confirmSweep = confirm(`✨ Uy hiếp và Trấn Áp ngay Triệu Công Tử Cấp ${currentBossLevel}?\nTiêu hao: 40 Vàng (Không tốn lượt đánh, nhận x2 thưởng)`);
+        if (!confirmSweep) return;
+
+        sound.play('levelup');
+        currentBossLevel++;
+        const lvlEl = document.getElementById('kc-boss-level-text');
+        if (lvlEl) lvlEl.textContent = `Cấp ${currentBossLevel}`;
+        alert(`🏆 TRẤN ÁP THÀNH CÔNG!\nTriệu Công Tử đã quy phục chưởng môn!\n\nPhần thưởng:\n• Bạc: +120.000\n• Kinh Nghiệm: +25.000\n• Hàn Thiết Châm x1\nBoss đã thăng lên Cấp ${currentBossLevel}!`);
+    }
 }

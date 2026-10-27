@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=35">
+    <link rel="stylesheet" href="/css/style.css?v=36">
 </head>
 <body>
     <div id="game-container">
@@ -613,7 +613,10 @@
                         <button class="kyngo-icon-btn" id="btn-kyngo-lanhhai" onclick="switchKyngoSubTab('lanhhai')" title="Lãnh Hải Tranh Bá">
                             <img src="/assets/ui/kyngo_authentic/icon_lanhhai.png" class="kyngo-feature-icon" alt="Lãnh Hải"/>
                         </button>
-                        <button class="kyngo-icon-btn" id="btn-kyngo-thuongtieu" onclick="switchKyngoSubTab('thuongtieu')" title="Thưởng Tiêu - Tích Lũy Tiêu">
+                                                <button class="kyngo-icon-btn" id="btn-kyngo-khieuchien" onclick="switchKyngoSubTab('khieuchien')" title="Khiêu chiến">
+                            <img src="/assets/ui/kyngo_authentic/clean_icon_khieuchien.png" class="kyngo-feature-icon" alt="Khiêu chiến"/>
+                        </button>
+<button class="kyngo-icon-btn" id="btn-kyngo-thuongtieu" onclick="switchKyngoSubTab('thuongtieu')" title="Thưởng Tiêu - Tích Lũy Tiêu">
                             <img src="/assets/ui/kyngo_authentic/icon_thuongtieu.png" class="kyngo-feature-icon" alt="Thưởng Tiêu"/>
                         </button>
                     </div>
@@ -627,6 +630,41 @@
                             <div class="kyngo-chicken-pulse"></div>
                             <img src="/assets/images/VP_GaQuay_to.png" class="kyngo-chicken-plate-img" alt="Gà Quay"/>
                             <span class="kyngo-tap-eat-hint">🍗 Chạm Ăn Gà</span>
+                        </div>
+                    </div>
+
+                                        <!-- Main Scenic Stage: Khiêu Chiến Triệu Công Tử (media_1793093271284_a9a0215e.jpg) -->
+                    <div id="kyngo-view-khieuchien" class="kyngo-stage-scene" style="display: none;">
+                        <img src="/assets/ui/kyngo_authentic/scene_khieuchien_full.png" class="kyngo-scene-bg" alt="Khiêu Chiến Triệu Công Tử"/>
+                        
+                        <div class="kc-stage-title-wrap">
+                            <img src="/assets/ui/kyngo_authentic/title_khieuchien_trieucongtu.png" alt="Khiêu Chiến Triệu Công Tử" />
+                        </div>
+
+                        <div class="kc-controls-overlay">
+                            <div class="kc-boss-level" id="kc-boss-level-text">Cấp 5</div>
+
+                            <div class="kc-actions-row">
+                                <div class="kc-action-btn-item" onclick="doBossAction('tranap')" title="Trấn Áp (40 Vàng)">
+                                    <div class="kc-action-calligraphy">Trấn Áp</div>
+                                    <div class="kc-action-cost">
+                                        <span>40</span>
+                                        <img src="/assets/ui/icon_KNB.png" alt="Vàng" />
+                                    </div>
+                                </div>
+
+                                <div class="kc-action-btn-item" onclick="doBossAction('chien')" title="Chiến (20 Vàng)">
+                                    <div class="kc-action-calligraphy">Chiến</div>
+                                    <div class="kc-action-cost">
+                                        <span>20</span>
+                                        <img src="/assets/ui/icon_KNB.png" alt="Vàng" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kc-timer-banner">
+                                <span>Đóng sau: <span id="kc-countdown-timer">2 ngày 22 giờ 21 phút 05 giây</span></span>
+                            </div>
                         </div>
                     </div>
 
@@ -2491,6 +2529,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=35"></script>
+    <script src="/js/game.js?v=36"></script>
 </body>
 </html>

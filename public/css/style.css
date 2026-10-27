@@ -9560,3 +9560,107 @@ img {
     color: #fff;
     box-shadow: 0 0 6px #b91c1c;
 }
+
+/* ================= KHIÊU CHIẾN STAGE IN KỲ NGỘ (media_1793093271284_a9a0215e.jpg) ================= */
+#kyngo-view-khieuchien {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.kc-stage-title-wrap {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+}
+.kc-stage-title-wrap img {
+    width: 90%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7));
+}
+
+.kc-controls-overlay {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.kc-boss-level {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 2px 4px #000, 0 0 8px rgba(0,0,0,0.9);
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 1px;
+}
+
+.kc-actions-row {
+    width: 90%;
+    max-width: 380px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.kc-action-btn-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: transform 0.1s;
+    user-select: none;
+}
+.kc-action-btn-item:active {
+    transform: scale(0.92);
+}
+
+.kc-action-calligraphy {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    font-family: 'Times New Roman', serif;
+    text-shadow: 0 2px 6px #000, 0 0 10px rgba(0,0,0,0.8);
+    letter-spacing: 2px;
+}
+
+.kc-action-cost {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #fef08a;
+    text-shadow: 0 1px 3px #000;
+}
+.kc-action-cost img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.kc-timer-banner {
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid #78350f;
+    border-radius: 12px;
+    padding: 3px 14px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #cbd5e1;
+    text-shadow: 0 1px 2px #000;
+}
