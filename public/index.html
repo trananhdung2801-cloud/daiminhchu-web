@@ -7,13 +7,27 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=21">
+    <link rel="stylesheet" href="/css/style.css?v=22">
 </head>
 <body>
     <div id="game-container">
-        <!-- ================= SCREEN 1: AUTHENTIC LOGIN & REGISTER ================= -->
+        <!-- ================= SCREEN 1: AUTHENTIC TITLE & LOGIN SCREEN ================= -->
         <div id="screen-login" class="screen active">
-            <div class="login-screen-bg">
+            <!-- Panel 1: Authentic Title Screen with "BẮT ĐẦU" (media_1793066664538_b0d165c2.jpg) -->
+            <div id="title-start-panel" class="screen-title-container" style="display: none;">
+                <div class="title-top-welcome-badge" id="title-welcome-user">Chưởng môn: MinhChu | S1 - Đào Hoa Đảo</div>
+                
+                <div class="title-batdau-wrapper" onclick="doStartGameFromTitle()" title="Bắt đầu bước vào chốn giang hồ">
+                    <img src="/assets/ui/title_authentic/btn_batdau.png" class="title-batdau-img" alt="Bắt đầu"/>
+                </div>
+                
+                <div class="title-version-text">Phiên bản 8.0.2</div>
+                
+                <button class="title-switch-acc-link" onclick="showAuthFormFromTitle()">[ Đổi tài khoản ]</button>
+            </div>
+
+            <!-- Panel 2: Login & Register Form (First Time or When Switching Accounts) -->
+            <div id="title-auth-panel" class="login-screen-bg" style="display: none;">
                 <div class="login-brand-header anim-pop-in">
                     <img class="login-app-icon" src="/assets/res/app_icon.png" alt="Đại Minh Chủ Icon">
                     <div class="login-brand-meta">
@@ -87,7 +101,7 @@
                 </div>
 
                 <div class="login-footer">
-                    <div class="footer-client-info" style="color: #a8a29e; font-size: 11px;">Đại Minh Chủ Mobile - Phiên Bản Võ Lâm Kiếm Hiệp Kim Dung</div>
+                    <div class="footer-client-info" style="color: #a8a29e; font-size: 11px;">Đại Minh Chủ Mobile - Phiên Bản 8.0.2 Kiếm Thần</div>
                 </div>
             </div>
         </div>
@@ -1622,6 +1636,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=21"></script>
+    <script src="/js/game.js?v=22"></script>
 </body>
 </html>

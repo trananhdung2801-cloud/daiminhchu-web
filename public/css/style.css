@@ -5714,3 +5714,98 @@ img {
     white-space: nowrap;
     animation: bounce 1.5s infinite;
 }
+
+
+/* ================= 100% AUTHENTIC TITLE SCREEN & BẮT ĐẦU (media_1793066664538_b0d165c2.jpg) ================= */
+.screen-title-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background: #0d0604 url('/assets/ui/title_authentic/bg_title_screen.png') no-repeat center top;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 35px;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.title-top-welcome-badge {
+    position: absolute;
+    top: 14px;
+    background: rgba(30, 16, 10, 0.88);
+    border: 1px solid #c27838;
+    border-radius: 14px;
+    padding: 5px 16px;
+    color: #ffedd5;
+    font-size: 12.5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.title-batdau-wrapper {
+    position: relative;
+    width: 86%;
+    max-width: 380px;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    margin-bottom: 10px;
+}
+
+.title-batdau-wrapper:hover {
+    transform: scale(1.04);
+    filter: brightness(1.1);
+}
+
+.title-batdau-wrapper:active {
+    transform: scale(0.96);
+    filter: brightness(0.9);
+}
+
+.title-batdau-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+}
+
+.title-version-text {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Times New Roman', cursive, serif;
+    text-shadow: 1px 1px 3px #000, 0 0 6px rgba(0, 0, 0, 0.85);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    z-index: 10;
+}
+
+.title-switch-acc-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #f7d488;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    text-decoration: underline;
+    transition: color 0.15s ease;
+    z-index: 10;
+}
+
+.title-switch-acc-link:hover {
+    color: #ffd700;
+}

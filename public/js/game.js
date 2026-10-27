@@ -1304,7 +1304,7 @@ function doLogout() {
     GameState.user = null;
     GameState.playerData = null;
     closeSettingsModal();
-    switchScreen('screen-login');
+    showAuthFormFromTitle();
 }
 
 // ================= SETTINGS & ADMIN PIN (6996) =================
@@ -2738,21 +2738,27 @@ window.addEventListener('DOMContentLoaded', async () => {
     await fetchStaticData();
     initWorldChatTicker();
 
-    // Auto-resume session if exists
+    // Check if player has logged in previously
     const savedAid = localStorage.getItem('dmc_aid');
-    const savedUser = localStorage.getItem('dmc_username') || 'MinhChu';
-    if (savedAid) {
+    const savedUser = localStorage.getItem('dmc_username');
+
+    if (savedAid && savedUser) {
+        // Pre-fetch player data in background so clicking "Bắt đầu" is instant!
         try {
             const res = await apiPost('login', { username: savedUser });
             if (res && res.success && res.hasCharacter && res.playerData) {
                 GameState.user = res.user;
                 GameState.playerData = res.playerData;
-                initMainGame();
-                console.log('Tự động khôi phục phiên đăng nhập của Minh Chủ:', savedUser);
             }
         } catch (e) {
-            console.warn('Auto-login skipped:', e);
+            console.warn('Background login fetch skipped:', e);
         }
+
+        // Show the Authentic Title Screen with "Bắt đầu" and "Phiên bản 8.0.2"!
+        showTitleStartScreen(savedUser);
+    } else {
+        // Show login/register form
+        showAuthFormFromTitle();
     }
     console.log('Đại Minh Chủ Authentic Web Game Loaded with 100% Features!');
 });
@@ -2962,5 +2968,65 @@ function switchKyngoSubTab(tab) {
         alert('🎲 [VI TIỂU BẢO ĐỔ SẮC] 🎲\nVi Tiểu Bảo: "Đại ca! Đến Lệ Xuân Viện lắc vài ván xúc xắc kiếm bạc cùng tiểu đệ nào!"');
     } else if (tab === 'thuongnhan') {
         switchTab('market');
+    }
+}
+
+
+// ================= 100% AUTHENTIC TITLE SCREEN & BẮT ĐẦU SYSTEM (media_1793066664538_b0d165c2.jpg) =================
+function showTitleStartScreen(username) {
+    const titlePanel = document.getElementById('title-start-panel');
+    const authPanel = document.getElementById('title-auth-panel');
+    const userBadge = document.getElementById('title-welcome-user');
+
+    if (titlePanel) titlePanel.style.display = 'flex';
+    if (authPanel) authPanel.style.display = 'none';
+    if (userBadge) {
+        const charName = GameState.playerData?.Account?.TenNhanVat || username || 'MinhChu';
+        userBadge.innerText = `Chưởng môn: ${charName} | S1 - Đào Hoa Đảo`;
+    }
+
+    switchScreen('screen-login');
+}
+
+function showAuthFormFromTitle() {
+    const titlePanel = document.getElementById('title-start-panel');
+    const authPanel = document.getElementById('title-auth-panel');
+
+    if (titlePanel) titlePanel.style.display = 'none';
+    if (authPanel) authPanel.style.display = 'block';
+
+    switchScreen('screen-login');
+}
+
+async function doStartGameFromTitle() {
+    sound.play('click');
+    showLoading('Đang bước vào chốn giang hồ...');
+
+    const savedUser = localStorage.getItem('dmc_username') || 'MinhChu';
+
+    // If playerData already loaded in background, enter instantly
+    if (GameState.user && GameState.playerData) {
+        hideLoading();
+        sound.play('renxong');
+        initMainGame();
+        return;
+    }
+
+    // Otherwise fetch login
+    try {
+        const res = await apiPost('login', { username: savedUser });
+        hideLoading();
+        if (res && res.success && res.hasCharacter && res.playerData) {
+            sound.play('renxong');
+            GameState.user = res.user;
+            GameState.playerData = res.playerData;
+            initMainGame();
+        } else {
+            alert('Không thể kết nối vào tài khoản, vui lòng đăng nhập lại!');
+            showAuthFormFromTitle();
+        }
+    } catch (e) {
+        hideLoading();
+        alert('Lỗi kết nối máy chủ!');
     }
 }
