@@ -10181,3 +10181,121 @@ img {
     text-align: center;
     line-height: 1.4;
 }
+
+
+/* ================= 100% AUTHENTIC THƯƠNG NHÂN THẦN BÍ SYSTEM (media_1793094305775_44f09702.jpg) ================= */
+#kyngo-view-thuongnhan {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tnn-item-slot-hotspot {
+    position: absolute;
+    top: 56%;
+    left: 65%;
+    width: 22%;
+    height: 15%;
+    cursor: pointer;
+    z-index: 6;
+    border-radius: 12px;
+    transition: transform 0.15s ease;
+}
+
+.tnn-item-slot-hotspot:hover,
+.tnn-item-slot-hotspot:active {
+    transform: scale(1.08);
+}
+
+.tnn-item-pulse {
+    position: absolute;
+    inset: -3px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    animation: tnn-item-glow 1.5s infinite alternate;
+}
+
+@keyframes tnn-item-glow {
+    0% { border-color: rgba(255, 215, 0, 0.2); box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+    100% { border-color: rgba(255, 215, 0, 0.8); box-shadow: 0 0 12px rgba(255, 215, 0, 0.7); }
+}
+
+.tnn-btn-thamquan-hotspot {
+    position: absolute;
+    top: 77.5%;
+    left: 11%;
+    width: 25%;
+    height: 9.5%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 8;
+    border-radius: 10px;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.tnn-btn-thamquan-hotspot:hover {
+    filter: brightness(1.15);
+    transform: scale(1.03);
+}
+
+.tnn-btn-thamquan-hotspot:active {
+    filter: brightness(0.9);
+    transform: scale(0.97);
+}
+
+.tnn-btn-muangay-hotspot {
+    position: absolute;
+    top: 77.5%;
+    left: 63.8%;
+    width: 25.5%;
+    height: 9.5%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 8;
+    border-radius: 10px;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.tnn-btn-muangay-hotspot:hover {
+    filter: brightness(1.2);
+    transform: scale(1.03);
+}
+
+.tnn-btn-muangay-hotspot:active {
+    filter: brightness(0.9);
+    transform: scale(0.97);
+}
+
+.tnn-timer-banner {
+    position: absolute;
+    top: 89.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.tnn-timer-text {
+    color: #fff9e6;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #000;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.tnn-timer-sec-hl {
+    color: #ffff00;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 0 0 6px #ffeb3b;
+}

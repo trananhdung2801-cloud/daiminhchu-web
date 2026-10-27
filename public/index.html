@@ -594,6 +594,9 @@
                 <div id="tab-recruit" class="tab-view kyngo-authentic-view" style="display: none;">
                     <!-- Top Sub-feature Icons Track (Horizontal Scroll across all 10 features) -->
                     <div class="kyngo-top-icons-row">
+                        <button class="kyngo-icon-btn" id="btn-kyngo-thuongnhan" onclick="switchKyngoSubTab('thuongnhan')" title="Thương Nhân Thần Bí">
+                            <img src="/assets/ui/kyngo_authentic/clean_icon_thuongnhan.png" class="kyngo-feature-icon" alt="Thương Nhân"/>
+                        </button>
                         <button class="kyngo-icon-btn active" id="btn-kyngo-theluc" onclick="switchKyngoSubTab('theluc')" title="Thể Lực - Ăn Gà Giờ Vàng">
                             <img src="/assets/ui/kyngo_authentic/icon_theluc.png" class="kyngo-feature-icon" alt="Thể Lực"/>
                         </button>
@@ -606,9 +609,7 @@
                         <button class="kyngo-icon-btn" id="btn-kyngo-tieubao" onclick="switchKyngoSubTab('tieubao')" title="Vi Tiểu Bảo">
                             <img src="/assets/ui/kyngo_authentic/icon_tieubao.png" class="kyngo-feature-icon" alt="Tiểu Bảo"/>
                         </button>
-                        <button class="kyngo-icon-btn" id="btn-kyngo-thuongnhan" onclick="switchKyngoSubTab('thuongnhan')" title="Thương Nhân Thần Bí">
-                            <img src="/assets/ui/kyngo_authentic/icon_thuongnhan.png" class="kyngo-feature-icon" alt="Thương"/>
-                        </button>
+
                         <button class="kyngo-icon-btn" id="btn-kyngo-baucua" onclick="switchKyngoSubTab('baucua')" title="Bầu Cua Tôm Cá">
                             <img src="/assets/ui/kyngo_authentic/icon_baucua.png" class="kyngo-feature-icon" alt="Bầu Cua"/>
                         </button>
@@ -714,7 +715,28 @@
                         </div>
                     </div>
 
-                                        <!-- Main Scenic Stage: Thưởng Nạp (media_1793093357077_6d2838c9.jpg) -->
+                                                            <!-- Main Scenic Stage: Thương Nhân Thần Bí (media_1793094305775_44f09702.jpg) -->
+                    <div id="kyngo-view-thuongnhan" class="kyngo-stage-scene" style="display: none;">
+                        <img src="/assets/ui/kyngo_authentic/scene_thuongnhan_full.png" class="kyngo-scene-bg" alt="Thương Nhân Thần Bí"/>
+                        
+                        <!-- Interactive Item Hotspot -->
+                        <div class="tnn-item-slot-hotspot" onclick="viewThuongNhanItem()" title="Xem chi tiết vật phẩm">
+                            <div class="tnn-item-pulse"></div>
+                        </div>
+
+                        <!-- Action Button Hotspot: Tham quan -->
+                        <button class="tnn-btn-thamquan-hotspot" onclick="doThuongNhanThamQuan()" title="Tham quan"></button>
+
+                        <!-- Action Button Hotspot: Mua ngay -->
+                        <button class="tnn-btn-muangay-hotspot" onclick="doThuongNhanMuaNgay()" title="Mua ngay"></button>
+
+                        <!-- Dynamic Countdown Banner -->
+                        <div class="tnn-timer-banner">
+                            <span class="tnn-timer-text">Rời đi sau: <span id="tnn-countdown-text">3 giờ 59 phút <b class="tnn-timer-sec-hl">43</b> giây</span></span>
+                        </div>
+                    </div>
+
+<!-- Main Scenic Stage: Thưởng Nạp (media_1793093357077_6d2838c9.jpg) -->
                     <div id="kyngo-view-thuongnap" class="kyngo-stage-scene" style="display: none;">
                         <img src="/assets/ui/kyngo_authentic/scene_thuongnap_full.png" class="kyngo-scene-bg" alt="Thưởng Nạp"/>
                         
@@ -2679,6 +2701,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=38"></script>
+    <script src="/js/game.js?v=39"></script>
 </body>
 </html>

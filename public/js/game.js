@@ -3459,6 +3459,7 @@ function switchKyngoSubTab(tab) {
     const bauCuaEl = document.getElementById('kyngo-view-baucua');
     const khieuChienEl = document.getElementById('kyngo-view-khieuchien');
     const thuongNapEl = document.getElementById('kyngo-view-thuongnap');
+    const thuongNhanEl = document.getElementById('kyngo-view-thuongnhan');
 
     if (tab === 'theluc') {
         if (theLucEl) theLucEl.style.display = 'block';
@@ -3466,12 +3467,23 @@ function switchKyngoSubTab(tab) {
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+    } else if (tab === 'thuongnhan') {
+        if (theLucEl) theLucEl.style.display = 'none';
+        if (thuongTieuEl) thuongTieuEl.style.display = 'none';
+        if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'block';
+        startThuongNhanCountdown();
+        updateThuongNhanUI();
     } else if (tab === 'thuongnap') {
         if (theLucEl) theLucEl.style.display = 'none';
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'block';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
         startThuongNapCountdown();
         updateThuongNapUI();
     } else if (tab === 'thuongtieu') {
@@ -3480,6 +3492,7 @@ function switchKyngoSubTab(tab) {
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
         startTltCountdown();
         updateTltSpentAmount();
     } else if (tab === 'baucua') {
@@ -3488,6 +3501,7 @@ function switchKyngoSubTab(tab) {
         if (bauCuaEl) bauCuaEl.style.display = 'block';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
         initBauCuaState();
     } else if (tab === 'khieuchien') {
         if (theLucEl) theLucEl.style.display = 'none';
@@ -3496,6 +3510,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'flex';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
         startKhieuChienCountdown();
     } else if (tab === 'bequan') {
         openBeQuanModal();
@@ -3508,8 +3523,6 @@ function switchKyngoSubTab(tab) {
         }
     } else if (tab === 'tieubao') {
         alert('🎲 [VI TIỂU BẢO ĐỔ SẮC] 🎲\nVi Tiểu Bảo: "Đại ca! Đến Lệ Xuân Viện lắc vài ván xúc xắc kiếm bạc cùng tiểu đệ nào!"');
-    } else if (tab === 'thuongnhan') {
-        switchTab('market');
     } else if (tab === 'thuongdai') {
         alert('⚔️ [THƯỢNG ĐÀI LUẬN VÕ] ⚔️\nĐại hội tỷ võ Thượng Đài quy tụ anh hùng bốn phương. Thách đấu cao thủ ghi danh bảng vàng!');
     } else if (tab === 'thuychien') {
@@ -5833,4 +5846,126 @@ function submitRecharge(goldAmount) {
     sound.play('victory');
     
     alert(`🎉 [NẠP TIỀN THÀNH CÔNG] 🎉\nChưởng Môn vừa nạp thành công +${goldAmount} Vàng!\nTổng tích lũy nạp hiện tại: ${newRecharged} Vàng.${unlockedMsg}`);
+}
+
+
+// ================= 100% AUTHENTIC THƯƠNG NHÂN THẦN BÍ SYSTEM (media_1793094305775_44f09702.jpg) =================
+let tnnCountdownSeconds = 14383; // 3 giờ 59 phút 43 giây
+let tnnCountdownTimer = null;
+
+const THUONG_NHAN_GOODS = [
+    {
+        id: 'ga_quay_7',
+        name: 'Gà Quay x7',
+        count: 7,
+        icon: '/assets/images/VP_GaQuay_to.png',
+        priceGold: 70,
+        originalPrice: 100,
+        desc: 'Món ngon bồi bổ đại bổ nguyên khí Tây Vực! Mỗi con gà quay phục hồi 10 điểm Thể Lực (Tổng phục hồi 70 điểm Thể Lực).',
+        effectType: 'theluc',
+        effectValue: 70
+    },
+    {
+        id: 'boiduong_dan_50',
+        name: 'Bồi Dưỡng Đan x50',
+        count: 50,
+        icon: '/assets/images/VP_BoiDuongDan_to.png',
+        priceGold: 100,
+        originalPrice: 150,
+        desc: 'Linh đan thần diệu kích phát tiềm năng đệ tử, dùng để bồi dưỡng tứ đại chỉ số thuộc tính võ học.',
+        effectType: 'item',
+        effectValue: 50
+    },
+    {
+        id: 'ruong_hoangkim_3',
+        name: 'Rương + Chìa Hoàng Kim x3',
+        count: 3,
+        icon: '/assets/images/VP_RuongHoangKim_to.png',
+        priceGold: 150,
+        originalPrice: 240,
+        desc: 'Bảo rương hoàng kim chứa đựng bí kíp giáp trụ cực phẩm võ lâm và kỳ trân dị bảo.',
+        effectType: 'item',
+        effectValue: 3
+    }
+];
+
+let currentTnnItemIndex = 0;
+
+function startThuongNhanCountdown() {
+    if (tnnCountdownTimer) clearInterval(tnnCountdownTimer);
+    const textEl = document.getElementById('tnn-countdown-text');
+    if (!textEl) return;
+    
+    function renderTimer() {
+        if (tnnCountdownSeconds <= 0) {
+            tnnCountdownSeconds = 14400; // Reset 4 hours cycle
+        }
+        const hours = Math.floor(tnnCountdownSeconds / 3600);
+        const mins = Math.floor((tnnCountdownSeconds % 3600) / 60);
+        const secs = tnnCountdownSeconds % 60;
+        
+        const hStr = hours < 10 ? '0' + hours : '' + hours;
+        const mStr = mins < 10 ? '0' + mins : '' + mins;
+        const sStr = secs < 10 ? '0' + secs : '' + secs;
+        
+        textEl.innerHTML = `${hours} giờ ${mStr} phút <b class="tnn-timer-sec-hl">${sStr}</b> giây`;
+        tnnCountdownSeconds--;
+    }
+    renderTimer();
+    tnnCountdownTimer = setInterval(renderTimer, 1000);
+}
+
+function updateThuongNhanUI() {
+    // Keep UI synchronized
+}
+
+function viewThuongNhanItem() {
+    sound.play('click');
+    const item = THUONG_NHAN_GOODS[currentTnnItemIndex] || THUONG_NHAN_GOODS[0];
+    alert(`🛒 [VẬT PHẨM BẢO QUÝ] 🛒\n• Tên: ${item.name}\n• Giá bán: ${item.priceGold} Vàng (Giảm giá từ ${item.originalPrice} Vàng)\n• Công dụng: ${item.desc}\n\nBấm nút "Mua ngay" để sở hữu kỳ bảo!`);
+}
+
+function doThuongNhanThamQuan() {
+    sound.play('click');
+    const quotes = [
+        '"Ta là ai không quan trọng. Quan trọng là ta có thứ ngươi cần."',
+        '"Đại hiệp cứ thong thả tham quan. Hàng quý hiếm Tây Vực chỉ bán cho người biết trân trọng!"',
+        '"Chuyến hàng này ta lặn lội ngàn dặm sa mạc mới mang về được đấy."',
+        '"Thương nhân thần bí xuất quỷ nhập thần, chỉ nán lại vài canh giờ rồi đi tiếp!"'
+    ];
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    
+    // Cycle items on browse
+    currentTnnItemIndex = (currentTnnItemIndex + 1) % THUONG_NHAN_GOODS.length;
+    const curItem = THUONG_NHAN_GOODS[currentTnnItemIndex];
+    
+    alert(`🧕 [THƯƠNG NHÂN THẦN BÍ] 🧕\n${randomQuote}\n\nVật phẩm hiện tại: ${curItem.name} (Giá: ${curItem.priceGold} Vàng).`);
+}
+
+function doThuongNhanMuaNgay() {
+    sound.play('click');
+    if (!GameState.playerData || !GameState.playerData.Account) return;
+    
+    const item = THUONG_NHAN_GOODS[currentTnnItemIndex] || THUONG_NHAN_GOODS[0];
+    const currentGold = GameState.playerData.Account.Vang || 0;
+    
+    if (currentGold < item.priceGold) {
+        alert(`❌ [KHÔNG ĐỦ VÀNG] ❌\nCần ${item.priceGold} Vàng để mua ${item.name}.\nHiện tại Chưởng Môn chỉ có: ${currentGold} Vàng.\n\nHãy nạp thêm Vàng tại mục "Thưởng Nạp" để mua hàng!`);
+        return;
+    }
+    
+    // Deduct gold
+    GameState.playerData.Account.Vang -= item.priceGold;
+    
+    // Grant effect
+    if (item.effectType === 'theluc') {
+        const curEnergy = GameState.playerData.Account.TheLuc || 0;
+        GameState.playerData.Account.TheLuc = curEnergy + item.effectValue;
+    }
+    
+    saveGameState();
+    updateHeader();
+    sound.play('victory');
+    
+    alert(`🎉 [GIAO DỊCH THÀNH CÔNG] 🎉\nChúc mừng Chưởng Môn đã mua thành công ${item.name}!\nĐã trừ: ${item.priceGold} Vàng.\n${item.effectType === 'theluc' ? 'Đã phục hồi ngay +' + item.effectValue + ' Thể Lực!' : 'Vật phẩm đã được thêm vào túi đồ!'}\n\nThương Nhân Thần Bí: "Cảm ơn đại hiệp đã ủng hộ! Lần sau ghé lại nhé!"`);
 }
