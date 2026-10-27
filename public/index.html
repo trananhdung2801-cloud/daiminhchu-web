@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=29">
+    <link rel="stylesheet" href="/css/style.css?v=30">
 </head>
 <body>
     <div id="game-container">
@@ -258,11 +258,11 @@
                     <div id="dt-view-doihinh" class="dt-view-container dt-doihinh-layout" style="display: flex;">
                         <!-- Left Column 4 Slots -->
                         <div class="dt-col-flank dt-flank-left">
-                            <div class="dt-slot-flank" id="dh-left-slot-0" onclick="showItemDetail('skill')">
+                            <div class="dt-slot-flank" id="dh-left-slot-0" onclick="openVoCongDetailModal('VC_BangPhachCong')">
                                 <img src="/assets/images/VC_DocCoCuuKiem_vo_cong_to.png" alt="Skill"/>
                                 <span class="slot-flank-lvl">99</span>
                             </div>
-                            <div class="dt-slot-flank" id="dh-left-slot-1" onclick="showItemDetail('skill')">
+                            <div class="dt-slot-flank" id="dh-left-slot-1" onclick="openVoCongDetailModal('VC_GiangLongThapBatChuong')">
                                 <img src="/assets/images/VC_GiangLongThapBatChuong_vo_cong_To.png" alt="Skill"/>
                                 <span class="slot-flank-lvl">7871</span>
                             </div>
@@ -308,7 +308,7 @@
                                 <img src="/assets/images/NV_PhongTuNuong_ava_to.png" alt="Avatar"/>
                                 <span class="slot-flank-lvl">0</span>
                             </div>
-                            <div class="dt-slot-flank" id="dh-right-slot-1" onclick="showItemDetail('skill')">
+                            <div class="dt-slot-flank" id="dh-right-slot-1" onclick="openVoCongDetailModal('VC_BichChamThanhChuong')">
                                 <img src="/assets/images/VC_BichChamThanhChuong_vo_cong_to.png" alt="Skill"/>
                                 <span class="slot-flank-lvl">760</span>
                             </div>
@@ -1798,7 +1798,7 @@
                     <!-- Võ công -->
                     <div class="hero-detail-skill-section">
                         <div class="hero-detail-section-title">Võ công :</div>
-                        <div class="hero-detail-skill-card" id="hero-detail-skill-card" onclick="alert('Võ Công Thiên Phú: Điệp Vũ Cửu Thiên (Lv.41)')" title="Võ Công Thiên Phú">
+                        <div class="hero-detail-skill-card" id="hero-detail-skill-card" onclick="openVoCongDetailModal()" title="Võ Công Thiên Phú">
                             <img id="hero-detail-skill-icon" src="/assets/ui/hero_info_authentic/skill_sample.png" alt="Võ công"/>
                             <span class="hero-detail-skill-lvl" id="hero-detail-skill-lvl">41</span>
                         </div>
@@ -1834,6 +1834,86 @@
                 <div class="hero-detail-duyenphan-list" id="hero-detail-duyenphan-list">
                     <!-- Dynamic bonds rendered from JS -->
                 </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- ================= 100% AUTHENTIC THÔNG TIN VÕ CÔNG (TAB DÀN TRẬN) ================= -->
+    <div id="vocong-detail-modal" class="modal-overlay">
+        <div class="vocong-authentic-dialog anim-zoom-enter">
+            <!-- Header Title: Thông tin võ công -->
+            <div class="vocong-header-bar">
+                <span class="vocong-header-title">Thông tin võ công</span>
+            </div>
+
+            <!-- Close Button (Red square metal frame with white X) -->
+            <button class="vocong-close-btn" onclick="closeVoCongDetailModal()" title="Đóng">
+                <img src="/assets/ui/hero_info_authentic/btn_close.png" alt="Đóng"/>
+            </button>
+
+            <!-- Main Content: Left Scroll + Right Description & Share -->
+            <div class="vocong-main-body">
+                <!-- Left: Hanging Scroll (Tranh cuộn võ công) -->
+                <div class="vocong-scroll-frame">
+                    <div class="vocong-scroll-wrapper">
+                        <img src="/assets/ui/vocong_info_authentic/scroll_vocong_clean.png" class="vocong-scroll-bg" alt="Cuộn tranh"/>
+                        
+                        <!-- Top-Left Vertical Calligraphy Skill Name -->
+                        <div id="vocong-vert-name" class="vocong-vert-title">
+                            Băng Phách Công
+                        </div>
+
+                        <!-- Top-Right Badge (KIM / GIÁP) -->
+                        <div id="vocong-badge-wrap" class="vocong-badge-kim">
+                            <img id="vocong-badge-img" src="/assets/ui/hero_info_authentic/badge_kim.png" alt="KIM"/>
+                        </div>
+
+                        <!-- Center Skill Art Image -->
+                        <div class="vocong-art-box">
+                            <img id="vocong-art-img" src="/assets/ui/vocong_info_authentic/art_bang_phach_cong.png" alt="Võ công"/>
+                        </div>
+
+                        <!-- Black Ink Splash Level Badge -->
+                        <div class="vocong-ink-lvl-badge">
+                            <img src="/assets/ui/vocong_info_authentic/ink_lvl_badge.png" class="ink-splash-bg" alt="Ink"/>
+                            <span id="vocong-lvl-num" class="ink-lvl-text">37</span>
+                        </div>
+
+                        <!-- Bottom Stats Row on Scroll -->
+                        <div class="vocong-scroll-stats-row">
+                            <div class="vc-stat-item">
+                                <img src="/assets/ui/hero_info_authentic/icon_stat_palm.png" class="vc-stat-ico" alt="Nội"/>
+                                <span id="vocong-stat-noi">392%</span>
+                            </div>
+                            <div class="vc-stat-item">
+                                <img src="/assets/ui/hero_info_authentic/icon_stat_shield.png" class="vc-stat-ico" alt="Thủ"/>
+                                <span id="vocong-stat-thu">467%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Description & Share Button -->
+                <div class="vocong-right-col">
+                    <div class="vocong-desc-box" id="vocong-desc-text">
+                        Tâm như băng phách. Chỉ số tăng thủ + 50% và nội + 20% mỗi lần ra chiêu. Khi ra chiêu, có xác suất 33% ra chiêu 1 lần nữa. Sát thương gây ra sau phòng ngự tăng <span class="highlight-stat">20%</span>, và giảm sát thương phải nhận <span class="highlight-stat">10%</span>.
+                    </div>
+
+                    <!-- Share Button (f share) -->
+                    <button class="vocong-share-btn" onclick="shareVoCongFB()" title="Chia sẻ Facebook">
+                        <img src="/assets/ui/vocong_info_authentic/btn_share_fb.png" alt="f share"/>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Action Buttons: Đổi võ công - Tham ngộ -->
+            <div class="vocong-bottom-actions">
+                <button class="vocong-btn-action btn-doi" onclick="openDoiVoCongModal()" title="Đổi võ công">
+                    <img src="/assets/ui/vocong_info_authentic/btn_doi_vo_cong.png" alt="Đổi võ công"/>
+                </button>
+                <button class="vocong-btn-action btn-thamngo" onclick="openThamNgoModal()" title="Tham ngộ">
+                    <img src="/assets/ui/vocong_info_authentic/btn_tham_ngo.png" alt="Tham ngộ"/>
+                </button>
             </div>
         </div>
     </div>
@@ -1989,6 +2069,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=29"></script>
+    <script src="/js/game.js?v=30"></script>
 </body>
 </html>
