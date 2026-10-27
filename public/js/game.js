@@ -966,45 +966,125 @@ const VP_FALLBACK_META = {
     }
 };
 
-function renderItems() {
-    const container = document.getElementById('items-container');
+
+// ================= 100% AUTHENTIC GIAO DIỆN TRANG BỊ =================
+let currentTrangBiTab = 'vukhi';
+
+const SAMPLE_TRANGBI_DATA = [
+    { id: 'tb_1', code: 'VK_HongTiTuCham', name: 'Hồng Ti tú châm', type: 'vukhi', level: 1, statIcon: 'sword', statName: 'Công', statVal: 91, tier: 'giap' },
+    { id: 'tb_2', code: 'VK_HongTiTuCham', name: 'Hồng Ti tú châm', type: 'vukhi', level: 1, statIcon: 'sword', statName: 'Công', statVal: 91, tier: 'giap' },
+    { id: 'tb_3', code: 'VK_HongTiTuCham', name: 'Hồng Ti tú châm', type: 'vukhi', level: 1, statIcon: 'sword', statName: 'Công', statVal: 91, tier: 'giap' },
+    { id: 'tb_4', code: 'VK_HongTiTuCham', name: 'Hồng Ti tú châm', type: 'vukhi', level: 1, statIcon: 'sword', statName: 'Công', statVal: 91, tier: 'giap' },
+    { id: 'tb_5', code: 'VK_HongTiTuCham', name: 'Hồng Ti tú châm', type: 'vukhi', level: 1, statIcon: 'sword', statName: 'Công', statVal: 91, tier: 'giap' },
+    { id: 'tb_6', code: 'VK_DoLongDao', name: 'Đồ Long Đao', type: 'vukhi', level: 10, statIcon: 'sword', statName: 'Công', statVal: 380, tier: 'giap' },
+    { id: 'tb_7', code: 'AG_HamHuongBaoY', name: 'Hàm Hương Bảo Y', type: 'aogiap', level: 12, statIcon: 'shield', statName: 'Thủ', statVal: 420, tier: 'giap' },
+    { id: 'tb_8', code: 'AG_CamVeHoangKimGiap', name: 'Hoàng Kim Giáp', type: 'aogiap', level: 15, statIcon: 'shield', statName: 'Thủ', statVal: 560, tier: 'giap' },
+    { id: 'tb_9', code: 'TS_HoiNhanNgocBoi', name: 'Hồi Nhân Ngọc Bội', type: 'trangsuc', level: 8, statIcon: 'blood', statName: 'Máu', statVal: 1250, tier: 'giap' },
+    { id: 'tb_10', code: 'TS_NgungThanHuongNang', name: 'Ngưng Thần Hương Nang', type: 'trangsuc', level: 5, statIcon: 'palm', statName: 'Nội', statVal: 340, tier: 'giap' },
+    { id: 'tb_11', code: 'VK_KimXaKiem', name: 'Kim Xà Kiếm', type: 'thankhi', level: 25, statIcon: 'sword', statName: 'Công', statVal: 950, tier: 'giap' }
+];
+
+function switchTrangBiTab(tab) {
+    sound.play('click');
+    currentTrangBiTab = tab;
+    document.querySelectorAll('.tb-tab-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById('btn-tb-tab-' + tab);
+    if (activeBtn) activeBtn.classList.add('active');
+    renderTrangBiList();
+}
+
+function renderTrangBiList() {
+    const container = document.getElementById('trangbi-list-container');
     if (!container) return;
     container.innerHTML = '';
 
-    const items = GameState.playerData.VatPhamTieuThu || [];
-    if (!items.length) {
-        container.innerHTML = '<div style="color: #eed9b5; text-align: center; padding: 40px 20px; font-size: 14px;">Túi đồ hiện không có vật phẩm nào.</div>';
+    let items = [];
+    if (GameState.playerData && GameState.playerData.TrangBi && GameState.playerData.TrangBi.length > 0) {
+        items = GameState.playerData.TrangBi;
+    } else {
+        items = SAMPLE_TRANGBI_DATA;
+    }
+
+    if (currentTrangBiTab !== 'all') {
+        items = items.filter(it => it.type === currentTrangBiTab);
+    }
+
+    if (items.length === 0) {
+        container.innerHTML = '<div style="color: #6d411b; text-align: center; padding: 40px 20px; font-size: 14px; font-weight: bold;">Không có trang bị nào trong mục này.</div>';
         return;
     }
 
-    const staticConsumables = (GameState.staticData && GameState.staticData.consumables) || {};
-
-    items.forEach(it => {
-        if (!it || it.quantity <= 0) return;
-        const code = it.name;
-        const staticItem = staticConsumables[code] || VP_FALLBACK_META[code] || {};
-        const title = staticItem.TenHienThi || VP_FALLBACK_META[code]?.TenHienThi || code;
-        const desc = staticItem.MoTa || VP_FALLBACK_META[code]?.MoTa || 'Vật phẩm quý hiếm trên giang hồ.';
-        const iconFile = VP_FALLBACK_META[code]?.Icon || (code + '_to.png');
-
+    items.forEach(item => {
         const row = document.createElement('div');
-        row.className = 'vp-item-row';
+        row.className = 'trangbi-item-row';
+        row.onclick = () => viewTrangBiDetail(item.code);
+        
+        const imgSrc = (item.code === 'VK_HongTiTuCham') 
+            ? '/assets/ui/trangbi_authentic/item_hong_ti_tu_cham.png' 
+            : ('/assets/images/' + item.code + '_trang_bi_to.png');
+
         row.innerHTML = `
-            <div class="vp-item-frame">
-                <img src="/assets/images/${iconFile}" class="vp-item-icon" alt="${title}" onerror="this.src='/assets/images/VP_BaoRuong_to.png'"/>
+            <div class="tb-item-icon-box">
+                <img src="${imgSrc}" class="tb-item-img" alt="${item.name}" onerror="this.src='/assets/ui/trangbi_authentic/item_hong_ti_tu_cham.png'"/>
+                <span class="tb-item-lvl">${item.level || 1}</span>
             </div>
-            <div class="vp-item-info">
-                <div class="vp-item-name">${title}</div>
-                <div class="vp-item-desc">${desc}</div>
-                <div class="vp-item-qty">Số lượng : ${Number(it.quantity).toLocaleString('vi-VN')}</div>
+            <div class="tb-item-info">
+                <div class="tb-item-name">${item.name}</div>
+                <div class="tb-item-stat-row">
+                    <img src="/assets/ui/hero_info_authentic/icon_stat_${item.statIcon || 'sword'}.png" class="tb-stat-ico" alt="${item.statName || 'Công'}"/>
+                    <span class="tb-stat-num">${item.statVal || 91}</span>
+                </div>
+                <img src="/assets/ui/dantran_authentic/badge_giap_purple.png" class="tb-badge-giap" alt="GIÁP"/>
             </div>
-            <div class="vp-item-actions">
-                ${it.quantity >= 10 ? `<button class="vp-btn vp-btn-10" onclick="doUseItem('${code}', 10)" title="Dùng 10 lần"></button>` : ''}
-                <button class="vp-btn vp-btn-use" onclick="doUseItem('${code}', 1)" title="Sử dụng"></button>
+            <div class="tb-item-actions" onclick="event.stopPropagation()">
+                <button class="tb-btn-act" onclick="dungLuyenItem('${item.id || item.code}')" title="Dung luyện">
+                    <img src="/assets/ui/trangbi_authentic/btn_dung_luyen.png" alt="Dung luyện"/>
+                </button>
+                <button class="tb-btn-act" onclick="tinhLuyenItem('${item.id || item.code}')" title="Tinh luyện">
+                    <img src="/assets/ui/trangbi_authentic/btn_tinh_luyen.png" alt="Tinh luyện"/>
+                </button>
+                <button class="tb-btn-act" onclick="cuongHoaItem('${item.id || item.code}')" title="Cường hóa">
+                    <img src="/assets/ui/trangbi_authentic/btn_cuong_hoa_red.png" alt="Cường hóa"/>
+                </button>
             </div>
         `;
         container.appendChild(row);
     });
+}
+
+function openPhanRaModal() {
+    sound.play('click');
+    alert('Phân Rã Trang Bị: Đang mở lò phân rã trang bị thừa để thu hồi Huyền Thiết và Điểm Tinh Luyện!');
+}
+
+function openBanModal() {
+    sound.play('click');
+    alert('Bán Trang Bị: Đang mở giao diện bán trang bị lấy Bạc!');
+}
+
+function dungLuyenItem(itemId) {
+    sound.play('click');
+    alert('Dung Luyện: Hợp nhất các trang bị cùng loại để thăng hoa phẩm chất!');
+}
+
+function tinhLuyenItem(itemId) {
+    sound.play('tuyetchieu');
+    alert('Tinh Luyện: Tẩy luyện thuộc tính quý hiếm thành công!');
+}
+
+function cuongHoaItem(itemId) {
+    sound.play('tuyetchieu');
+    alert('Cường Hóa: Trang bị đã được cường hóa tăng thêm cấp độ và uy lực!');
+    renderTrangBiList();
+}
+
+function viewTrangBiDetail(code) {
+    sound.play('click');
+    alert('Chi Tiết Trang Bị: ' + code);
+}
+
+function renderItems() {
+    renderTrangBiList();
 }
 
 async function doUseItem(itemCode, count = 1) {

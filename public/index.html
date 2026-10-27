@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=30">
+    <link rel="stylesheet" href="/css/style.css?v=31">
 </head>
 <body>
     <div id="game-container">
@@ -821,12 +821,39 @@
                     </div>
                 </div>
 
-                <div id="tab-items" class="tab-view vatpham-authentic-view" style="display: none;">
-                    <div class="vp-top-header-row">
-                        <img src="/assets/ui/vatpham_authentic/tab_vatpham_plaque.png" class="vp-top-plaque" alt="Vật phẩm"/>
+                                <!-- ================= 100% AUTHENTIC GIAO DIỆN TRANG BỊ (media_1793077943396_4798b6c6.jpg) ================= -->
+                <div id="tab-items" class="tab-view trangbi-authentic-view" style="display: none;">
+                    <!-- Top 5 Tabs: Tất cả, Vũ khí, Áo giáp, Trang sức, Thần Khí -->
+                    <div class="trangbi-tabs-row">
+                        <button class="tb-tab-btn" id="btn-tb-tab-all" onclick="switchTrangBiTab('all')" title="Tất cả">
+                            <span class="tb-tab-text">Tất cả</span>
+                        </button>
+                        <button class="tb-tab-btn active" id="btn-tb-tab-vukhi" onclick="switchTrangBiTab('vukhi')" title="Vũ khí">
+                            <span class="tb-tab-text">Vũ khí</span>
+                        </button>
+                        <button class="tb-tab-btn" id="btn-tb-tab-aogiap" onclick="switchTrangBiTab('aogiap')" title="Áo giáp">
+                            <span class="tb-tab-text">Áo giáp</span>
+                        </button>
+                        <button class="tb-tab-btn" id="btn-tb-tab-trangsuc" onclick="switchTrangBiTab('trangsuc')" title="Trang sức">
+                            <span class="tb-tab-text">Trang sức</span>
+                        </button>
+                        <button class="tb-tab-btn" id="btn-tb-tab-thankhi" onclick="switchTrangBiTab('thankhi')" title="Thần Khí">
+                            <span class="tb-tab-text">Thần Khí</span>
+                        </button>
                     </div>
-                    <div class="vp-subheader-banner"></div>
-                    <div id="items-container" class="vp-items-board"></div>
+
+                    <!-- Sub-action Row: Phân Rã & Bán -->
+                    <div class="trangbi-subaction-row">
+                        <button class="tb-action-sub-btn" onclick="openPhanRaModal()" title="Phân rã">
+                            <img src="/assets/ui/trangbi_authentic/btn_phan_ra.png" alt="Phân rã"/>
+                        </button>
+                        <button class="tb-action-sub-btn" onclick="openBanModal()" title="Bán">
+                            <img src="/assets/ui/trangbi_authentic/btn_ban.png" alt="Bán"/>
+                        </button>
+                    </div>
+
+                    <!-- Equipment Items List -->
+                    <div class="trangbi-list-container" id="trangbi-list-container"></div>
                 </div>
             </div>
 
@@ -2069,6 +2096,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=30"></script>
+    <script src="/js/game.js?v=31"></script>
 </body>
 </html>
