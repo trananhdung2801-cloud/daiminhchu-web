@@ -10516,3 +10516,236 @@ img {
     margin-bottom: 8px;
     color: #efebe9;
 }
+
+
+/* ================= 100% AUTHENTIC TẦM BẢO HOÀNG CUNG SYSTEM (media_1793097644447_6ae8b96c.jpg) ================= */
+#kyngo-view-tambao {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tb-slots-container {
+    position: absolute;
+    top: 22%;
+    left: 6.5%;
+    width: 87%;
+    height: 29%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px 10px;
+    z-index: 6;
+}
+
+.tb-slot-item {
+    position: relative;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+}
+
+.tb-slot-item:hover {
+    transform: scale(1.08);
+}
+
+.tb-slot-highlight {
+    position: absolute;
+    inset: -3px;
+    border: 2.5px solid transparent;
+    border-radius: 12px;
+    pointer-events: none;
+    transition: all 0.15s ease;
+}
+
+.tb-slot-item.active .tb-slot-highlight {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px #ffd700, inset 0 0 10px rgba(255, 215, 0, 0.6);
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.tb-count-banner {
+    position: absolute;
+    top: 52.8%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff9e6;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000, 0 0 4px #000;
+    white-space: nowrap;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.tb-count-banner b {
+    color: #ffeb3b;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+/* Milestone Hotspots on Progress Track */
+.tb-milestone-hotspot {
+    position: absolute;
+    top: 57.5%;
+    height: 12%;
+    cursor: pointer;
+    z-index: 7;
+    border-radius: 50%;
+    transition: transform 0.15s ease;
+}
+
+.tb-milestone-hotspot:hover {
+    transform: scale(1.1);
+}
+
+.tb-ms-20 {
+    left: 4%;
+    width: 15%;
+}
+
+.tb-ms-200 {
+    left: 42.5%;
+    width: 15%;
+}
+
+.tb-ms-500 {
+    left: 81%;
+    width: 15%;
+}
+
+/* 3 Action Button Hotspots */
+.tb-btn-hotspot {
+    position: absolute;
+    top: 77.2%;
+    height: 12.8%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 8;
+    border-radius: 10px;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.tb-btn-hotspot:hover {
+    filter: brightness(1.2);
+    transform: scale(1.03);
+}
+
+.tb-btn-hotspot:active {
+    filter: brightness(0.9);
+    transform: scale(0.97);
+}
+
+.tb-btn-10-hotspot {
+    left: 7.2%;
+    width: 27%;
+}
+
+.tb-btn-1-hotspot {
+    left: 36.8%;
+    width: 27%;
+}
+
+.tb-btn-bxh-hotspot {
+    left: 66.5%;
+    width: 27%;
+}
+
+/* Bottom Bar Live Gold Display */
+.tb-gold-display-box {
+    position: absolute;
+    top: 92.5%;
+    right: 5%;
+    width: 24%;
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #ffeb3b;
+    font-size: 14px;
+    font-weight: 900;
+    text-shadow: 1px 1px 2px #000;
+    cursor: pointer;
+    z-index: 8;
+}
+
+/* Modal BXH */
+.tb-bxh-modal-content {
+    max-width: 440px;
+    background: #1a0f0a url('/assets/ui/bg_modal_wood.png') center/cover;
+    border: 2px solid #b8860b;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(184, 134, 11, 0.4);
+    color: #fff;
+    padding: 16px;
+}
+
+.tb-bxh-header-row {
+    display: flex;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffd700;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.tb-bxh-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.tb-bxh-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.tb-bxh-item span:nth-child(1) { flex: 1; }
+.tb-bxh-item span:nth-child(2) { flex: 3; font-weight: bold; }
+.tb-bxh-item span:nth-child(3) { flex: 2; color: #b0bec5; }
+.tb-bxh-item span:nth-child(4) { flex: 2; text-align: right; }
+
+.tb-bxh-item.top1 { border-color: #ffd700; background: rgba(255, 215, 0, 0.12); }
+.tb-bxh-item.top2 { border-color: #c0c0c0; background: rgba(192, 192, 192, 0.1); }
+.tb-bxh-item.top3 { border-color: #cd7f32; background: rgba(205, 127, 50, 0.1); }
+.tb-bxh-item.current-player { border-color: #4caf50; background: rgba(76, 175, 80, 0.15); }
+
+.rank-badge {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.rank-badge.r1 { background: #ffd700; color: #3e2723; }
+.rank-badge.r2 { background: #c0c0c0; color: #1a1a1a; }
+.rank-badge.r3 { background: #cd7f32; color: #fff; }
+
+.count-hl {
+    color: #ffeb3b;
+    font-weight: bold;
+}
+
+.tb-bxh-notice {
+    font-size: 11px;
+    color: #b0bec5;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+}

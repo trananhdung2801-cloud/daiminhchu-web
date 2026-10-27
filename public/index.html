@@ -594,6 +594,9 @@
                 <div id="tab-recruit" class="tab-view kyngo-authentic-view" style="display: none;">
                     <!-- Top Sub-feature Icons Track (Horizontal Scroll across all 10 features) -->
                     <div class="kyngo-top-icons-row">
+                        <button class="kyngo-icon-btn" id="btn-kyngo-tambao" onclick="switchKyngoSubTab('tambao')" title="Tầm Bảo (Hoàng Cung Đại Lý)">
+                            <img src="/assets/ui/kyngo_authentic/clean_icon_tambao.png" class="kyngo-feature-icon" alt="Tầm Bảo"/>
+                        </button>
                         <button class="kyngo-icon-btn" id="btn-kyngo-thuongnhan" onclick="switchKyngoSubTab('thuongnhan')" title="Thương Nhân Thần Bí">
                             <img src="/assets/ui/kyngo_authentic/clean_icon_thuongnhan.png" class="kyngo-feature-icon" alt="Thương Nhân"/>
                         </button>
@@ -718,7 +721,44 @@
                         </div>
                     </div>
 
-                                                                                <!-- Main Scenic Stage: Dự Đoán Bóng Đá (media_1793094347617_84886d52.jpg) -->
+                                                                                                    <!-- Main Scenic Stage: Tầm Bảo - Hoàng Cung Đại Lý (media_1793097644447_6ae8b96c.jpg) -->
+                    <div id="kyngo-view-tambao" class="kyngo-stage-scene" style="display: none;">
+                        <img src="/assets/ui/kyngo_authentic/scene_tambao_full.png" class="kyngo-scene-bg" alt="Hoàng Cung Đại Lý"/>
+                        
+                        <!-- 8 Treasure Slots Hotspots -->
+                        <div class="tb-slots-container">
+                            <div class="tb-slot-item" id="tb-slot-0" onclick="inspectTambaoSlot(0)" title="Rương Báu Hoàng Kim"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-1" onclick="inspectTambaoSlot(1)" title="Thiên Niên Nhân Sâm"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-2" onclick="inspectTambaoSlot(2)" title="Bao Lì Xì May Mắn"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-3" onclick="inspectTambaoSlot(3)" title="Huyết Ngọc Thần Thạch"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-4" onclick="inspectTambaoSlot(4)" title="Càn Khôn Linh Cầu"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-5" onclick="inspectTambaoSlot(5)" title="Bí Kíp Thần Công"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-6" onclick="inspectTambaoSlot(6)" title="Vàng Đĩnh Hoàng Kim"><div class="tb-slot-highlight"></div></div>
+                            <div class="tb-slot-item" id="tb-slot-7" onclick="inspectTambaoSlot(7)" title="Lam Tinh Thạch"><div class="tb-slot-highlight"></div></div>
+                        </div>
+
+                        <!-- Live Counter: Đã tầm bảo 1277 lần -->
+                        <div class="tb-count-banner">
+                            <span>Đã tầm bảo <b id="tb-spins-count-text">1277</b> lần</span>
+                        </div>
+
+                        <!-- Milestone Hotspots on Progress Track -->
+                        <div class="tb-milestone-hotspot tb-ms-20" onclick="claimTambaoMilestone(20)" title="Mốc Hoàng Cung 20 lần"></div>
+                        <div class="tb-milestone-hotspot tb-ms-200" onclick="claimTambaoMilestone(200)" title="Mốc Đại Nội 200 lần"></div>
+                        <div class="tb-milestone-hotspot tb-ms-500" onclick="claimTambaoMilestone(500)" title="Mốc Kim Điện 500 lần"></div>
+
+                        <!-- 3 Action Button Hotspots -->
+                        <button class="tb-btn-hotspot tb-btn-10-hotspot" onclick="doTamBao(10)" title="10 lần tầm bảo (1000 Vàng)"></button>
+                        <button class="tb-btn-hotspot tb-btn-1-hotspot" onclick="doTamBao(1)" title="Tầm bảo 1 lần (100 Vàng)"></button>
+                        <button class="tb-btn-hotspot tb-btn-bxh-hotspot" onclick="openTamBaoBXH()" title="Bảng xếp hạng Tầm Bảo"></button>
+
+                        <!-- Bottom Bar Live Gold Display -->
+                        <div class="tb-gold-display-box" onclick="switchKyngoSubTab('thuongnap')" title="Vàng hiện có - Nhấp để nạp thêm">
+                            <span id="tb-live-gold-val">622046</span>
+                        </div>
+                    </div>
+
+<!-- Main Scenic Stage: Dự Đoán Bóng Đá (media_1793094347617_84886d52.jpg) -->
                     <div id="kyngo-view-bongda" class="kyngo-stage-scene" style="display: none;">
                         <img src="/assets/ui/kyngo_authentic/scene_bongda_full.png" class="kyngo-scene-bg" alt="Dự Đoán Bóng Đá"/>
                         
@@ -2686,7 +2726,36 @@
             </div>
         </div>
 
-                    <!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
+                            <!-- ================= MODAL: BẢNG XẾP HẠNG TẦM BẢO ================= -->
+        <div id="modal-tambao-bxh" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content tb-bxh-modal-content">
+                <div class="authentic-modal-header">
+                    <h3 class="authentic-modal-title">Bảng Xếp Hạng Tầm Bảo Hoàng Cung</h3>
+                    <button class="authentic-modal-close" onclick="closeTamBaoBXH()">×</button>
+                </div>
+                <div class="tb-bxh-modal-body">
+                    <div class="tb-bxh-header-row">
+                        <span style="flex: 1;">Hạng</span>
+                        <span style="flex: 3;">Chưởng Môn</span>
+                        <span style="flex: 2;">Môn Phái</span>
+                        <span style="flex: 2; text-align: right;">Số lần</span>
+                    </div>
+                    <div class="tb-bxh-list">
+                        <div class="tb-bxh-item top1"><span class="rank-badge r1">1</span><span>Đoàn Dự</span><span>Đại Lý</span><span class="count-hl">2540</span></div>
+                        <div class="tb-bxh-item top2"><span class="rank-badge r2">2</span><span>Tiêu Phong</span><span>Cái Bang</span><span class="count-hl">1890</span></div>
+                        <div class="tb-bxh-item top3"><span class="rank-badge r3">3</span><span>Hư Trúc</span><span>Tiêu Dao</span><span class="count-hl">1450</span></div>
+                        <div class="tb-bxh-item current-player"><span class="rank-badge">4</span><span id="tb-bxh-my-name">Chưởng Môn</span><span>Võ Lâm</span><span class="count-hl" id="tb-bxh-my-count">1277</span></div>
+                        <div class="tb-bxh-item"><span class="rank-badge">5</span><span>Mộ Dung Phục</span><span>Cô Tô</span><span class="count-hl">980</span></div>
+                        <div class="tb-bxh-item"><span class="rank-badge">6</span><span>Cưu Ma Trí</span><span>Thổ Phồn</span><span class="count-hl">750</span></div>
+                    </div>
+                    <div class="tb-bxh-notice">
+                        * Phần thưởng TOP 1-3 sẽ được ban phát qua Truyền Thư khi sự kiện kết thúc!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
         <div id="modal-bongda-bet" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content bd-bet-modal-content">
                 <div class="authentic-modal-header">
@@ -2788,6 +2857,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=40"></script>
+    <script src="/js/game.js?v=41"></script>
 </body>
 </html>
