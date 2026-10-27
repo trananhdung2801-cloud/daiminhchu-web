@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=19">
+    <link rel="stylesheet" href="/css/style.css?v=20">
 </head>
 <body>
     <div id="game-container">
@@ -598,6 +598,36 @@
 
                 <!-- Tab 8: Túi Đồ & Kho Vật Phẩm (img_02, img_21, img_33) -->
                 <!-- Tab 8: 100% Authentic Vật Phẩm GUI Matching Original Game Screenshot -->
+                
+                <!-- Tab 9: 100% Authentic Trò Chuyện (Chat) Matching Original Game Screenshot media_1793066508164_3024b437.jpg -->
+                <div id="tab-chat" class="tab-view chat-authentic-view" style="display: none;">
+                    <!-- Top 3 Channels Tabs -->
+                    <div class="chat-top-tabs-row">
+                        <button class="chat-tab-btn" id="btn-chat-tab-tatca" onclick="switchChatChannel('tatca')">
+                            <span class="chat-tab-text">Tất cả</span>
+                        </button>
+                        <button class="chat-tab-btn active" id="btn-chat-tab-lienserver" onclick="switchChatChannel('lienserver')">
+                            <span class="chat-tab-text">Liên Server</span>
+                        </button>
+                        <button class="chat-tab-btn" id="btn-chat-tab-lienminh" onclick="switchChatChannel('lienminh')">
+                            <span class="chat-tab-text">Liên minh</span>
+                        </button>
+                    </div>
+
+                    <!-- Chat Messages List -->
+                    <div id="chat-messages-container" class="chat-messages-board"></div>
+
+                    <!-- Bottom Controls Bar (Horn Counter, Input, Button "Chém") -->
+                    <div class="chat-bottom-bar">
+                        <div class="chat-horn-badge" title="Loa truyền tin liên server">
+                            <img src="/assets/ui/chat_authentic/icon_loa_truyentin.png" class="chat-horn-icon" alt="Loa"/>
+                            <span id="chat-horn-count" class="chat-horn-val">16511</span>
+                        </div>
+                        <input type="text" id="chat-input-field" class="chat-input-text" placeholder="Nhập lời luận kiếm / trò chuyện..." onkeydown="if(event.key==='Enter') doSendChatMessage()"/>
+                        <button class="chat-btn-chem" onclick="doSendChatMessage()" title="Chém"></button>
+                    </div>
+                </div>
+
                 <div id="tab-items" class="tab-view vatpham-authentic-view" style="display: none;">
                     <div class="vp-top-header-row">
                         <img src="/assets/ui/vatpham_authentic/tab_vatpham_plaque.png" class="vp-top-plaque" alt="Vật phẩm"/>
@@ -1691,6 +1721,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=19"></script>
+    <script src="/js/game.js?v=20"></script>
 </body>
 </html>

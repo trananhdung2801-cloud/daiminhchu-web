@@ -99,6 +99,7 @@ class DatabaseManager {
             ensureItem('VP_GaQuay', 50);
             ensureItem('VP_RuouNuNhiHong', 50);
             ensureItem('VP_BoiDuongDan', 200);
+            ensureItem('VP_LoaTruyenTin', 16511);
             return data;
         } catch (e) {
             console.error('[DB] Error parsing player data for aid', aid, e);

@@ -2726,13 +2726,11 @@ function closeAnOanModal() {
 
 function openChatModal() {
     sound.play('click');
-    const modal = document.getElementById('chat-modal');
-    if (modal) modal.classList.add('active');
+    switchTab('chat');
 }
 function closeChatModal() {
     sound.play('click');
-    const modal = document.getElementById('chat-modal');
-    if (modal) modal.classList.remove('active');
+    switchTab('home');
 }
 
 // Init Game on Load
@@ -2830,5 +2828,108 @@ function handleHauCungSlotClick(slotIdx) {
         alert(`🌸 [HẬU CUNG MỸ NHÂN] 🌸\nNàng: ${beauty.name}\nCảnh giới: Hoàng Kim +${beauty.tier}\n\nHiệu quả: "Các đệ tử trong Hậu cung sẽ được tăng 1 cấp võ công thiên phú khi các nàng đều đạt cấp Hoàng kim"\nHiện tại: Toàn bộ đội hình được tăng +1 Cấp Võ Công Thiên Phú!`);
     } else {
         alert('Vị trí Hậu Cung còn trống, có thể chiêu mộ thêm mỹ nhân vào cung!');
+    }
+}
+
+
+// ================= 100% AUTHENTIC TRÒ CHUYỆN (CHAT) SYSTEM =================
+let currentChatChannel = 'lienserver';
+let chatMessagesCache = [];
+
+function switchChatChannel(channel) {
+    sound.play('click');
+    currentChatChannel = channel;
+
+    document.querySelectorAll('.chat-tab-btn').forEach(btn => btn.classList.remove('active'));
+    const btn = document.getElementById('btn-chat-tab-' + channel);
+    if (btn) btn.classList.add('active');
+
+    renderChatMessages();
+}
+
+async function renderChat() {
+    try {
+        const res = await apiPost('get_chat', { aid: getEffectiveAid() });
+        if (res && res.success) {
+            chatMessagesCache = res.messages || [];
+            const hornEl = document.getElementById('chat-horn-count');
+            if (hornEl) hornEl.innerText = res.hornCount || 16511;
+        }
+    } catch (e) {
+        console.error('get_chat error:', e);
+    }
+    renderChatMessages();
+}
+
+function renderChatMessages() {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const msgs = chatMessagesCache.filter(m => currentChatChannel === 'tatca' || m.channel === currentChatChannel || currentChatChannel === 'lienserver');
+
+    msgs.forEach(m => {
+        const row = document.createElement('div');
+        row.className = 'chat-msg-row';
+
+        let badgesHtml = '';
+        (m.badges || []).forEach(b => {
+            if (b === 'shield') {
+                badgesHtml += '<img src="/assets/ui/luankiem_authentic/badge_shield.png" class="chat-badge-img" alt="Shield"/>';
+            } else if (b === 'swirl') {
+                badgesHtml += '<img src="/assets/ui/luankiem_authentic/badge_swirl.png" class="chat-badge-img" alt="Swirl"/>';
+            } else if (b === 'star') {
+                badgesHtml += '<img src="/assets/ui/luankiem_authentic/badge_star.png" class="chat-badge-img" alt="Star"/>';
+            } else if (b === 'spiral') {
+                badgesHtml += '<img src="/assets/ui/chat_authentic/badge_yellow_spiral.png" class="chat-badge-img" alt="Spiral"/>';
+            }
+        });
+
+        row.innerHTML = `
+            <div class="chat-msg-header">
+                ${m.tag ? `<span class="chat-lm-tag">${m.tag}</span>` : ''}
+                <span class="chat-sender-name">${m.sender}</span>
+                <div class="chat-badges-wrap">${badgesHtml}</div>
+                <span class="chat-time-tag">${m.time || 'Vài giờ trước'}</span>
+            </div>
+            <div class="chat-bubble">${m.content}</div>
+        `;
+        container.appendChild(row);
+    });
+
+    container.scrollTop = container.scrollHeight;
+}
+
+async function doSendChatMessage() {
+    const input = document.getElementById('chat-input-field');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) {
+        alert('Vui lòng nhập nội dung tin nhắn!');
+        return;
+    }
+
+    sound.play('click');
+    try {
+        const res = await apiPost('send_chat', {
+            aid: getEffectiveAid(),
+            content: text,
+            channel: currentChatChannel
+        });
+
+        if (res && res.success) {
+            sound.play('trangbi');
+            input.value = '';
+            if (res.newMsg) {
+                chatMessagesCache.push(res.newMsg);
+            }
+            const hornEl = document.getElementById('chat-horn-count');
+            if (hornEl && res.hornCount !== undefined) hornEl.innerText = res.hornCount;
+            renderChatMessages();
+        } else {
+            alert(res?.error || 'Không thể gửi tin nhắn!');
+        }
+    } catch (e) {
+        alert('Lỗi kết nối máy chủ!');
     }
 }

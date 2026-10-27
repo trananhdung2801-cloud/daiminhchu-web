@@ -5325,3 +5325,251 @@ img {
     display: block;
     object-fit: cover;
 }
+
+
+/* ================= 100% AUTHENTIC TRÒ CHUYỆN (CHAT) GUI ================= */
+.chat-authentic-view {
+    padding: 0 4px 76px 4px !important;
+    background: #af8d74 url('/assets/ui/Background.png') no-repeat center top !important;
+    background-size: cover !important;
+    min-height: calc(100vh - 75px);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-top-tabs-row {
+    display: flex;
+    gap: 6px;
+    padding: 4px 6px 2px 6px;
+    margin-bottom: 2px;
+}
+
+.chat-tab-btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+    transition: transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: url('/assets/ui/luankiem_authentic/tab_wood_clean.png') no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.chat-tab-btn.active {
+    background: url('/assets/ui/luankiem_authentic/tab_stone_clean.png') no-repeat center center;
+    background-size: 100% 100%;
+}
+
+#btn-chat-tab-tatca:not(.active) {
+    background-image: url('/assets/ui/chat_authentic/tab_tatca.png') !important;
+}
+#btn-chat-tab-tatca:not(.active) .chat-tab-text {
+    display: none;
+}
+
+#btn-chat-tab-lienserver.active {
+    background-image: url('/assets/ui/chat_authentic/tab_lienserver_active.png') !important;
+}
+#btn-chat-tab-lienserver.active .chat-tab-text {
+    display: none;
+}
+
+#btn-chat-tab-lienminh:not(.active) {
+    background-image: url('/assets/ui/chat_authentic/tab_lienminh.png') !important;
+}
+#btn-chat-tab-lienminh:not(.active) .chat-tab-text {
+    display: none;
+}
+
+.chat-tab-text {
+    font-size: 16px;
+    font-weight: 900;
+    font-family: 'Times New Roman', cursive, serif;
+    color: #381e10;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.chat-tab-btn:not(.active) .chat-tab-text {
+    color: #edd1a9;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.chat-tab-btn:active {
+    transform: scale(0.96);
+}
+
+.chat-messages-board {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    padding: 6px 8px 12px 8px;
+    box-sizing: border-box;
+}
+
+.chat-msg-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chat-msg-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px;
+}
+
+.chat-lm-tag {
+    color: #ffd700;
+    font-weight: 900;
+    font-size: 12.5px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.chat-sender-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13.5px;
+    text-shadow: 1px 1px 2px #000;
+    font-family: 'Times New Roman', serif;
+}
+
+.chat-badges-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 2px;
+}
+
+.chat-badge-img {
+    width: 17px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.chat-time-tag {
+    margin-left: auto;
+    color: #f7e6c4;
+    font-size: 11.5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Wuxia Speech Bubble matching Screenshot */
+.chat-bubble {
+    position: relative;
+    background: linear-gradient(180deg, #fffcf5 0%, #faeed7 100%);
+    border: 1.5px solid #c27838;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #1a0e07;
+    font-size: 13.5px;
+    font-weight: 500;
+    font-family: 'Times New Roman', serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 5px;
+    word-break: break-word;
+}
+
+.chat-bubble::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 14px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 7px solid #c27838;
+}
+
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid #fffcf5;
+}
+
+/* Bottom Controls Bar */
+.chat-bottom-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: rgba(30, 16, 9, 0.85);
+    border-top: 2px solid #5a3a22;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.chat-horn-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.chat-horn-icon {
+    width: 38px;
+    height: 36px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.chat-horn-val {
+    color: #fffaed;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 1px 1px 2px #000;
+    font-family: 'Times New Roman', serif;
+}
+
+.chat-input-text {
+    flex: 1;
+    height: 36px;
+    background: #fffcf5;
+    border: 1.5px solid #c27838;
+    border-radius: 6px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: #1a0e07;
+    outline: none;
+    font-family: 'Times New Roman', serif;
+}
+
+.chat-input-text:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+.chat-btn-chem {
+    width: 90px;
+    height: 40px;
+    background: url('/assets/ui/chat_authentic/btn_chem.png') no-repeat center center;
+    background-size: 100% 100%;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 6px;
+    flex-shrink: 0;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.chat-btn-chem:active {
+    transform: scale(0.93);
+    filter: brightness(0.85);
+}

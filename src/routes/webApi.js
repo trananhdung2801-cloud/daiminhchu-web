@@ -1707,6 +1707,125 @@ Phát hiện Thần Khố: +${rewardBac.toLocaleString('vi-VN')} Bạc, +${rewar
 
         return { success: false, error: 'Địa danh thám hiểm không hợp lệ' };
     }
+
+getChat(body) {
+        const aid = Number(body.aid) || (db.users && db.users[0] ? db.users[0].aid : 1);
+        const playerData = db.getPlayerData(aid);
+        const loaItem = (playerData?.VatPhamTieuThu || []).find(it => it.name === 'VP_LoaTruyenTin');
+        const hornCount = loaItem ? loaItem.quantity : 16511;
+
+        // Authentic chats from original game screenshot (media_1793066508164_3024b437.jpg)
+        const defaultMessages = [
+            {
+                id: 1,
+                sender: 's160.s171-Đen.[M2.6].[K2]',
+                tag: '',
+                content: 'có tt dug luc ttieeu hết cmn knb :((',
+                badges: ['shield'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 2,
+                sender: 's178.GẤU ĐẠI VƯƠNG[M17.24].[K15][V14]',
+                tag: '',
+                content: 'Còn vài ngày nữa chơi nốt, xong chia tay ae',
+                badges: ['shield', 'swirl', 'star'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 3,
+                sender: 's160.s171-Đen.[M2.6].[K2]',
+                tag: '',
+                content: '*** mp tip ăn tt :))',
+                badges: ['spiral', 'shield'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 4,
+                sender: 's160.s171-Đen.[M2.6].[K2]',
+                tag: '',
+                content: 'mới kiếm đc 50k knb chưa quá :))',
+                badges: ['spiral', 'shield'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 5,
+                sender: 's1.Fan : Vua Bọ Cạp[M9.191].[K8][V15]',
+                tag: '[LMVD]',
+                content: '***',
+                badges: ['swirl', 'shield', 'star'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 6,
+                sender: 's180.Hiếu Hững Hờ[M6.17].[K6][V9]',
+                tag: '[LMVD]',
+                content: 'akx',
+                badges: ['shield', 'star'],
+                time: 'Vài giờ trước',
+                channel: 'lienserver'
+            },
+            {
+                id: 7,
+                sender: 's160.s171-Đen.[M2.6].[K2]',
+                tag: '',
+                content: '...',
+                badges: ['spiral', 'shield'],
+                time: '15 phút trước',
+                channel: 'lienserver'
+            }
+        ];
+
+        return {
+            success: true,
+            hornCount,
+            messages: defaultMessages
+        };
+    }
+
+    sendChat(body) {
+        const aid = Number(body.aid) || (db.users && db.users[0] ? db.users[0].aid : 1);
+        const playerData = db.getPlayerData(aid);
+        if (!playerData) return { success: false, error: 'User not found' };
+
+        const content = (body.content || '').trim();
+        if (!content) return { success: false, error: 'Nội dung tin nhắn không được để trống!' };
+
+        playerData.VatPhamTieuThu = playerData.VatPhamTieuThu || [];
+        let loaItem = playerData.VatPhamTieuThu.find(it => it.name === 'VP_LoaTruyenTin');
+        if (!loaItem) {
+            loaItem = { name: 'VP_LoaTruyenTin', quantity: 16511 };
+            playerData.VatPhamTieuThu.push(loaItem);
+        }
+
+        if (loaItem.quantity > 0) {
+            loaItem.quantity -= 1;
+        }
+
+        db.savePlayerData(aid, playerData);
+
+        const newMsg = {
+            id: Date.now(),
+            sender: (playerData.Account?.TenNhanVat || 'S171-Đen') + '.[K2]',
+            tag: '[LMVD]',
+            content,
+            badges: ['shield', 'star'],
+            time: 'Vừa xong',
+            channel: body.channel || 'lienserver'
+        };
+
+        return {
+            success: true,
+            hornCount: loaItem.quantity,
+            newMsg,
+            playerData
+        };
+    }
 }
 
 const controller = new WebApiController();
