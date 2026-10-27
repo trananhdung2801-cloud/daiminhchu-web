@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=17">
+    <link rel="stylesheet" href="/css/style.css?v=18">
 </head>
 <body>
     <div id="game-container">
@@ -509,20 +509,31 @@
                     </div>
                 </div>
 
-                <!-- Tab 7: Hoa Sơn Luận Kiếm - PvP (img_05, img_24, img_27) -->
-                <div id="tab-luankiem" class="tab-view" style="display: none;">
-                    <div class="luankiem-header-banner">
-                        <div class="luankiem-quote">"Đánh bại tất cả đối thủ để bổn môn lập luận kiếm thượng đỉnh"</div>
-                        <div class="luankiem-stats-row">
-                            <span>Thứ hạng: <b id="lk-user-rank" style="color: #ffd700;">3222</b></span>
-                            <span>Lượt: <b id="lk-remaining-fights" style="color: #86efac;">10</b></span>
-                            <span>Điểm: <b id="lk-user-points" style="color: #f59e0b;">94.185.286</b></span>
-                        </div>
-                        <div class="luankiem-subtext">Giữ vững thứ hạng này, cứ 10 phút được thưởng +900 điểm!</div>
+                <!-- Tab 7: 100% Authentic Luận Kiếm GUI Matching Original Game Screenshots -->
+                <div id="tab-luankiem" class="tab-view luankiem-authentic-view" style="display: none;">
+                    <!-- Top 2 Switcher Tabs -->
+                    <div class="lk-tab-switcher">
+                        <button id="btn-subtab-luankiem" class="lk-tab-btn active" onclick="switchLuankiemSubTab('luankiem')">
+                            <span class="lk-tab-text">Luận Kiếm</span>
+                        </button>
+                        <button id="btn-subtab-xephang" class="lk-tab-btn" onclick="switchLuankiemSubTab('xephang')">
+                            <span class="lk-tab-text">Xếp hạng</span>
+                        </button>
                     </div>
 
-                    <div style="color: #ffd700; font-size: 12px; font-weight: 900; margin: 10px 0 6px;">BẢNG VÀNG CAO THỦ LUẬN KIẾM:</div>
-                    <div id="luankiem-ranking-list" class="luankiem-list-container"></div>
+                    <!-- Subheader Description & Current Rank -->
+                    <div class="lk-info-banner">
+                        <div class="lk-quote-line">Đánh bại tất cả đối thủ để bổn môn lập luận kiếm thượng đỉnh</div>
+                        <div class="lk-rank-status-row">
+                            <div class="lk-rank-label-wrap">
+                                Thứ hạng hiện tại : <span id="lk-user-rank" class="lk-rank-val">3222</span>
+                            </div>
+                            <img src="/assets/ui/luankiem_authentic/badge_vip_v.png" class="lk-vip-v-badge" alt="VIP V"/>
+                        </div>
+                    </div>
+
+                    <!-- Ranking & Opponents List -->
+                    <div id="luankiem-ranking-list" class="lk-cards-container"></div>
                 </div>
 
                 <!-- Tab 8: Túi Đồ & Kho Vật Phẩm (img_02, img_21, img_33) -->
@@ -1620,6 +1631,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=17"></script>
+    <script src="/js/game.js?v=18"></script>
 </body>
 </html>

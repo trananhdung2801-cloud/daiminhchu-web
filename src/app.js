@@ -134,6 +134,9 @@ function handleHttpRequest(req, res) {
                 case 'get_luankiem':
                     result = webApi.getLuankiem(body);
                     break;
+                case 'claim_luankiem_reward':
+                    result = webApi.claimLuankiemReward(body);
+                    break;
                 case 'challenge_luankiem':
                     result = webApi.challengeLuankiem(body);
                     break;

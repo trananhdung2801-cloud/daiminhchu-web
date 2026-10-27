@@ -1561,40 +1561,144 @@ function renderThatTinh() {
 }
 
 // ================= HOA SƠN LUẬN KIẾM PvP (img_05, img_24, img_27) =================
+let currentLuankiemSubTab = 'luankiem';
+
+function switchLuankiemSubTab(tab) {
+    sound.play('click');
+    currentLuankiemSubTab = tab;
+    const btnLk = document.getElementById('btn-subtab-luankiem');
+    const btnXh = document.getElementById('btn-subtab-xephang');
+    if (btnLk && btnXh) {
+        if (tab === 'luankiem') {
+            btnLk.classList.add('active');
+            btnXh.classList.remove('active');
+        } else {
+            btnLk.classList.remove('active');
+            btnXh.classList.add('active');
+        }
+    }
+    renderLuankiem();
+}
+
 async function renderLuankiem() {
     showLoading('Đang tải bảng vàng Luận Kiếm...');
     try {
         const res = await apiPost('get_luankiem', { aid: getEffectiveAid() });
         hideLoading();
 
-        if (!res.success) return;
+        if (!res || !res.success) return;
 
-        document.getElementById('lk-user-rank').innerText = res.userRank;
-        document.getElementById('lk-remaining-fights').innerText = res.remainingFights;
-        document.getElementById('lk-user-points').innerText = Number(res.userPoints).toLocaleString('vi-VN');
+        const rankEl = document.getElementById('lk-user-rank');
+        if (rankEl) rankEl.innerText = res.userRank;
 
         const container = document.getElementById('luankiem-ranking-list');
+        if (!container) return;
         container.innerHTML = '';
 
-        res.rankings.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'luankiem-rank-item';
-            const topCls = item.rank === 1 ? 'top1' : item.rank === 2 ? 'top2' : item.rank === 3 ? 'top3' : '';
-            row.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="rank-badge-num ${topCls}">${item.rank}</span>
-                    <img src="${getAvatarUrl(item.leader)}" style="width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #ffd700; object-fit: cover;" onerror="this.src='/assets/res/avatar_default.png'">
-                    <div>
-                        <div style="font-size: 12px; font-weight: 900; color: #fef08a;">${item.name}</div>
-                        <div style="font-size: 10px; color: #a8a29e;">Lv.${item.level} | +${item.rewardBonus} Điểm/10p</div>
+        const userRank = Number(res.userRank) || 3222;
+        const userPoints = Number(res.userPoints) || 11730;
+
+        // If player holds Rank 1 or is in 'luankiem' tab and Rank 1:
+        if (userRank === 1 && currentLuankiemSubTab === 'luankiem') {
+            const selfCard = document.createElement('div');
+            selfCard.className = 'lk-self-card';
+            selfCard.innerHTML = `
+                <div class="lk-self-card-top">
+                    <div class="lk-self-player-name">${GameState.playerData?.Account?.TenNhanVat || 'Đại Tà Vương'}.[M12.133].[K12]</div>
+                    <div class="lk-player-meta">
+                        <span class="lk-player-level">410</span>
+                        <img src="/assets/ui/luankiem_authentic/badge_shield.png" class="lk-badge-icon" alt="Shield"/>
+                        <img src="/assets/ui/luankiem_authentic/badge_swirl.png" class="lk-badge-icon" alt="Swirl"/>
+                        <img src="/assets/ui/luankiem_authentic/badge_star.png" class="lk-badge-icon" alt="Star"/>
                     </div>
                 </div>
-                <button class="btn-wuxia-gold" style="width: 80px; height: 30px; font-size: 11px;" onclick="challengeTargetRank(${item.rank})">Khiêu Chiến</button>
+                <div class="lk-self-body-row">
+                    <div class="lk-rank-col">
+                        <span class="lk-rank-calligraphy" style="color: #1a0e07; text-shadow: 0 1px 0 rgba(255,255,255,0.4);">1</span>
+                        <span class="lk-pts-reward" style="color: #b91c1c;">+50</span>
+                    </div>
+                    <div class="lk-self-reward-info">
+                        <div class="lk-self-reward-title">Điểm Thưởng: <span class="lk-self-reward-pts">${userPoints.toLocaleString('vi-VN')}</span></div>
+                        <div class="lk-self-reward-sub">Giữ vững thứ hạng này, cứ 10 phút được thưởng 50 điểm</div>
+                    </div>
+                    <div class="lk-action-col">
+                        <button class="lk-btn-capnhat" onclick="claimLuankiemReward()" title="Cập nhật"></button>
+                    </div>
+                </div>
             `;
-            container.appendChild(row);
+            container.appendChild(selfCard);
+        }
+
+        // Render rankings list
+        const rankings = res.rankings || [];
+        rankings.forEach(item => {
+            // If userRank === 1, skip showing rank 1 again in the list
+            if (userRank === 1 && item.rank === 1 && currentLuankiemSubTab === 'luankiem') return;
+
+            const card = document.createElement('div');
+            card.className = 'lk-opponent-card';
+
+            const disciplesHtml = (item.disciples || ['NV_LenhHoXung', 'NV_DongPhuongBatBai', 'NV_TruongTamPhong']).map((code, idx) => {
+                const btNum = (item.bt && item.bt[idx]) || (idx + 1);
+                return `
+                    <div class="lk-disciple-item">
+                        <img src="/assets/images/${code}_ava_to.png" class="lk-disciple-img" onerror="this.src='/assets/images/NV_QuachTinh_ava_to.png'"/>
+                        <span class="lk-disciple-tier">${btNum}</span>
+                    </div>
+                `;
+            }).join('');
+
+            card.innerHTML = `
+                <div class="lk-card-top-row">
+                    <div class="lk-player-name">
+                        <span class="lk-server-prefix">${item.server || 'S19.'}</span>${item.name}
+                    </div>
+                    <div class="lk-player-meta">
+                        <span class="lk-player-level">${item.level}</span>
+                        <img src="/assets/ui/luankiem_authentic/badge_shield.png" class="lk-badge-icon" alt="Shield"/>
+                        <img src="/assets/ui/luankiem_authentic/badge_swirl.png" class="lk-badge-icon" alt="Swirl"/>
+                        ${item.hasStar ? '<img src="/assets/ui/luankiem_authentic/badge_star.png" class="lk-badge-icon" alt="Star"/>' : ''}
+                    </div>
+                </div>
+                <div class="lk-card-body-row">
+                    <div class="lk-rank-col">
+                        <span class="lk-rank-calligraphy">${item.rank}</span>
+                        <span class="lk-pts-reward">+${item.rewardBonus}</span>
+                    </div>
+                    <div class="lk-disciples-col">
+                        ${disciplesHtml}
+                    </div>
+                    <div class="lk-action-col">
+                        <button class="lk-btn-doihinh" onclick="challengeTargetRank(${item.rank})" title="Đội Hình"></button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
         });
     } catch (e) {
         hideLoading();
+        console.error('renderLuankiem error:', e);
+    }
+}
+
+async function claimLuankiemReward() {
+    sound.play('click');
+    showLoading('Đang cập nhật thứ hạng...');
+    try {
+        const res = await apiPost('claim_luankiem_reward', { aid: getEffectiveAid() });
+        hideLoading();
+        if (res.success) {
+            sound.play('trangbi');
+            GameState.playerData = res.playerData;
+            updateHeader();
+            renderLuankiem();
+            alert(res.message || 'Cập nhật thứ hạng thành công!');
+        } else {
+            alert(res.error || 'Cập nhật thất bại!');
+        }
+    } catch (e) {
+        hideLoading();
+        alert('Lỗi kết nối máy chủ!');
     }
 }
 
