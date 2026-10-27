@@ -3151,7 +3151,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 // ================= 100% AUTHENTIC DÀN TRẬN SUB-MODES & HẬU CUNG =================
-let currentDantranMode = 'tran1';
 
 const AUTHENTIC_HAUCUNG_BEAUTIES = [
     { code: 'NV_Achau', name: 'A Châu', tier: 11 },
