@@ -5809,3 +5809,104 @@ img {
 .title-switch-acc-link:hover {
     color: #ffd700;
 }
+
+/* ================= 100% AUTHENTIC THƯỞNG TIÊU (TÍCH LŨY TIÊU) GUI (media_1793066770174_4d94b8e6.jpg) ================= */
+#kyngo-view-thuongtieu {
+    position: relative;
+    width: 100%;
+    max-width: 498px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    flex: 1;
+}
+
+.tlt-timer-banner {
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.tlt-timer-text {
+    color: #fff9e6;
+    font-size: 13px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #000;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.tlt-milestone-slots {
+    position: absolute;
+    left: 2%;
+    width: 96%;
+    height: 16.5%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 6;
+}
+
+.tlt-slots-tier1 {
+    top: 32.5%;
+}
+
+.tlt-slots-tier2 {
+    top: 63.5%;
+}
+
+.tlt-slot {
+    width: 18%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tlt-slot:hover,
+.tlt-slot:active {
+    background: rgba(255, 215, 0, 0.22);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    transform: scale(1.05);
+}
+
+.tlt-spent-counter {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.tlt-spent-label {
+    color: #fff9e6;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px #000, 0 0 4px #000;
+}
+
+.tlt-knb-icon {
+    width: 22px;
+    height: 17px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px #000);
+}
+
+.tlt-spent-val {
+    color: #ffd700;
+    font-size: 15px;
+    font-weight: 900;
+    text-shadow: 1px 1px 3px #000, 0 0 6px #ff9800;
+}
