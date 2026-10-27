@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=36">
+    <link rel="stylesheet" href="/css/style.css?v=37">
 </head>
 <body>
     <div id="game-container">
@@ -300,6 +300,14 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                                                <!-- Bottom Floating Ám Khí & Chân Khí Orbs (media_1793093318687_911dce52.jpg) -->
+                        <div class="dt-amkhi-slot-floating" onclick="openAmKhiModal()" title="Ám Khí">
+                            <img src="/assets/ui/amkhi_authentic/clean_slot_am_khi_dantran.png" alt="Ám Khí" />
+                        </div>
+                        <div class="dt-chankhi-slot-floating" onclick="openChanKhiModal()" title="Chân Khí">
+                            <img src="/assets/ui/dantran_authentic/orb_chankhi.png" alt="Chân Khí" />
                         </div>
 
                         <!-- Right Column 4 Slots -->
@@ -2038,21 +2046,73 @@
         </div>
     </div>
 
-    <!-- ================= MODAL ÁM KHÍ ================= -->
+    <!-- ================= 100% AUTHENTIC MODAL ÁM KHÍ (media_1793093318687_911dce52.jpg) ================= -->
     <div id="amkhi-modal" class="modal-overlay">
-        <div class="wuxia-dialog anim-zoom-enter" style="max-width: 440px;">
-            <div class="dialog-header-bar">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <img src="/assets/ui/home_authentic/icon_amkhi.png" style="width: 28px; height: 28px; object-fit: contain;">
-                    <span class="dialog-title">ÁM KHÍ ĐƯỜNG MÔN</span>
+        <div class="amkhi-dialog-card">
+            <div class="amkhi-modal-header">
+                <span class="amkhi-title-calligraphy">Ám khí</span>
+                <div class="amkhi-close-btn" onclick="closeAmKhiModal()" title="Đóng">
+                    <img src="/assets/ui/chankhi_authentic/btn_close_x.png" alt="Close" />
                 </div>
-                <img src="/assets/res/sh_close.png" class="btn-dialog-close" onclick="closeAmKhiModal()" alt="Đóng">
             </div>
-            <div class="dialog-body-scroll" style="text-align: center;">
-                <img src="/assets/ui/AmKhi_1.png" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 8px;">
-                <h3 style="color: #ffd700; font-size: 14px;">Bạo Vũ Lê Hoa Châm</h3>
-                <p style="font-size: 11px; color: #fed7aa; margin: 4px 0 12px;">Xuất kỳ bất ý, bắn độc châm gây sát thương toàn thể phe địch!</p>
-                <button class="btn-wuxia-gold" style="width: 160px; height: 36px; font-size: 11px;" onclick="alert('Đã trang bị Ám Khí xuất trận!')">TRANG BỊ ÁM KHÍ</button>
+            
+            <div class="amkhi-body-content">
+                <!-- Top Showcase (Medallion & Element) -->
+                <div class="amkhi-showcase-row">
+                    <div class="amkhi-medallion-box">
+                        <img id="ak-modal-medallion-img" src="/assets/ui/amkhi_authentic/clean_medallion_am_phong.png" alt="Ám Phong" />
+                    </div>
+                    <div class="amkhi-meta-info">
+                        <div id="ak-modal-name" class="amkhi-name-text">Ám Phong</div>
+                        <div id="ak-modal-element" class="amkhi-element-badge">Kim</div>
+                    </div>
+                </div>
+
+                <!-- Trait / Effect Banner -->
+                <div class="amkhi-trait-box" id="ak-modal-trait">
+                    Đạt <span class="amkhi-highlight-red">10k THỦ</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 1 cấp võ công, <span class="amkhi-highlight-red">20k THỦ</span> tăng 2 cấp võ công. <span class="amkhi-highlight-yellow">Lượt đầu bị tấn công có 80% né thường và đả thể. Sau khi né, tăng 50% xác suất ra chưởng</span>
+                </div>
+
+                <!-- Plaque Shelf "Chỉ số cơ bản" -->
+                <div class="amkhi-plaque-bar">
+                    <span class="amkhi-plaque-title">Chỉ số cơ bản</span>
+                </div>
+
+                <!-- 4 Main Stats Grid (2x2) -->
+                <div class="amkhi-stats-grid-box">
+                    <div class="amkhi-stat-col-item">
+                        <span class="km-stat-icon-circle">🩸</span>
+                        <span id="ak-stat-hp">1006855</span>
+                    </div>
+                    <div class="amkhi-stat-col-item">
+                        <span class="km-stat-icon-circle">⚔️</span>
+                        <span id="ak-stat-atk">1675</span>
+                    </div>
+                    <div class="amkhi-stat-col-item">
+                        <span class="km-stat-icon-circle">🛡️</span>
+                        <span id="ak-stat-def">20020</span>
+                    </div>
+                    <div class="amkhi-stat-col-item">
+                        <span class="km-stat-icon-circle">🌀</span>
+                        <span id="ak-stat-int">2350</span>
+                    </div>
+                </div>
+
+                <!-- 4 Action Buttons 2x2 -->
+                <div class="amkhi-buttons-grid">
+                    <div class="amkhi-btn-wrap" onclick="doAmKhiAction('doi')" title="Đổi ám khí">
+                        <img src="/assets/ui/amkhi_authentic/clean_btn_doi_am_khi.png" alt="Đổi ám khí" />
+                    </div>
+                    <div class="amkhi-btn-wrap" onclick="doAmKhiAction('luyen')" title="Luyện khí">
+                        <img src="/assets/ui/amkhi_authentic/clean_btn_luyen_khi.png" alt="Luyện khí" />
+                    </div>
+                    <div class="amkhi-btn-wrap" onclick="doAmKhiAction('boiduong')" title="Bồi dưỡng">
+                        <img src="/assets/ui/amkhi_authentic/clean_btn_boi_duong.png" alt="Bồi dưỡng" />
+                    </div>
+                    <div class="amkhi-btn-wrap" onclick="doAmKhiAction('thang')" title="Thăng khí">
+                        <img src="/assets/ui/amkhi_authentic/clean_btn_thang_khi.png" alt="Thăng khí" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2529,6 +2589,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=36"></script>
+    <script src="/js/game.js?v=37"></script>
 </body>
 </html>

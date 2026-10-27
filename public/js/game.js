@@ -5483,3 +5483,120 @@ function doBossAction(action) {
         alert(`🏆 TRẤN ÁP THÀNH CÔNG!\nTriệu Công Tử đã quy phục chưởng môn!\n\nPhần thưởng:\n• Bạc: +120.000\n• Kinh Nghiệm: +25.000\n• Hàn Thiết Châm x1\nBoss đã thăng lên Cấp ${currentBossLevel}!`);
     }
 }
+
+// ================= 100% AUTHENTIC ÁM KHÍ SYSTEM (media_1793093318687_911dce52.jpg) =================
+let currentAmKhiIndex = 0;
+
+const NGU_HANH_AMKHI_LIST = [
+    {
+        name: 'Ám Phong',
+        element: 'Kim',
+        medallion: '/assets/ui/amkhi_authentic/clean_medallion_am_phong.png',
+        trait: 'Đạt <span class="amkhi-highlight-red">10k THỦ</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 1 cấp võ công, <span class="amkhi-highlight-red">20k THỦ</span> tăng 2 cấp võ công. <span class="amkhi-highlight-yellow">Lượt đầu bị tấn công có 80% né thường và đả thể. Sau khi né, tăng 50% xác suất ra chưởng</span>',
+        hp: 1006855,
+        atk: 1675,
+        def: 20020,
+        intVal: 2350
+    },
+    {
+        name: 'Thanh Mộc',
+        element: 'Mộc',
+        medallion: '/assets/ui/amkhi_authentic/clean_medallion_am_phong.png',
+        trait: 'Đạt <span class="amkhi-highlight-red">10k MÁU</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 1 cấp võ công. <span class="amkhi-highlight-yellow">Khi máu dưới 30%, kích hoạt Sinh Mộc Hồi Xuân hồi phục 25% sinh lực tối đa</span>',
+        hp: 1150000,
+        atk: 1520,
+        def: 22100,
+        intVal: 2100
+    },
+    {
+        name: 'Hàn Băng',
+        element: 'Thủy',
+        medallion: '/assets/ui/amkhi_authentic/clean_medallion_am_phong.png',
+        trait: 'Đạt <span class="amkhi-highlight-red">10k NỘI</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 1 cấp võ công. <span class="amkhi-highlight-yellow">Đòn đánh thường có 40% đóng băng phong bế nộ khí đối thủ trong 1 hiệp</span>',
+        hp: 980000,
+        atk: 1850,
+        def: 19500,
+        intVal: 2600
+    },
+    {
+        name: 'Liệt Hỏa',
+        element: 'Hỏa',
+        medallion: '/assets/ui/amkhi_authentic/clean_medallion_am_phong.png',
+        trait: 'Đạt <span class="amkhi-highlight-red">10k CÔNG</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 1 cấp võ công. <span class="amkhi-highlight-yellow">Gia tăng 35% Bạo kích và 50% Sát thương bạo kích cho tất cả đệ tử xuất trận</span>',
+        hp: 920000,
+        atk: 2200,
+        def: 18000,
+        intVal: 2800
+    },
+    {
+        name: 'Huyền Thổ',
+        element: 'Thổ',
+        medallion: '/assets/ui/amkhi_authentic/clean_medallion_am_phong.png',
+        trait: 'Đạt <span class="amkhi-highlight-red">15k THỦ</span> của 5 ám khí <span class="amkhi-highlight-yellow">NGŨ HÀNH</span> tăng 2 cấp võ công. <span class="amkhi-highlight-yellow">Hấp thụ 30% sát thương nhận vào chuyển hóa thành hộ thuẫn phòng thủ kiên cố</span>',
+        hp: 1250000,
+        atk: 1400,
+        def: 25000,
+        intVal: 1900
+    }
+];
+
+function renderAmKhiData() {
+    const ak = NGU_HANH_AMKHI_LIST[currentAmKhiIndex];
+    if (!ak) return;
+
+    const nameEl = document.getElementById('ak-modal-name');
+    if (nameEl) nameEl.textContent = ak.name;
+
+    const elemEl = document.getElementById('ak-modal-element');
+    if (elemEl) elemEl.textContent = ak.element;
+
+    const traitEl = document.getElementById('ak-modal-trait');
+    if (traitEl) traitEl.innerHTML = ak.trait;
+
+    const hpEl = document.getElementById('ak-stat-hp');
+    if (hpEl) hpEl.textContent = ak.hp;
+
+    const atkEl = document.getElementById('ak-stat-atk');
+    if (atkEl) atkEl.textContent = ak.atk;
+
+    const defEl = document.getElementById('ak-stat-def');
+    if (defEl) defEl.textContent = ak.def;
+
+    const intEl = document.getElementById('ak-stat-int');
+    if (intEl) intEl.textContent = ak.intVal;
+}
+
+// Override openAmKhiModal to render authentic data
+const _origOpenAmKhiModal = openAmKhiModal;
+openAmKhiModal = function() {
+    sound.play('click');
+    const modal = document.getElementById('amkhi-modal');
+    if (modal) {
+        modal.classList.add('active');
+        renderAmKhiData();
+    }
+};
+
+function doAmKhiAction(action) {
+    const ak = NGU_HANH_AMKHI_LIST[currentAmKhiIndex];
+    if (action === 'doi') {
+        sound.play('equip');
+        currentAmKhiIndex = (currentAmKhiIndex + 1) % NGU_HANH_AMKHI_LIST.length;
+        renderAmKhiData();
+        alert(`✨ Chúc mừng! Đã chuyển đổi sang Ám Khí [${NGU_HANH_AMKHI_LIST[currentAmKhiIndex].name}] - Hệ [${NGU_HANH_AMKHI_LIST[currentAmKhiIndex].element}]!`);
+    } else if (action === 'luyen') {
+        sound.play('renxong');
+        ak.hp = Math.floor(ak.hp * 1.05);
+        ak.atk = Math.floor(ak.atk * 1.05);
+        ak.def = Math.floor(ak.def * 1.05);
+        ak.intVal = Math.floor(ak.intVal * 1.05);
+        renderAmKhiData();
+        alert(`🔥 Luyện Khí thành công! Tất cả chỉ số cơ bản của [${ak.name}] đã gia tăng 5%!`);
+    } else if (action === 'boiduong') {
+        sound.play('levelup');
+        alert(`🌿 Bồi Dưỡng thành công! Tăng thêm 5% xác suất kích hoạt né đòn và xuất chiêu phản kích của [${ak.name}]!`);
+    } else if (action === 'thang') {
+        sound.play('renxong');
+        alert(`🌟 Thăng Khí thành công! Ám Khí [${ak.name}] đã đột phá cảnh giới và thăng thêm 1 Sao uy lực!`);
+    }
+}
