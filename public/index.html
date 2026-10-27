@@ -306,6 +306,9 @@
                         <div class="dt-amkhi-slot-floating" onclick="openAmKhiModal()" title="Ám Khí">
                             <img src="/assets/ui/amkhi_authentic/clean_slot_am_khi_dantran.png" alt="Ám Khí" />
                         </div>
+                        <div class="dt-thankhi-slot-floating" onclick="openThanKhiModal()" title="Thần Khí (Lưỡng Nghi Thần Khí)">
+                            <img src="/assets/ui/thankhi_authentic/slot_than_khi_round.png" alt="Thần Khí" />
+                        </div>
                         <div class="dt-chankhi-slot-floating" onclick="openChanKhiModal()" title="Chân Khí">
                             <img src="/assets/ui/dantran_authentic/orb_chankhi.png" alt="Chân Khí" />
                         </div>
@@ -2755,6 +2758,147 @@
             </div>
         </div>
 
+        <!-- ================= MODAL: THÔNG TIN TRANG BỊ (THẦN KHÍ) ================= -->
+        <div id="modal-thankhi-info" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content tk-info-modal-content">
+                <div class="tk-modal-wood-header">
+                    <span class="tk-header-title">Thông tin trang bị</span>
+                    <button class="tk-modal-close-x" onclick="closeThanKhiModal()">
+                        <img src="/assets/ui/thankhi_authentic/btn_close_x.png" alt="Close"/>
+                    </button>
+                </div>
+                <div class="tk-info-body-grid">
+                    <!-- Left: Scroll with divine artifact -->
+                    <div class="tk-scroll-wrap">
+                        <img src="/assets/ui/thankhi_authentic/scroll_luong_nghi_than_khi.png" class="tk-scroll-bg" alt="Lưỡng Nghi Thần Khí"/>
+                        
+                        <div class="tk-stat-overlay">
+                            <div class="tk-stat-row">
+                                <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                                <img src="/assets/ui/icon_stat_palm.png" class="tk-stat-icon" alt="Thủ"/>
+                                <span class="tk-stat-num" id="tk-info-stat-def">2450</span>
+                            </div>
+                            <div class="tk-stat-row">
+                                <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                                <img src="/assets/ui/icon_stat_blood.png" class="tk-stat-icon" alt="Khí huyết"/>
+                                <span class="tk-stat-num" id="tk-info-stat-hp">4208</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Description and options -->
+                    <div class="tk-desc-column">
+                        <div class="tk-desc-box">
+                            Thần vật thượng cổ, có thể xoay chuyển càn khôn, gia tăng 2 loại thuộc tính ngẫu nhiên cho kẻ mang nó trên người.
+                        </div>
+                        <div class="tk-actions-sub">
+                            <button class="tk-btn-fshare" onclick="doThanKhiShare()" title="Chia sẻ Facebook">
+                                <img src="/assets/ui/thankhi_authentic/btn_fshare.png" alt="Share"/>
+                            </button>
+                            <button class="tk-btn-open-eppham" onclick="openThanKhiEpPhamScreen()" title="Ép phẩm Thần Khí">
+                                ⚡ Ép Phẩm Thần Khí
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Action Row -->
+                <div class="tk-info-footer-row">
+                    <button class="tk-btn-action" onclick="openThanKhiInventory()" title="Đổi trang bị">
+                        <img src="/assets/ui/thankhi_authentic/btn_doi_trang_bi.png" alt="Đổi trang bị"/>
+                    </button>
+                    <div class="tk-cuonghoa-wrap">
+                        <button class="tk-btn-action" onclick="doThanKhiCuongHoa()" title="Cường hóa">
+                            <img src="/assets/ui/thankhi_authentic/btn_cuong_hoa.png" alt="Cường hóa"/>
+                        </button>
+                        <div class="tk-cuonghoa-hint" id="tk-cuonghoa-hint">Cấp độ môn phái không đủ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: ÉP PHẨM THẦN KHÍ ================= -->
+        <div id="screen-thankhi-eppham" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content tk-eppham-modal-content">
+                <!-- Top Navigation -->
+                <div class="tk-ep-header-row">
+                    <div class="tk-ep-tab-title">Ép phẩm</div>
+                    <div class="tk-ep-header-actions">
+                        <button class="tk-ep-top-btn" onclick="openThanKhiHelp()">
+                            <img src="/assets/ui/thankhi_authentic/btn_huong_dan.png" alt="Hướng dẫn"/>
+                        </button>
+                        <button class="tk-ep-top-btn" onclick="closeThanKhiEpPhamScreen()">
+                            <img src="/assets/ui/thankhi_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tk-ep-body-card">
+                    <!-- Artifact Overview -->
+                    <div class="tk-ep-meta-row">
+                        <img src="/assets/ui/thankhi_authentic/icon_luong_nghi_square.png" class="tk-ep-art-icon" alt="Lưỡng Nghi"/>
+                        <div class="tk-ep-meta-info">
+                            <div class="tk-ep-name-row">
+                                <span class="tk-ep-artifact-name">Lưỡng Nghi Thần Khí</span>
+                                <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                            </div>
+                            <div class="tk-ep-lvl-row">Cấp độ: <span id="tk-ep-card-lvl">1</span></div>
+                        </div>
+                        <div class="tk-ep-preview-stats">
+                            <div class="tk-ep-pstat">
+                                <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                                <img src="/assets/ui/icon_stat_sword.png" class="tk-stat-icon" alt="Công"/>
+                                <span id="tk-preview-stat1">320</span>
+                            </div>
+                            <div class="tk-ep-pstat">
+                                <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                                <img src="/assets/ui/icon_stat_palm.png" class="tk-stat-icon" alt="Thủ"/>
+                                <span id="tk-preview-stat2">432</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bamboo Slat Attribute Rows -->
+                    <div class="tk-ep-slat-row" id="tk-slat-row-1">
+                        <div class="tk-slat-stat-left">
+                            <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                            <img src="/assets/ui/icon_stat_sword.png" class="tk-stat-icon" id="tk-slat-icon-1" alt="Công"/>
+                            <span class="tk-slat-val" id="tk-slat-val-1">320</span>
+                        </div>
+                        <div class="tk-slat-lock-right" onclick="toggleLockThanKhiSlot(1)">
+                            <div class="tk-lock-radio" id="tk-lock-radio-1"></div>
+                            <span class="tk-lock-label">Cố định</span>
+                            <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" class="tk-knb-mini" alt="Vàng"/>
+                            <span class="tk-lock-cost">20</span>
+                        </div>
+                    </div>
+
+                    <div class="tk-ep-slat-row" id="tk-slat-row-2">
+                        <div class="tk-slat-stat-left">
+                            <img src="/assets/ui/thankhi_authentic/badge_kim.png" class="tk-badge-kim" alt="Kim"/>
+                            <img src="/assets/ui/icon_stat_palm.png" class="tk-stat-icon" id="tk-slat-icon-2" alt="Thủ"/>
+                            <span class="tk-slat-val" id="tk-slat-val-2">432</span>
+                        </div>
+                        <div class="tk-slat-lock-right" onclick="toggleLockThanKhiSlot(2)">
+                            <div class="tk-lock-radio" id="tk-lock-radio-2"></div>
+                            <span class="tk-lock-label">Cố định</span>
+                            <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" class="tk-knb-mini" alt="Vàng"/>
+                            <span class="tk-lock-cost">20</span>
+                        </div>
+                    </div>
+
+                    <!-- 2 Action Buttons -->
+                    <div class="tk-ep-actions-row">
+                        <button class="tk-btn-ep-action" onclick="doThanKhiEpPham('thuong')" title="Ép thường (2.000.000 Bạc)">
+                            <img src="/assets/ui/thankhi_authentic/btn_ep_thuong.png" alt="Ép thường"/>
+                        </button>
+                        <button class="tk-btn-ep-action" onclick="doThanKhiEpPham('caocap')" title="Ép cao cấp (50 Vàng)">
+                            <img src="/assets/ui/thankhi_authentic/btn_ep_cao_cap.png" alt="Ép cao cấp"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
         <div id="modal-bongda-bet" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content bd-bet-modal-content">
@@ -2857,6 +3001,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=41"></script>
+    <script src="/js/game.js?v=42"></script>
 </body>
 </html>

@@ -10749,3 +10749,422 @@ img {
     text-align: center;
     margin-top: 10px;
 }
+
+
+/* ================= 100% AUTHENTIC THẦN KHÍ SYSTEM (media_1793097679825_6e27c42b.jpg & media_1793097700309_530ba1b7.jpg) ================= */
+.dt-thankhi-slot-floating {
+    position: absolute;
+    bottom: 120px;
+    left: 8px;
+    width: 54px;
+    height: 54px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.dt-thankhi-slot-floating:hover {
+    transform: scale(1.08);
+}
+
+.dt-thankhi-slot-floating:active {
+    transform: scale(0.92);
+}
+
+.dt-thankhi-slot-floating img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Modal Thông Tin Trang Bị (Thần Khí) */
+.tk-info-modal-content {
+    max-width: 460px;
+    background: #2a1810 url('/assets/ui/bg_modal_wood.png') center/cover;
+    border: 3px solid #8d6e63;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.95);
+    padding: 12px;
+    color: #fff;
+}
+
+.tk-modal-wood-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #5d4037;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.tk-header-title {
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.tk-modal-close-x {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.tk-modal-close-x img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tk-info-body-grid {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.tk-scroll-wrap {
+    position: relative;
+    width: 220px;
+    height: 330px;
+    flex-shrink: 0;
+}
+
+.tk-scroll-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.tk-stat-overlay {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tk-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.tk-badge-kim {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.tk-stat-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.tk-stat-num {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.tk-desc-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tk-desc-box {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid #5d4037;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #ffecb3;
+}
+
+.tk-actions-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tk-btn-fshare {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    align-self: flex-start;
+}
+
+.tk-btn-fshare img {
+    height: 34px;
+    object-fit: contain;
+}
+
+.tk-btn-open-eppham {
+    background: linear-gradient(180deg, #ff9800, #e65100);
+    border: 1.5px solid #ffd54f;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 8px 12px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.5);
+    transition: all 0.15s ease;
+}
+
+.tk-btn-open-eppham:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+.tk-info-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    border-top: 1px solid #5d4037;
+    padding-top: 12px;
+}
+
+.tk-btn-action {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s ease;
+}
+
+.tk-btn-action:hover {
+    transform: scale(1.04);
+}
+
+.tk-btn-action:active {
+    transform: scale(0.96);
+}
+
+.tk-btn-action img {
+    height: 52px;
+    object-fit: contain;
+}
+
+.tk-cuonghoa-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tk-cuonghoa-hint {
+    color: #e53935;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+/* Screen Ép Phẩm Thần Khí */
+.tk-eppham-modal-content {
+    max-width: 460px;
+    background: #3e2723 url('/assets/ui/thankhi_authentic/screen_ep_pham_full.png') center/cover;
+    border: 3px solid #8d6e63;
+    border-radius: 12px;
+    box-shadow: 0 0 35px rgba(0,0,0,0.95);
+    padding: 14px;
+    color: #fff;
+}
+
+.tk-ep-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.tk-ep-tab-title {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 6px 16px;
+    border-radius: 6px;
+}
+
+.tk-ep-header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.tk-ep-top-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.tk-ep-top-btn img {
+    height: 36px;
+    object-fit: contain;
+}
+
+.tk-ep-body-card {
+    background: rgba(46, 26, 17, 0.85);
+    border: 2px solid #6d4c41;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.tk-ep-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.tk-ep-art-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.tk-ep-meta-info {
+    flex: 1;
+}
+
+.tk-ep-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffd700;
+}
+
+.tk-ep-lvl-row {
+    color: #d7ccc8;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.tk-ep-preview-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tk-ep-pstat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.tk-ep-slat-row {
+    background: url('/assets/ui/thankhi_authentic/slat_stat_bg.png') center/cover;
+    height: 52px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    margin-bottom: 12px;
+    border: 1px solid #5d4037;
+}
+
+.tk-slat-stat-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.tk-slat-lock-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid #8d6e63;
+}
+
+.tk-lock-radio {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #b0bec5;
+    background: #37474f;
+    transition: all 0.15s ease;
+}
+
+.tk-lock-radio.locked {
+    border-color: #ffd700;
+    background: #ff9800;
+    box-shadow: 0 0 6px #ffeb3b;
+}
+
+.tk-lock-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffecb3;
+}
+
+.tk-knb-mini {
+    width: 16px;
+    height: 12px;
+    object-fit: contain;
+}
+
+.tk-lock-cost {
+    font-size: 12px;
+    color: #ffd700;
+    font-weight: 800;
+}
+
+.tk-ep-actions-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 18px;
+}
+
+.tk-btn-ep-action {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s ease;
+}
+
+.tk-btn-ep-action:hover {
+    transform: scale(1.05);
+}
+
+.tk-btn-ep-action:active {
+    transform: scale(0.95);
+}
+
+.tk-btn-ep-action img {
+    height: 60px;
+    object-fit: contain;
+}

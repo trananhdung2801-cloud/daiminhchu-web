@@ -6282,3 +6282,187 @@ function closeTamBaoBXH() {
     const modal = document.getElementById('modal-tambao-bxh');
     if (modal) modal.style.display = 'none';
 }
+
+
+// ================= 100% AUTHENTIC THẦN KHÍ SYSTEM (media_1793097679825_6e27c42b.jpg & media_1793097700309_530ba1b7.jpg) =================
+let thanKhiData = {
+    name: 'Lưỡng Nghi Thần Khí',
+    level: 99,
+    statDef: 2450,
+    statHp: 4208,
+    statAtk: 320,
+    lockSlot1: false,
+    lockSlot2: false
+};
+
+function openThanKhiModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-thankhi-info');
+    if (!modal) return;
+    
+    if (GameState.playerData && GameState.playerData.thanKhi) {
+        thanKhiData = Object.assign(thanKhiData, GameState.playerData.thanKhi);
+    }
+    
+    const defEl = document.getElementById('tk-info-stat-def');
+    const hpEl = document.getElementById('tk-info-stat-hp');
+    if (defEl) defEl.textContent = thanKhiData.statDef;
+    if (hpEl) hpEl.textContent = thanKhiData.statHp;
+    
+    modal.style.display = 'flex';
+}
+
+function closeThanKhiModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-thankhi-info');
+    if (modal) modal.style.display = 'none';
+}
+
+function openThanKhiEpPhamScreen() {
+    sound.play('click');
+    closeThanKhiModal();
+    const screen = document.getElementById('screen-thankhi-eppham');
+    if (!screen) return;
+    
+    updateThanKhiEpPhamUI();
+    screen.style.display = 'flex';
+}
+
+function closeThanKhiEpPhamScreen() {
+    sound.play('click');
+    const screen = document.getElementById('screen-thankhi-eppham');
+    if (screen) screen.style.display = 'none';
+    openThanKhiModal();
+}
+
+function updateThanKhiEpPhamUI() {
+    const cardLvlEl = document.getElementById('tk-ep-card-lvl');
+    const stat1El = document.getElementById('tk-preview-stat1');
+    const stat2El = document.getElementById('tk-preview-stat2');
+    const slatVal1El = document.getElementById('tk-slat-val-1');
+    const slatVal2El = document.getElementById('tk-slat-val-2');
+    
+    if (cardLvlEl) cardLvlEl.textContent = thanKhiData.level >= 99 ? 1 : thanKhiData.level;
+    if (stat1El) stat1El.textContent = thanKhiData.statAtk;
+    if (stat2El) stat2El.textContent = thanKhiData.statDef;
+    if (slatVal1El) slatVal1El.textContent = thanKhiData.statAtk;
+    if (slatVal2El) slatVal2El.textContent = thanKhiData.statDef;
+    
+    const r1 = document.getElementById('tk-lock-radio-1');
+    const r2 = document.getElementById('tk-lock-radio-2');
+    if (r1) {
+        if (thanKhiData.lockSlot1) r1.classList.add('locked');
+        else r1.classList.remove('locked');
+    }
+    if (r2) {
+        if (thanKhiData.lockSlot2) r2.classList.add('locked');
+        else r2.classList.remove('locked');
+    }
+}
+
+function toggleLockThanKhiSlot(slot) {
+    sound.play('click');
+    if (slot === 1) {
+        thanKhiData.lockSlot1 = !thanKhiData.lockSlot1;
+    } else if (slot === 2) {
+        thanKhiData.lockSlot2 = !thanKhiData.lockSlot2;
+    }
+    updateThanKhiEpPhamUI();
+}
+
+function doThanKhiEpPham(type) {
+    sound.play('click');
+    if (!GameState.playerData || !GameState.playerData.Account) return;
+    
+    let lockCount = (thanKhiData.lockSlot1 ? 1 : 0) + (thanKhiData.lockSlot2 ? 1 : 0);
+    let lockGoldCost = lockCount * 20;
+    
+    let baseSilver = type === 'thuong' ? 2000000 : 0;
+    let baseGold = type === 'caocap' ? 50 : 0;
+    let totalGold = baseGold + lockGoldCost;
+    
+    const curSilver = GameState.playerData.Account.Bac || 0;
+    const curGold = GameState.playerData.Account.Vang || 0;
+    
+    if (curSilver < baseSilver) {
+        alert(`❌ [KHÔNG ĐỦ NGÂN LƯỢNG] ❌\nCần ${baseSilver.toLocaleString('vi-VN')} Bạc để ép phẩm thường!\nHiện tại chỉ có: ${curSilver.toLocaleString('vi-VN')} Bạc.`);
+        return;
+    }
+    if (curGold < totalGold) {
+        alert(`❌ [KHÔNG ĐỦ VÀNG] ❌\nCần ${totalGold} Vàng (phí ép + ${lockGoldCost} Vàng khóa dòng)!\nHiện tại chỉ có: ${curGold} Vàng.`);
+        return;
+    }
+    
+    // Deduct
+    GameState.playerData.Account.Bac -= baseSilver;
+    GameState.playerData.Account.Vang -= totalGold;
+    
+    // Re-roll unlocked attributes
+    if (!thanKhiData.lockSlot1) {
+        const minVal = type === 'caocap' ? 350 : 280;
+        const maxVal = type === 'caocap' ? 650 : 480;
+        thanKhiData.statAtk = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+    }
+    if (!thanKhiData.lockSlot2) {
+        const minVal = type === 'caocap' ? 450 : 380;
+        const maxVal = type === 'caocap' ? 800 : 580;
+        thanKhiData.statDef = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+    }
+    
+    if (!GameState.playerData.thanKhi) GameState.playerData.thanKhi = {};
+    Object.assign(GameState.playerData.thanKhi, thanKhiData);
+    
+    saveGameState();
+    updateHeader();
+    updateThanKhiEpPhamUI();
+    sound.play('victory');
+    
+    alert(`✨ [ÉP PHẨM THẦN KHÍ THÀNH CÔNG] ✨\nĐã tẩy luyện thuộc tính Lưỡng Nghi Thần Khí:\n⚔️ Công kích: ${thanKhiData.statAtk}\n🛡️ Phòng ngự: ${thanKhiData.statDef}`);
+}
+
+function doThanKhiCuongHoa() {
+    sound.play('click');
+    if (!GameState.playerData || !GameState.playerData.Account) return;
+    
+    const costSilver = 2545200;
+    const curSilver = GameState.playerData.Account.Bac || 0;
+    
+    if (curSilver < costSilver) {
+        alert(`❌ [CẤP ĐỘ MÔN PHÁI HOẶC BẠC KHÔNG ĐỦ] ❌\nCần ${costSilver.toLocaleString('vi-VN')} Bạc để cường hóa cấp kế tiếp.\nHiện có: ${curSilver.toLocaleString('vi-VN')} Bạc.`);
+        return;
+    }
+    
+    GameState.playerData.Account.Bac -= costSilver;
+    thanKhiData.level = (thanKhiData.level || 99) + 1;
+    thanKhiData.statDef += 50;
+    thanKhiData.statHp += 80;
+    
+    if (!GameState.playerData.thanKhi) GameState.playerData.thanKhi = {};
+    Object.assign(GameState.playerData.thanKhi, thanKhiData);
+    
+    saveGameState();
+    updateHeader();
+    
+    const defEl = document.getElementById('tk-info-stat-def');
+    const hpEl = document.getElementById('tk-info-stat-hp');
+    if (defEl) defEl.textContent = thanKhiData.statDef;
+    if (hpEl) hpEl.textContent = thanKhiData.statHp;
+    
+    sound.play('victory');
+    alert(`🎉 [CƯỜNG HÓA THÀNH CÔNG] 🎉\nLưỡng Nghi Thần Khí đã thăng lên Cấp ${thanKhiData.level}!\n🛡️ Phòng thủ: +50\n🩸 Khí huyết: +80`);
+}
+
+function doThanKhiShare() {
+    sound.play('click');
+    alert(`📢 [CHIA SẺ THẦN KHÍ] 📢\nĐã sao chép liên kết khoe Lưỡng Nghi Thần Khí phẩm Kim lên Facebook!`);
+}
+
+function openThanKhiHelp() {
+    sound.play('click');
+    alert(`📜 [HƯỚNG DẪN ÉP PHẨM THẦN KHÍ] 📜\n1. Thần khí có 2 dòng thuộc tính ngẫu nhiên gia tăng sức mạnh cho toàn đội hình.\n2. Chưởng môn có thể dùng Bạc hoặc Vàng để tẩy luyện (ép phẩm) lại các chỉ số này.\n3. Khi xuất hiện thuộc tính ưng ý, có thể bấm "Cố định" (tốn 20 Vàng) để khóa dòng đó lại khi ép tiếp!`);
+}
+
+function openThanKhiInventory() {
+    sound.play('click');
+    alert(`🎒 [KHO THẦN KHÍ] 🎒\nHiện tại Chưởng Môn đang mang thần khí mạnh nhất: [Lưỡng Nghi Thần Khí] phẩm Kim Hoàng Gia.`);
+}
