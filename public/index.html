@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20">
+    <link rel="stylesheet" href="/css/style.css?v=21">
 </head>
 <body>
     <div id="game-container">
@@ -425,136 +425,37 @@
                     <div id="luyencong-container" class="disciple-scroll-list"></div>
                 </div>
 
-                <!-- Tab 5: Kỳ Ngộ (Ăn Gà, Kho Báu, Chiêu Mộ - img_04, img_18, img_22) -->
-                <div id="tab-recruit" class="tab-view" style="display: none;">
-                    <!-- Activity 1: Ăn Gà Giờ Vàng (img_22) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/images/VP_GaQuay_to.png" style="width: 44px; height: 44px; object-fit: contain;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Ăn Gà Giờ Vàng (12h-13h & 18h-19h)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Thường xuyên ăn gà bồi bổ +20 Thể Lực & +10 Khí Lực!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="doEatChicken()">ĂN GÀ</button>
+                <!-- Tab 5: 100% Authentic Kỳ Ngộ & Thể Lực (Ăn Gà) Matching Original Game Screenshot media_1793066635941_fb2af011.jpg -->
+                <div id="tab-recruit" class="tab-view kyngo-authentic-view" style="display: none;">
+                    <!-- Top Sub-feature Icons Track -->
+                    <div class="kyngo-top-icons-row">
+                        <button class="kyngo-icon-btn active" id="btn-kyngo-theluc" onclick="switchKyngoSubTab('theluc')" title="Thể Lực - Ăn Gà Giờ Vàng">
+                            <img src="/assets/ui/kyngo_authentic/icon_theluc.png" class="kyngo-feature-icon" alt="Thể Lực"/>
+                        </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-bequan" onclick="switchKyngoSubTab('bequan')" title="Bế Quan Tu Luyện">
+                            <img src="/assets/ui/kyngo_authentic/icon_bequan.png" class="kyngo-feature-icon" alt="Bế Quan"/>
+                        </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-thambai" onclick="switchKyngoSubTab('thambai')" title="Tham Bái Thần Tiên Tỷ Tỷ">
+                            <img src="/assets/ui/kyngo_authentic/icon_thambai.png" class="kyngo-feature-icon" alt="Tham Bái"/>
+                        </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-tieubao" onclick="switchKyngoSubTab('tieubao')" title="Vi Tiểu Bảo">
+                            <img src="/assets/ui/kyngo_authentic/icon_tieubao.png" class="kyngo-feature-icon" alt="Tiểu Bảo"/>
+                        </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-thuongnhan" onclick="switchKyngoSubTab('thuongnhan')" title="Thương Nhân Thần Bí">
+                            <img src="/assets/ui/kyngo_authentic/icon_thuongnhan.png" class="kyngo-feature-icon" alt="Thương"/>
+                        </button>
                     </div>
 
-                    <!-- Activity 2: Mở Rương Kho Báu Kỳ Ngộ (img_04, img_18) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/ui/icon_PhongBao.png" style="width: 44px; height: 44px; object-fit: contain;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Kho Báu Kỳ Ngộ (Đào Hoa Đảo)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Mở nhận KNB, Bách Niên Sâm, Bồi Dưỡng Đan, Tàn Hồn Giáp!</p>
-                            </div>
+                    <!-- Main Scenic Stage: Thể Lực (Ăn Gà Giờ Vàng) -->
+                    <div id="kyngo-view-theluc" class="kyngo-stage-scene">
+                        <img src="/assets/ui/kyngo_authentic/scene_an_ga_full.png" class="kyngo-scene-bg" alt="Ăn Gà Giờ Vàng"/>
+                        
+                        <!-- Interactive Roast Chicken Hotspot on the Stone Table -->
+                        <div class="kyngo-roast-chicken-hotspot" onclick="doEatChicken()" title="Chạm để Ăn Gà hồi Thể Lực!">
+                            <div class="kyngo-chicken-pulse"></div>
+                            <img src="/assets/images/VP_GaQuay_to.png" class="kyngo-chicken-plate-img" alt="Gà Quay"/>
+                            <span class="kyngo-tap-eat-hint">🍗 Chạm Ăn Gà</span>
                         </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="doOpenTreasure()">MỞ KHO BÁU</button>
-                    </div>
-
-                    <!-- Activity 3: Nhập Giftcode Quà Tặng Giáp Ngọ (img_19) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 32px;">🎁</span>
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Nhập Mã Code Quà Tặng (GIAPNGO)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Nhập mã nhận Vàng, Bách Niên Sâm, Đan Dược và Đệ Tử Giáp!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openGiftcodeModal()">NHẬP CODE</button>
-                    </div>
-
-                    <!-- Activity 4: Đua Top Máy Chủ Mới & Vượt Map Huyết Cầm (img_17, img_34) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 32px;">📜</span>
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Đua Top Server Mới - Huyết Cầm 1</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Vượt map nhận đại lượng Nguyên Bảo và Ngân Lượng cực lớn!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openDuaTopModal()">XEM TOP</button>
-                    </div>
-
-                    <!-- Activity 5: Liên Minh Bang Hội (img_23) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 32px;">🚩</span>
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Liên Minh Bang Hội (Cửu Châu Minh)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Cống hiến bang hội, nhận bổng lộc và tăng chỉ số liên minh!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openLienMinhModal()">LIÊN MINH</button>
-                    </div>
-
-                    <!-- Activity 6: Vận Tiêu Long Môn (img_08, img_22) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/ui/ava_thuongtieu.png" style="width: 44px; height: 44px; object-fit: contain;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Vận Tiêu Long Môn (8h-10h & 20h-22h)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Áp tải tiêu xa nhận Bạc, Bồi Dưỡng Đan hoặc cướp tiêu đoạt bảo!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openVanTieuModal()">VẬN TIÊU</button>
-                    </div>
-
-                    <!-- Activity 7: Boss Thế Giới: Thần Điêu Phục Ma (img_21, img_27, img_29) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/images/NV_ThanDieu_ava_to.png" style="width: 44px; height: 44px; object-fit: contain; border-radius: 50%;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Boss Thế Giới: Thần Điêu Phục Ma</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Toàn server hợp lực khiêu chiến, tích lũy sát thương đoạt Thần Binh!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openBossThanDieuModal()">KHIÊU CHIẾN</button>
-                    </div>
-
-                    <!-- Activity 8: Thần Tiên Tỷ Tỷ Ban Phước (img_37) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/images/NV_VuongNguYen_ava_to.png" style="width: 44px; height: 44px; object-fit: contain; border-radius: 50%;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Thần Tiên Tỷ Tỷ (Động Vô Lượng Sơn)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Khấn vái thành tâm nhận Bí kíp Tuyệt Thế Võ Công [Giáp] & KNB!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openThanTienTyTyModal()">KHẤN VÁI</button>
-                    </div>
-
-                    <!-- Activity 9: Đào Kho Báu Ôn Hựu Sơn & Tuyệt Tình Cốc (img_04, img_18, img_24) -->
-                    <div class="kyngo-card-box">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <img src="/assets/ui/ava_batmon.png" style="width: 44px; height: 44px; object-fit: contain;">
-                            <div>
-                                <h4 style="color: #ffd700; font-size: 13px;">Đào Kho Báu (Ôn Hựu Sơn & Tuyệt Tình Cốc)</h4>
-                                <p style="font-size: 11px; color: #a8a29e;">Khai mở kho báu tầng sâu nhận Tàn Hồn Đệ Tử Giáp & Thần Binh!</p>
-                            </div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 36px; font-size: 11px;" onclick="openKhoBauModal()">ĐÀO BÁU</button>
-                    </div>
-
-                    <!-- Activity 3: Tầm Tiên Chiêu Mộ Cao Thủ -->
-                    <div style="color: #ffd700; font-size: 13px; font-weight: 900; margin: 12px 0 8px; text-shadow: 1px 1px 2px #000;">
-                        TẦM TIÊN CHIÊU MỘ CAO THỦ
-                    </div>
-                    <div class="recruit-box-item">
-                        <div>
-                            <h3 style="color: #ffd700; font-size: 14px; margin-bottom: 2px;">Bách Lý Khiêu Nhất</h3>
-                            <p style="font-size: 11px; color: #bfa58a;">Tỉ lệ chiêu mộ cao thủ [Ất] & [Bính]</p>
-                            <div style="font-size: 12px; color: #ffde59; font-weight: bold; margin-top: 2px;">Giá: 100 Vàng</div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 38px; font-size: 11px;" onclick="doRecruit('bach_ly')">Chiêu Mộ</button>
-                    </div>
-
-                    <div class="recruit-box-item">
-                        <div>
-                            <h3 style="color: #ffd700; font-size: 14px; margin-bottom: 2px;">Vạn Lý Khiêu Nhất</h3>
-                            <p style="font-size: 11px; color: #bfa58a;">Tỉ lệ chiêu mộ đại hiệp [Giáp] & [Ất]</p>
-                            <div style="font-size: 12px; color: #ffde59; font-weight: bold; margin-top: 2px;">Giá: 300 Vàng</div>
-                        </div>
-                        <button class="btn-wuxia-gold" style="width: 100px; height: 38px; font-size: 11px;" onclick="doRecruit('van_ly')">Chiêu Mộ</button>
                     </div>
                 </div>
 
@@ -1721,6 +1622,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=20"></script>
+    <script src="/js/game.js?v=21"></script>
 </body>
 </html>

@@ -2933,3 +2933,34 @@ async function doSendChatMessage() {
         alert('Lỗi kết nối máy chủ!');
     }
 }
+
+
+// ================= 100% AUTHENTIC KỲ NGỘ SUB-TABS =================
+let currentKyngoSubTab = 'theluc';
+
+function switchKyngoSubTab(tab) {
+    sound.play('click');
+    currentKyngoSubTab = tab;
+
+    document.querySelectorAll('.kyngo-icon-btn').forEach(btn => btn.classList.remove('active'));
+    const btn = document.getElementById('btn-kyngo-' + tab);
+    if (btn) btn.classList.add('active');
+
+    const sceneEl = document.getElementById('kyngo-view-theluc');
+    if (tab === 'theluc') {
+        if (sceneEl) sceneEl.style.display = 'block';
+    } else if (tab === 'bequan') {
+        openBeQuanModal();
+    } else if (tab === 'thambai') {
+        alert('🌸 [THAM BÁI THẦN TIÊN TỶ TỶ] 🌸\nChưởng môn thành tâm tham bái tượng ngọc Vô Lượng Sơn, nhận được sự gia hộ từ Thần Tiên Tỷ Tỷ: +100 KNB, +50.000 Ngân Lượng!');
+        if (GameState.playerData && GameState.playerData.Account) {
+            GameState.playerData.Account.Vang = (GameState.playerData.Account.Vang || 0) + 100;
+            GameState.playerData.Account.Bac = (GameState.playerData.Account.Bac || 0) + 50000;
+            updateHeader();
+        }
+    } else if (tab === 'tieubao') {
+        alert('🎲 [VI TIỂU BẢO ĐỔ SẮC] 🎲\nVi Tiểu Bảo: "Đại ca! Đến Lệ Xuân Viện lắc vài ván xúc xắc kiếm bạc cùng tiểu đệ nào!"');
+    } else if (tab === 'thuongnhan') {
+        switchTab('market');
+    }
+}
