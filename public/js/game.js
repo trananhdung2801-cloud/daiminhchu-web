@@ -448,8 +448,7 @@ function renderScrollPainting() {
 
 
 function openChanKhiModal() {
-    sound.play('click');
-    alert('✨ Tính năng Chân Khí Đột Phá: Gia tăng 15% Sát thương và Nội lực cho đệ tử!');
+    openChanKhiScreen();
 }
 
 function showItemDetail(slotType) {
@@ -4145,4 +4144,724 @@ function openThamNgoModal() {
         const cur = parseInt(lvlEl.innerText) || 37;
         lvlEl.innerText = cur + 1;
     }
+}
+
+// ================= 100% AUTHENTIC CHÂN KHÍ SYSTEM (MATCHING 3 ORIGINAL SCREENSHOTS) =================
+const AUTHENTIC_CHANKHI_DATABASE = [
+  {
+    "id": "CK_HuyThien",
+    "name": "Hủy Thiên",
+    "desc": "Công Kích +110",
+    "tier": 1,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 110,
+    "growth": 110,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_HoThien",
+    "name": "Hộ Thiên",
+    "desc": "Phòng Thủ +90",
+    "tier": 1,
+    "type": "Thu",
+    "statLabel": "Phòng thủ",
+    "base": 90,
+    "growth": 90,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_VanThien",
+    "name": "Vạn Thiên",
+    "desc": "Nội công +100",
+    "tier": 1,
+    "type": "NoiLuc",
+    "statLabel": "Nội công",
+    "base": 100,
+    "growth": 100,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_TeThien",
+    "name": "Tề Thiên",
+    "desc": "Máu +200",
+    "tier": 1,
+    "type": "Mau",
+    "statLabel": "Máu",
+    "base": 200,
+    "growth": 200,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_VoThuong",
+    "name": "Vô Thương",
+    "desc": "Phòng Thủ +50",
+    "tier": 1,
+    "type": "Thu",
+    "statLabel": "Phòng thủ",
+    "base": 50,
+    "growth": 50,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_BatPha",
+    "name": "Bất Phá",
+    "desc": "Phòng Thủ +30",
+    "tier": 2,
+    "type": "Thu",
+    "statLabel": "Phòng thủ",
+    "base": 30,
+    "growth": 30,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_ThanHo",
+    "name": "Thần Hộ",
+    "desc": "Phản Kích +15",
+    "tier": 1,
+    "type": "PhanKich",
+    "statLabel": "Phản đòn",
+    "base": 15,
+    "growth": 15,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_4.png"
+  },
+  {
+    "id": "CK_TramLong",
+    "name": "Trảm Long",
+    "desc": "Phá Phản +18",
+    "tier": 1,
+    "type": "PhaPhan",
+    "statLabel": "Phá phản",
+    "base": 18,
+    "growth": 18,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_4.png"
+  },
+  {
+    "id": "CK_ThienCo",
+    "name": "Thiên Cổ",
+    "desc": "Máu +100",
+    "tier": 1,
+    "type": "Mau",
+    "statLabel": "Máu",
+    "base": 100,
+    "growth": 100,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_DietThe",
+    "name": "Diệt Thế",
+    "desc": "Công kích +50",
+    "tier": 1,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 50,
+    "growth": 50,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_VoCuc",
+    "name": "Vô Cực",
+    "desc": "Nội công +50",
+    "tier": 1,
+    "type": "NoiLuc",
+    "statLabel": "Nội công",
+    "base": 50,
+    "growth": 50,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_HuyenBien",
+    "name": "Huyền Biến",
+    "desc": "Né +15",
+    "tier": 1,
+    "type": "TranhNe",
+    "statLabel": "Né tránh",
+    "base": 15,
+    "growth": 15,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_1.png"
+  },
+  {
+    "id": "CK_PhanNhat",
+    "name": "Phần Nhật",
+    "desc": "Bạo kích +15",
+    "tier": 1,
+    "type": "BaoKich",
+    "statLabel": "Bạo kích",
+    "base": 15,
+    "growth": 15,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_3.png"
+  },
+  {
+    "id": "CK_LuocHong",
+    "name": "Lược Hồng",
+    "desc": "Phòng bạo +18",
+    "tier": 1,
+    "type": "PhongBao",
+    "statLabel": "Phòng bạo",
+    "base": 18,
+    "growth": 18,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_2.png"
+  },
+  {
+    "id": "CK_ThanNhan",
+    "name": "Thần Nhãn",
+    "desc": "Chính xác +18",
+    "tier": 1,
+    "type": "ChinhXac",
+    "statLabel": "Chính xác",
+    "base": 18,
+    "growth": 18,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_5.png"
+  },
+  {
+    "id": "CK_BatTu",
+    "name": "Bất Tử",
+    "desc": "Máu +75",
+    "tier": 2,
+    "type": "Mau",
+    "statLabel": "Máu",
+    "base": 75,
+    "growth": 75,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_CucVu",
+    "name": "Cực Vũ",
+    "desc": "Công kích +35",
+    "tier": 2,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 35,
+    "growth": 35,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_NhiepHon",
+    "name": "Nhiếp hồn",
+    "desc": "Nội công +35",
+    "tier": 2,
+    "type": "NoiLuc",
+    "statLabel": "Nội công",
+    "base": 35,
+    "growth": 35,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_MeTung",
+    "name": "Mê Tung",
+    "desc": "Né +10",
+    "tier": 2,
+    "type": "TranhNe",
+    "statLabel": "Né tránh",
+    "base": 10,
+    "growth": 10,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_1.png"
+  },
+  {
+    "id": "CK_ChanDia",
+    "name": "Chấn địa",
+    "desc": "Bạo kích +10",
+    "tier": 2,
+    "type": "BaoKich",
+    "statLabel": "Bạo kích",
+    "base": 10,
+    "growth": 10,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_3.png"
+  },
+  {
+    "id": "CK_LangYen",
+    "name": "Lăng Yên",
+    "desc": "Phòng bạo +12",
+    "tier": 2,
+    "type": "PhongBao",
+    "statLabel": "Phòng bạo",
+    "base": 12,
+    "growth": 12,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_2.png"
+  },
+  {
+    "id": "CK_DoatLinh",
+    "name": "Đoạt Linh",
+    "desc": "Chính xác +12",
+    "tier": 2,
+    "type": "ChinhXac",
+    "statLabel": "Chính xác",
+    "base": 12,
+    "growth": 12,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_5.png"
+  },
+  {
+    "id": "CK_ThuTam",
+    "name": "Thủ Tâm",
+    "desc": "Phản +10",
+    "tier": 2,
+    "type": "PhanKich",
+    "statLabel": "Phản đòn",
+    "base": 10,
+    "growth": 10,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_4.png"
+  },
+  {
+    "id": "CK_TranHai",
+    "name": "Trấn Hải",
+    "desc": "Phá phản +12",
+    "tier": 2,
+    "type": "PhaPhan",
+    "statLabel": "Phá phản",
+    "base": 12,
+    "growth": 12,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_4.png"
+  },
+  {
+    "id": "CK_KhaiSon",
+    "name": "Khai Sơn",
+    "desc": "Công kích +25",
+    "tier": 3,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 25,
+    "growth": 25,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_KimCuong",
+    "name": "Kim Cương",
+    "desc": "Phòng thủ +20",
+    "tier": 3,
+    "type": "Thu",
+    "statLabel": "Phòng thủ",
+    "base": 20,
+    "growth": 20,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_ThanhTam",
+    "name": "Thanh Tâm",
+    "desc": "Nội công +25",
+    "tier": 3,
+    "type": "NoiLuc",
+    "statLabel": "Nội công",
+    "base": 25,
+    "growth": 25,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_AnhDon",
+    "name": "Ảnh Độn",
+    "desc": "Né +5",
+    "tier": 3,
+    "type": "TranhNe",
+    "statLabel": "Né tránh",
+    "base": 5,
+    "growth": 5,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_1.png"
+  },
+  {
+    "id": "CK_NoDiem",
+    "name": "Nộ Diễm",
+    "desc": "Bạo kích +5",
+    "tier": 3,
+    "type": "BaoKich",
+    "statLabel": "Bạo kích",
+    "base": 5,
+    "growth": 5,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_3.png"
+  },
+  {
+    "id": "CK_TruyHon",
+    "name": "Truy Hồn",
+    "desc": "Chính xác +6",
+    "tier": 3,
+    "type": "ChinhXac",
+    "statLabel": "Chính xác",
+    "base": 6,
+    "growth": 6,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_5.png"
+  },
+  {
+    "id": "CK_PhaQuan",
+    "name": "Phá Quân",
+    "desc": "Công kích +15",
+    "tier": 4,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 15,
+    "growth": 15,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_NgungMach",
+    "name": "Ngưng mạch",
+    "desc": "Nội công +15",
+    "tier": 4,
+    "type": "NoiLuc",
+    "statLabel": "Nội công",
+    "base": 15,
+    "growth": 15,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_8.png"
+  },
+  {
+    "id": "CK_ThietCot",
+    "name": "Thiết Cốt",
+    "desc": "Phòng thủ +10",
+    "tier": 4,
+    "type": "Thu",
+    "statLabel": "Phòng thủ",
+    "base": 10,
+    "growth": 10,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  },
+  {
+    "id": "CK_DiHinh",
+    "name": "Di hình",
+    "desc": "Né +3",
+    "tier": 4,
+    "type": "TranhNe",
+    "statLabel": "Né tránh",
+    "base": 3,
+    "growth": 3,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_1.png"
+  },
+  {
+    "id": "CK_SongThuocTinh",
+    "name": "Vô Song",
+    "desc": "",
+    "tier": 1,
+    "type": "Cong",
+    "statLabel": "Công kích",
+    "base": 1,
+    "growth": 1,
+    "orb": "/assets/ui/chankhi_authentic/clean_orb_6.png"
+  }
+];
+
+let currentChanKhiDiscipleIndex = 0;
+let currentSelectedChanKhiSlot = 0;
+
+const CHANKHI_DISCIPLES = [
+    {
+        code: 'NV_HungBa',
+        name: 'Hùng Bá',
+        level: 490,
+        enhancement: '+0',
+        hpText: '69643358341 / 120874070012',
+        hpVal: 30932,
+        atkVal: 12913,
+        defVal: 12401,
+        intVal: 44532,
+        slots: [
+            { id: 'CK_HuyenBien', name: 'Huyền Biến', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_1.png', type: 'TranhNe', statLabel: 'Né tránh', bonus: 300 },
+            { id: 'CK_LuocHong', name: 'Lược Hồng', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_2.png', type: 'PhongBao', statLabel: 'Phòng bạo', bonus: 360 },
+            { id: 'CK_PhanNhat', name: 'Phần Nhật', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_3.png', type: 'BaoKich', statLabel: 'Bạo kích', bonus: 4000 },
+            { id: 'CK_SongThuocTinh', name: 'Vô Song', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_4.png', type: 'PhanKich', statLabel: 'Phản đòn', bonus: 300 },
+            { id: 'CK_ThanNhan', name: 'Thần Nhãn', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_5.png', type: 'ChinhXac', statLabel: 'Chính xác', bonus: 360 },
+            { id: 'CK_DietThe', name: 'Tà Diệt', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_6.png', type: 'Cong', statLabel: 'Kháng bạo', bonus: 20 },
+            null,
+            { id: 'CK_VoCuc', name: 'Kình Ma', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_8.png', type: 'NoiLuc', statLabel: 'Nội công', bonus: 1000 }
+        ]
+    },
+    {
+        code: 'NV_DongPhuongBatBai',
+        name: 'Đông Phương Bất Bại',
+        level: 568,
+        enhancement: '+5',
+        hpText: '88294102931 / 150938102931',
+        hpVal: 38200,
+        atkVal: 21500,
+        defVal: 16800,
+        intVal: 59200,
+        slots: [
+            { id: 'CK_HuyThien', name: 'Hủy Thiên', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_6.png', type: 'Cong', statLabel: 'Công kích', bonus: 2200 },
+            { id: 'CK_PhanNhat', name: 'Phần Nhật', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_3.png', type: 'BaoKich', statLabel: 'Bạo kích', bonus: 4000 },
+            { id: 'CK_HuyenBien', name: 'Huyền Biến', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_1.png', type: 'TranhNe', statLabel: 'Né tránh', bonus: 300 },
+            { id: 'CK_LuocHong', name: 'Lược Hồng', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_2.png', type: 'PhongBao', statLabel: 'Phòng bạo', bonus: 360 },
+            { id: 'CK_ThanNhan', name: 'Thần Nhãn', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_5.png', type: 'ChinhXac', statLabel: 'Chính xác', bonus: 360 },
+            { id: 'CK_SongThuocTinh', name: 'Vô Song', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_4.png', type: 'PhanKich', statLabel: 'Phản đòn', bonus: 300 },
+            null,
+            { id: 'CK_VanThien', name: 'Vạn Thiên', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_8.png', type: 'NoiLuc', statLabel: 'Nội công', bonus: 2000 }
+        ]
+    },
+    {
+        code: 'NV_TayMonXuyTuyet',
+        name: 'Tây Môn Xuy Tuyết',
+        level: 537,
+        enhancement: '+3',
+        hpText: '75294102931 / 130938102931',
+        hpVal: 34100,
+        atkVal: 19800,
+        defVal: 15200,
+        intVal: 48900,
+        slots: [
+            { id: 'CK_HuyThien', name: 'Hủy Thiên', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_6.png', type: 'Cong', statLabel: 'Công kích', bonus: 2200 },
+            { id: 'CK_ThanNhan', name: 'Thần Nhãn', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_5.png', type: 'ChinhXac', statLabel: 'Chính xác', bonus: 360 },
+            { id: 'CK_PhanNhat', name: 'Phần Nhật', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_3.png', type: 'BaoKich', statLabel: 'Bạo kích', bonus: 4000 },
+            { id: 'CK_LuocHong', name: 'Lược Hồng', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_2.png', type: 'PhongBao', statLabel: 'Phòng bạo', bonus: 360 },
+            { id: 'CK_HuyenBien', name: 'Huyền Biến', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_1.png', type: 'TranhNe', statLabel: 'Né tránh', bonus: 300 },
+            { id: 'CK_SongThuocTinh', name: 'Vô Song', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_4.png', type: 'PhanKich', statLabel: 'Phản đòn', bonus: 300 },
+            null,
+            { id: 'CK_VoCuc', name: 'Vô Cực', level: 20, orb: '/assets/ui/chankhi_authentic/clean_orb_8.png', type: 'NoiLuc', statLabel: 'Nội công', bonus: 1000 }
+        ]
+    }
+];
+
+function openChanKhiScreen(targetCode) {
+    sound.play('click');
+    if (targetCode) {
+        const idx = CHANKHI_DISCIPLES.findIndex(d => d.code === targetCode);
+        if (idx !== -1) currentChanKhiDiscipleIndex = idx;
+    }
+    const scr = document.getElementById('chankhi-screen');
+    if (scr) {
+        scr.classList.add('active');
+        renderChanKhiScreen();
+    }
+}
+
+function closeChanKhiScreen() {
+    sound.play('click');
+    const scr = document.getElementById('chankhi-screen');
+    if (scr) scr.classList.remove('active');
+}
+
+// Override openChanKhiModal to show the authentic screen
+function openChanKhiModal() {
+    openChanKhiScreen();
+}
+
+function switchChanKhiDisciple() {
+    sound.play('click');
+    currentChanKhiDiscipleIndex = (currentChanKhiDiscipleIndex + 1) % CHANKHI_DISCIPLES.length;
+    renderChanKhiScreen();
+}
+
+function renderChanKhiScreen() {
+    const d = CHANKHI_DISCIPLES[currentChanKhiDiscipleIndex];
+    if (!d) return;
+
+    // Disciple switcher top right
+    const switcherAva = document.getElementById('ck-switcher-ava');
+    if (switcherAva) {
+        const nextIdx = (currentChanKhiDiscipleIndex + 1) % CHANKHI_DISCIPLES.length;
+        const nextD = CHANKHI_DISCIPLES[nextIdx];
+        switcherAva.src = `/assets/images/${nextD.code}_ava_to.png`;
+    }
+
+    // Center scroll painting
+    const calligraphy = document.getElementById('ck-disciple-calligraphy');
+    if (calligraphy) calligraphy.textContent = d.name;
+
+    const discipleImg = document.getElementById('ck-disciple-img');
+    if (discipleImg) discipleImg.src = `/assets/images/${d.code}_ava_to.png`;
+
+    const lvlEl = document.getElementById('ck-disciple-lvl');
+    if (lvlEl) lvlEl.textContent = d.level;
+
+    const hpEl = document.getElementById('ck-disciple-hp');
+    if (hpEl) hpEl.textContent = d.hpText;
+
+    const statHp = document.getElementById('ck-stat-hp');
+    if (statHp) statHp.textContent = d.hpVal;
+
+    const statAtk = document.getElementById('ck-stat-atk');
+    if (statAtk) statAtk.textContent = d.atkVal;
+
+    const statDef = document.getElementById('ck-stat-def');
+    if (statDef) statDef.textContent = d.defVal;
+
+    const statInt = document.getElementById('ck-stat-int');
+    if (statInt) statInt.textContent = d.intVal;
+
+    // Render 8 Slots
+    d.slots.forEach((s, idx) => {
+        const imgEl = document.getElementById(`ck-slot-img-${idx}`);
+        const lvlTag = document.getElementById(`ck-slot-lvl-${idx}`);
+        const nameEl = document.getElementById(`ck-slot-name-${idx}`);
+
+        if (s) {
+            if (imgEl) {
+                imgEl.src = s.orb || '/assets/ui/chankhi_authentic/clean_orb_1.png';
+                imgEl.style.opacity = '1';
+            }
+            if (lvlTag) {
+                lvlTag.textContent = s.level || 20;
+                lvlTag.style.display = 'block';
+            }
+            if (nameEl) {
+                nameEl.textContent = s.name;
+                nameEl.style.color = '#fef08a';
+            }
+        } else {
+            if (imgEl) {
+                imgEl.src = '/assets/ui/chankhi_authentic/clean_orb_7.png';
+                imgEl.style.opacity = '0.6';
+            }
+            if (lvlTag) {
+                lvlTag.style.display = 'none';
+            }
+            if (nameEl) {
+                nameEl.textContent = 'Trống';
+                nameEl.style.color = '#a8a29e';
+            }
+        }
+    });
+
+    // Auxiliary stats on disciple
+    updateChanKhiAuxStats(d);
+}
+
+function updateChanKhiAuxStats(d) {
+    let neTranh = 0, phanDon = 0, phongBao = 0, baoKich = 0, chinhXac = 0, khangBao = 0;
+    d.slots.forEach(s => {
+        if (!s) return;
+        if (s.type === 'TranhNe') neTranh += s.bonus || (s.level * 15);
+        else if (s.type === 'PhongBao') phongBao += s.bonus || (s.level * 18);
+        else if (s.type === 'BaoKich') baoKich += s.bonus || (s.level * 15);
+        else if (s.type === 'PhanKich') phanDon += s.bonus || (s.level * 15);
+        else if (s.type === 'ChinhXac') chinhXac += s.bonus || (s.level * 18);
+        else if (s.statLabel === 'Kháng bạo') khangBao += s.bonus || 20;
+    });
+
+    const elNe = document.getElementById('ck-aux-netranh');
+    if (elNe) elNe.textContent = neTranh ? `+${neTranh}` : '+300';
+
+    const elPhan = document.getElementById('ck-aux-phandon');
+    if (elPhan) elPhan.textContent = phanDon ? `+${phanDon}` : '+300';
+
+    const elPhong = document.getElementById('ck-aux-phongbao');
+    if (elPhong) elPhong.textContent = phongBao ? `+${phongBao}` : '+360';
+
+    const elBao = document.getElementById('ck-aux-baokich');
+    if (elBao) elBao.textContent = baoKich ? `${baoKich}` : '4000';
+
+    const elChinh = document.getElementById('ck-aux-chinhxac');
+    if (elChinh) elChinh.textContent = chinhXac ? `+${chinhXac}` : '+360';
+
+    const elKhang = document.getElementById('ck-aux-khangbao');
+    if (elKhang) elKhang.textContent = khangBao ? `${khangBao}` : '20';
+}
+
+// ================= MODAL: THÔNG TIN CHÂN KHÍ =================
+function openChanKhiDetailModal(slotIndex) {
+    sound.play('click');
+    currentSelectedChanKhiSlot = slotIndex;
+    const d = CHANKHI_DISCIPLES[currentChanKhiDiscipleIndex];
+    const s = d.slots[slotIndex];
+
+    const modal = document.getElementById('modal-chankhi-detail');
+    if (!modal) return;
+
+    const orbImg = document.getElementById('ck-modal-orb-img');
+    const nameEl = document.getElementById('ck-modal-name');
+    const lvlEl = document.getElementById('ck-modal-lvl');
+    const tagEl = document.getElementById('ck-modal-stat-tag');
+    const valEl = document.getElementById('ck-modal-stat-val');
+
+    if (s) {
+        if (orbImg) orbImg.src = s.orb || '/assets/ui/chankhi_authentic/clean_modal_orb.png';
+        if (nameEl) nameEl.textContent = s.name;
+        if (lvlEl) lvlEl.textContent = `Cấp: ${s.level || 20}`;
+        if (tagEl) tagEl.textContent = s.statLabel || 'Thuộc tính';
+        if (valEl) valEl.textContent = `+${s.bonus || (s.level * 18)}`;
+    } else {
+        if (orbImg) orbImg.src = '/assets/ui/chankhi_authentic/clean_orb_7.png';
+        if (nameEl) nameEl.textContent = 'Ô Trống';
+        if (lvlEl) lvlEl.textContent = 'Cấp: 0';
+        if (tagEl) tagEl.textContent = 'Chưa khảm';
+        if (valEl) valEl.textContent = '+0';
+    }
+
+    modal.classList.add('active');
+}
+
+function closeChanKhiDetailModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-chankhi-detail');
+    if (modal) modal.classList.remove('active');
+}
+
+function doUpgradeCurrentChanKhi() {
+    const d = CHANKHI_DISCIPLES[currentChanKhiDiscipleIndex];
+    let s = d.slots[currentSelectedChanKhiSlot];
+    if (!s) {
+        alert('Ô này đang trống! Hãy bấm [Đổi Chân khí] để khảm Chân khí mới.');
+        return;
+    }
+
+    if (s.level >= 20) {
+        alert(`Chân khí [${s.name}] đã đạt cấp tối đa (Cấp 20)!`);
+        return;
+    }
+
+    sound.play('levelup');
+    s.level = (s.level || 1) + 1;
+    // Growth increase
+    const growth = 18;
+    s.bonus = (s.bonus || 0) + growth;
+
+    // Update modal
+    const lvlEl = document.getElementById('ck-modal-lvl');
+    if (lvlEl) lvlEl.textContent = `Cấp: ${s.level}`;
+    const valEl = document.getElementById('ck-modal-stat-val');
+    if (valEl) valEl.textContent = `+${s.bonus}`;
+
+    renderChanKhiScreen();
+    alert(`✨ Chúc mừng! Chân khí [${s.name}] đã thăng lên Cấp ${s.level}, tăng thêm ${growth} ${s.statLabel}!`);
+}
+
+// ================= MODAL: KHO CHÂN KHÍ =================
+function openChanKhiInventory() {
+    sound.play('click');
+    const invModal = document.getElementById('modal-chankhi-inventory');
+    if (!invModal) return;
+
+    const listEl = document.getElementById('ck-inventory-list');
+    if (listEl) {
+        listEl.innerHTML = AUTHENTIC_CHANKHI_DATABASE.map(item => {
+            const tierColor = item.tier === 1 ? '#eab308' : item.tier === 2 ? '#c084fc' : item.tier === 3 ? '#38bdf8' : '#4ade80';
+            const tierName = item.tier === 1 ? 'Giáp' : item.tier === 2 ? 'Ất' : item.tier === 3 ? 'Bính' : 'Đinh';
+            return `
+                <div class="ck-inv-item" onclick="equipChanKhiToSlot('${item.id}')">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="${item.orb}" style="width: 38px; height: 38px; object-fit: contain; filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));" />
+                        <div>
+                            <div style="font-weight: 900; color: #451a03; font-size: 13px;">
+                                ${item.name} <span style="font-size: 10px; color: ${tierColor}; border: 1px solid ${tierColor}; padding: 0 4px; border-radius: 3px;">${tierName}</span>
+                            </div>
+                            <div style="font-size: 11px; color: #78350f;">${item.desc}</div>
+                        </div>
+                    </div>
+                    <button class="btn-wuxia-gold" style="width: 72px; height: 30px; font-size: 11px; padding: 0;">Trang bị</button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    invModal.classList.add('active');
+}
+
+function closeChanKhiInventory() {
+    sound.play('click');
+    const invModal = document.getElementById('modal-chankhi-inventory');
+    if (invModal) invModal.classList.remove('active');
+}
+
+function equipChanKhiToSlot(ckId) {
+    sound.play('equip');
+    const item = AUTHENTIC_CHANKHI_DATABASE.find(x => x.id === ckId);
+    if (!item) return;
+
+    const d = CHANKHI_DISCIPLES[currentChanKhiDiscipleIndex];
+    d.slots[currentSelectedChanKhiSlot] = {
+        id: item.id,
+        name: item.name,
+        level: 20,
+        orb: item.orb,
+        type: item.type,
+        statLabel: item.statLabel,
+        bonus: item.growth * 20
+    };
+
+    closeChanKhiInventory();
+    openChanKhiDetailModal(currentSelectedChanKhiSlot);
+    renderChanKhiScreen();
 }

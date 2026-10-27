@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=32">
+    <link rel="stylesheet" href="/css/style.css?v=33">
 </head>
 <body>
     <div id="game-container">
@@ -2096,6 +2096,200 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=32"></script>
+
+        <!-- ================= 100% AUTHENTIC CHÂN KHÍ SCREEN (MATCHING 3 ORIGINAL SCREENSHOTS) ================= -->
+        <div id="chankhi-screen" class="chankhi-screen-container">
+            <!-- Header Bar -->
+            <div class="ck-header-bar">
+                <div class="ck-back-btn" onclick="closeChanKhiScreen()" title="Quay lại">
+                    <img src="/assets/ui/chankhi_authentic/btn_back_header.png" alt="Back" />
+                </div>
+                
+                <div class="ck-top-stats">
+                    <div class="ck-vip-badge">12★</div>
+                    <div class="ck-stat-chip">
+                        <img src="/assets/ui/icon_KNB.png" alt="Vàng" />
+                        <span id="ck-gold-val">51,829</span>
+                    </div>
+                    <div class="ck-stat-chip">
+                        <img src="/assets/images/icon_bac.png" alt="Bạc" />
+                        <span id="ck-silver-val">8,152,400</span>
+                    </div>
+                </div>
+
+                <!-- Top Right Disciple Switcher -->
+                <div class="ck-disciple-switcher" onclick="switchChanKhiDisciple()" title="Đổi đệ tử">
+                    <div class="ck-switcher-frame">
+                        <img id="ck-switcher-ava" src="/assets/images/NV_HungBa_ava_to.png" alt="Đệ tử" />
+                    </div>
+                    <div class="ck-switcher-badge">Đổi đệ tử</div>
+                </div>
+            </div>
+
+            <!-- Main Arena -->
+            <div class="ck-main-arena">
+                <!-- Left 4 Slots -->
+                <div class="ck-slot-column left">
+                    <div class="ck-slot-item" id="ck-slot-1" onclick="openChanKhiDetailModal(0)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-0" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_1.png" />
+                            <span id="ck-slot-lvl-0" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-0" class="ck-orb-name">Huyền Biến</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-2" onclick="openChanKhiDetailModal(1)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-1" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_2.png" />
+                            <span id="ck-slot-lvl-1" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-1" class="ck-orb-name">Lược Hồng</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-3" onclick="openChanKhiDetailModal(2)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-2" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_3.png" />
+                            <span id="ck-slot-lvl-2" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-2" class="ck-orb-name">Phần Nhật</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-4" onclick="openChanKhiDetailModal(3)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-3" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_4.png" />
+                            <span id="ck-slot-lvl-3" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-3" class="ck-orb-name">Vô Song</div>
+                    </div>
+                </div>
+
+                <!-- Center Scroll Painting -->
+                <div class="ck-center-scroll-container">
+                    <img class="ck-scroll-roller-top" src="/assets/ui/chankhi_authentic/scroll_rod_top.png" alt="Rod Top" />
+                    <div class="ck-scroll-body">
+                        <div id="ck-disciple-calligraphy" class="ck-disciple-calligraphy">Hùng Bá</div>
+                        <div class="ck-disciple-art-wrap">
+                            <img id="ck-disciple-img" class="ck-disciple-art-img" src="/assets/images/NV_HungBa_ava_to.png" alt="Disciple" />
+                        </div>
+                        <!-- Stats Panel at Bottom of Scroll -->
+                        <div class="ck-disciple-stats-panel">
+                            <div class="ck-level-hp-bar">
+                                <span class="ck-lvl-enh">+0</span>
+                                <span id="ck-disciple-lvl" class="ck-lvl-val">490</span>
+                                <span id="ck-disciple-hp" class="ck-hp-val">69643358341 / 120874070012</span>
+                            </div>
+                            <div class="ck-main-stats-row">
+                                <div class="ck-main-stat-item" title="Khí huyết"><span class="ck-stat-icon-circle">🩸</span><span id="ck-stat-hp">30932</span></div>
+                                <div class="ck-main-stat-item" title="Võ công"><span class="ck-stat-icon-circle">⚔️</span><span id="ck-stat-atk">12913</span></div>
+                                <div class="ck-main-stat-item" title="Phòng thủ"><span class="ck-stat-icon-circle">🛡️</span><span id="ck-stat-def">12401</span></div>
+                                <div class="ck-main-stat-item" title="Nội lực"><span class="ck-stat-icon-circle">🌀</span><span id="ck-stat-int">44532</span></div>
+                            </div>
+                            <div class="ck-aux-stats-grid">
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Né tránh</span><span id="ck-aux-netranh" class="ck-aux-val">+300</span></div>
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Phản đòn</span><span id="ck-aux-phandon" class="ck-aux-val">+300</span></div>
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Phòng bạo</span><span id="ck-aux-phongbao" class="ck-aux-val">+360</span></div>
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Bạo kích</span><span id="ck-aux-baokich" class="ck-aux-val">4000</span></div>
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Chính xác</span><span id="ck-aux-chinhxac" class="ck-aux-val">+360</span></div>
+                                <div class="ck-aux-badge-item"><span class="ck-aux-tag">Kháng bạo</span><span id="ck-aux-khangbao" class="ck-aux-val">20</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="ck-scroll-roller-bottom" src="/assets/ui/chankhi_authentic/scroll_rod_bottom.png" alt="Rod Bottom" />
+                </div>
+
+                <!-- Right 4 Slots -->
+                <div class="ck-slot-column right">
+                    <div class="ck-slot-item" id="ck-slot-5" onclick="openChanKhiDetailModal(4)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-4" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_5.png" />
+                            <span id="ck-slot-lvl-4" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-4" class="ck-orb-name">Thần Nhãn</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-6" onclick="openChanKhiDetailModal(5)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-5" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_6.png" />
+                            <span id="ck-slot-lvl-5" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-5" class="ck-orb-name">Tà Diệt</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-7" onclick="openChanKhiDetailModal(6)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-6" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_7.png" />
+                            <span id="ck-slot-lvl-6" class="ck-orb-level" style="display:none;"></span>
+                        </div>
+                        <div id="ck-slot-name-6" class="ck-orb-name" style="color: #a8a29e;">Trống</div>
+                    </div>
+
+                    <div class="ck-slot-item" id="ck-slot-8" onclick="openChanKhiDetailModal(7)">
+                        <div class="ck-orb-wrapper">
+                            <img id="ck-slot-img-7" class="ck-orb-img" src="/assets/ui/chankhi_authentic/clean_orb_8.png" />
+                            <span id="ck-slot-lvl-7" class="ck-orb-level">20</span>
+                        </div>
+                        <div id="ck-slot-name-7" class="ck-orb-name">Kình Ma</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: THÔNG TIN CHÂN KHÍ ================= -->
+        <div id="modal-chankhi-detail" class="ck-modal-backdrop">
+            <div class="ck-detail-card">
+                <div class="ck-modal-header">
+                    <div class="ck-modal-header-title">Thông tin Chân khí</div>
+                    <div class="ck-modal-close-btn" onclick="closeChanKhiDetailModal()">
+                        <img src="/assets/ui/chankhi_authentic/btn_close_x.png" alt="Close" />
+                    </div>
+                </div>
+                <div class="ck-detail-body">
+                    <div class="ck-detail-orb-showcase">
+                        <div class="ck-detail-orb-rim">
+                            <img id="ck-modal-orb-img" src="/assets/ui/chankhi_authentic/clean_modal_orb.png" alt="Chân khí" />
+                        </div>
+                        <div class="ck-detail-meta">
+                            <div id="ck-modal-name" class="ck-detail-name">Lược Hồng</div>
+                            <div id="ck-modal-lvl" class="ck-detail-lvl">Cấp: 20</div>
+                        </div>
+                    </div>
+                    <div class="ck-detail-effect-row">
+                        <span>Gia tăng đệ tử</span>
+                        <span id="ck-modal-stat-tag" class="ck-aux-tag">Phòng bạo</span>
+                        <span id="ck-modal-stat-val" style="color: #b91c1c; font-weight: 900; font-size: 15px;">+360</span>
+                    </div>
+                    <div class="ck-modal-actions">
+                        <div class="ck-action-btn-img" onclick="openChanKhiInventory()" title="Đổi Chân khí">
+                            <img src="/assets/ui/chankhi_authentic/clean_btn_doi_chankhi.png" alt="Đổi Chân khí" />
+                        </div>
+                        <div class="ck-action-btn-img" onclick="doUpgradeCurrentChanKhi()" title="Tăng cấp">
+                            <img src="/assets/ui/chankhi_authentic/clean_btn_tang_cap.png" alt="Tăng cấp" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: KHO CHÂN KHÍ (ĐỔI CHÂN KHÍ) ================= -->
+        <div id="modal-chankhi-inventory" class="ck-modal-backdrop">
+            <div class="ck-detail-card">
+                <div class="ck-modal-header">
+                    <div class="ck-modal-header-title">Kho Chân Khí</div>
+                    <div class="ck-modal-close-btn" onclick="closeChanKhiInventory()">
+                        <img src="/assets/ui/chankhi_authentic/btn_close_x.png" alt="Close" />
+                    </div>
+                </div>
+                <div class="ck-detail-body">
+                    <div style="font-size: 12px; color: #78350f; font-weight: bold; width: 100%; text-align: left;">
+                        Chọn Chân khí để trang bị vào ô đang chọn:
+                    </div>
+                    <div class="ck-inv-list" id="ck-inventory-list">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="/js/game.js?v=33"></script>
 </body>
 </html>
