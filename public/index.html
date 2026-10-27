@@ -624,6 +624,9 @@
                                                 <button class="kyngo-icon-btn" id="btn-kyngo-khieuchien" onclick="switchKyngoSubTab('khieuchien')" title="Khiêu chiến">
                             <img src="/assets/ui/kyngo_authentic/clean_icon_khieuchien.png" class="kyngo-feature-icon" alt="Khiêu chiến"/>
                         </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-thuongnap" onclick="switchKyngoSubTab('thuongnap')" title="Thưởng Nạp">
+                            <img src="/assets/ui/kyngo_authentic/clean_icon_thuongnap.png" class="kyngo-feature-icon" alt="Thưởng Nạp"/>
+                        </button>
 <button class="kyngo-icon-btn" id="btn-kyngo-thuongtieu" onclick="switchKyngoSubTab('thuongtieu')" title="Thưởng Tiêu - Tích Lũy Tiêu">
                             <img src="/assets/ui/kyngo_authentic/icon_thuongtieu.png" class="kyngo-feature-icon" alt="Thưởng Tiêu"/>
                         </button>
@@ -709,6 +712,43 @@
                             <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" class="tlt-knb-icon" alt="KNB"/>
                             <span id="tlt-spent-amount" class="tlt-spent-val">2</span>
                         </div>
+                    </div>
+
+                                        <!-- Main Scenic Stage: Thưởng Nạp (media_1793093357077_6d2838c9.jpg) -->
+                    <div id="kyngo-view-thuongnap" class="kyngo-stage-scene" style="display: none;">
+                        <img src="/assets/ui/kyngo_authentic/scene_thuongnap_full.png" class="kyngo-scene-bg" alt="Thưởng Nạp"/>
+                        
+                        <!-- Live Countdown Timer Banner -->
+                        <div class="tn-timer-banner">
+                            <span class="tn-timer-text">Còn lại: <span id="tn-countdown-text">4 ngày 02 giờ 28 phút 34 giây</span></span>
+                        </div>
+
+                        <!-- Milestone Pouches Hotspots on Scroll -->
+                        <div class="tn-milestone-slots">
+                            <!-- Milestone 1: 250 Vàng -->
+                            <div class="tn-milestone-item tn-milestone-1" id="tn-item-1" onclick="handleThuongNapMilestone(1)" title="Mốc 250 Vàng">
+                                <div class="tn-pouch-glow" id="tn-glow-1"></div>
+                                <div class="tn-pouch-badge" id="tn-badge-1">Đã nhận</div>
+                            </div>
+                            <!-- Milestone 2: 1000 Vàng -->
+                            <div class="tn-milestone-item tn-milestone-2" id="tn-item-2" onclick="handleThuongNapMilestone(2)" title="Mốc 1000 Vàng">
+                                <div class="tn-pouch-glow" id="tn-glow-2"></div>
+                                <div class="tn-pouch-badge" id="tn-badge-2">Chưa đủ</div>
+                            </div>
+                            <!-- Milestone 3: 2500 Vàng -->
+                            <div class="tn-milestone-item tn-milestone-3" id="tn-item-3" onclick="handleThuongNapMilestone(3)" title="Mốc 2500 Vàng">
+                                <div class="tn-pouch-glow" id="tn-glow-3"></div>
+                                <div class="tn-pouch-badge" id="tn-badge-3">Chưa đủ</div>
+                            </div>
+                        </div>
+
+                        <!-- Live Accumulated Recharged Counter (Left Bottom) -->
+                        <div class="tn-recharged-counter-box" onclick="doThuongNapNaptien()" title="Bấm để Nạp Thêm Vàng">
+                            <span class="tn-counter-num" id="tn-recharged-gold-val">700</span>
+                        </div>
+
+                        <!-- Interactive 'Nạp Tiền' Golden Button (Right Bottom) -->
+                        <button class="tn-btn-naptien-hotspot" onclick="doThuongNapNaptien()" title="Nạp Tiền Ngay"></button>
                     </div>
 
                     <!-- Main Scenic Stage 3: Bầu Cua Tôm Cá Authentic GUI (media_1793068015082_01406808.jpg) -->
@@ -2589,6 +2629,56 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=37"></script>
+            <!-- ================= MODAL: NẠP TIỀN THƯỞNG NẠP ================= -->
+        <div id="modal-thuongnap-recharge" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content tn-recharge-modal-content">
+                <div class="authentic-modal-header">
+                    <h3 class="authentic-modal-title">Nạp Tiền - Thưởng Nạp</h3>
+                    <button class="authentic-modal-close" onclick="closeThuongNapRechargeModal()">×</button>
+                </div>
+                <div class="tn-recharge-modal-body">
+                    <div class="tn-recharge-info-bar">
+                        <span>Vàng hiện có: <b id="tn-modal-current-gold" style="color: #ffd700;">0</b> <img src="/assets/ui/kyngo_authentic/icon_knb_gold.png" style="width: 16px; vertical-align: middle;"></span>
+                        <span>Đã tích lũy: <b id="tn-modal-total-recharged" style="color: #ff9800;">700</b> Vàng</span>
+                    </div>
+                    <div class="tn-package-grid">
+                        <div class="tn-pkg-card" onclick="submitRecharge(250)">
+                            <div class="tn-pkg-icon">💰</div>
+                            <div class="tn-pkg-gold">+250 Vàng</div>
+                            <div class="tn-pkg-desc">Đạt Mốc 1 (250 Vàng)</div>
+                            <div class="tn-pkg-price">25.000 VNĐ</div>
+                            <button class="tn-pkg-btn">Nạp Ngay</button>
+                        </div>
+                        <div class="tn-pkg-card highlight" onclick="submitRecharge(750)">
+                            <div class="tn-pkg-badge">HOT</div>
+                            <div class="tn-pkg-icon">🏆</div>
+                            <div class="tn-pkg-gold">+750 Vàng</div>
+                            <div class="tn-pkg-desc">Đạt Mốc 2 (1000 Vàng)</div>
+                            <div class="tn-pkg-price">75.000 VNĐ</div>
+                            <button class="tn-pkg-btn">Nạp Ngay</button>
+                        </div>
+                        <div class="tn-pkg-card" onclick="submitRecharge(1500)">
+                            <div class="tn-pkg-icon">👑</div>
+                            <div class="tn-pkg-gold">+1500 Vàng</div>
+                            <div class="tn-pkg-desc">Đạt Mốc 3 (2500 Vàng)</div>
+                            <div class="tn-pkg-price">150.000 VNĐ</div>
+                            <button class="tn-pkg-btn">Nạp Ngay</button>
+                        </div>
+                        <div class="tn-pkg-card" onclick="submitRecharge(5000)">
+                            <div class="tn-pkg-icon">💎</div>
+                            <div class="tn-pkg-gold">+5000 Vàng</div>
+                            <div class="tn-pkg-desc">Đại Phú Hào Võ Lâm</div>
+                            <div class="tn-pkg-price">500.000 VNĐ</div>
+                            <button class="tn-pkg-btn">Nạp Ngay</button>
+                        </div>
+                    </div>
+                    <div class="tn-recharge-notice">
+                        * Lưu ý: Nạp tích lũy tự động cộng dồn và mở khóa các túi quà mốc tương ứng, phần thưởng gửi thẳng vào Hòm Thư!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="/js/game.js?v=38"></script>
 </body>
 </html>

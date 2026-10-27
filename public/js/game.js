@@ -3458,17 +3458,28 @@ function switchKyngoSubTab(tab) {
     const thuongTieuEl = document.getElementById('kyngo-view-thuongtieu');
     const bauCuaEl = document.getElementById('kyngo-view-baucua');
     const khieuChienEl = document.getElementById('kyngo-view-khieuchien');
+    const thuongNapEl = document.getElementById('kyngo-view-thuongnap');
 
     if (tab === 'theluc') {
         if (theLucEl) theLucEl.style.display = 'block';
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
+    } else if (tab === 'thuongnap') {
+        if (theLucEl) theLucEl.style.display = 'none';
+        if (thuongTieuEl) thuongTieuEl.style.display = 'none';
+        if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'block';
+        startThuongNapCountdown();
+        updateThuongNapUI();
     } else if (tab === 'thuongtieu') {
         if (theLucEl) theLucEl.style.display = 'none';
         if (thuongTieuEl) thuongTieuEl.style.display = 'block';
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
         startTltCountdown();
         updateTltSpentAmount();
     } else if (tab === 'baucua') {
@@ -3476,6 +3487,7 @@ function switchKyngoSubTab(tab) {
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
         if (bauCuaEl) bauCuaEl.style.display = 'block';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
         initBauCuaState();
     } else if (tab === 'khieuchien') {
         if (theLucEl) theLucEl.style.display = 'none';
@@ -3483,6 +3495,7 @@ function switchKyngoSubTab(tab) {
         if (bauCuaEl) bauCuaEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (khieuChienEl) khieuChienEl.style.display = 'flex';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
         startKhieuChienCountdown();
     } else if (tab === 'bequan') {
         openBeQuanModal();
@@ -5599,4 +5612,225 @@ function doAmKhiAction(action) {
         sound.play('renxong');
         alert(`🌟 Thăng Khí thành công! Ám Khí [${ak.name}] đã đột phá cảnh giới và thăng thêm 1 Sao uy lực!`);
     }
+}
+
+
+// ================= 100% AUTHENTIC THƯỞNG NẠP SYSTEM (media_1793093357077_6d2838c9.jpg) =================
+let tnCountdownSeconds = 354514; // 4 ngày 02 giờ 28 phút 34 giây
+let tnCountdownTimer = null;
+const THUONG_NAP_MILESTONES = [
+    {
+        id: 1,
+        gold: 250,
+        name: 'Mốc 250 Vàng',
+        rewards: [
+            { name: 'Ngân Lượng', amount: 1000000, desc: '100 Vạn Bạc' },
+            { name: 'Bồi Dưỡng Đan', amount: 10, desc: '10 Viên' },
+            { name: 'Tẩy Tủy Đan', amount: 5, desc: '5 Viên' },
+            { name: 'Rương Hoàng Kim', amount: 1, desc: '1 Rương' }
+        ]
+    },
+    {
+        id: 2,
+        gold: 1000,
+        name: 'Mốc 1000 Vàng',
+        rewards: [
+            { name: 'Ngân Lượng', amount: 3000000, desc: '300 Vạn Bạc' },
+            { name: 'Bồi Dưỡng Đan', amount: 50, desc: '50 Viên' },
+            { name: 'Tẩy Tủy Đan', amount: 20, desc: '20 Viên' },
+            { name: 'Bí Kíp Thần Công', amount: 1, desc: '1 Cuốn' }
+        ]
+    },
+    {
+        id: 3,
+        gold: 2500,
+        name: 'Mốc 2500 Vàng',
+        rewards: [
+            { name: 'Ngân Lượng', amount: 10000000, desc: '1000 Vạn Bạc' },
+            { name: 'Bồi Dưỡng Đan', amount: 150, desc: '150 Viên' },
+            { name: 'Tẩy Tủy Đan', amount: 50, desc: '50 Viên' },
+            { name: 'Rương Giáp Cam Cực Phẩm', amount: 1, desc: '1 Rương' }
+        ]
+    }
+];
+
+function startThuongNapCountdown() {
+    if (tnCountdownTimer) clearInterval(tnCountdownTimer);
+    const textEl = document.getElementById('tn-countdown-text');
+    if (!textEl) return;
+    
+    function renderTimer() {
+        if (tnCountdownSeconds <= 0) {
+            textEl.textContent = 'Đã kết thúc sự kiện!';
+            return;
+        }
+        const days = Math.floor(tnCountdownSeconds / 86400);
+        const hours = Math.floor((tnCountdownSeconds % 86400) / 3600);
+        const mins = Math.floor((tnCountdownSeconds % 3600) / 60);
+        const secs = tnCountdownSeconds % 60;
+        
+        const hStr = hours < 10 ? '0' + hours : '' + hours;
+        const mStr = mins < 10 ? '0' + mins : '' + mins;
+        const sStr = secs < 10 ? '0' + secs : '' + secs;
+        
+        textEl.textContent = `${days} ngày ${hStr} giờ ${mStr} phút ${sStr} giây`;
+        tnCountdownSeconds--;
+    }
+    renderTimer();
+    tnCountdownTimer = setInterval(renderTimer, 1000);
+}
+
+function updateThuongNapUI() {
+    if (!GameState.playerData) return;
+    if (GameState.playerData.rechargedGold === undefined) {
+        GameState.playerData.rechargedGold = 700; // Authentic default matching screenshot
+    }
+    if (!GameState.playerData.claimedThuongNapMilestones) {
+        GameState.playerData.claimedThuongNapMilestones = [1]; // Milestone 1 already reached at 700
+    }
+    
+    const valEl = document.getElementById('tn-recharged-gold-val');
+    if (valEl) {
+        valEl.textContent = GameState.playerData.rechargedGold;
+    }
+    
+    const recharged = GameState.playerData.rechargedGold;
+    const claimedList = GameState.playerData.claimedThuongNapMilestones;
+    
+    THUONG_NAP_MILESTONES.forEach(ms => {
+        const itemEl = document.getElementById('tn-item-' + ms.id);
+        const badgeEl = document.getElementById('tn-badge-' + ms.id);
+        if (!itemEl) return;
+        
+        itemEl.classList.remove('unlocked', 'claimed');
+        if (claimedList.includes(ms.id)) {
+            itemEl.classList.add('claimed');
+            if (badgeEl) badgeEl.textContent = 'Đã nhận';
+        } else if (recharged >= ms.gold) {
+            itemEl.classList.add('unlocked');
+            if (badgeEl) badgeEl.textContent = 'Có thể nhận';
+        } else {
+            if (badgeEl) badgeEl.textContent = `Thiếu ${ms.gold - recharged}`;
+        }
+    });
+}
+
+function handleThuongNapMilestone(id) {
+    sound.play('click');
+    const ms = THUONG_NAP_MILESTONES.find(m => m.id === id);
+    if (!ms) return;
+    
+    const recharged = GameState.playerData.rechargedGold || 0;
+    const claimedList = GameState.playerData.claimedThuongNapMilestones || [];
+    
+    let rewardText = ms.rewards.map(r => `• ${r.name}: ${r.desc}`).join('\n');
+    
+    if (claimedList.includes(id)) {
+        alert(`🎁 [${ms.name.toUpperCase()}] 🎁\nBạn đã nhận phần thưởng mốc này qua Hòm Thư:\n${rewardText}`);
+        return;
+    }
+    
+    if (recharged >= ms.gold) {
+        // Claim reward
+        claimedList.push(id);
+        GameState.playerData.claimedThuongNapMilestones = claimedList;
+        
+        // Grant rewards
+        ms.rewards.forEach(r => {
+            if (r.name === 'Ngân Lượng' && GameState.playerData.Account) {
+                GameState.playerData.Account.Bac = (GameState.playerData.Account.Bac || 0) + r.amount;
+            }
+        });
+        
+        // Auto send mail confirmation
+        if (!GameState.playerData.Mails) GameState.playerData.Mails = [];
+        GameState.playerData.Mails.unshift({
+            id: Date.now(),
+            title: `Thưởng Nạp - ${ms.name}`,
+            sender: 'Hệ Thống Thưởng Nạp',
+            content: `Chúc mừng Chưởng Môn đã đạt mốc tích lũy ${ms.gold} Vàng! Phần thưởng: ${rewardText}`,
+            date: new Date().toLocaleDateString('vi-VN'),
+            claimed: true
+        });
+        
+        saveGameState();
+        updateHeader();
+        updateThuongNapUI();
+        sound.play('victory');
+        
+        alert(`🎉 [NHẬN THƯỞNG THÀNH CÔNG] 🎉\nChúc mừng Chưởng Môn đã nhận thưởng ${ms.name}:\n${rewardText}\n(Phần thưởng đã cộng vào túi đồ và lưu lịch sử truyền thư)`);
+    } else {
+        alert(`🔒 [CHƯA ĐỦ ĐIỀU KIỆN] 🔒\n${ms.name} yêu cầu nạp tích lũy đủ ${ms.gold} Vàng.\nHiện tại Chưởng Môn đã nạp: ${recharged} Vàng (Còn thiếu ${ms.gold - recharged} Vàng).\n\nBấm nút "Nạp Tiền" để tích lũy thêm!`);
+    }
+}
+
+function doThuongNapNaptien() {
+    sound.play('click');
+    const modal = document.getElementById('modal-thuongnap-recharge');
+    if (!modal) return;
+    
+    const curGoldEl = document.getElementById('tn-modal-current-gold');
+    const totalRechargedEl = document.getElementById('tn-modal-total-recharged');
+    
+    if (curGoldEl && GameState.playerData && GameState.playerData.Account) {
+        curGoldEl.textContent = GameState.playerData.Account.Vang || 0;
+    }
+    if (totalRechargedEl && GameState.playerData) {
+        totalRechargedEl.textContent = GameState.playerData.rechargedGold || 700;
+    }
+    
+    modal.style.display = 'flex';
+}
+
+function closeThuongNapRechargeModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-thuongnap-recharge');
+    if (modal) modal.style.display = 'none';
+}
+
+function submitRecharge(goldAmount) {
+    sound.play('click');
+    if (!GameState.playerData) return;
+    if (!GameState.playerData.Account) GameState.playerData.Account = {};
+    
+    const oldRecharged = GameState.playerData.rechargedGold || 0;
+    const newRecharged = oldRecharged + goldAmount;
+    GameState.playerData.rechargedGold = newRecharged;
+    GameState.playerData.Account.Vang = (GameState.playerData.Account.Vang || 0) + goldAmount;
+    
+    // Check auto milestone rewards delivery
+    const claimedList = GameState.playerData.claimedThuongNapMilestones || [];
+    let unlockedMsg = '';
+    
+    THUONG_NAP_MILESTONES.forEach(ms => {
+        if (newRecharged >= ms.gold && !claimedList.includes(ms.id)) {
+            claimedList.push(ms.id);
+            // Auto grant reward
+            ms.rewards.forEach(r => {
+                if (r.name === 'Ngân Lượng' && GameState.playerData.Account) {
+                    GameState.playerData.Account.Bac = (GameState.playerData.Account.Bac || 0) + r.amount;
+                }
+            });
+            // Auto mail
+            if (!GameState.playerData.Mails) GameState.playerData.Mails = [];
+            GameState.playerData.Mails.unshift({
+                id: Date.now() + ms.id,
+                title: `Phần Thưởng Tự Động - ${ms.name}`,
+                sender: 'Hệ Thống Thưởng Nạp',
+                content: `Hệ thống tự động gửi phần thưởng mốc ${ms.gold} Vàng qua Truyền Thư:\n` + ms.rewards.map(r => `• ${r.name}: ${r.desc}`).join('\n'),
+                date: new Date().toLocaleDateString('vi-VN'),
+                claimed: true
+            });
+            unlockedMsg += `\n✨ Đã mở khóa và nhận tự động ${ms.name}!`;
+        }
+    });
+    GameState.playerData.claimedThuongNapMilestones = claimedList;
+    
+    saveGameState();
+    updateHeader();
+    updateThuongNapUI();
+    closeThuongNapRechargeModal();
+    sound.play('victory');
+    
+    alert(`🎉 [NẠP TIỀN THÀNH CÔNG] 🎉\nChưởng Môn vừa nạp thành công +${goldAmount} Vàng!\nTổng tích lũy nạp hiện tại: ${newRecharged} Vàng.${unlockedMsg}`);
 }

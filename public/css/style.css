@@ -9910,3 +9910,274 @@ img {
     height: 100%;
     object-fit: contain;
 }
+
+
+/* ================= 100% AUTHENTIC THƯỞNG NẠP SYSTEM (media_1793093357077_6d2838c9.jpg) ================= */
+#kyngo-view-thuongnap {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tn-timer-banner {
+    position: absolute;
+    top: 11.8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.tn-timer-text {
+    color: #fff9e6;
+    font-size: 13px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #000;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.tn-milestone-slots {
+    position: absolute;
+    top: 24%;
+    left: 6%;
+    width: 88%;
+    height: 32%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 6;
+}
+
+.tn-milestone-item {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+}
+
+.tn-milestone-item:hover,
+.tn-milestone-item:active {
+    transform: scale(1.05);
+}
+
+.tn-pouch-glow {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.tn-milestone-item.unlocked .tn-pouch-glow {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), inset 0 0 15px rgba(255, 152, 0, 0.6);
+    animation: tn-pulse-glow 1.5s infinite alternate;
+}
+
+@keyframes tn-pulse-glow {
+    0% { transform: translateX(-50%) scale(0.95); opacity: 0.6; }
+    100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+.tn-pouch-badge {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-shadow: 1px 1px 2px #000;
+    display: none;
+}
+
+.tn-milestone-item.unlocked .tn-pouch-badge {
+    display: block;
+    background: linear-gradient(180deg, #ffeb3b, #ff9800);
+    color: #3e2723;
+    border: 1px solid #ffd54f;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+}
+
+.tn-milestone-item.claimed .tn-pouch-badge {
+    display: block;
+    background: rgba(0, 0, 0, 0.65);
+    color: #a5d6a7;
+    border: 1px solid #4caf50;
+}
+
+.tn-recharged-counter-box {
+    position: absolute;
+    top: 79.5%;
+    left: 23%;
+    width: 65px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 6;
+    cursor: pointer;
+}
+
+.tn-counter-num {
+    color: #ffeb3b;
+    font-size: 15px;
+    font-weight: 900;
+    text-shadow: 1px 1px 3px #000, 0 0 5px #ff9800;
+    letter-spacing: 0.5px;
+}
+
+.tn-btn-naptien-hotspot {
+    position: absolute;
+    top: 77.2%;
+    left: 71.5%;
+    width: 25.5%;
+    height: 10%;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 8;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.tn-btn-naptien-hotspot:hover {
+    filter: brightness(1.15);
+    transform: scale(1.03);
+}
+
+.tn-btn-naptien-hotspot:active {
+    filter: brightness(0.9);
+    transform: scale(0.97);
+}
+
+/* Modal Nạp Tiền Styling */
+.tn-recharge-modal-content {
+    max-width: 440px;
+    background: #1a0f0a url('/assets/ui/bg_modal_wood.png') center/cover;
+    border: 2px solid #b8860b;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(184, 134, 11, 0.4);
+    color: #fff;
+    padding: 16px;
+}
+
+.tn-recharge-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #5d4037;
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+.tn-package-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.tn-pkg-card {
+    position: relative;
+    background: linear-gradient(180deg, #2c1a11, #1a0d06);
+    border: 1.5px solid #8d6e63;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.tn-pkg-card:hover {
+    border-color: #ffd700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 215, 0, 0.3);
+}
+
+.tn-pkg-card.highlight {
+    border-color: #ff9800;
+    background: linear-gradient(180deg, #3e2723, #21130d);
+}
+
+.tn-pkg-badge {
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    background: #e53935;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.tn-pkg-icon {
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.tn-pkg-gold {
+    color: #ffd700;
+    font-size: 15px;
+    font-weight: 800;
+    text-shadow: 0 1px 3px #000;
+}
+
+.tn-pkg-desc {
+    color: #ffcc80;
+    font-size: 10px;
+    margin: 3px 0 6px;
+}
+
+.tn-pkg-price {
+    color: #81c784;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.tn-pkg-btn {
+    width: 100%;
+    background: linear-gradient(180deg, #ffc107, #ff8f00);
+    border: 1px solid #ffe082;
+    border-radius: 6px;
+    color: #3e2723;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 4px 0;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.tn-pkg-btn:hover {
+    background: linear-gradient(180deg, #ffca28, #ffa000);
+}
+
+.tn-recharge-notice {
+    font-size: 11px;
+    color: #b0bec5;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+}
