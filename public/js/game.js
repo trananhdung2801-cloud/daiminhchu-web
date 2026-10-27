@@ -806,40 +806,113 @@ async function doRecruit(type) {
     renderCurrentTab();
 }
 
-// 5. Items Tab
+// 5. Authentic Items Tab & Item Consumption
+const VP_FALLBACK_META = {
+    'VP_BaoRuong': {
+        TenHienThi: 'Bảo rương',
+        MoTa: 'Một chiếc rương thần bí xuất hiện trên Ngũ nhạc sơn, mở ra có thể nhận 1 trang bị Giáp cấp bất kỳ',
+        Icon: 'VP_BaoRuong_to.png'
+    },
+    'VP_BitTat': {
+        TenHienThi: 'Bít tất',
+        MoTa: 'Món quà bí ẩn của 1 cao nhân áo đỏ leo ống khói, chứa nhiều phần quà bất ngờ',
+        Icon: 'VP_BitTat_to.png'
+    },
+    'VP_BachNienSam': {
+        TenHienThi: 'Bách niên sâm',
+        MoTa: 'Thần dược trăm năm, có công dụng tăng cường khí huyết của đệ tử ( đệ tử không mất tiềm lực )',
+        Icon: 'VP_BachNienSam_to.png'
+    },
+    'VP_BoHuyetDan': {
+        TenHienThi: 'Bách niên sâm',
+        MoTa: 'Thần dược trăm năm, có công dụng tăng cường khí huyết của đệ tử ( đệ tử không mất tiềm lực )',
+        Icon: 'VP_BachNienSam_to.png'
+    },
+    'VP_GaQuay': {
+        TenHienThi: 'Gà quay',
+        MoTa: 'Hồi 8 sinh lực',
+        Icon: 'VP_GaQuay_to.png'
+    },
+    'VP_RuouNuNhiHong': {
+        TenHienThi: 'Nữ nhi hồng',
+        MoTa: 'Rượu nấu bằng nhiều loại gạo khác nhau, men rượu bằng gạo hoặc lúa mạch, dùng để uống với cao nhân.',
+        Icon: 'VP_BinhRuou_to.png'
+    },
+    'VP_BinhRuou': {
+        TenHienThi: 'Nữ nhi hồng',
+        MoTa: 'Rượu nấu bằng nhiều loại gạo khác nhau, men rượu bằng gạo hoặc lúa mạch, dùng để uống với cao nhân.',
+        Icon: 'VP_BinhRuou_to.png'
+    },
+    'VP_BoiDuongDan': {
+        TenHienThi: 'Bồi dưỡng đan',
+        MoTa: 'Kích thích tiềm năng của đệ tử',
+        Icon: 'VP_BoiDuongDan_to.png'
+    }
+};
+
 function renderItems() {
     const container = document.getElementById('items-container');
+    if (!container) return;
     container.innerHTML = '';
 
     const items = GameState.playerData.VatPhamTieuThu || [];
+    if (!items.length) {
+        container.innerHTML = '<div style="color: #eed9b5; text-align: center; padding: 40px 20px; font-size: 14px;">Túi đồ hiện không có vật phẩm nào.</div>';
+        return;
+    }
+
+    const staticConsumables = (GameState.staticData && GameState.staticData.consumables) || {};
+
     items.forEach(it => {
-        const card = document.createElement('div');
-        card.style.cssText = "background: rgba(28, 18, 13, 0.9); border: 1px solid #5a3c22; border-radius: 6px; padding: 10px; display: flex; align-items: center; gap: 10px;";
-        const isGa = it.name === 'VP_GaQuay';
-        const iconImg = isGa ? `${IMG_BASE}VP_GaQuay_to.png` : `${IMG_BASE}VP_RuouTrangNguyenHong_to.png`;
-        card.innerHTML = `
-            <img src="${iconImg}" style="width: 44px; height: 44px; object-fit: contain; background: #000; border-radius: 4px; border: 1px solid #73502b;"/>
-            <div style="flex: 1;">
-                <h4 style="font-size: 12px; color: #fffae6;">${isGa ? 'Gà Quay' : 'Nữ Nhi Hồng'} (x${it.quantity})</h4>
-                <p style="font-size: 10px; color: #a8917e;">${isGa ? '+15 Thể Lực' : '+15 Khí Lực'}</p>
-                <button class="btn-wuxia-gold" style="width: 70px; height: 26px; font-size: 10px; margin-top: 4px;" onclick="useItem('${it.name}')">Dùng</button>
+        if (!it || it.quantity <= 0) return;
+        const code = it.name;
+        const staticItem = staticConsumables[code] || VP_FALLBACK_META[code] || {};
+        const title = staticItem.TenHienThi || VP_FALLBACK_META[code]?.TenHienThi || code;
+        const desc = staticItem.MoTa || VP_FALLBACK_META[code]?.MoTa || 'Vật phẩm quý hiếm trên giang hồ.';
+        const iconFile = VP_FALLBACK_META[code]?.Icon || (code + '_to.png');
+
+        const row = document.createElement('div');
+        row.className = 'vp-item-row';
+        row.innerHTML = `
+            <div class="vp-item-frame">
+                <img src="/assets/images/${iconFile}" class="vp-item-icon" alt="${title}" onerror="this.src='/assets/images/VP_BaoRuong_to.png'"/>
+            </div>
+            <div class="vp-item-info">
+                <div class="vp-item-name">${title}</div>
+                <div class="vp-item-desc">${desc}</div>
+                <div class="vp-item-qty">Số lượng : ${Number(it.quantity).toLocaleString('vi-VN')}</div>
+            </div>
+            <div class="vp-item-actions">
+                ${it.quantity >= 10 ? `<button class="vp-btn vp-btn-10" onclick="doUseItem('${code}', 10)" title="Dùng 10 lần"></button>` : ''}
+                <button class="vp-btn vp-btn-use" onclick="doUseItem('${code}', 1)" title="Sử dụng"></button>
             </div>
         `;
-        container.appendChild(card);
+        container.appendChild(row);
     });
 }
 
-async function useItem(itemCode) {
+async function doUseItem(itemCode, count = 1) {
     sound.play('click');
-    const res = await apiPost('use_item', { aid: getEffectiveAid(), itemCode });
-    if (!res.success) {
-        alert(res.error || 'Không thể dùng vật phẩm');
+    const res = await apiPost('use_item', {
+        aid: getEffectiveAid(),
+        itemCode,
+        count
+    });
+    if (!res || !res.success) {
+        alert(res?.error || 'Không thể sử dụng vật phẩm!');
         return;
     }
     sound.play('trangbi');
-    GameState.playerData = res.playerData;
+    if (res.playerData) {
+        GameState.playerData = res.playerData;
+    }
     updateHeader();
     renderItems();
+    alert(res.message || `Đã sử dụng thành công ${count} vật phẩm!`);
+}
+
+function useItem(itemCode) {
+    return doUseItem(itemCode, 1);
 }
 
 // ================= AUTHENTIC BATTLE ARENA (100% MATCHING IMAGE 1 & VIDEO) =================
@@ -1597,52 +1670,12 @@ async function doOpenTreasure() {
 }
 
 // ================= TÚI ĐỒ VẬT PHẨM (img_02, img_21, img_33) =================
+// Items category legacy compatibility
 let currentBagCategory = 'all';
-
 function switchItemCategory(cat, btnEl) {
     sound.play('click');
     currentBagCategory = cat;
-    document.querySelectorAll('.item-cat-btn').forEach(b => b.classList.remove('active'));
-    if (btnEl) btnEl.classList.add('active');
     renderItems();
-}
-
-function renderItems() {
-    const container = document.getElementById('items-container');
-    if (!container) return;
-    container.innerHTML = '';
-
-    const items = GameState.playerData.VatPhamTieuThu || [];
-    
-    // Default authentic items if empty
-    const displayList = [
-        { name: 'VP_BachNienSam', title: 'Bách Niên Sâm', desc: 'Thần dược trăm năm tăng cường khí huyết đệ tử không hao tổn tiềm lực', qty: 7923441, icon: 'icon_PhongBao.png', cat: 'duocpham' },
-        { name: 'VP_GaQuay', title: 'Gà Quay', desc: 'Hồi phục 15 sinh lực thể lực hành hiệp', qty: 75963, icon: 'VP_GaQuay_to.png', cat: 'duocpham' },
-        { name: 'VP_RuouNuNhiHong', title: 'Rượu Nữ Nhi Hồng', desc: 'Hồi phục 15 khí lực khiêu chiến luận kiếm', qty: 12540, icon: 'VP_RuouTrangNguyenHong_to.png', cat: 'duocpham' },
-        { name: 'VP_BoiDuongDan', title: 'Bồi Dưỡng Đan', desc: 'Dược đan kích thích tiềm lực 4 thuộc tính đệ tử', qty: 5121196, icon: 'icon_BaoKich.png', cat: 'duocpham' },
-        { name: 'VK_DoLongDao', title: 'Đồ Long Đao [Giáp]', desc: 'Thần binh cái thế chí tôn trong võ lâm', qty: 1, icon: 'VK_DoLongDao_trang_bi_to.png', cat: 'trangbi' },
-        { name: 'AG_CamVeHoangKimGiap', title: 'Cẩm Vệ Hoàng Kim Giáp [Giáp]', desc: 'Hoàng kim bảo giáp phòng ngự siêu việt', qty: 1, icon: 'AG_CamVeHoangKimGiap_trang_bi_to.png', cat: 'trangbi' },
-        { name: 'VC_DocCoCuuKiem', title: 'Độc Cô Cửu Kiếm [Giáp]', desc: 'Tuyệt kỹ kiếm pháp vô chiêu thắng hữu chiêu', qty: 1, icon: 'VC_DocCoCuuKiem_vo_cong_to.png', cat: 'vocong' },
-        { name: 'VC_QuyHoaBaoDien', title: 'Quỳ Hoa Bảo Điển [Giáp]', desc: 'Bảo điển võ học thần bí uy chấn thiên hạ', qty: 1, icon: 'VC_QuyHoaBaoDien_vo_cong_to.png', cat: 'vocong' }
-    ];
-
-    const filtered = displayList.filter(it => currentBagCategory === 'all' || it.cat === currentBagCategory);
-
-    filtered.forEach(it => {
-        const card = document.createElement('div');
-        card.style.cssText = "background: rgba(28, 18, 13, 0.9); border: 1px solid #5a3c22; border-radius: 6px; padding: 10px; display: flex; align-items: center; gap: 10px;";
-        const iconSrc = it.icon.startsWith('icon_') ? `/assets/ui/${it.icon}` : `/assets/images/${it.icon}`;
-
-        card.innerHTML = `
-            <img src="${iconSrc}" style="width: 44px; height: 44px; object-fit: contain; background: #000; border-radius: 4px; border: 1px solid #73502b;" onerror="this.src='/assets/res/avatar_default.png'"/>
-            <div style="flex: 1;">
-                <h4 style="font-size: 12px; color: #fffae6;">${it.title} <span style="color: #ffd700; font-size: 11px;">(x${Number(it.qty).toLocaleString('vi-VN')})</span></h4>
-                <p style="font-size: 10px; color: #a8917e; line-height: 1.3;">${it.desc}</p>
-            </div>
-            <button class="btn-wuxia-gold" style="width: 65px; height: 28px; font-size: 10px;" onclick="useItem('${it.name}')">Dùng</button>
-        `;
-        container.appendChild(card);
-    });
 }
 
 // ================= WORLD CHAT TICKER (img_13.jpg) =================

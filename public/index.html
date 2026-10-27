@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=16">
+    <link rel="stylesheet" href="/css/style.css?v=17">
 </head>
 <body>
     <div id="game-container">
@@ -526,14 +526,13 @@
                 </div>
 
                 <!-- Tab 8: Túi Đồ & Kho Vật Phẩm (img_02, img_21, img_33) -->
-                <div id="tab-items" class="tab-view" style="display: none;">
-                    <div class="items-category-tabs">
-                        <button class="item-cat-btn active" onclick="switchItemCategory('all', this)">Tất Cả</button>
-                        <button class="item-cat-btn" onclick="switchItemCategory('duocpham', this)">Dược Phẩm</button>
-                        <button class="item-cat-btn" onclick="switchItemCategory('trangbi', this)">Trang Bị</button>
-                        <button class="item-cat-btn" onclick="switchItemCategory('vocong', this)">Võ Công</button>
+                <!-- Tab 8: 100% Authentic Vật Phẩm GUI Matching Original Game Screenshot -->
+                <div id="tab-items" class="tab-view vatpham-authentic-view" style="display: none;">
+                    <div class="vp-top-header-row">
+                        <img src="/assets/ui/vatpham_authentic/tab_vatpham_plaque.png" class="vp-top-plaque" alt="Vật phẩm"/>
                     </div>
-                    <div id="items-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                    <div class="vp-subheader-banner"></div>
+                    <div id="items-container" class="vp-items-board"></div>
                 </div>
             </div>
 
@@ -1621,6 +1620,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=16"></script>
+    <script src="/js/game.js?v=17"></script>
 </body>
 </html>

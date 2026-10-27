@@ -4613,3 +4613,160 @@ img {
     color: #4a2711;
     opacity: 0.8;
 }
+
+
+/* ================= 100% AUTHENTIC VẬT PHẨM (INVENTORY) GUI ================= */
+.vatpham-authentic-view {
+    padding: 0 4px 76px 4px !important;
+    background: #180d07 url('/assets/ui/Background.png') no-repeat center top !important;
+    background-size: cover !important;
+    min-height: calc(100vh - 75px);
+    display: flex;
+    flex-direction: column;
+}
+
+.vp-top-header-row {
+    display: flex;
+    align-items: flex-end;
+    padding: 2px 4px 0 8px;
+    margin-bottom: -1px;
+    z-index: 2;
+    position: relative;
+}
+
+.vp-top-plaque {
+    width: 108px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.65));
+}
+
+.vp-subheader-banner {
+    width: 100%;
+    height: 32px;
+    background: url('/assets/ui/vatpham_authentic/subheader_banner.png') no-repeat center center;
+    background-size: 100% 100%;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+}
+
+.vp-items-board {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #603c21 url('/assets/ui/home_authentic/home_lower_board.png');
+    border: 2px solid #4a2d18;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+    max-height: calc(100vh - 170px);
+}
+
+.vp-item-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    border-bottom: 2px solid #3c2415;
+    box-shadow: 0 1px 0 rgba(110, 72, 43, 0.5);
+    position: relative;
+    gap: 12px;
+    background: rgba(45, 27, 16, 0.55);
+}
+
+.vp-item-row:nth-child(even) {
+    background: rgba(35, 20, 11, 0.65);
+}
+
+.vp-item-frame {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #f7f9fa 0%, #dbe4eb 100%);
+    border: 2px solid #8ca5b9;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.vp-item-icon {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+}
+
+.vp-item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.vp-item-name {
+    color: #fffaed;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 0.3px;
+}
+
+.vp-item-desc {
+    color: #edd9b5;
+    font-size: 11.5px;
+    line-height: 1.35;
+    text-shadow: 1px 1px 1px #000;
+    word-break: break-word;
+}
+
+.vp-item-qty {
+    color: #fffaed;
+    font-size: 12.5px;
+    font-weight: bold;
+    margin-top: 3px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.vp-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.vp-btn {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: transparent;
+    transition: transform 0.1s ease, filter 0.1s ease;
+    display: block;
+}
+
+.vp-btn:active {
+    transform: scale(0.93);
+    filter: brightness(0.85);
+}
+
+.vp-btn-10 {
+    width: 86px;
+    height: 36px;
+    background: url('/assets/ui/vatpham_authentic/btn_dung10lan.png') no-repeat center center;
+    background-size: 100% 100%;
+    border-radius: 4px;
+}
+
+.vp-btn-use {
+    width: 76px;
+    height: 36px;
+    background: url('/assets/ui/vatpham_authentic/btn_sudung.png') no-repeat center center;
+    background-size: 100% 100%;
+    border-radius: 4px;
+}

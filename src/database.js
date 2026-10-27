@@ -86,6 +86,19 @@ class DatabaseManager {
             if (!data.GiangHoProgress) {
                 data.GiangHoProgress = { maxChapterIdx: 0, maxMissionIdx: 0 };
             }
+            data.VatPhamTieuThu = data.VatPhamTieuThu || [];
+            const ensureItem = (name, quantity) => {
+                let existing = data.VatPhamTieuThu.find(it => it.name === name);
+                if (!existing) {
+                    data.VatPhamTieuThu.push({ name, quantity });
+                }
+            };
+            ensureItem('VP_BaoRuong', 80);
+            ensureItem('VP_BitTat', 608);
+            ensureItem('VP_BachNienSam', 7923441);
+            ensureItem('VP_GaQuay', 50);
+            ensureItem('VP_RuouNuNhiHong', 50);
+            ensureItem('VP_BoiDuongDan', 200);
             return data;
         } catch (e) {
             console.error('[DB] Error parsing player data for aid', aid, e);
