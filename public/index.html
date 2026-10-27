@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=14">
+    <link rel="stylesheet" href="/css/style.css?v=15">
 </head>
 <body>
     <div id="game-container">
@@ -245,11 +245,23 @@
                 </div>
 
                 <!-- Tab 3: Giang Hồ Vượt Ải (Gi.hồ) -->
-                <div id="tab-giangho" class="tab-view" style="display: none;">
-                    <div class="giangho-banner">
-                        <h3 id="gh-chapter-name">Chương 1: Hạnh Tử Lâm</h3>
+                <div id="tab-giangho" class="tab-view giangho-authentic-view" style="display: none;">
+                    <!-- 1. Chapter Horizontal Paper Scroll Selector (Matching Original Game) -->
+                    <div class="gh-scroll-wrapper">
+                        <img src="/assets/ui/giangho_authentic/scroll_roller_l.png" class="gh-scroll-roller-left" alt="Roller">
+                        <div class="gh-chapter-scroll-track" id="gh-chapter-track"></div>
+                        <img src="/assets/ui/giangho_authentic/scroll_roller_r.png" class="gh-scroll-roller-right" alt="Roller">
                     </div>
-                    <div id="gh-mission-list"></div>
+
+                    <!-- 2. Chapter Story Lore Box (Authentic Parchment Frame) -->
+                    <div class="gh-story-box-wrapper">
+                        <p id="gh-chapter-story" class="gh-chapter-story-text">
+                            Đang tải cốt truyện giang hồ...
+                        </p>
+                    </div>
+
+                    <!-- 3. Missions Planks List (Authentic Wooden Planks & Carved Bronze 'Đánh' Buttons) -->
+                    <div id="gh-mission-list" class="gh-mission-planks-container"></div>
                 </div>
 
                 <!-- Tab 4: Luyện Công (L.công) -->
@@ -1522,6 +1534,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=14"></script>
+    <script src="/js/game.js?v=15"></script>
 </body>
 </html>

@@ -209,6 +209,12 @@ class WebApiController {
                 }
             }
 
+            // Save battle stars rating (1-3 stars)
+            playerData.GiangHoProgress.stars = playerData.GiangHoProgress.stars || {};
+            const starKey = chapterIdx + '_' + missionIdx;
+            const curStars = playerData.GiangHoProgress.stars[starKey] || 0;
+            playerData.GiangHoProgress.stars[starKey] = Math.max(curStars, battleResult.stars || 1);
+
             // Level up check
             while (playerData.Account.Exp >= playerData.Account.ExpMax) {
                 playerData.Account.Exp -= playerData.Account.ExpMax;

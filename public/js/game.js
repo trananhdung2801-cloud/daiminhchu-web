@@ -525,88 +525,128 @@ function renderDisciples() {
     });
 }
 
-// 3. Giang Ho Tab (Sequential Map Progression: Beat Previous Stage to Unlock Next)
+// 3. Giang Ho Tab (100% AUTHENTIC GUI MATCHING ORIGINAL SCREENSHOT)
+function selectGiangHoChapter(chIdx) {
+    sound.play('click');
+    const ghProg = (GameState.playerData && GameState.playerData.GiangHoProgress)
+        ? GameState.playerData.GiangHoProgress
+        : { maxChapterIdx: 0, maxMissionIdx: 0 };
+    if (chIdx > ghProg.maxChapterIdx) {
+        alert('🔒 Chương này chưa mở khóa! Hãy vượt qua tất cả các ải của chương trước.');
+        return;
+    }
+    GameState.currentChapterIdx = chIdx;
+    renderGiangHo();
+}
+
 function renderGiangHo() {
     if (!GameState.staticData || !GameState.staticData.giangHo) return;
     const chapters = GameState.staticData.giangHo;
     const ghProg = (GameState.playerData && GameState.playerData.GiangHoProgress)
         ? GameState.playerData.GiangHoProgress
-        : { maxChapterIdx: 0, maxMissionIdx: 0 };
+        : { maxChapterIdx: 0, maxMissionIdx: 0, stars: {} };
 
-    GameState.currentChapterIdx = GameState.currentChapterIdx || 0;
+    if (GameState.currentChapterIdx === undefined || GameState.currentChapterIdx === null) {
+        GameState.currentChapterIdx = ghProg.maxChapterIdx || 0;
+    }
     if (GameState.currentChapterIdx > ghProg.maxChapterIdx) {
         GameState.currentChapterIdx = ghProg.maxChapterIdx;
     }
 
     const currentChapter = chapters[GameState.currentChapterIdx] || chapters[0];
 
-    // Navigation for chapters
-    const ghChapterBanner = document.querySelector('.giangho-banner');
-    if (ghChapterBanner) {
-        ghChapterBanner.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 4px 6px;">
-                <button class="btn-wuxia-gold" style="width: 32px; height: 28px; padding: 0; font-size: 14px; font-weight: bold;" 
-                        onclick="changeGiangHoChapter(-1)" ${GameState.currentChapterIdx === 0 ? 'disabled style="opacity:0.35;"' : ''}>◀</button>
-                <h3 id="gh-chapter-name" style="margin: 0; font-size: 14px; color: #ffd700; text-shadow: 1px 1px 2px #000; text-align: center; flex: 1;">
-                    Chương ${GameState.currentChapterIdx + 1}: ${currentChapter.tenHienThi || currentChapter.TenHienThi}
-                </h3>
-                <button class="btn-wuxia-gold" style="width: 32px; height: 28px; padding: 0; font-size: 14px; font-weight: bold;" 
-                        onclick="changeGiangHoChapter(1)" ${GameState.currentChapterIdx >= ghProg.maxChapterIdx ? 'disabled style="opacity:0.35;"' : ''}>▶</button>
-            </div>
-        `;
+    // 1. Render Horizontal Paper Scroll Track of Chapter Plaques
+    const track = document.getElementById('gh-chapter-track');
+    if (track) {
+        track.innerHTML = '';
+        // Show chapters up to maxChapterIdx + 1 locked
+        const maxVisible = Math.min(ghProg.maxChapterIdx + 2, chapters.length);
+        for (let i = 0; i < maxVisible; i++) {
+            const ch = chapters[i];
+            const isUnlocked = i <= ghProg.maxChapterIdx;
+            const isActive = i === GameState.currentChapterIdx;
+
+            const plaque = document.createElement('div');
+            plaque.className = `gh-plaque-btn ${isActive ? 'active' : (isUnlocked ? 'inactive' : 'locked')}`;
+            plaque.title = ch.tenHienThi;
+            plaque.innerText = isUnlocked ? ch.tenHienThi : `🔒 ${ch.tenHienThi}`;
+            plaque.onclick = () => selectGiangHoChapter(i);
+
+            track.appendChild(plaque);
+
+            // Auto-scroll track to active plaque
+            if (isActive) {
+                setTimeout(() => {
+                    plaque.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }, 50);
+            }
+        }
     }
 
+    // 2. Render Chapter Story Lore Box
+    const storyEl = document.getElementById('gh-chapter-story');
+    if (storyEl) {
+        storyEl.innerText = currentChapter.moTa || 'Nội bộ Cái Bang xuất hiện rạn nứt, hãy lên đường dẹp loạn giang hồ!';
+    }
+
+    // 3. Render Mission Wooden Planks List
     const list = document.getElementById('gh-mission-list');
     if (!list) return;
     list.innerHTML = '';
 
-    const missions = currentChapter.nhiemVuList || currentChapter.NhiemVuList || [];
+    const missions = currentChapter.nhiemVuList || [];
     missions.forEach((m, idx) => {
         const isUnlocked = (GameState.currentChapterIdx < ghProg.maxChapterIdx) ||
                            (GameState.currentChapterIdx === ghProg.maxChapterIdx && idx <= ghProg.maxMissionIdx);
         const isCleared = (GameState.currentChapterIdx < ghProg.maxChapterIdx) ||
                           (GameState.currentChapterIdx === ghProg.maxChapterIdx && idx < ghProg.maxMissionIdx);
 
-        const card = document.createElement('div');
-        card.className = `mission-row ${!isUnlocked ? 'mission-locked' : ''}`;
-        if (!isUnlocked) {
-            card.style.opacity = '0.55';
-            card.style.filter = 'grayscale(60%)';
+        const starKey = GameState.currentChapterIdx + '_' + idx;
+        const stars = (ghProg.stars && ghProg.stars[starKey]) ? Number(ghProg.stars[starKey]) : (isCleared ? 3 : 0);
+
+        // Avatar url: if NV_ use official hero avatar, else generic NPC
+        let avaUrl = '/assets/images/NC_Generic_NhanSi.png';
+        if (m.daiDienCode && m.daiDienCode.startsWith('NV_')) {
+            avaUrl = `/assets/images/${m.daiDienCode}_ava_to.png`;
         }
 
-        const badgeText = isCleared ? '<span style="color: #4ade80; font-size: 10px; margin-left: 6px; font-weight: bold;">⭐ ĐÃ VƯỢT</span>' : '';
-        const btnHtml = isUnlocked
-            ? `<button class="btn-authentic-fight" onclick="startBattle(${GameState.currentChapterIdx}, ${idx})">${isCleared ? 'QUYẾT ĐẤU' : 'KHIÊU CHIẾN'}</button>`
-            : `<button class="btn-authentic-fight" style="background: #374151; color: #9ca3af; border-color: #4b5563;" disabled>🔒 CHƯA MỞ</button>`;
+        const plank = document.createElement('div');
+        plank.className = 'gh-mission-plank';
 
-        card.innerHTML = `
-            <div style="flex: 1;">
-                <h4 style="margin: 0 0 3px 0; font-size: 13px; color: ${isUnlocked ? '#fef08a' : '#9ca3af'};">
-                    Ải ${idx + 1}: ${m.tenHienThi || m.TenHienThi} ${badgeText}
-                </h4>
-                <p style="margin: 0; font-size: 11px; color: #d6d3d1;">${m.moTa || m.MoTa || 'Quyết chiến cao thủ võ lâm trong ải giang hồ.'}</p>
-                <div style="font-size: 10px; color: #ffd700; font-weight: bold; margin-top: 3px;">
-                    Thưởng: +${m.expThuong || m.ExpThuong || 10} Exp, +${m.bacThuong || m.BacThuong || 50} Bạc
-                </div>
+        // Stars row HTML
+        let starsHtml = '';
+        if (stars > 0) {
+            starsHtml = `<div class="gh-stars-row">` +
+                '<img src="/assets/ui/icon_star.png" class="gh-star-img" alt="Star"/>'.repeat(stars) +
+                `</div>`;
+        } else {
+            starsHtml = `<div class="gh-stars-row" style="opacity: 0.35;">` +
+                '<img src="/assets/ui/icon_star.png" class="gh-star-img" alt="Star"/>' +
+                `</div>`;
+        }
+
+        const btnHtml = isUnlocked
+            ? `<button class="gh-btn-danh" onclick="startBattle(${GameState.currentChapterIdx}, ${idx})" title="Khiêu chiến ải ${idx + 1}">
+                   ${starsHtml}
+                   <span class="gh-btn-danh-text">Đánh</span>
+               </button>`
+            : `<button class="gh-btn-danh locked" disabled title="Ải chưa mở khóa">
+                   <span class="gh-btn-danh-text" style="color: #94a3b8; font-size: 11px;">🔒 Khóa</span>
+               </button>`;
+
+        plank.innerHTML = `
+            <div class="gh-mission-avatar-box">
+                <img class="gh-mission-avatar-img" src="${avaUrl}" onerror="this.src='/assets/images/NC_Generic_NhanSi.png'" alt="Avatar"/>
+            </div>
+            <div class="gh-mission-info">
+                <h4 class="gh-mission-title">Ải ${idx + 1}: ${m.tenHienThi}</h4>
+                <p class="gh-mission-reward">Thưởng: +${m.expThuong || 10} Exp, +${m.bacThuong || 50} Bạc</p>
             </div>
             ${btnHtml}
         `;
-        list.appendChild(card);
+
+        list.appendChild(plank);
     });
-}
-
-function changeGiangHoChapter(delta) {
-    sound.play('click');
-    const chapters = (GameState.staticData && GameState.staticData.giangHo) ? GameState.staticData.giangHo : [];
-    const ghProg = (GameState.playerData && GameState.playerData.GiangHoProgress)
-        ? GameState.playerData.GiangHoProgress
-        : { maxChapterIdx: 0, maxMissionIdx: 0 };
-
-    const nextIdx = (GameState.currentChapterIdx || 0) + delta;
-    if (nextIdx >= 0 && nextIdx <= ghProg.maxChapterIdx && nextIdx < chapters.length) {
-        GameState.currentChapterIdx = nextIdx;
-        renderGiangHo();
-    }
 }
 
 // 4. Recruit Tab
