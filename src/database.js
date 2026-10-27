@@ -82,7 +82,11 @@ class DatabaseManager {
         const row = stmt.get(aid);
         if (!row || !row.data_json) return null;
         try {
-            return JSON.parse(row.data_json);
+            const data = JSON.parse(row.data_json);
+            if (!data.GiangHoProgress) {
+                data.GiangHoProgress = { maxChapterIdx: 0, maxMissionIdx: 0 };
+            }
+            return data;
         } catch (e) {
             console.error('[DB] Error parsing player data for aid', aid, e);
             return null;
@@ -283,6 +287,10 @@ class DatabaseManager {
                 }
             ],
             TanChuong: [],
+            GiangHoProgress: {
+                maxChapterIdx: 0,
+                maxMissionIdx: 0
+            },
             GiangHo: [
                 {
                     giangHoIndx: 0,

@@ -2,6 +2,24 @@ const db = require('../database');
 const configLoader = require('../configLoader');
 const battleEngine = require('../battleEngine');
 
+function getMaxSlotDoiHinh(level) {
+    if (level >= 25) return 8;
+    if (level >= 20) return 7;
+    if (level >= 15) return 6;
+    if (level >= 10) return 5;
+    if (level >= 3) return 4;
+    return 3;
+}
+
+function getRequiredLevelForSlot(slot) {
+    if (slot <= 3) return 1;
+    if (slot === 4) return 3;
+    if (slot === 5) return 10;
+    if (slot === 6) return 15;
+    if (slot === 7) return 20;
+    return 25;
+}
+
 class WebApiController {
     constructor() {
         configLoader.loadAll();
@@ -132,6 +150,13 @@ class WebApiController {
         const playerData = db.getPlayerData(aid);
         if (!playerData) return { success: false, error: 'No player data' };
 
+        // Sequential Map Progression check
+        playerData.GiangHoProgress = playerData.GiangHoProgress || { maxChapterIdx: 0, maxMissionIdx: 0 };
+        if (chapterIdx > playerData.GiangHoProgress.maxChapterIdx ||
+            (chapterIdx === playerData.GiangHoProgress.maxChapterIdx && missionIdx > playerData.GiangHoProgress.maxMissionIdx)) {
+            return { success: false, error: 'Ải này chưa mở khóa! Hãy vượt qua ải trước để tiếp tục.' };
+        }
+
         // Check stamina (LuotNV)
         if (playerData.GiaTriThoiGian.LuotNV < 1) {
             return { success: false, error: 'Không đủ Thể Lực! Hãy dùng Gà Quay để hồi phục.' };
@@ -145,9 +170,11 @@ class WebApiController {
         const mission = chapter.NhiemVuList[missionIdx];
         const enemyFormation = mission.DoiHinh || [];
 
-        // Prepare player formation disciples
+        // Prepare player formation disciples (only from unlocked active slots)
+        const currentLevel = (playerData.Account && playerData.Account.Level) ? Number(playerData.Account.Level) : 1;
+        const maxSlots = getMaxSlotDoiHinh(currentLevel);
         const playerFormation = [];
-        for (let s = 1; s <= 8; s++) {
+        for (let s = 1; s <= maxSlots; s++) {
             const discipleId = playerData.DoiHinh['slot' + s];
             if (discipleId > 0) {
                 const disciple = playerData.NhanVat.find(nv => nv.id === discipleId);
@@ -170,6 +197,17 @@ class WebApiController {
         if (battleResult.isWin) {
             playerData.Account.Bac += battleResult.bacGained;
             playerData.Account.Exp += battleResult.expGained;
+
+            // Sequential progression update
+            if (chapterIdx === playerData.GiangHoProgress.maxChapterIdx && missionIdx === playerData.GiangHoProgress.maxMissionIdx) {
+                const totalMissionsInChapter = (chapter.NhiemVuList || []).length;
+                if (missionIdx + 1 < totalMissionsInChapter) {
+                    playerData.GiangHoProgress.maxMissionIdx += 1;
+                } else {
+                    playerData.GiangHoProgress.maxChapterIdx += 1;
+                    playerData.GiangHoProgress.maxMissionIdx = 0;
+                }
+            }
 
             // Level up check
             while (playerData.Account.Exp >= playerData.Account.ExpMax) {
@@ -317,7 +355,14 @@ class WebApiController {
         const playerData = db.getPlayerData(aid);
         if (!playerData) return { success: false, error: 'No player data' };
 
-        if (slot < 1 || slot > 8) return { success: false, error: 'Slot invalid' };
+        if (slot < 1 || slot > 8) return { success: false, error: 'Vị trí không hợp lệ!' };
+
+        const currentLevel = (playerData.Account && playerData.Account.Level) ? Number(playerData.Account.Level) : 1;
+        const maxSlots = getMaxSlotDoiHinh(currentLevel);
+        if (slot > maxSlots) {
+            const reqLv = getRequiredLevelForSlot(slot);
+            return { success: false, error: 'Vị trí #' + slot + ' yêu cầu đạt Đẳng cấp ' + reqLv + ' để mở khóa!' };
+        }
 
         playerData.DoiHinh['slot' + slot] = discipleId;
         db.savePlayerData(aid, playerData);

@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=13">
+    <link rel="stylesheet" href="/css/style.css?v=14">
 </head>
 <body>
     <div id="game-container">
@@ -180,42 +180,40 @@
             <div class="content-area">
                 <!-- Tab 1: Authentic Disciple Scroll Painting (Tr.chủ) -->
                 <div id="tab-home" class="tab-view home-perfect-view">
-                    <div class="home-seamless-stage">
-                        <div style="display:none;" id="home-cloud-disciples"></div>
-                        <img src="/assets/ui/home_authentic/home_main_stage_perfect.png" class="home-seamless-bg" alt="Đại Minh Chủ">
+                    <!-- 1. Interactive Formation Cloud Carousel (Swipe Left/Right for 8 Disciples) -->
+                    <div class="home-cloud-stage-wrapper">
+                        <div class="home-cloud-stage-scroll" id="home-cloud-disciples"></div>
+                    </div>
 
-                        <!-- 5 Floating Disciples Hotspots (Cloud Stage) -->
-                        <div class="perf-hotspot" style="left: 2%; top: 4%; width: 19%; height: 25%;" onclick="openDiscipleDetailModal('NV_DuongQua')" title="Dương Quá"></div>
-                        <div class="perf-hotspot" style="left: 22%; top: 4%; width: 19%; height: 25%;" onclick="openDiscipleDetailModal('NV_HoaVoKhuyet')" title="Hoa Vô Khuyết"></div>
-                        <div class="perf-hotspot" style="left: 42%; top: 2%; width: 21%; height: 27%;" onclick="openDiscipleDetailModal('NV_TruongTamPhong')" title="Trương Tam Phong"></div>
-                        <div class="perf-hotspot" style="left: 64%; top: 4%; width: 18%; height: 25%;" onclick="openDiscipleDetailModal('NV_QuachTinh')" title="Quách Tĩnh"></div>
-                        <div class="perf-hotspot" style="left: 83%; top: 4%; width: 16%; height: 25%;" onclick="openDiscipleDetailModal('NV_DongPhuongBatBai')" title="Đông Phương Bất Bại"></div>
+                    <!-- 2. Authentic Carved Lower Board (6 Buttons + 6 Activities + 6 Utilities) -->
+                    <div class="home-lower-stage">
+                        <img src="/assets/ui/home_authentic/home_lower_board.png" class="home-lower-bg" alt="Đại Minh Chủ">
 
                         <!-- 6 Carved Wooden Buttons Hotspots -->
-                        <div class="perf-hotspot" style="left: 4.5%; top: 32%; width: 26%; height: 11%;" onclick="openDiscipleDetailModal()" title="Đệ tử"></div>
-                        <div class="perf-hotspot" style="left: 36%; top: 32%; width: 26%; height: 11%;" onclick="openTinhLuyenModal()" title="Trang bị"></div>
-                        <div class="perf-hotspot" style="left: 67%; top: 32%; width: 26%; height: 11%;" onclick="openThanTienTyTyModal()" title="Võ công"></div>
+                        <div class="perf-hotspot" style="left: 4.3%; top: 1%; width: 25.5%; height: 16%;" onclick="openDiscipleDetailModal()" title="Đệ tử"></div>
+                        <div class="perf-hotspot" style="left: 36.1%; top: 1%; width: 25.5%; height: 16%;" onclick="openTinhLuyenModal()" title="Trang bị"></div>
+                        <div class="perf-hotspot" style="left: 66.8%; top: 1%; width: 25.5%; height: 16%;" onclick="openThanTienTyTyModal()" title="Võ công"></div>
 
-                        <div class="perf-hotspot" style="left: 4.5%; top: 45%; width: 26%; height: 11%;" onclick="openKinhMachModal()" title="Kinh Mạch"></div>
-                        <div class="perf-hotspot" style="left: 36%; top: 45%; width: 26%; height: 11%;" onclick="openChanKhiModal()" title="Chân khí"></div>
-                        <div class="perf-hotspot" style="left: 67%; top: 45%; width: 26%; height: 11%;" onclick="openTayDuyenModal()" title="Khẩu quyết"></div>
+                        <div class="perf-hotspot" style="left: 4.3%; top: 20%; width: 25.5%; height: 16%;" onclick="openKinhMachModal()" title="Kinh Mạch"></div>
+                        <div class="perf-hotspot" style="left: 36.1%; top: 20%; width: 25.5%; height: 16%;" onclick="openChanKhiModal()" title="Chân khí"></div>
+                        <div class="perf-hotspot" style="left: 66.8%; top: 20%; width: 25.5%; height: 16%;" onclick="openTayDuyenModal()" title="Khẩu quyết"></div>
 
                         <!-- 6 Big Activity Icons Hotspots -->
-                        <div class="perf-hotspot" style="left: 5%; top: 58%; width: 26%; height: 13.5%;" onclick="openLongChauModal()" title="Long Châu"></div>
-                        <div class="perf-hotspot" style="left: 35%; top: 58%; width: 26%; height: 13.5%;" onclick="openLienServerModal()" title="Liên Server"></div>
-                        <div class="perf-hotspot" style="left: 65%; top: 58%; width: 30%; height: 13.5%;" onclick="switchTab('luankiem')" title="Luận kiếm Liên Cụm"></div>
+                        <div class="perf-hotspot" style="left: 5.2%; top: 38.6%; width: 25.2%; height: 20%;" onclick="openLongChauModal()" title="Long Châu"></div>
+                        <div class="perf-hotspot" style="left: 34.7%; top: 38.6%; width: 25.2%; height: 20%;" onclick="openLienServerModal()" title="Liên Server"></div>
+                        <div class="perf-hotspot" style="left: 63.4%; top: 38.6%; width: 31.3%; height: 20%;" onclick="switchTab('luankiem')" title="Luận kiếm Liên Cụm"></div>
 
-                        <div class="perf-hotspot" style="left: 3.5%; top: 74%; width: 29%; height: 12%;" onclick="openAmKhiModal()" title="Ám khí"></div>
-                        <div class="perf-hotspot" style="left: 41%; top: 75.5%; width: 14%; height: 9%;" onclick="openGiftcodeModal()" title="Fanpage"></div>
-                        <div class="perf-hotspot" style="left: 65%; top: 74%; width: 30%; height: 12%;" onclick="openLienMinhModal()" title="Liên minh"></div>
+                        <div class="perf-hotspot" style="left: 3.5%; top: 62.4%; width: 28.6%; height: 17%;" onclick="openAmKhiModal()" title="Ám khí"></div>
+                        <div class="perf-hotspot" style="left: 42.5%; top: 65.3%; width: 11.3%; height: 12%;" onclick="openGiftcodeModal()" title="Fanpage"></div>
+                        <div class="perf-hotspot" style="left: 64.2%; top: 62.4%; width: 30.4%; height: 17%;" onclick="openLienMinhModal()" title="Liên minh"></div>
 
                         <!-- 6 Utility Square Buttons Hotspots -->
-                        <div class="perf-hotspot" style="left: 4.5%; top: 89%; width: 14%; height: 9.5%;" onclick="switchTab('items')" title="Tay nải"></div>
-                        <div class="perf-hotspot" style="left: 20%; top: 89%; width: 14%; height: 9.5%;" onclick="openTopServerModal()" title="Võ lâm phổ"></div>
-                        <div class="perf-hotspot" style="left: 36%; top: 89%; width: 14%; height: 9.5%;" onclick="openMailModal()" title="Truyền thư"></div>
-                        <div class="perf-hotspot" style="left: 51.5%; top: 89%; width: 14%; height: 9.5%;" onclick="openAnOanModal()" title="Ân oán"></div>
-                        <div class="perf-hotspot" style="left: 67%; top: 89%; width: 14%; height: 9.5%;" onclick="openChatModal()" title="Trò chuyện"></div>
-                        <div class="perf-hotspot" style="left: 82.5%; top: 89%; width: 14%; height: 9.5%;" onclick="openSettingsModal()" title="Cài đặt"></div>
+                        <div class="perf-hotspot" style="left: 4.9%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="switchTab('items')" title="Tay nải"></div>
+                        <div class="perf-hotspot" style="left: 20.5%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="openTopServerModal()" title="Võ lâm phổ"></div>
+                        <div class="perf-hotspot" style="left: 36.1%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="openMailModal()" title="Truyền thư"></div>
+                        <div class="perf-hotspot" style="left: 51.7%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="openAnOanModal()" title="Ân oán"></div>
+                        <div class="perf-hotspot" style="left: 67.4%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="openChatModal()" title="Trò chuyện"></div>
+                        <div class="perf-hotspot" style="left: 83.0%; top: 84.2%; width: 13.9%; height: 13.5%;" onclick="openSettingsModal()" title="Cài đặt"></div>
                     </div>
                 </div>
 
@@ -1524,6 +1522,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=13"></script>
+    <script src="/js/game.js?v=14"></script>
 </body>
 </html>
