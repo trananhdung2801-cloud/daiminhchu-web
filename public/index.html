@@ -616,6 +616,9 @@
                         <button class="kyngo-icon-btn" id="btn-kyngo-thuongdai" onclick="switchKyngoSubTab('thuongdai')" title="Thượng Đài Luận Võ">
                             <img src="/assets/ui/kyngo_authentic/icon_thuongdai.png" class="kyngo-feature-icon" alt="Thượng Đài"/>
                         </button>
+                        <button class="kyngo-icon-btn" id="btn-kyngo-bongda" onclick="switchKyngoSubTab('bongda')" title="Dự Đoán Bóng Đá">
+                            <img src="/assets/ui/kyngo_authentic/clean_icon_bongda.png" class="kyngo-feature-icon" alt="Bóng đá"/>
+                        </button>
                         <button class="kyngo-icon-btn" id="btn-kyngo-thuychien" onclick="switchKyngoSubTab('thuychien')" title="Thủy Chiến">
                             <img src="/assets/ui/kyngo_authentic/icon_thuychien.png" class="kyngo-feature-icon" alt="Thủy Chiến"/>
                         </button>
@@ -715,7 +718,39 @@
                         </div>
                     </div>
 
-                                                            <!-- Main Scenic Stage: Thương Nhân Thần Bí (media_1793094305775_44f09702.jpg) -->
+                                                                                <!-- Main Scenic Stage: Dự Đoán Bóng Đá (media_1793094347617_84886d52.jpg) -->
+                    <div id="kyngo-view-bongda" class="kyngo-stage-scene" style="display: none;">
+                        <img src="/assets/ui/kyngo_authentic/scene_bongda_full.png" class="kyngo-scene-bg" alt="Dự Đoán Bóng Đá"/>
+                        
+                        <!-- Match 1 Interactive Betting Hotspots -->
+                        <div class="bd-bet-hotspot bd-bet-vietnam" onclick="openBongDaBetModal('vn')" title="Đặt cược: Việt Nam Thắng (Tỉ lệ 2.0)">
+                            <span class="bd-bet-val" id="bd-val-vn">10000</span>
+                        </div>
+                        <div class="bd-bet-hotspot bd-bet-draw" onclick="openBongDaBetModal('draw')" title="Đặt cược: Hòa (Tỉ lệ 3.2)">
+                            <span class="bd-bet-val" id="bd-val-draw"></span>
+                        </div>
+                        <div class="bd-bet-hotspot bd-bet-thai" onclick="openBongDaBetModal('thai')" title="Đặt cược: Thái Lan Thắng (Tỉ lệ 2.0)">
+                            <span class="bd-bet-val" id="bd-val-thai"></span>
+                        </div>
+
+                        <!-- Match 2 Interactive Betting Hotspots (Tài / Xỉu) -->
+                        <div class="bd-bet-hotspot bd-bet-tai" onclick="openBongDaBetModal('tai')" title="Đặt cược: Kèo Tài (Tổng > 2 bàn, Tỉ lệ 1.95)">
+                            <span class="bd-bet-val" id="bd-val-tai"></span>
+                        </div>
+                        <div class="bd-bet-hotspot bd-bet-xiu" onclick="openBongDaBetModal('xiu')" title="Đặt cược: Kèo Xỉu (Tổng < 2 bàn, Tỉ lệ 1.95)">
+                            <span class="bd-bet-val" id="bd-val-xiu"></span>
+                        </div>
+
+                        <!-- Footer: Time remaining -->
+                        <div class="bd-countdown-banner">
+                            <span>Kết thúc sau: <b id="bd-countdown-text">157 ngày</b></span>
+                        </div>
+
+                        <!-- Button 'Quy tắc' Hotspot -->
+                        <button class="bd-btn-quytac-hotspot" onclick="openBongDaRulesModal()" title="Quy Tắc Dự Đoán"></button>
+                    </div>
+
+<!-- Main Scenic Stage: Thương Nhân Thần Bí (media_1793094305775_44f09702.jpg) -->
                     <div id="kyngo-view-thuongnhan" class="kyngo-stage-scene" style="display: none;">
                         <img src="/assets/ui/kyngo_authentic/scene_thuongnhan_full.png" class="kyngo-scene-bg" alt="Thương Nhân Thần Bí"/>
                         
@@ -2651,7 +2686,59 @@
             </div>
         </div>
 
-            <!-- ================= MODAL: NẠP TIỀN THƯỞNG NẠP ================= -->
+                    <!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
+        <div id="modal-bongda-bet" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content bd-bet-modal-content">
+                <div class="authentic-modal-header">
+                    <h3 class="authentic-modal-title">Đặt Cược - Dự Đoán Bóng Đá</h3>
+                    <button class="authentic-modal-close" onclick="closeBongDaBetModal()">×</button>
+                </div>
+                <div class="bd-bet-modal-body">
+                    <div class="bd-selected-match-bar">
+                        <span id="bd-modal-match-name" style="color: #ffd700; font-weight: bold;">Việt Nam (0 : 1/4)</span>
+                        <span id="bd-modal-odds-tag" style="color: #ff9800; font-weight: bold;">Tỉ lệ: 1 ăn 2.0</span>
+                    </div>
+                    <div style="font-size: 13px; color: #fff; margin-bottom: 8px;">
+                        Chọn số lượng Vàng đặt cược:
+                    </div>
+                    <div class="bd-chip-selector">
+                        <button class="bd-chip-btn" id="bd-chip-1000" onclick="selectBongDaChip(1000)">1.000</button>
+                        <button class="bd-chip-btn" id="bd-chip-5000" onclick="selectBongDaChip(5000)">5.000</button>
+                        <button class="bd-chip-btn active" id="bd-chip-10000" onclick="selectBongDaChip(10000)">10.000</button>
+                        <button class="bd-chip-btn" id="bd-chip-50000" onclick="selectBongDaChip(50000)">50.000</button>
+                    </div>
+                    <div class="bd-payout-calc">
+                        <span>Số Vàng cược: <b id="bd-modal-bet-gold" style="color: #ffd700;">10.000</b> Vàng</span>
+                        <span>Tiền thắng ước tính: <b id="bd-modal-est-payout" style="color: #81c784;">20.000</b> Vàng</span>
+                    </div>
+                    <div class="bd-actions-row">
+                        <button class="bd-btn-submit" onclick="submitBongDaBet()">Xác Nhận Đặt Cược</button>
+                        <button class="bd-btn-cancel" onclick="closeBongDaBetModal()">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL: QUY TẮC DỰ ĐOÁN BÓNG ĐÁ ================= -->
+        <div id="modal-bongda-rules" class="authentic-modal" style="display: none;">
+            <div class="authentic-modal-content bd-rules-modal-content">
+                <div class="authentic-modal-header">
+                    <h3 class="authentic-modal-title">Quy Tắc Dự Đoán Bóng Đá</h3>
+                    <button class="authentic-modal-close" onclick="closeBongDaRulesModal()">×</button>
+                </div>
+                <div class="bd-rules-modal-body">
+                    <p>⚽ <b>1. Thể lệ tham gia:</b></p>
+                    <p>Chưởng Môn sử dụng Vàng (KNB) để tham gia dự đoán kết quả các trận cầu tâm điểm đỉnh cao.</p>
+                    <p>⚽ <b>2. Các loại kèo cược:</b></p>
+                    <p>• <b>Kèo Châu Á (Chấp):</b> Đội tuyển chấp tỷ lệ bàn thắng theo quy định (Ví dụ: Việt Nam chấp 0 : 1/4).</p>
+                    <p>• <b>Kèo Tài / Xỉu (Tổng bàn thắng):</b> Dự đoán tổng số bàn thắng trong trận lớn hơn hoặc nhỏ hơn tỷ lệ mốc (Mốc 2 bàn).</p>
+                    <p>⚽ <b>3. Kết toán và Trao thưởng:</b></p>
+                    <p>• Sau khi trận đấu có kết quả chính thức từ trọng tài, hệ thống sẽ tự động kết toán kết quả cược.</p>
+                    <p>• Tiền thưởng (Gốc + Thắng) được tự động chuyển thẳng vào <b>Hòm Thư</b> của Chưởng Môn!</p>
+                </div>
+            </div>
+        </div>
+<!-- ================= MODAL: NẠP TIỀN THƯỞNG NẠP ================= -->
         <div id="modal-thuongnap-recharge" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content tn-recharge-modal-content">
                 <div class="authentic-modal-header">
@@ -2701,6 +2788,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=39"></script>
+    <script src="/js/game.js?v=40"></script>
 </body>
 </html>

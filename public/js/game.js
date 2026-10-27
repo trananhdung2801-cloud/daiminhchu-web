@@ -3460,6 +3460,7 @@ function switchKyngoSubTab(tab) {
     const khieuChienEl = document.getElementById('kyngo-view-khieuchien');
     const thuongNapEl = document.getElementById('kyngo-view-thuongnap');
     const thuongNhanEl = document.getElementById('kyngo-view-thuongnhan');
+    const bongDaEl = document.getElementById('kyngo-view-bongda');
 
     if (tab === 'theluc') {
         if (theLucEl) theLucEl.style.display = 'block';
@@ -3468,6 +3469,16 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
         if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'none';
+    } else if (tab === 'bongda') {
+        if (theLucEl) theLucEl.style.display = 'none';
+        if (thuongTieuEl) thuongTieuEl.style.display = 'none';
+        if (bauCuaEl) bauCuaEl.style.display = 'none';
+        if (khieuChienEl) khieuChienEl.style.display = 'none';
+        if (thuongNapEl) thuongNapEl.style.display = 'none';
+        if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'block';
+        updateBongDaUI();
     } else if (tab === 'thuongnhan') {
         if (theLucEl) theLucEl.style.display = 'none';
         if (thuongTieuEl) thuongTieuEl.style.display = 'none';
@@ -3475,6 +3486,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
         if (thuongNhanEl) thuongNhanEl.style.display = 'block';
+        if (bongDaEl) bongDaEl.style.display = 'none';
         startThuongNhanCountdown();
         updateThuongNhanUI();
     } else if (tab === 'thuongnap') {
@@ -3484,6 +3496,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'block';
         if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'none';
         startThuongNapCountdown();
         updateThuongNapUI();
     } else if (tab === 'thuongtieu') {
@@ -3493,6 +3506,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
         if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'none';
         startTltCountdown();
         updateTltSpentAmount();
     } else if (tab === 'baucua') {
@@ -3502,6 +3516,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'none';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
         if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'none';
         initBauCuaState();
     } else if (tab === 'khieuchien') {
         if (theLucEl) theLucEl.style.display = 'none';
@@ -3511,6 +3526,7 @@ function switchKyngoSubTab(tab) {
         if (khieuChienEl) khieuChienEl.style.display = 'flex';
         if (thuongNapEl) thuongNapEl.style.display = 'none';
         if (thuongNhanEl) thuongNhanEl.style.display = 'none';
+        if (bongDaEl) bongDaEl.style.display = 'none';
         startKhieuChienCountdown();
     } else if (tab === 'bequan') {
         openBeQuanModal();
@@ -5968,4 +5984,135 @@ function doThuongNhanMuaNgay() {
     sound.play('victory');
     
     alert(`🎉 [GIAO DỊCH THÀNH CÔNG] 🎉\nChúc mừng Chưởng Môn đã mua thành công ${item.name}!\nĐã trừ: ${item.priceGold} Vàng.\n${item.effectType === 'theluc' ? 'Đã phục hồi ngay +' + item.effectValue + ' Thể Lực!' : 'Vật phẩm đã được thêm vào túi đồ!'}\n\nThương Nhân Thần Bí: "Cảm ơn đại hiệp đã ủng hộ! Lần sau ghé lại nhé!"`);
+}
+
+
+// ================= 100% AUTHENTIC DỰ ĐOÁN BÓNG ĐÁ SYSTEM (media_1793094347617_84886d52.jpg) =================
+let currentBongDaSelection = 'vn';
+let currentBongDaChip = 10000;
+const BONG_DA_ODDS = {
+    vn: { name: 'Việt Nam Thắng (0 : 1/4)', odds: 2.0 },
+    draw: { name: 'Hòa (0 : 1/4)', odds: 3.2 },
+    thai: { name: 'Thái Lan Thắng', odds: 2.0 },
+    tai: { name: 'Kèo Tài (Tổng > 2 bàn)', odds: 1.95 },
+    xiu: { name: 'Kèo Xỉu (Tổng < 2 bàn)', odds: 1.95 }
+};
+
+function updateBongDaUI() {
+    if (!GameState.playerData) return;
+    if (!GameState.playerData.bongDaBets) {
+        GameState.playerData.bongDaBets = {
+            vn: 10000,
+            draw: 0,
+            thai: 0,
+            tai: 0,
+            xiu: 0
+        };
+    }
+    
+    const bets = GameState.playerData.bongDaBets;
+    const elVn = document.getElementById('bd-val-vn');
+    const elDraw = document.getElementById('bd-val-draw');
+    const elThai = document.getElementById('bd-val-thai');
+    const elTai = document.getElementById('bd-val-tai');
+    const elXiu = document.getElementById('bd-val-xiu');
+    
+    if (elVn) elVn.textContent = bets.vn ? bets.vn : '';
+    if (elDraw) elDraw.textContent = bets.draw ? bets.draw : '';
+    if (elThai) elThai.textContent = bets.thai ? bets.thai : '';
+    if (elTai) elTai.textContent = bets.tai ? bets.tai : '';
+    if (elXiu) elXiu.textContent = bets.xiu ? bets.xiu : '';
+}
+
+function openBongDaBetModal(key) {
+    sound.play('click');
+    currentBongDaSelection = key;
+    const modal = document.getElementById('modal-bongda-bet');
+    if (!modal) return;
+    
+    const matchNameEl = document.getElementById('bd-modal-match-name');
+    const oddsTagEl = document.getElementById('bd-modal-odds-tag');
+    const cfg = BONG_DA_ODDS[key] || BONG_DA_ODDS.vn;
+    
+    if (matchNameEl) matchNameEl.textContent = cfg.name;
+    if (oddsTagEl) oddsTagEl.textContent = `Tỉ lệ: 1 ăn ${cfg.odds}`;
+    
+    selectBongDaChip(currentBongDaChip || 10000);
+    modal.style.display = 'flex';
+}
+
+function closeBongDaBetModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-bongda-bet');
+    if (modal) modal.style.display = 'none';
+}
+
+function selectBongDaChip(chip) {
+    sound.play('click');
+    currentBongDaChip = chip;
+    document.querySelectorAll('.bd-chip-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('bd-chip-' + chip);
+    if (btn) btn.classList.add('active');
+    
+    const betGoldEl = document.getElementById('bd-modal-bet-gold');
+    const estPayoutEl = document.getElementById('bd-modal-est-payout');
+    const cfg = BONG_DA_ODDS[currentBongDaSelection] || BONG_DA_ODDS.vn;
+    
+    if (betGoldEl) betGoldEl.textContent = chip.toLocaleString('vi-VN');
+    if (estPayoutEl) {
+        const payout = Math.floor(chip * cfg.odds);
+        estPayoutEl.textContent = payout.toLocaleString('vi-VN');
+    }
+}
+
+function submitBongDaBet() {
+    sound.play('click');
+    if (!GameState.playerData || !GameState.playerData.Account) return;
+    
+    const currentGold = GameState.playerData.Account.Vang || 0;
+    if (currentGold < currentBongDaChip) {
+        alert(`❌ [KHÔNG ĐỦ VÀNG] ❌\nChưởng Môn cần ${currentBongDaChip.toLocaleString('vi-VN')} Vàng để đặt cược.\nHiện tại chỉ có: ${currentGold.toLocaleString('vi-VN')} Vàng!`);
+        return;
+    }
+    
+    // Deduct gold
+    GameState.playerData.Account.Vang -= currentBongDaChip;
+    
+    // Record bet
+    if (!GameState.playerData.bongDaBets) GameState.playerData.bongDaBets = {};
+    GameState.playerData.bongDaBets[currentBongDaSelection] = (GameState.playerData.bongDaBets[currentBongDaSelection] || 0) + currentBongDaChip;
+    
+    const cfg = BONG_DA_ODDS[currentBongDaSelection];
+    const estPayout = Math.floor(currentBongDaChip * cfg.odds);
+    
+    // Send mail receipt
+    if (!GameState.playerData.Mails) GameState.playerData.Mails = [];
+    GameState.playerData.Mails.unshift({
+        id: Date.now(),
+        title: `Phiếu Cược Bóng Đá: ${cfg.name}`,
+        sender: 'Ban Trọng Tài Đại Minh Chủ',
+        content: `Chưởng Môn đã đặt cược thành công ${currentBongDaChip.toLocaleString('vi-VN')} Vàng vào cửa [${cfg.name}].\nTỉ lệ: 1 ăn ${cfg.odds}. Tiền thắng ước tính: ${estPayout.toLocaleString('vi-VN')} Vàng.\nTiền thưởng sẽ được tự động gửi qua Hòm Thư sau khi trận đấu kết thúc!`,
+        date: new Date().toLocaleDateString('vi-VN'),
+        claimed: true
+    });
+    
+    saveGameState();
+    updateHeader();
+    updateBongDaUI();
+    closeBongDaBetModal();
+    sound.play('victory');
+    
+    alert(`🎉 [ĐẶT CƯỢC THÀNH CÔNG] 🎉\nĐã cược thành công ${currentBongDaChip.toLocaleString('vi-VN')} Vàng vào [${cfg.name}]!\nTiền thắng ước tính: ${estPayout.toLocaleString('vi-VN')} Vàng.`);
+}
+
+function openBongDaRulesModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-bongda-rules');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeBongDaRulesModal() {
+    sound.play('click');
+    const modal = document.getElementById('modal-bongda-rules');
+    if (modal) modal.style.display = 'none';
 }

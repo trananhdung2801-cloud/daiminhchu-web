@@ -10299,3 +10299,220 @@ img {
     font-weight: 900;
     text-shadow: 0 0 6px #ffeb3b;
 }
+
+
+/* ================= 100% AUTHENTIC DỰ ĐOÁN BÓNG ĐÁ SYSTEM (media_1793094347617_84886d52.jpg) ================= */
+#kyngo-view-bongda {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.bd-bet-hotspot {
+    position: absolute;
+    cursor: pointer;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    border-radius: 4px;
+}
+
+.bd-bet-hotspot:hover {
+    transform: scale(1.04);
+    filter: brightness(1.15);
+}
+
+.bd-bet-hotspot:active {
+    transform: scale(0.96);
+}
+
+/* Match 1 Bet Boxes (VietNam / Hoa / ThaiLan) */
+.bd-bet-vietnam {
+    top: 30.8%;
+    left: 15%;
+    width: 22%;
+    height: 8.2%;
+}
+
+.bd-bet-draw {
+    top: 30.8%;
+    left: 39%;
+    width: 22%;
+    height: 8.2%;
+}
+
+.bd-bet-thai {
+    top: 30.8%;
+    left: 63.5%;
+    width: 22%;
+    height: 8.2%;
+}
+
+/* Match 2 Bet Boxes (Tai / Xiu) */
+.bd-bet-tai {
+    top: 53.5%;
+    left: 6.5%;
+    width: 42%;
+    height: 10.5%;
+}
+
+.bd-bet-xiu {
+    top: 53.5%;
+    left: 51.5%;
+    width: 42%;
+    height: 10.5%;
+}
+
+.bd-bet-val {
+    color: #3e2723;
+    font-size: 13px;
+    font-weight: 900;
+    text-shadow: 0 0 2px #fff;
+    pointer-events: none;
+}
+
+.bd-countdown-banner {
+    position: absolute;
+    top: 81%;
+    left: 5%;
+    font-size: 14px;
+    color: #4e342e;
+    font-weight: 700;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.bd-countdown-banner b {
+    color: #8b0000;
+}
+
+.bd-btn-quytac-hotspot {
+    position: absolute;
+    top: 79.8%;
+    left: 72%;
+    width: 22.5%;
+    height: 8.5%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 8;
+    border-radius: 6px;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.bd-btn-quytac-hotspot:hover {
+    filter: brightness(1.2);
+    transform: scale(1.04);
+}
+
+.bd-btn-quytac-hotspot:active {
+    filter: brightness(0.9);
+    transform: scale(0.96);
+}
+
+/* Modal Bet Styling */
+.bd-bet-modal-content,
+.bd-rules-modal-content {
+    max-width: 440px;
+    background: #1a0f0a url('/assets/ui/bg_modal_wood.png') center/cover;
+    border: 2px solid #b8860b;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(184, 134, 11, 0.4);
+    color: #fff;
+    padding: 16px;
+}
+
+.bd-selected-match-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #5d4037;
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+.bd-chip-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.bd-chip-btn {
+    background: linear-gradient(180deg, #3e2723, #1a0d06);
+    border: 1.5px solid #8d6e63;
+    border-radius: 8px;
+    color: #ffd700;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.bd-chip-btn.active,
+.bd-chip-btn:hover {
+    border-color: #ffd700;
+    background: linear-gradient(180deg, #ff8f00, #e65100);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.bd-payout-calc {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #3e2723;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.bd-actions-row {
+    display: flex;
+    gap: 10px;
+}
+
+.bd-btn-submit {
+    flex: 2;
+    background: linear-gradient(180deg, #ffc107, #ff8f00);
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    color: #3e2723;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.bd-btn-submit:hover {
+    background: linear-gradient(180deg, #ffca28, #ffa000);
+}
+
+.bd-btn-cancel {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #6d4c41;
+    border-radius: 8px;
+    color: #ccc;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.bd-rules-modal-body p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #efebe9;
+}
