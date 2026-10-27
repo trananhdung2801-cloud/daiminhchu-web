@@ -5137,3 +5137,191 @@ img {
     transform: scale(0.93);
     filter: brightness(0.85);
 }
+
+
+/* ================= 100% AUTHENTIC HẬU CUNG & DÀN TRẬN SUB-MODE ICONS ================= */
+.dt-top-submode-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 6px 6px 4px 6px;
+    z-index: 5;
+    margin-bottom: 2px;
+}
+
+.dt-submode-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dt-submode-btn:hover {
+    transform: scale(1.06);
+}
+
+.dt-submode-btn.active {
+    box-shadow: 0 0 10px #ffd700, 0 0 4px #ff9800;
+    border-radius: 14px;
+}
+
+.dt-submode-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.dt-plaque-wrapper {
+    margin-left: auto;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.dt-plaque-wrapper:hover {
+    transform: scale(1.06);
+}
+
+.dt-plaque-img {
+    height: 46px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.dt-view-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HẬU CUNG SCREEN (media_1793066451321_a85b6675.jpg) */
+.dt-haucung-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.hc-scroll-wrapper {
+    width: 100%;
+    max-width: 485px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.hc-scroll-roller {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    z-index: 3;
+}
+
+.hc-chamber-board {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 430px;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    background: #1e110b;
+}
+
+.hc-chamber-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hc-slots-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 2;
+    position: relative;
+}
+
+.hc-col-left {
+    align-items: flex-start;
+}
+
+.hc-col-right {
+    align-items: flex-end;
+}
+
+.hc-slot-card {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px;
+    border: 2.5px solid #ffd84c;
+    background: #1a0e08;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.6), inset 0 0 8px rgba(0, 0, 0, 0.8), 0 3px 6px rgba(0, 0, 0, 0.7);
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.12s ease;
+}
+
+.hc-slot-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px #ffe066;
+}
+
+.hc-slot-card:active {
+    transform: scale(0.95);
+}
+
+.hc-slot-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hc-slot-tier-badge {
+    position: absolute;
+    bottom: 1px;
+    left: 4px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #ffeb3b;
+    text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
+    z-index: 3;
+}
+
+.hc-bottom-banner-wrap {
+    width: 100%;
+    margin-top: -2px;
+    z-index: 2;
+}
+
+.hc-bottom-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}

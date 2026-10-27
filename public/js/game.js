@@ -444,6 +444,14 @@ function renderFormationOverviewBoard() {
 
 function renderFormation() {
     if (!GameState.playerData) return;
+    if (typeof currentDantranMode !== 'undefined' && currentDantranMode === 'haucung') {
+        const viewMain = document.getElementById('dt-view-main');
+        const viewHauCung = document.getElementById('dt-view-haucung');
+        if (viewMain) viewMain.style.display = 'none';
+        if (viewHauCung) viewHauCung.style.display = 'flex';
+        renderHauCung();
+        return;
+    }
     const dh = GameState.playerData.DoiHinh || {};
     const level = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
     const maxSlots = getMaxSlotDoiHinh(level);
@@ -2750,3 +2758,77 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     console.log('Đại Minh Chủ Authentic Web Game Loaded with 100% Features!');
 });
+
+
+// ================= 100% AUTHENTIC DÀN TRẬN SUB-MODES & HẬU CUNG =================
+let currentDantranMode = 'tran1';
+
+const AUTHENTIC_HAUCUNG_BEAUTIES = [
+    { code: 'NV_Achau', name: 'A Châu', tier: 11 },
+    { code: 'NV_TrieuMan', name: 'Triệu Mẫn', tier: 11 },
+    { code: 'NV_ChuChiNhuoc', name: 'Chu Chỉ Nhược', tier: 11 },
+    { code: 'NV_HoangDung', name: 'Hoàng Dung', tier: 11 },
+    { code: 'NV_TieuLongNu', name: 'Tiểu Long Nữ', tier: 11 },
+    { code: 'NV_NhamDoanhDoanh', name: 'Nhậm Doanh Doanh', tier: 11 },
+    { code: 'NV_VuongNguYen', name: 'Vương Ngữ Yên', tier: 11 },
+    { code: 'NV_LamTrieuAnh', name: 'Lâm Triều Anh', tier: 11 }
+];
+
+function switchDantranMode(mode) {
+    sound.play('click');
+    currentDantranMode = mode;
+
+    document.querySelectorAll('.dt-submode-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById('btn-dt-mode-' + mode);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    const viewMain = document.getElementById('dt-view-main');
+    const viewHauCung = document.getElementById('dt-view-haucung');
+
+    if (mode === 'haucung') {
+        if (viewMain) viewMain.style.display = 'none';
+        if (viewHauCung) viewHauCung.style.display = 'flex';
+        renderHauCung();
+    } else if (mode === 'tran1') {
+        if (viewMain) viewMain.style.display = 'flex';
+        if (viewHauCung) viewHauCung.style.display = 'none';
+        renderFormation();
+    } else if (mode === 'tran2') {
+        if (viewMain) viewMain.style.display = 'flex';
+        if (viewHauCung) viewHauCung.style.display = 'none';
+        openFormationOverviewModal();
+    } else if (mode === 'long') {
+        if (viewMain) viewMain.style.display = 'flex';
+        if (viewHauCung) viewHauCung.style.display = 'none';
+        openLongChauModal();
+    }
+}
+
+function renderHauCung() {
+    for (let i = 0; i < 8; i++) {
+        const slotEl = document.getElementById('hc-slot-' + i);
+        if (!slotEl) continue;
+
+        const beauty = AUTHENTIC_HAUCUNG_BEAUTIES[i];
+        if (beauty) {
+            slotEl.innerHTML = `
+                <img src="/assets/images/${beauty.code}_ava_to.png" class="hc-slot-avatar" alt="${beauty.name}" onerror="this.src='/assets/images/NV_TieuLongNu_ava_to.png'"/>
+                <span class="hc-slot-tier-badge">${beauty.tier}</span>
+            `;
+            slotEl.title = `${beauty.name} (Hậu Cung Vị Trí #${i + 1}) - Cấp Hoàng Kim +11`;
+        } else {
+            slotEl.innerHTML = '<img src="/assets/ui/dantran_authentic/haucung_empty_slot.png" class="hc-slot-avatar" alt="Trống"/>';
+            slotEl.title = 'Vị trí Hậu Cung còn trống';
+        }
+    }
+}
+
+function handleHauCungSlotClick(slotIdx) {
+    sound.play('click');
+    const beauty = AUTHENTIC_HAUCUNG_BEAUTIES[slotIdx];
+    if (beauty) {
+        alert(`🌸 [HẬU CUNG MỸ NHÂN] 🌸\nNàng: ${beauty.name}\nCảnh giới: Hoàng Kim +${beauty.tier}\n\nHiệu quả: "Các đệ tử trong Hậu cung sẽ được tăng 1 cấp võ công thiên phú khi các nàng đều đạt cấp Hoàng kim"\nHiện tại: Toàn bộ đội hình được tăng +1 Cấp Võ Công Thiên Phú!`);
+    } else {
+        alert('Vị trí Hậu Cung còn trống, có thể chiêu mộ thêm mỹ nhân vào cung!');
+    }
+}

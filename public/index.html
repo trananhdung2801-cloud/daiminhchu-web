@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=18">
+    <link rel="stylesheet" href="/css/style.css?v=19">
 </head>
 <body>
     <div id="game-container">
@@ -218,6 +218,27 @@
                 </div>
 
                 <div id="tab-formation" class="tab-view dantran-authentic-view" style="display: none;">
+                    <!-- Top Sub-mode Icons & Plaque (100% Authentic Matching Original Game Screenshot) -->
+                    <div class="dt-top-submode-row">
+                        <button class="dt-submode-btn active" id="btn-dt-mode-tran1" onclick="switchDantranMode('tran1')" title="Trận 1 - Bát Quái Trận">
+                            <img src="/assets/ui/dantran_authentic/icon_tran1.png" alt="Trận 1" class="dt-submode-icon"/>
+                        </button>
+                        <button class="dt-submode-btn" id="btn-dt-mode-tran2" onclick="switchDantranMode('tran2')" title="Trận 2 - Thất Tinh Trận">
+                            <img src="/assets/ui/dantran_authentic/icon_tran2.png" alt="Trận 2" class="dt-submode-icon"/>
+                        </button>
+                        <button class="dt-submode-btn" id="btn-dt-mode-long" onclick="switchDantranMode('long')" title="Long Trận">
+                            <img src="/assets/ui/dantran_authentic/icon_tran3_long.png" alt="Long Trận" class="dt-submode-icon"/>
+                        </button>
+                        <button class="dt-submode-btn" id="btn-dt-mode-haucung" onclick="switchDantranMode('haucung')" title="Hậu Cung">
+                            <img src="/assets/ui/dantran_authentic/icon_haucung.png" alt="Hậu Cung" class="dt-submode-icon"/>
+                        </button>
+                        <div class="dt-plaque-wrapper" onclick="openFormationOverviewModal()" title="Dàn Trận">
+                            <img src="/assets/ui/dantran_authentic/plaque_dantran_vert.png" alt="Dàn Trận" class="dt-plaque-img"/>
+                        </div>
+                    </div>
+
+                    <!-- View A: Main Formation (Disciple Detail, Equipment & Skills) -->
+                    <div id="dt-view-main" class="dt-view-container">
                     <!-- Top Disciple Roster Strip + "Dàn Trận" Button (Matching Original Game) -->
                     <div class="dt-top-roster-row">
                         <div class="dt-disciple-avatars-track" id="dt-disciple-avatars-track"></div>
@@ -301,6 +322,45 @@
                             <div class="dt-orb-chankhi" onclick="openChanKhiModal()" title="Chân Khí">
                                 <img src="/assets/ui/dantran_authentic/orb_chankhi.png" alt="Chân Khí"/>
                             </div>
+                        </div>
+                    </div>
+                
+                    </div>
+
+                    <!-- View B: 100% Authentic Hậu Cung Screen (media_1793066451321_a85b6675.jpg) -->
+                    <div id="dt-view-haucung" class="dt-haucung-view" style="display: none;">
+                        <div class="hc-scroll-wrapper">
+                            <!-- Top Roller -->
+                            <img src="/assets/ui/dantran_authentic/scroll_top_roller.png" class="hc-scroll-roller" alt="Scroll Top"/>
+
+                            <!-- Chamber Background & 8 Disciples -->
+                            <div class="hc-chamber-board">
+                                <img src="/assets/ui/dantran_authentic/haucung_chamber_bg.png" class="hc-chamber-bg" alt="Chamber"/>
+                                
+                                <!-- Left Column 4 Disciples -->
+                                <div class="hc-slots-column hc-col-left">
+                                    <div class="hc-slot-card" id="hc-slot-0" onclick="handleHauCungSlotClick(0)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-1" onclick="handleHauCungSlotClick(1)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-2" onclick="handleHauCungSlotClick(2)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-3" onclick="handleHauCungSlotClick(3)"></div>
+                                </div>
+
+                                <!-- Right Column 4 Disciples -->
+                                <div class="hc-slots-column hc-col-right">
+                                    <div class="hc-slot-card" id="hc-slot-4" onclick="handleHauCungSlotClick(4)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-5" onclick="handleHauCungSlotClick(5)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-6" onclick="handleHauCungSlotClick(6)"></div>
+                                    <div class="hc-slot-card" id="hc-slot-7" onclick="handleHauCungSlotClick(7)"></div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Banner with Wuxia Text -->
+                            <div class="hc-bottom-banner-wrap">
+                                <img src="/assets/ui/dantran_authentic/haucung_bottom_banner.png" class="hc-bottom-banner-img" alt="Hậu Cung Banner"/>
+                            </div>
+
+                            <!-- Bottom Roller -->
+                            <img src="/assets/ui/dantran_authentic/scroll_bottom_roller.png" class="hc-scroll-roller" alt="Scroll Bottom"/>
                         </div>
                     </div>
                 </div>
@@ -1631,6 +1691,6 @@
         </div>
     </div>
 
-    <script src="/js/game.js?v=18"></script>
+    <script src="/js/game.js?v=19"></script>
 </body>
 </html>
