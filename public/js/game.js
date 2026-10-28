@@ -199,8 +199,14 @@ function switchTab(tabName) {
     });
 
     document.querySelectorAll('.tab-view').forEach(view => {
-        view.style.display = view.id === `tab-${tabName}` ? 'block' : 'none';
+        view.style.display = view.id === `tab-${tabName}` ? (tabName === 'home' ? 'flex' : 'block') : 'none';
     });
+
+    const contentArea = document.querySelector('.content-area');
+    if (contentArea) {
+        contentArea.style.overflow = (tabName === 'home' ? 'hidden' : 'auto');
+        contentArea.scrollTop = 0;
+    }
 
     const lanternBox = document.getElementById('home-floating-lanterns');
     if (lanternBox) {
