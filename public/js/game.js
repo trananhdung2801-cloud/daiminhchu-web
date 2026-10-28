@@ -3953,6 +3953,10 @@ function switchLuyencongSubTab(tab) {
         openHoangKimDeTuScreen();
     } else if (tab === 'hkvocong') {
         openHoangKimVoCongScreen();
+    } else if (tab === 'truyencong') {
+        openTruyenCongScreen();
+    } else if (tab === 'thamngo') {
+        openThamNgoScreen();
     }
 }
 
@@ -6863,4 +6867,417 @@ function showMatDetail(matKey) {
         thankhi: '✨ [Lưỡng Nghi Thần Khí]\nThần khí thái cực thượng cổ có thể xoay chuyển càn khôn trong tab Dàn Trận.'
     };
     alert(hints[matKey] || 'Kỳ trân dị bảo võ lâm!');
+}
+
+
+/* =========================================================================
+   100% AUTHENTIC TRUYỀN CÔNG LỰC SYSTEM
+   ========================================================================= */
+const truyenCongState = {
+    targetHeroId: 'hero_datma',
+    sourceHeroId: 'hero_dichphong',
+    exp: 150764161917,
+    targetOldLvl: 373,
+    targetNewLvl: 527,
+    dan: 27332,
+    sam: 375658,
+    selectingType: null // 'target' or 'source'
+};
+
+const truyenCongHeroRoster = {
+    'hero_datma': {
+        id: 'hero_datma',
+        name: 'Đạt Ma Tổ Sư',
+        avatar: '/assets/ui/truyencong_authentic/ava_dat_ma.png',
+        level: 373,
+        tier: 0,
+        quality: 'Giáp 1'
+    },
+    'hero_dichphong': {
+        id: 'hero_dichphong',
+        name: 'Dịch Phong',
+        avatar: '/assets/ui/truyencong_authentic/ava_dich_phong.png',
+        level: 525,
+        tier: 5,
+        quality: 'Giáp 1'
+    },
+    'hero_truongtamphong': {
+        id: 'hero_truongtamphong',
+        name: 'Trương Tam Phong',
+        avatar: '/assets/ui/hoangkim_authentic/avatar_hero_purple.png',
+        level: 495,
+        tier: 1,
+        quality: 'Giáp 1'
+    },
+    'hero_trieuman': {
+        id: 'hero_trieuman',
+        name: 'Triệu Mẫn',
+        avatar: '/assets/ui/hoangkim_authentic/avatar_hero_max10.png',
+        level: 510,
+        tier: 10,
+        quality: 'Kim'
+    }
+};
+
+function renderTruyenCongScreen() {
+    const targetHero = truyenCongHeroRoster[truyenCongState.targetHeroId] || truyenCongHeroRoster['hero_datma'];
+    const sourceHero = truyenCongHeroRoster[truyenCongState.sourceHeroId] || truyenCongHeroRoster['hero_dichphong'];
+
+    // Render target disciple
+    const targetAva = document.getElementById('tc-target-ava');
+    const targetName = document.getElementById('tc-target-name');
+    const targetLvl = document.getElementById('tc-target-lvl');
+    if (targetAva) targetAva.src = targetHero.avatar;
+    if (targetName) targetName.textContent = targetHero.name;
+    if (targetLvl) targetLvl.textContent = targetHero.level;
+
+    // Render source disciple
+    const sourceAva = document.getElementById('tc-source-ava');
+    const sourceName = document.getElementById('tc-source-name');
+    const sourceLvl = document.getElementById('tc-source-lvl');
+    const sourceTier = document.getElementById('tc-source-tier');
+    if (sourceAva) sourceAva.src = sourceHero.avatar;
+    if (sourceName) sourceName.textContent = sourceHero.name;
+    if (sourceLvl) sourceLvl.textContent = sourceHero.level;
+    if (sourceTier) sourceTier.textContent = sourceHero.tier || 1;
+
+    // Render stats
+    const expVal = document.getElementById('tc-exp-val');
+    const oldLvl = document.getElementById('tc-stat-old-lvl');
+    const newLvl = document.getElementById('tc-stat-new-lvl');
+    const danVal = document.getElementById('tc-dan-val');
+    const samVal = document.getElementById('tc-sam-val');
+
+    if (expVal) expVal.textContent = truyenCongState.exp.toLocaleString('vi-VN');
+    if (oldLvl) oldLvl.textContent = targetHero.level;
+    if (newLvl) newLvl.textContent = Math.max(targetHero.level, sourceHero.level + 2);
+    if (danVal) danVal.textContent = truyenCongState.dan.toLocaleString('vi-VN');
+    if (samVal) samVal.textContent = truyenCongState.sam.toLocaleString('vi-VN');
+}
+
+function openTruyenCongScreen(targetHeroId, sourceHeroId) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    if (targetHeroId) truyenCongState.targetHeroId = targetHeroId;
+    if (sourceHeroId) truyenCongState.sourceHeroId = sourceHeroId;
+
+    renderTruyenCongScreen();
+    const scr = document.getElementById('screen-truyencong');
+    if (scr) scr.style.display = 'flex';
+}
+
+function closeTruyenCongScreen() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const scr = document.getElementById('screen-truyencong');
+    if (scr) scr.style.display = 'none';
+}
+
+function openSelectTruyenCongTargetModal() {
+    truyenCongState.selectingType = 'target';
+    openSelectTruyenCongModal('Chọn Đệ Tử Nhận Công');
+}
+
+function openSelectTruyenCongSourceModal() {
+    truyenCongState.selectingType = 'source';
+    openSelectTruyenCongModal('Chọn Đệ Tử Cho Công (Sẽ Hi Sinh)');
+}
+
+function openSelectTruyenCongModal(title) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const titleEl = document.getElementById('tc-select-modal-title');
+    const listEl = document.getElementById('tc-select-hero-list');
+    if (titleEl) titleEl.textContent = title;
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+    Object.values(truyenCongHeroRoster).forEach(h => {
+        const item = document.createElement('div');
+        item.className = 'hk-select-item';
+        item.onclick = function() {
+            if (truyenCongState.selectingType === 'target') {
+                truyenCongState.targetHeroId = h.id;
+            } else {
+                truyenCongState.sourceHeroId = h.id;
+            }
+            closeSelectTruyenCongModal();
+            renderTruyenCongScreen();
+        };
+
+        item.innerHTML = `
+            <img src="${h.avatar}" style="width: 46px; height: 46px; border-radius: 6px; border: 1px solid #ca8a04;">
+            <div style="flex: 1;">
+                <div style="color: #ffd700; font-weight: bold; font-size: 13px;">${h.name}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Phẩm chất: <b style="color: #c084fc;">${h.quality}</b> | Cấp độ: <b style="color: #4ade80;">${h.level}</b></div>
+            </div>
+            <button class="btn-wuxia-gold" style="width: 70px; height: 28px; font-size: 11px;">Chọn</button>
+        `;
+        listEl.appendChild(item);
+    });
+
+    const modal = document.getElementById('modal-select-tc-hero');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeSelectTruyenCongModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const modal = document.getElementById('modal-select-tc-hero');
+    if (modal) modal.style.display = 'none';
+}
+
+function doExecuteTruyenCong() {
+    const target = truyenCongHeroRoster[truyenCongState.targetHeroId] || truyenCongHeroRoster['hero_datma'];
+    const source = truyenCongHeroRoster[truyenCongState.sourceHeroId] || truyenCongHeroRoster['hero_dichphong'];
+
+    if (target.id === source.id) {
+        alert('Đệ tử nhận công và đệ tử cho công không thể là cùng một người!');
+        return;
+    }
+
+    const confirmed = confirm(
+        '⚠️ CẢNH BÁO TRUYỀN CÔNG LỰC ⚠️\n' +
+        'Đệ tử truyền công [' + source.name + '] (Cấp ' + source.level + ') sẽ HI SINH và rời khỏi môn phái!\n' +
+        'Đệ tử nhận công [' + target.name + '] sẽ hấp thụ toàn bộ tu vi thăng cấp lên CẤP ' + truyenCongState.targetNewLvl + '!\n\n' +
+        'Chưởng môn có chắc chắn muốn tiến hành truyền công lực?'
+    );
+
+    if (!confirmed) return;
+
+    if (typeof sound !== 'undefined') sound.play('level_up');
+
+    target.level = truyenCongState.targetNewLvl;
+    renderTruyenCongScreen();
+
+    alert(
+        '🌟 TRUYỀN CÔNG LỰC ĐẠI THÀNH! 🌟\n' +
+        'Đệ tử [' + target.name + '] đã đột phá lên CẤP ' + target.level + '!\n' +
+        '🎁 Thu hồi ' + truyenCongState.dan.toLocaleString('vi-VN') + ' Bồi Dưỡng Đan\n' +
+        '🎁 Thu hồi ' + truyenCongState.sam.toLocaleString('vi-VN') + ' Bách Niên Sâm\n' +
+        '[' + source.name + '] đã hoàn thành sứ mệnh và quy ẩn giang hồ!'
+    );
+}
+
+// Backward-compatible alias
+function openTruyenCongModal() {
+    openTruyenCongScreen();
+}
+
+/* =========================================================================
+   100% AUTHENTIC THAM NGỘ VÕ CÔNG SYSTEM
+   ========================================================================= */
+const thamNgoState = {
+    targetSkillId: 'skill_linhte',
+    slots: [null, null, null, null, null]
+};
+
+const thamNgoSkillLibrary = {
+    'skill_linhte': {
+        id: 'skill_linhte',
+        name: 'Linh Tê Nhất Chỉ',
+        icon: '/assets/ui/thamngo_authentic/icon_linh_te_nhat_chi.png',
+        quality: 'Giáp 1',
+        tier: 'giap',
+        level: 18,
+        statType: 'Thân pháp',
+        statVal: 780
+    },
+    'skill_cuucung': {
+        id: 'skill_cuucung',
+        name: 'Cửu Cung Kiếm Pháp',
+        icon: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+        quality: 'Giáp 1',
+        tier: 'giap',
+        level: 15,
+        statType: 'Công kích',
+        statVal: 620
+    },
+    'skill_tiemvu': {
+        id: 'skill_tiemvu',
+        name: 'Tiêm Vũ Băng Châm',
+        icon: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+        quality: 'Ất',
+        tier: 'at',
+        level: 12,
+        statType: 'Thân pháp',
+        statVal: 430
+    },
+    'skill_kimxa': {
+        id: 'skill_kimxa',
+        name: 'Kim Xà Kiếm Pháp',
+        icon: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+        quality: 'Bính',
+        tier: 'binh',
+        level: 10,
+        statType: 'Bạo kích',
+        statVal: 280
+    }
+};
+
+function renderThamNgoScreen() {
+    const target = thamNgoSkillLibrary[thamNgoState.targetSkillId] || thamNgoSkillLibrary['skill_linhte'];
+
+    const iconEl = document.getElementById('tn-target-icon');
+    const lvlEl = document.getElementById('tn-target-lvl-badge');
+    const nameEl = document.getElementById('tn-target-name');
+    const capEl = document.getElementById('tn-target-cap-num');
+    const statEl = document.getElementById('tn-target-stat-val');
+
+    if (iconEl) iconEl.src = target.icon;
+    if (lvlEl) lvlEl.textContent = target.level;
+    if (nameEl) nameEl.textContent = target.name;
+    if (capEl) capEl.textContent = target.level;
+    if (statEl) statEl.textContent = target.statVal;
+
+    // Render 5 slots
+    for (let i = 0; i < 5; i++) {
+        const slotImg = document.getElementById('tn-slot-img-' + i);
+        if (slotImg) {
+            if (thamNgoState.slots[i]) {
+                slotImg.src = thamNgoState.slots[i].icon;
+                slotImg.style.borderRadius = '6px';
+            } else {
+                slotImg.src = '/assets/ui/thamngo_authentic/slot_ink_plus.png';
+            }
+        }
+    }
+}
+
+function openThamNgoScreen(skillId) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    if (skillId && thamNgoSkillLibrary[skillId]) {
+        thamNgoState.targetSkillId = skillId;
+    }
+    renderThamNgoScreen();
+    const scr = document.getElementById('screen-thamngo');
+    if (scr) scr.style.display = 'flex';
+}
+
+function closeThamNgoScreen() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const scr = document.getElementById('screen-thamngo');
+    if (scr) scr.style.display = 'none';
+}
+
+function clickThamNgoSlot(slotIdx) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    if (thamNgoState.slots[slotIdx]) {
+        // Clear slot
+        thamNgoState.slots[slotIdx] = null;
+        renderThamNgoScreen();
+    } else {
+        openSelectThamNgoSkillForSlot(slotIdx);
+    }
+}
+
+let activeSlotIndex = 0;
+function openSelectThamNgoSkillForSlot(slotIdx) {
+    activeSlotIndex = slotIdx;
+    const listEl = document.getElementById('tn-select-skill-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+    Object.values(thamNgoSkillLibrary).forEach(s => {
+        if (s.id === thamNgoState.targetSkillId) return; // Cannot consume target itself
+
+        const item = document.createElement('div');
+        item.className = 'hk-select-item';
+        item.onclick = function() {
+            thamNgoState.slots[activeSlotIndex] = s;
+            closeSelectThamNgoSkillModal();
+            renderThamNgoScreen();
+        };
+
+        item.innerHTML = `
+            <img src="${s.icon}" style="width: 44px; height: 44px; border-radius: 6px;">
+            <div style="flex: 1;">
+                <div style="color: #ffd700; font-weight: bold; font-size: 13px;">${s.name}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Phẩm chất: <b style="color: #c084fc;">${s.quality}</b> | Cấp độ: ${s.level}</div>
+            </div>
+            <button class="btn-wuxia-gold" style="width: 70px; height: 28px; font-size: 11px;">Chọn</button>
+        `;
+        listEl.appendChild(item);
+    });
+
+    const modal = document.getElementById('modal-select-tn-skill');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeSelectThamNgoSkillModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const modal = document.getElementById('modal-select-tn-skill');
+    if (modal) modal.style.display = 'none';
+}
+
+function openSelectThamNgoTargetSkillModal() {
+    const listEl = document.getElementById('tn-select-skill-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+    Object.values(thamNgoSkillLibrary).forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'hk-select-item';
+        item.onclick = function() {
+            thamNgoState.targetSkillId = s.id;
+            closeSelectThamNgoSkillModal();
+            renderThamNgoScreen();
+        };
+
+        item.innerHTML = `
+            <img src="${s.icon}" style="width: 44px; height: 44px; border-radius: 6px;">
+            <div style="flex: 1;">
+                <div style="color: #ffd700; font-weight: bold; font-size: 13px;">${s.name}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Phẩm chất: <b style="color: #c084fc;">${s.quality}</b> | Cấp độ: ${s.level}</div>
+            </div>
+            <button class="btn-wuxia-gold" style="width: 70px; height: 28px; font-size: 11px;">Chọn</button>
+        `;
+        listEl.appendChild(item);
+    });
+
+    const modal = document.getElementById('modal-select-tn-skill');
+    if (modal) modal.style.display = 'flex';
+}
+
+function fastSelectThamNgoTier(tier) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const tierName = tier === 'binh' ? 'Bính' : (tier === 'at' ? 'Ất' : 'Giáp');
+    
+    // Auto fill 5 dummy or actual skills of matching tier
+    for (let i = 0; i < 5; i++) {
+        thamNgoState.slots[i] = {
+            id: 'dummy_' + tier + '_' + i,
+            name: 'Võ Công [' + tierName + ']',
+            icon: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+            quality: tierName,
+            tier: tier,
+            level: 1
+        };
+    }
+    renderThamNgoScreen();
+}
+
+function doExecuteThamNgo() {
+    const target = thamNgoSkillLibrary[thamNgoState.targetSkillId] || thamNgoSkillLibrary['skill_linhte'];
+    const filledCount = thamNgoState.slots.filter(s => s !== null).length;
+
+    if (filledCount === 0) {
+        alert('Chưởng môn vui lòng chọn ít nhất 1 võ công tiêu hao hoặc bấm [Chọn Bính / Ất / Giáp]!');
+        return;
+    }
+
+    if (typeof sound !== 'undefined') sound.play('level_up');
+
+    target.level += filledCount;
+    target.statVal += filledCount * 45;
+    thamNgoState.slots = [null, null, null, null, null];
+    renderThamNgoScreen();
+
+    alert(
+        '🌟 THAM NGỘ VÕ HỌC THÀNH CÔNG! 🌟\n' +
+        'Võ công [' + target.name + '] đã đột phá lên CẤP ' + target.level + '!\n' +
+        '⭐ Gia tăng +' + (filledCount * 45) + ' ' + target.statType + ' (Tổng: ' + target.statVal + ')\n' +
+        '⭐ Đã tiêu hao thành công ' + filledCount + ' bí kíp võ công làm nguyên liệu tham ngộ!'
+    );
+}
+
+// Backward-compatible alias
+function openThamNgoModal() {
+    openThamNgoScreen();
 }

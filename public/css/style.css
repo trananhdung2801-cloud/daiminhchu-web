@@ -11742,3 +11742,445 @@ img {
     background: rgba(234, 179, 8, 0.15);
     border-color: #eab308;
 }
+
+/* =========================================================================
+   100% AUTHENTIC TRUYỀN CÔNG LỰC & THAM NGỘ VÕ CÔNG (ORIGINAL GAME GUI)
+   ========================================================================= */
+.tc-modal-content, .tn-modal-content {
+    max-width: 480px;
+    width: 100%;
+    height: 94vh;
+    max-height: 840px;
+    display: flex;
+    flex-direction: column;
+    background: #c8ab78 radial-gradient(circle at 50% 30%, #e6d3a8 0%, #ba9864 70%, #9e7d4a 100%);
+    border: 3px solid #6b4423;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(78, 42, 10, 0.4);
+    overflow: hidden;
+    position: relative;
+}
+
+.tc-header-row, .tn-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px 6px 14px;
+    background: linear-gradient(180deg, rgba(60,30,10,0.45) 0%, rgba(40,20,10,0.15) 100%);
+    border-bottom: 2px solid rgba(139, 90, 43, 0.35);
+}
+
+.tc-title-plaque, .tn-title-plaque {
+    display: flex;
+    align-items: center;
+}
+
+.tc-title-img, .tn-title-img {
+    height: 42px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.tc-quaylai-btn, .tn-quaylai-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s;
+}
+
+.tc-quaylai-btn img, .tn-quaylai-btn img {
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.tc-quaylai-btn:hover img, .tn-quaylai-btn:hover img {
+    transform: scale(1.05);
+}
+
+.tc-body-scroll, .tn-body-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tc-desc-banner {
+    background: rgba(35, 20, 10, 0.5);
+    border: 2px solid #8e8071;
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+}
+
+.tc-disciples-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0 6px 0;
+    padding: 0 10px;
+}
+
+.tc-disciple-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.tc-disciple-card:hover {
+    transform: scale(1.04);
+}
+
+.tc-disciple-avatar-wrap {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.tc-disciple-avatar-wrap.source-gold {
+    box-shadow: 0 0 12px #facc15;
+    border: 2px solid #facc15;
+}
+
+.tc-disciple-ava-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.tc-source-tier-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #ca8a04;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 5px;
+    border-radius: 0 4px 0 6px;
+    box-shadow: 0 0 4px #facc15;
+}
+
+.tc-disciple-name {
+    color: #1c1917;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 6px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.tc-disciple-sub {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #451a03;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+.tc-badge-giap {
+    height: 18px;
+    object-fit: contain;
+}
+
+.tc-arrow-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tc-arrow-left-img {
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px #dc2626);
+}
+
+.tc-linhduoc-box {
+    background: #deb887 url('/assets/ui/truyencong_authentic/box_linh_duoc.png') center / 100% 100% no-repeat;
+    border: 2px solid #8c6d48;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 4px 14px 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tc-linhduoc-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.tc-linhduoc-title-img {
+    height: 24px;
+    object-fit: contain;
+}
+
+.tc-linhduoc-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tc-linhduoc-pill-img {
+    width: 72px;
+    height: 68px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px #38bdf8);
+}
+
+.tc-linhduoc-stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.tc-stat-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #291506;
+    font-weight: 600;
+}
+
+.tc-stat-num {
+    color: #1e293b;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.tc-lvl-old {
+    color: #475569;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.tc-lvl-new {
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 0 0 4px rgba(220,38,38,0.4);
+}
+
+.tc-exp-ico {
+    height: 18px;
+    object-fit: contain;
+}
+
+.tc-arrow-or-img {
+    height: 14px;
+    object-fit: contain;
+}
+
+.tc-bottom-actions, .tn-bottom-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: auto;
+    padding: 8px 0 12px 0;
+}
+
+.tc-btn-action, .tn-btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s;
+}
+
+.tc-btn-action img, .tn-btn-action img {
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+.tc-btn-action:hover img, .tn-btn-action:hover img {
+    transform: scale(1.05);
+}
+
+.tc-btn-action:active img, .tn-btn-action:active img {
+    transform: scale(0.96);
+}
+
+/* Tham Ngộ Võ Công */
+.tn-target-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(35, 20, 10, 0.35);
+    border: 2px solid #ca8a04;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 4px 6px 10px 6px;
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+}
+
+.tn-target-icon-wrap {
+    position: relative;
+    width: 72px;
+    height: 72px;
+}
+
+.tn-target-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.tn-target-lvl {
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
+    background: #9333ea;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.tn-target-name {
+    color: #26160c;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Cinzel Decorative', cursive, serif;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+}
+
+.tn-target-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #3b1904;
+    font-weight: bold;
+}
+
+.tn-cap-tag {
+    background: rgba(0,0,0,0.3);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+}
+
+.tn-stat-ico {
+    height: 20px;
+    object-fit: contain;
+}
+
+.tn-stat-val {
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tn-tieuhao-box {
+    position: relative;
+    margin: 8px 4px 10px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tn-tieuhao-roof {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.tn-tieuhao-title-img {
+    height: 28px;
+    object-fit: contain;
+}
+
+.tn-slots-tray {
+    width: 100%;
+    max-width: 460px;
+    background: url('/assets/ui/thamngo_authentic/tray_tieu_hao.png') center / 100% 100% no-repeat;
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.tn-slot-box {
+    width: 66px;
+    height: 66px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tn-slot-box:hover {
+    transform: scale(1.06);
+}
+
+.tn-slot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tn-tieuhao-hint {
+    color: #3b1904;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.tn-fast-select-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 10px 0;
+}
+
+.tn-btn-fast {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s;
+}
+
+.tn-btn-fast img {
+    height: 76px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+.tn-btn-fast:hover img {
+    transform: scale(1.05);
+}
+
+.tn-btn-fast:active img {
+    transform: scale(0.96);
+}

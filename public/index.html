@@ -560,6 +560,12 @@
                         <button class="lc-icon-btn" id="btn-lc-hkvocong" onclick="switchLuyencongSubTab('hkvocong')" title="Hoàng Kim Võ Công">
                             <img src="/assets/ui/hoangkim_authentic/icon_sub_hk_vocong.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="HK Võ Công"/>
                         </button>
+                        <button class="lc-icon-btn" id="btn-lc-truyencong" onclick="switchLuyencongSubTab('truyencong')" title="Truyền Công Lực">
+                            <img src="/assets/ui/truyencong_authentic/icon_sub_truyencong.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="Truyền Công"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-thamngo" onclick="switchLuyencongSubTab('thamngo')" title="Tham Ngộ Võ Công">
+                            <img src="/assets/ui/thamngo_authentic/icon_sub_thamngo.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="Tham Ngộ"/>
+                        </button>
                     </div>
 
                     <!-- Main Scenic Stage: Luyện Điêu Authentic GUI -->
@@ -2042,7 +2048,7 @@
                 <div class="hero-detail-center-crest">
                     <img src="/assets/ui/hero_info_authentic/center_crest.png" alt="Crest"/>
                 </div>
-                <button class="hero-detail-btn-action btn-transfer" onclick="closeDiscipleDetailModal(); openBoiDuongModal();" title="Truyền công lực">
+                <button class="hero-detail-btn-action btn-transfer" onclick="closeDiscipleDetailModal(); openTruyenCongScreen();" title="Truyền công lực">
                     <img src="/assets/ui/hero_info_authentic/btn_transfer.png" alt="Truyền công lực"/>
                 </button>
                 <button class="hero-detail-btn-action btn-hk-detu" onclick="openHoangKimDeTuFromHeroModal()" title="Hoàng Kim Đệ Tử">
@@ -2133,7 +2139,7 @@
                 <button class="vocong-btn-action btn-doi" onclick="openDoiVoCongModal()" title="Đổi võ công">
                     <img src="/assets/ui/vocong_info_authentic/btn_doi_vo_cong.png" alt="Đổi võ công"/>
                 </button>
-                <button class="vocong-btn-action btn-thamngo" onclick="openThamNgoModal()" title="Tham ngộ">
+                <button class="vocong-btn-action btn-thamngo" onclick="openThamNgoScreen();" title="Tham ngộ">
                     <img src="/assets/ui/vocong_info_authentic/btn_tham_ngo.png" alt="Tham ngộ"/>
                 </button>
                 <button class="vocong-btn-action btn-hk-vocong" onclick="openHoangKimVoCongFromSkillModal()" title="Hoàng Kim Võ Công">
@@ -3178,6 +3184,211 @@
             </div>
         </div>
 
+
+        <!-- ================= 100% AUTHENTIC TRUYỀN CÔNG LỰC ================= -->
+        <div id="screen-truyencong" class="authentic-modal" style="display: none; z-index: 10006;">
+            <div class="authentic-modal-content tc-modal-content">
+                <!-- Top Navigation -->
+                <div class="tc-header-row">
+                    <div class="tc-title-plaque">
+                        <img src="/assets/ui/truyencong_authentic/title_truyen_cong_luc.png" alt="Truyền công lực" class="tc-title-img"/>
+                    </div>
+                    <button class="tc-quaylai-btn" onclick="closeTruyenCongScreen()">
+                        <img src="/assets/ui/hoangkim_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                    </button>
+                </div>
+
+                <div class="tc-body-scroll">
+                    <!-- Subtitle Notice -->
+                    <div class="tc-desc-banner">
+                        Sử dụng linh dược, chuyển công lực của đệ tử này sang đệ tử khác - đệ tử truyền công sẽ hi sinh
+                    </div>
+
+                    <!-- Two Disciples Section -->
+                    <div class="tc-disciples-row">
+                        <!-- Target Disciple (Nhận công) -->
+                        <div class="tc-disciple-card" onclick="openSelectTruyenCongTargetModal()" title="Nhấn để đổi đệ tử nhận công">
+                            <div class="tc-disciple-avatar-wrap">
+                                <img id="tc-target-ava" src="/assets/ui/truyencong_authentic/ava_dat_ma.png" class="tc-disciple-ava-img" alt="Đạt Ma"/>
+                            </div>
+                            <div class="tc-disciple-name" id="tc-target-name">Đạt Ma Tổ Sư</div>
+                            <div class="tc-disciple-sub">
+                                <img src="/assets/ui/truyencong_authentic/badge_giap1.png" class="tc-badge-giap" alt="Giáp 1"/>
+                                <span>Cấp độ : <b id="tc-target-lvl">373</b></span>
+                            </div>
+                        </div>
+
+                        <!-- Center Red Arrow (Pointing Left) -->
+                        <div class="tc-arrow-center">
+                            <img src="/assets/ui/truyencong_authentic/red_arrow_left.png" class="tc-arrow-left-img" alt="◀"/>
+                        </div>
+
+                        <!-- Source Disciple (Cho công - sẽ hi sinh) -->
+                        <div class="tc-disciple-card" onclick="openSelectTruyenCongSourceModal()" title="Nhấn để đổi đệ tử cho công">
+                            <div class="tc-disciple-avatar-wrap source-gold">
+                                <img id="tc-source-ava" src="/assets/ui/truyencong_authentic/ava_dich_phong.png" class="tc-disciple-ava-img" alt="Dịch Phong"/>
+                                <span class="tc-source-tier-badge" id="tc-source-tier">5</span>
+                            </div>
+                            <div class="tc-disciple-name" id="tc-source-name">Dịch Phong</div>
+                            <div class="tc-disciple-sub">
+                                <img src="/assets/ui/truyencong_authentic/badge_giap1.png" class="tc-badge-giap" alt="Giáp 1"/>
+                                <span>Cấp độ : <b id="tc-source-lvl">525</b></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Linh Dược Phục Dụng Box -->
+                    <div class="tc-linhduoc-box">
+                        <div class="tc-linhduoc-header">
+                            <img src="/assets/ui/truyencong_authentic/title_linh_duoc.png" alt="Linh dược phục dụng" class="tc-linhduoc-title-img"/>
+                        </div>
+                        <div class="tc-linhduoc-content">
+                            <div class="tc-linhduoc-icon-col">
+                                <img src="/assets/ui/truyencong_authentic/icon_linh_duoc.png" class="tc-linhduoc-pill-img" alt="Linh Dược"/>
+                            </div>
+                            <div class="tc-linhduoc-stats-col">
+                                <div class="tc-stat-line">
+                                    <span class="tc-stat-lbl">Điểm công lực truyền được :</span>
+                                    <img src="/assets/ui/truyencong_authentic/icon_exp.png" class="tc-exp-ico" alt="EXP"/>
+                                    <span class="tc-stat-num" id="tc-exp-val">150764161917</span>
+                                </div>
+                                <div class="tc-stat-line">
+                                    <span class="tc-stat-lbl">Cấp độ đạt được :</span>
+                                    <span id="tc-stat-old-lvl" class="tc-lvl-old">373</span>
+                                    <img src="/assets/ui/truyencong_authentic/arrow_orange_right.png" class="tc-arrow-or-img" alt="➔"/>
+                                    <span id="tc-stat-new-lvl" class="tc-lvl-new">527</span>
+                                </div>
+                                <div class="tc-stat-line">
+                                    <span class="tc-stat-lbl">Bồi dưỡng đan thu được :</span>
+                                    <span class="tc-stat-num" id="tc-dan-val">27332</span>
+                                </div>
+                                <div class="tc-stat-line">
+                                    <span class="tc-stat-lbl">Bách niên sâm thu được :</span>
+                                    <span class="tc-stat-num" id="tc-sam-val">375658</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Action Buttons: Quay lại & Xác Định -->
+                    <div class="tc-bottom-actions">
+                        <button class="tc-btn-action" onclick="closeTruyenCongScreen()" title="Quay lại">
+                            <img src="/assets/ui/truyencong_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                        </button>
+                        <button class="tc-btn-action" onclick="doExecuteTruyenCong()" title="Xác Định">
+                            <img src="/assets/ui/truyencong_authentic/btn_xac_dinh.png" alt="Xác Định"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 100% AUTHENTIC THAM NGỘ VÕ CÔNG ================= -->
+        <div id="screen-thamngo" class="authentic-modal" style="display: none; z-index: 10006;">
+            <div class="authentic-modal-content tn-modal-content">
+                <!-- Top Navigation -->
+                <div class="tn-header-row">
+                    <div class="tn-title-plaque">
+                        <img src="/assets/ui/thamngo_authentic/title_tham_ngo_vo_cong.png" alt="Tham ngộ võ công" class="tn-title-img"/>
+                    </div>
+                    <button class="tn-quaylai-btn" onclick="closeThamNgoScreen()">
+                        <img src="/assets/ui/hoangkim_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                    </button>
+                </div>
+
+                <div class="tn-body-scroll">
+                    <!-- Target Skill Header Card -->
+                    <div class="tn-target-card" onclick="openSelectThamNgoTargetSkillModal()" title="Nhấn để đổi võ công cần tham ngộ">
+                        <div class="tn-target-icon-wrap">
+                            <img id="tn-target-icon" src="/assets/ui/thamngo_authentic/icon_linh_te_nhat_chi.png" class="tn-target-icon-img" alt="Linh Tê Nhất Chỉ"/>
+                            <span id="tn-target-lvl-badge" class="tn-target-lvl">18</span>
+                        </div>
+                        <div class="tn-target-info">
+                            <div class="tn-target-name" id="tn-target-name">Linh Tê Nhất Chỉ</div>
+                            <div class="tn-target-stats-row">
+                                <img src="/assets/ui/truyencong_authentic/badge_giap1.png" class="tn-badge-giap" alt="Giáp 1"/>
+                                <span class="tn-cap-tag">Cấp <b id="tn-target-cap-num">18</b></span>
+                                <img src="/assets/ui/hoangkim_authentic/stat_thanphap.png" class="tn-stat-ico" alt="Thân pháp"/>
+                                <span id="tn-target-stat-val" class="tn-stat-val">780</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tiêu Hao Võ Công Section (Pagoda Roof Box + 5 Slots Tray) -->
+                    <div class="tn-tieuhao-box">
+                        <div class="tn-tieuhao-roof">
+                            <img src="/assets/ui/thamngo_authentic/title_tieu_hao_vo_cong.png" alt="Tiêu Hao Võ Công" class="tn-tieuhao-title-img"/>
+                        </div>
+
+                        <!-- 5 Consumption Slots Tray -->
+                        <div class="tn-slots-tray">
+                            <div class="tn-slot-box" id="tn-slot-0" onclick="clickThamNgoSlot(0)">
+                                <img src="/assets/ui/thamngo_authentic/slot_ink_plus.png" class="tn-slot-img" id="tn-slot-img-0" alt="+"/>
+                            </div>
+                            <div class="tn-slot-box" id="tn-slot-1" onclick="clickThamNgoSlot(1)">
+                                <img src="/assets/ui/thamngo_authentic/slot_ink_plus.png" class="tn-slot-img" id="tn-slot-img-1" alt="+"/>
+                            </div>
+                            <div class="tn-slot-box" id="tn-slot-2" onclick="clickThamNgoSlot(2)">
+                                <img src="/assets/ui/thamngo_authentic/slot_ink_plus.png" class="tn-slot-img" id="tn-slot-img-2" alt="+"/>
+                            </div>
+                            <div class="tn-slot-box" id="tn-slot-3" onclick="clickThamNgoSlot(3)">
+                                <img src="/assets/ui/thamngo_authentic/slot_ink_plus.png" class="tn-slot-img" id="tn-slot-img-3" alt="+"/>
+                            </div>
+                            <div class="tn-slot-box" id="tn-slot-4" onclick="clickThamNgoSlot(4)">
+                                <img src="/assets/ui/thamngo_authentic/slot_ink_plus.png" class="tn-slot-img" id="tn-slot-img-4" alt="+"/>
+                            </div>
+                        </div>
+
+                        <div class="tn-tieuhao-hint">Mời chọn võ công tiêu hao</div>
+                    </div>
+
+                    <!-- Fast-Select 3 Tier Buttons: Bính, Ất, Giáp -->
+                    <div class="tn-fast-select-row">
+                        <button class="tn-btn-fast" onclick="fastSelectThamNgoTier('binh')" title="Chọn Bính">
+                            <img src="/assets/ui/thamngo_authentic/btn_chon_binh.png" alt="Chọn Bính"/>
+                        </button>
+                        <button class="tn-btn-fast" onclick="fastSelectThamNgoTier('at')" title="Chọn Ất">
+                            <img src="/assets/ui/thamngo_authentic/btn_chon_at.png" alt="Chọn Ất"/>
+                        </button>
+                        <button class="tn-btn-fast" onclick="fastSelectThamNgoTier('giap')" title="Chọn Giáp">
+                            <img src="/assets/ui/thamngo_authentic/btn_chon_giap.png" alt="Chọn Giáp"/>
+                        </button>
+                    </div>
+
+                    <!-- Bottom Action Buttons: Quay lại & Tham ngộ -->
+                    <div class="tn-bottom-actions">
+                        <button class="tn-btn-action" onclick="closeThamNgoScreen()" title="Quay lại">
+                            <img src="/assets/ui/thamngo_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                        </button>
+                        <button class="tn-btn-action" onclick="doExecuteThamNgo()" title="Tham ngộ">
+                            <img src="/assets/ui/thamngo_authentic/btn_tham_ngo.png" alt="Tham ngộ"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selection Modals for Truyen Cong and Tham Ngo -->
+        <div id="modal-select-tc-hero" class="authentic-modal" style="display: none; z-index: 10012;">
+            <div class="authentic-modal-content hk-select-modal-content">
+                <div class="hk-select-header">
+                    <span class="hk-select-title" id="tc-select-modal-title">Chọn Đệ Tử</span>
+                    <button class="hk-select-close" onclick="closeSelectTruyenCongModal()">×</button>
+                </div>
+                <div class="hk-select-list" id="tc-select-hero-list"></div>
+            </div>
+        </div>
+
+        <div id="modal-select-tn-skill" class="authentic-modal" style="display: none; z-index: 10012;">
+            <div class="authentic-modal-content hk-select-modal-content">
+                <div class="hk-select-header">
+                    <span class="hk-select-title">Chọn Võ Công Tiêu Hao</span>
+                    <button class="hk-select-close" onclick="closeSelectThamNgoSkillModal()">×</button>
+                </div>
+                <div class="hk-select-list" id="tn-select-skill-list"></div>
+            </div>
+        </div>
+
 <!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
         <div id="modal-bongda-bet" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content bd-bet-modal-content">
@@ -3280,6 +3491,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=43"></script>
+    <script src="/js/game.js?v=44"></script>
 </body>
 </html>
