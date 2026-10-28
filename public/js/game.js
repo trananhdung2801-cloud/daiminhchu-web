@@ -452,8 +452,7 @@ function openChanKhiModal() {
 }
 
 function showItemDetail(slotType) {
-    sound.play('click');
-    alert(`Ô trang bị [${slotType.toUpperCase()}]: Nhấp vào Túi Đồ để thay đổi thần binh & tâm pháp!`);
+    openTrangBiInfoModal();
 }
 
 function renderMarket() {
@@ -1078,8 +1077,7 @@ function cuongHoaItem(itemId) {
 }
 
 function viewTrangBiDetail(code) {
-    sound.play('click');
-    alert('Chi Tiết Trang Bị: ' + code);
+    openTrangBiInfoModal(code);
 }
 
 function renderItems() {
@@ -7280,4 +7278,124 @@ function doExecuteThamNgo() {
 // Backward-compatible alias
 function openThamNgoModal() {
     openThamNgoScreen();
+}
+
+
+/* =========================================================================
+   100% AUTHENTIC THÔNG TIN TRANG BỊ SYSTEM
+   ========================================================================= */
+const defaultTrangBiData = {
+    id: 'tb_giap_ngo',
+    code: 'TS_GiapNgoNgocBoi',
+    name: 'Giáp Ngọ Ngọc Bội',
+    type: 'trangsuc',
+    level: 1,
+    statIcon: 'blood',
+    statName: 'Khí huyết',
+    statVal: 200,
+    tier: 'at',
+    desc: 'Ngọc bội được chế tác mừng năm mới Giáp Ngọ',
+    art: '/assets/ui/trangbi_info_authentic/art_giap_ngo_ngoc_boi.png',
+    cuongHoaCost: 960
+};
+
+let currentViewingTrangBi = Object.assign({}, defaultTrangBiData);
+
+function openTrangBiInfoModal(itemCodeOrObj) {
+    if (typeof sound !== 'undefined') sound.play('click');
+
+    if (!itemCodeOrObj) {
+        currentViewingTrangBi = Object.assign({}, defaultTrangBiData);
+    } else if (typeof itemCodeOrObj === 'string') {
+        const found = (typeof defaultTrangBiList !== 'undefined') 
+            ? defaultTrangBiList.find(i => i.code === itemCodeOrObj || i.id === itemCodeOrObj)
+            : null;
+        if (found) {
+            currentViewingTrangBi = Object.assign({}, found);
+            if (!currentViewingTrangBi.art) {
+                currentViewingTrangBi.art = '/assets/ui/trangbi_info_authentic/art_giap_ngo_ngoc_boi.png';
+            }
+            if (!currentViewingTrangBi.desc) {
+                currentViewingTrangBi.desc = found.name + ' thần binh võ lâm, tăng ' + found.statVal + ' ' + (found.statName || 'chỉ số') + '.';
+            }
+            if (!currentViewingTrangBi.cuongHoaCost) {
+                currentViewingTrangBi.cuongHoaCost = 960 * (currentViewingTrangBi.level || 1);
+            }
+        } else {
+            currentViewingTrangBi = Object.assign({}, defaultTrangBiData);
+        }
+    } else if (typeof itemCodeOrObj === 'object') {
+        currentViewingTrangBi = Object.assign({}, defaultTrangBiData, itemCodeOrObj);
+    }
+
+    renderTrangBiInfoModal();
+
+    const modal = document.getElementById('modal-trangbi-info');
+    if (modal) modal.style.display = 'flex';
+}
+
+function renderTrangBiInfoModal() {
+    const item = currentViewingTrangBi;
+    const nameEl = document.getElementById('tb-info-vert-name');
+    const badgeEl = document.getElementById('tb-info-badge-img');
+    const artEl = document.getElementById('tb-info-art-img');
+    const lvlEl = document.getElementById('tb-info-lvl-num');
+    const statIconEl = document.getElementById('tb-info-stat-icon');
+    const statValEl = document.getElementById('tb-info-stat-val');
+    const descEl = document.getElementById('tb-info-desc-box');
+
+    if (nameEl) nameEl.textContent = item.name;
+    if (badgeEl) {
+        if (item.tier === 'at') {
+            badgeEl.src = '/assets/ui/trangbi_info_authentic/badge_at.png';
+        } else if (item.tier === 'kim') {
+            badgeEl.src = '/assets/ui/hero_info_authentic/badge_kim.png';
+        } else {
+            badgeEl.src = '/assets/ui/hero_info_authentic/badge_giap.png';
+        }
+    }
+    if (artEl) {
+        artEl.src = item.art || '/assets/ui/trangbi_info_authentic/art_giap_ngo_ngoc_boi.png';
+    }
+    if (lvlEl) lvlEl.textContent = item.level;
+
+    if (statIconEl) {
+        const iconMap = {
+            'blood': '/assets/ui/hero_info_authentic/icon_stat_blood.png',
+            'sword': '/assets/ui/hero_info_authentic/icon_stat_sword.png',
+            'shield': '/assets/ui/hero_info_authentic/icon_stat_shield.png',
+            'palm': '/assets/ui/hero_info_authentic/icon_stat_palm.png'
+        };
+        statIconEl.src = iconMap[item.statIcon] || iconMap['blood'];
+    }
+    if (statValEl) statValEl.textContent = item.statVal;
+    if (descEl) descEl.textContent = item.desc || 'Ngọc bội được chế tác mừng năm mới Giáp Ngọ';
+}
+
+function closeTrangBiInfoModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const modal = document.getElementById('modal-trangbi-info');
+    if (modal) modal.style.display = 'none';
+}
+
+function doTrangBiCuongHoa() {
+    if (typeof sound !== 'undefined') sound.play('level_up');
+    const item = currentViewingTrangBi;
+    item.level = (item.level || 1) + 1;
+    item.statVal = Math.round(item.statVal * 1.15);
+    item.cuongHoaCost = (item.cuongHoaCost || 960) + 480;
+
+    renderTrangBiInfoModal();
+
+    alert(
+        '⚔️ CƯỜNG HÓA THÀNH CÔNG! ⚔️\n' +
+        '[' + item.name + '] đã đột phá lên CẤP ' + item.level + '!\n' +
+        '⭐ ' + (item.statName || 'Thuộc tính') + ' tăng lên: ' + item.statVal + '!\n' +
+        '⭐ Tiêu hao ' + (item.cuongHoaCost - 480) + ' Bạc'
+    );
+}
+
+function shareTrangBiFB() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    alert('📢 Đã chia sẻ thần binh [' + currentViewingTrangBi.name + '] lên Facebook!');
 }

@@ -2776,7 +2776,84 @@
             </div>
         </div>
 
-        <!-- ================= MODAL: THÔNG TIN TRANG BỊ (THẦN KHÍ) ================= -->
+        
+        <!-- ================= 100% AUTHENTIC THÔNG TIN TRANG BỊ ================= -->
+        <div id="modal-trangbi-info" class="modal-overlay" style="display: none; z-index: 10015;">
+            <div class="trangbi-authentic-dialog anim-zoom-enter">
+                <!-- Header Title Bar: Thông tin trang bị -->
+                <div class="trangbi-header-bar">
+                    <span class="trangbi-header-title">Thông tin trang bị</span>
+                </div>
+
+                <!-- Close Button (Red square metal frame with white X) -->
+                <button class="trangbi-close-btn" onclick="closeTrangBiInfoModal()" title="Đóng">
+                    <img src="/assets/ui/trangbi_info_authentic/btn_close_x_clean.png" alt="Đóng"/>
+                </button>
+
+                <!-- Main Content: Left Scroll + Right Description & Share -->
+                <div class="trangbi-main-body">
+                    <!-- Left: Hanging Scroll (Tranh cuộn trang bị xanh sapphire) -->
+                    <div class="trangbi-scroll-frame">
+                        <div class="trangbi-scroll-wrapper">
+                            <img src="/assets/ui/trangbi_info_authentic/scroll_trang_bi_full.png" class="trangbi-scroll-bg" alt="Cuộn tranh"/>
+
+                            <!-- Top-Left Vertical Calligraphy Equipment Name -->
+                            <div id="tb-info-vert-name" class="trangbi-vert-title">
+                                Giáp Ngọ Ngọc Bội
+                            </div>
+
+                            <!-- Top-Right Quality Badge (ẤT / GIÁP / KIM) -->
+                            <div id="tb-info-badge-wrap" class="trangbi-badge-wrap">
+                                <img id="tb-info-badge-img" src="/assets/ui/trangbi_info_authentic/badge_at.png" alt="ẤT"/>
+                            </div>
+
+                            <!-- Center Equipment Art Image -->
+                            <div class="trangbi-art-box">
+                                <img id="tb-info-art-img" src="/assets/ui/trangbi_info_authentic/art_giap_ngo_ngoc_boi.png" alt="Trang bị"/>
+                            </div>
+
+                            <!-- Black Ink Splash Level Badge -->
+                            <div class="trangbi-ink-lvl-badge">
+                                <img src="/assets/ui/trangbi_info_authentic/ink_lvl_badge.png" class="ink-splash-bg" alt="Ink"/>
+                                <span id="tb-info-lvl-num" class="trangbi-lvl-text">1</span>
+                            </div>
+
+                            <!-- Bottom Stats Row on Scroll -->
+                            <div class="trangbi-scroll-stats-row">
+                                <div class="tb-stat-item">
+                                    <img id="tb-info-stat-icon" src="/assets/ui/hero_info_authentic/icon_stat_blood.png" class="tb-stat-ico" alt="Máu"/>
+                                    <span id="tb-info-stat-val">200</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Description & Share Button -->
+                    <div class="trangbi-right-col">
+                        <div class="trangbi-desc-box" id="tb-info-desc-box">
+                            Ngọc bội được chế tác mừng năm mới Giáp Ngọ
+                        </div>
+
+                        <!-- Share Button (f share) -->
+                        <button class="trangbi-share-btn" onclick="shareTrangBiFB()" title="Chia sẻ Facebook">
+                            <img src="/assets/ui/trangbi_info_authentic/btn_fshare_clean.png" alt="f share"/>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bottom Action Buttons: Đóng - Cường hóa -->
+                <div class="trangbi-bottom-actions">
+                    <button class="trangbi-btn-action btn-dong" onclick="closeTrangBiInfoModal()" title="Đóng">
+                        <img src="/assets/ui/trangbi_info_authentic/btn_dong_clean.png" alt="Đóng"/>
+                    </button>
+                    <button class="trangbi-btn-action btn-cuonghoa" onclick="doTrangBiCuongHoa()" title="Cường hóa">
+                        <img src="/assets/ui/trangbi_info_authentic/btn_cuong_hoa_clean.png" alt="Cường hóa"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<!-- ================= MODAL: THÔNG TIN TRANG BỊ (THẦN KHÍ) ================= -->
         <div id="modal-thankhi-info" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content tk-info-modal-content">
                 <div class="tk-modal-wood-header">
@@ -3491,6 +3568,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=44"></script>
+    <script src="/js/game.js?v=45"></script>
 </body>
 </html>
