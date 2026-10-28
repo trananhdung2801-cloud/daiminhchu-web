@@ -1,0 +1,2538 @@
+{
+  "home": {
+    "id": "4278",
+    "name": "HomeForm",
+    "pos": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "sprites": [],
+    "labels": [],
+    "anchors": [],
+    "children": [
+      {
+        "id": "641",
+        "name": "TopLeftA",
+        "pos": [
+          -378.0,
+          568.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          2
+        ],
+        "children": [
+          {
+            "id": "3717",
+            "name": "MonPhaiExp",
+            "pos": [
+              40.134247,
+              -100.89868,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "1195",
+                "name": "LvlBkg",
+                "pos": [
+                  0.5,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  77.0,
+                  78.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home_06"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "2537",
+                "name": "MonPhaiLvl",
+                "pos": [
+                  1.0,
+                  -2.0,
+                  -5.0
+                ],
+                "scale": [
+                  32.0,
+                  32.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [
+                  "22"
+                ],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "4783",
+                "name": "MonPhaiName",
+                "pos": [
+                  45.0,
+                  34.0,
+                  -5.0
+                ],
+                "scale": [
+                  60.0,
+                  60.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [
+                  "Thien Long Bang"
+                ],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "5866",
+                "name": "Progress Bar",
+                "pos": [
+                  1.9382935,
+                  -11.637604,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "48",
+                    "name": "Foreground",
+                    "pos": [
+                      21.285553,
+                      1.2651672,
+                      0.0
+                    ],
+                    "scale": [
+                      213.0,
+                      21.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_10"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "1373",
+                    "name": "MonPhaiExpLabel",
+                    "pos": [
+                      129.22813,
+                      2.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      27.0,
+                      27.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "100/22111"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "5870",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      246.0,
+                      36.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1428",
+        "name": "BottomA",
+        "pos": [
+          0.0,
+          -568.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          7
+        ],
+        "children": [
+          {
+            "id": "1572",
+            "name": "DuoiCungBtn",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "497",
+                "name": "HistoryBtn",
+                "pos": [
+                  -150.83597,
+                  169.96597,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "2129",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      92.0,
+                      69.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_15"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "821",
+                "name": "MailBtn",
+                "pos": [
+                  -49.043423,
+                  169.96597,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "50",
+                    "name": "Background",
+                    "pos": [
+                      0.5,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      85.0,
+                      69.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_66"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "1553",
+                "name": "MailUnRead",
+                "pos": [
+                  -32.216393,
+                  200.91638,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "1742",
+                    "name": "Label",
+                    "pos": [
+                      0.0,
+                      2.0,
+                      -2.0
+                    ],
+                    "scale": [
+                      32.0,
+                      32.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "0"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3361",
+                    "name": "unreadIcon1",
+                    "pos": [
+                      -0.5546949,
+                      -0.00012204005,
+                      0.0
+                    ],
+                    "scale": [
+                      36.0,
+                      36.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "OtherAvatar_SoluongFrame"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3527",
+                    "name": "unreadIcon1",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      30.0,
+                      30.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "OtherAvatar_SoluongFrame"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "2562",
+                "name": "PublicChatBtn",
+                "pos": [
+                  151.7852,
+                  169.96597,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "467",
+                    "name": "Background",
+                    "pos": [
+                      0.5,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      81.0,
+                      67.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_45"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "4199",
+                "name": "FriendBtn",
+                "pos": [
+                  54.845043,
+                  169.96597,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "4190",
+                    "name": "Background",
+                    "pos": [
+                      0.5,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      86.0,
+                      70.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_54"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "5160",
+                "name": "VatPhamBtn",
+                "pos": [
+                  -249.2413,
+                  169.96622,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "2464",
+                    "name": "Background",
+                    "pos": [
+                      0.5,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      86.0,
+                      68.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_72"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "5255",
+                "name": "SettingBtn",
+                "pos": [
+                  252.06772,
+                  169.96597,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "513",
+                    "name": "Background",
+                    "pos": [
+                      0.5,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      87.0,
+                      68.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_70"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "3982",
+            "name": "BkgPanel",
+            "pos": [
+              0.0,
+              0.0,
+              9.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "126",
+                "name": "bkg",
+                "pos": [
+                  0.0,
+                  113.028046,
+                  1.0
+                ],
+                "scale": [
+                  757.1876,
+                  980.24304,
+                  1.0
+                ],
+                "sprites": [
+                  "background"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "4896",
+            "name": "DenLongPanel",
+            "pos": [
+              0.0,
+              0.0,
+              7.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "5318",
+            "name": "TrenBtn",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "424",
+                "name": "KinhMachBtn",
+                "pos": [
+                  -218.48686,
+                  548.5759,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "614",
+                    "name": "Label",
+                    "pos": [
+                      0.0,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "Kinh Mạch"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "830",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "1931",
+                "name": "VoCongBtn",
+                "pos": [
+                  192.99333,
+                  664.1629,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "162",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3746",
+                    "name": "Label",
+                    "pos": [
+                      0.5,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "'Võ công '"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "2731",
+                "name": "TrangBiBtn",
+                "pos": [
+                  -9.168847,
+                  664.1629,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "3745",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "5389",
+                    "name": "Label",
+                    "pos": [
+                      0.5,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "Trang bị"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "4429",
+                "name": "ChanKhiBtn",
+                "pos": [
+                  -9.168655,
+                  548.5759,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "4754",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "5414",
+                    "name": "Label",
+                    "pos": [
+                      0.5,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "Chân khí"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "4507",
+                "name": "NhanVatBtn",
+                "pos": [
+                  -218.48698,
+                  664.1629,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "3819",
+                    "name": "Label",
+                    "pos": [
+                      0.0,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "Đệ tử"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "4297",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "4561",
+                "name": "TeDanBtn",
+                "pos": [
+                  192.99333,
+                  548.5759,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "293",
+                    "name": "Label",
+                    "pos": [
+                      0.5,
+                      8.0,
+                      -5.0
+                    ],
+                    "scale": [
+                      60.0,
+                      60.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "Khẩu quyết"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "2831",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.5,
+                      0.0
+                    ],
+                    "scale": [
+                      168.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_05"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "5706",
+            "name": "GiuaBtn",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "77",
+                "name": "LienServerBtn",
+                "pos": [
+                  -14.627838,
+                  422.92786,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "5200",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      160.0,
+                      140.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "lien sever"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "195",
+                "name": "LuanKiemBtn",
+                "pos": [
+                  184.01402,
+                  427.66473,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "5555",
+                    "name": "Background",
+                    "pos": [
+                      13.0,
+                      -8.9,
+                      0.0
+                    ],
+                    "scale": [
+                      192.0,
+                      135.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_12"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "1921",
+                "name": "LongChauBtn",
+                "pos": [
+                  -215.0,
+                  417.8412,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "1104",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      164.0,
+                      95.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "longchau"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "2419",
+                "name": "FanPageBtn",
+                "pos": [
+                  -4.0,
+                  285.7,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "5748",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      187.0,
+                      83.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "fanpage"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "2591",
+                "name": "BangHoiBtn",
+                "pos": [
+                  185.48157,
+                  292.1452,
+                  0.0
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "4372",
+                    "name": "Background",
+                    "pos": [
+                      13.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      188.0,
+                      98.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_02_43"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "2906",
+                "name": "AmKhiBtn",
+                "pos": [
+                  -234.76357,
+                  296.54388,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "4776",
+                    "name": "Background",
+                    "pos": [
+                      20.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      195.5,
+                      75.4,
+                      1.0
+                    ],
+                    "sprites": [
+                      "am_khi"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "5217",
+                "name": "MySohaBtn",
+                "pos": [
+                  -3.9,
+                  285.7,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "689",
+                    "name": "Notification",
+                    "pos": [
+                      26.084352,
+                      41.10675,
+                      -2.0
+                    ],
+                    "scale": [
+                      1.000248,
+                      1.000248,
+                      1.000248
+                    ],
+                    "sprites": [],
+                    "labels": [],
+                    "anchors": [],
+                    "children": [
+                      {
+                        "id": "2358",
+                        "name": "bkg",
+                        "pos": [
+                          -0.7895686,
+                          0.0,
+                          0.0
+                        ],
+                        "scale": [
+                          30.0,
+                          30.0,
+                          1.0
+                        ],
+                        "sprites": [
+                          "OtherAvatar_SoluongFrame"
+                        ],
+                        "labels": [],
+                        "anchors": [],
+                        "children": []
+                      },
+                      {
+                        "id": "3258",
+                        "name": "NotificationLabel",
+                        "pos": [
+                          0.0,
+                          2.0,
+                          -2.0
+                        ],
+                        "scale": [
+                          32.0,
+                          32.0,
+                          1.0
+                        ],
+                        "sprites": [],
+                        "labels": [
+                          "0"
+                        ],
+                        "anchors": [],
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "5169",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      187.0,
+                      104.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "mysoha"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2240",
+        "name": "TopA",
+        "pos": [
+          0.0,
+          568.0,
+          0.0
+        ],
+        "scale": [
+          1.000248,
+          1.000248,
+          1.000248
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          3
+        ],
+        "children": [
+          {
+            "id": "854",
+            "name": "bkg",
+            "pos": [
+              0.0,
+              -524.0,
+              2.0
+            ],
+            "scale": [
+              757.0,
+              297.34,
+              1.0
+            ],
+            "sprites": [
+              "background_dragon"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "4593",
+            "name": "NhanVatSlider",
+            "pos": [
+              0.0,
+              -291.92715,
+              8.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "5310",
+            "name": "ShowThongTinMonPhai",
+            "pos": [
+              0.0,
+              -97.77751,
+              0.28702295
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "2882",
+        "name": "TopRightA",
+        "pos": [
+          378.0,
+          568.0,
+          0.0
+        ],
+        "scale": [
+          1.000248,
+          1.000248,
+          1.000248
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          4
+        ],
+        "children": [
+          {
+            "id": "498",
+            "name": "vangLabel",
+            "pos": [
+              -232.04756,
+              -77.00007,
+              -5.0
+            ],
+            "scale": [
+              27.0,
+              27.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [
+              "300"
+            ],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "1258",
+            "name": "luotBiKipLabel",
+            "pos": [
+              -79.87018,
+              -118.99997,
+              -5.0
+            ],
+            "scale": [
+              27.0,
+              27.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [
+              "30/30"
+            ],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "1438",
+            "name": "luotBiKipSprite",
+            "pos": [
+              -99.5,
+              -118.5,
+              -5.0
+            ],
+            "scale": [
+              39.0,
+              37.0,
+              1.0
+            ],
+            "sprites": [
+              "icon_LuotTimBiKip"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "1663",
+            "name": "Maybay",
+            "pos": [
+              -368.45966,
+              -502.1331,
+              -9.99752
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "4412",
+                "name": "cloud",
+                "pos": [
+                  -1.5664911,
+                  -148.05673,
+                  -29.706459
+                ],
+                "scale": [
+                  1.000248,
+                  1.000248,
+                  1.000248
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "4719",
+                "name": "sun",
+                "pos": [
+                  -40.427658,
+                  -39.139534,
+                  -29.705967
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "2189",
+            "name": "bacLabel",
+            "pos": [
+              -234.04738,
+              -118.99994,
+              -5.0
+            ],
+            "scale": [
+              27.0,
+              27.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [
+              "0"
+            ],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "3915",
+            "name": "vangSprite",
+            "pos": [
+              -257.5,
+              -77.0,
+              -5.0
+            ],
+            "scale": [
+              40.0,
+              28.0,
+              1.0
+            ],
+            "sprites": [
+              "icon_vang"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "4277",
+            "name": "luotGiangHoSprite",
+            "pos": [
+              -100.5,
+              -76.5,
+              -5.0
+            ],
+            "scale": [
+              39.0,
+              37.0,
+              1.0
+            ],
+            "sprites": [
+              "icon_LuotGiangHo"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "5429",
+            "name": "vipSprite",
+            "pos": [
+              -310.0,
+              -74.5,
+              -5.0
+            ],
+            "scale": [
+              58.0,
+              29.0,
+              1.0
+            ],
+            "sprites": [
+              "icon_vip6"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "5619",
+            "name": "bacSprite",
+            "pos": [
+              -256.5,
+              -119.0,
+              -5.0
+            ],
+            "scale": [
+              40.0,
+              28.0,
+              1.0
+            ],
+            "sprites": [
+              "icon_bac"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "5656",
+            "name": "luotGiangHoLabel",
+            "pos": [
+              -77.87037,
+              -77.00007,
+              -5.0
+            ],
+            "scale": [
+              27.0,
+              27.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [
+              "30/30"
+            ],
+            "anchors": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "menu": {
+    "id": "5734",
+    "name": "MenuGroup",
+    "pos": [
+      0.0,
+      -568.0,
+      -5.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "sprites": [],
+    "labels": [],
+    "anchors": [],
+    "children": [
+      {
+        "id": "28",
+        "name": "BottomA",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.000248,
+          1.000248,
+          1.000248
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          7
+        ],
+        "children": [
+          {
+            "id": "5602",
+            "name": "SliderMenu",
+            "pos": [
+              -221.3888,
+              0.0,
+              -33.948406
+            ],
+            "scale": [
+              0.999876,
+              0.999876,
+              0.999876
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "1146",
+                "name": "LuanKiemBtn",
+                "pos": [
+                  520.2681,
+                  48.63484,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "1116",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      80.0,
+                      72.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_22"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3700",
+                    "name": "Mask6",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "3141",
+                "name": "LuyenCongBtn",
+                "pos": [
+                  214.63252,
+                  48.6349,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "902",
+                    "name": "Mask3",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "4950",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      80.0,
+                      78.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_27"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "3340",
+                "name": "BangHoiBtn",
+                "pos": [
+                  613.58093,
+                  48.63484,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "378",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      76.0,
+                      79.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_21"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3857",
+                    "name": "Mask7",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "3394",
+                "name": "GiangHoBtn",
+                "pos": [
+                  114.20731,
+                  48.6349,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "1078",
+                    "name": "Mask2",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3985",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      69.0,
+                      73.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_38"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "3712",
+                "name": "NhanVatBtn",
+                "pos": [
+                  15.433859,
+                  48.63484,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "31",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      76.0,
+                      72.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_30"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "4234",
+                    "name": "Mask1",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "4445",
+                "name": "KyNgoBtn",
+                "pos": [
+                  316.72534,
+                  48.6349,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "4213",
+                    "name": "Mask4",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "5326",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      76.0,
+                      74.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_09"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "5854",
+                "name": "CuaHangBtn",
+                "pos": [
+                  418.86996,
+                  48.6349,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "789",
+                    "name": "Background",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      75.0,
+                      71.0,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_20"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "3449",
+                    "name": "Mask5",
+                    "pos": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "scale": [
+                      91.9887,
+                      84.98953,
+                      1.0
+                    ],
+                    "sprites": [
+                      "home_03_34"
+                    ],
+                    "labels": [],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "545",
+        "name": "BottomLeftA",
+        "pos": [
+          -378.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          0
+        ],
+        "children": [
+          {
+            "id": "1715",
+            "name": "HomeBtn",
+            "pos": [
+              46.670746,
+              48.63501,
+              -10.084594
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "2414",
+                "name": "Background",
+                "pos": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  75.0,
+                  76.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home_03_42"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "4417",
+                "name": "Mask0",
+                "pos": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  92.0,
+                  85.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home_03_34"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "2145",
+            "name": "LeftArrow",
+            "pos": [
+              104.21393,
+              50.773438,
+              -10.373095
+            ],
+            "scale": [
+              30.996157,
+              43.994545,
+              1.0
+            ],
+            "sprites": [
+              "home_03_15"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          },
+          {
+            "id": "2773",
+            "name": "bkgadd",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "100",
+                "name": "Sprite",
+                "pos": [
+                  20.0,
+                  103.0,
+                  0.0
+                ],
+                "scale": [
+                  34.0,
+                  30.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home4_46"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "1148",
+                "name": "Sprite",
+                "pos": [
+                  381.84113,
+                  103.00003,
+                  -0.0001039505
+                ],
+                "scale": [
+                  33.999912,
+                  30.000055,
+                  1.0
+                ],
+                "sprites": [
+                  "home4_46"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "3310",
+                "name": "Sprite",
+                "pos": [
+                  734.95435,
+                  103.00003,
+                  -0.0001039505
+                ],
+                "scale": [
+                  33.999912,
+                  30.000055,
+                  1.0
+                ],
+                "sprites": [
+                  "home4_46"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "3587",
+                "name": "Sprite",
+                "pos": [
+                  202.34915,
+                  103.00003,
+                  4.7683716e-07
+                ],
+                "scale": [
+                  34.0,
+                  30.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home4_46"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "4259",
+                "name": "Sprite",
+                "pos": [
+                  563.0523,
+                  103.00003,
+                  -0.0001039505
+                ],
+                "scale": [
+                  33.999912,
+                  30.000055,
+                  1.0
+                ],
+                "sprites": [
+                  "home4_46"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "4690",
+            "name": "bkg",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              757.0,
+              120.0,
+              1.0
+            ],
+            "sprites": [
+              "home_03_03"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "713",
+        "name": "TopA",
+        "pos": [
+          0.0,
+          1136.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          3
+        ],
+        "children": [
+          {
+            "id": "5390",
+            "name": "SystemMessage",
+            "pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "sprites": [],
+            "labels": [],
+            "anchors": [],
+            "children": [
+              {
+                "id": "71",
+                "name": "bkg",
+                "pos": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  757.0,
+                  50.0,
+                  1.0
+                ],
+                "sprites": [
+                  "home_03_05"
+                ],
+                "labels": [],
+                "anchors": [],
+                "children": []
+              },
+              {
+                "id": "2049",
+                "name": "MessageGroup",
+                "pos": [
+                  0.0,
+                  -18.0,
+                  -10.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sprites": [],
+                "labels": [],
+                "anchors": [],
+                "children": [
+                  {
+                    "id": "2517",
+                    "name": "Message1",
+                    "pos": [
+                      -356.0,
+                      0.0,
+                      -7.0
+                    ],
+                    "scale": [
+                      30.0,
+                      30.0,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "mMaxLineWidth: 0"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  },
+                  {
+                    "id": "5990",
+                    "name": "Message2",
+                    "pos": [
+                      -356.00024,
+                      0.0,
+                      -7.0001364
+                    ],
+                    "scale": [
+                      30.000055,
+                      30.000055,
+                      1.0
+                    ],
+                    "sprites": [],
+                    "labels": [
+                      "mMaxLineWidth: 0"
+                    ],
+                    "anchors": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4786",
+        "name": "BottomRightA",
+        "pos": [
+          378.0,
+          0.0,
+          4.7683716e-07
+        ],
+        "scale": [
+          1.000248,
+          1.000248,
+          1.000248
+        ],
+        "sprites": [],
+        "labels": [],
+        "anchors": [
+          6
+        ],
+        "children": [
+          {
+            "id": "2552",
+            "name": "Arrow",
+            "pos": [
+              -17.39556,
+              50.99999,
+              -10.082094
+            ],
+            "scale": [
+              32.0,
+              44.0,
+              1.0
+            ],
+            "sprites": [
+              "home_03_11"
+            ],
+            "labels": [],
+            "anchors": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

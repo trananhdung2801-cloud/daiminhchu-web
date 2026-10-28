@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=51">
+    <link rel="stylesheet" href="/css/style.css?v=52">
 </head>
 <body>
     <div id="game-container">
@@ -176,20 +176,52 @@
             </div>
 
             <!-- 100% AUTHENTIC PERFECT SEAMLESS HEADER -->
-            <div class="header-profile-authentic-perfect">
-                <span id="header-level" class="hdr-perf-level"></span>
-                <span id="header-player-name" class="hdr-perf-name"></span>
-                <div class="hdr-perf-exp-wrap">
-                    <div id="header-exp-fill" class="hdr-perf-exp-fill"></div>
-                    <span id="header-exp-text" class="hdr-perf-exp-text"></span>
+            <div class="unity-header-profile-bar">
+                    <!-- TopLeftA: MonPhaiExp -->
+                    <div class="unity-hdr-left">
+                        <div class="unity-lvl-badge">
+                            <img src="/assets/ui/dmc_authentic/home_06.png" class="unity-lvl-bg" alt="Level"/>
+                            <span id="header-level" class="unity-lvl-text">1</span>
+                        </div>
+                        <div class="unity-sect-info">
+                            <div id="header-player-name" class="unity-sect-name">Đại Hiệp</div>
+                            <div class="unity-exp-bar-wrap">
+                                <img src="/assets/ui/dmc_authentic/home_03.png" class="unity-exp-bg" alt=""/>
+                                <div id="header-exp-fill" class="unity-exp-fill">
+                                    <img src="/assets/ui/dmc_authentic/home_10.png" class="unity-exp-img" alt=""/>
+                                </div>
+                                <span id="header-exp-text" class="unity-exp-text">0/100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TopRightA: Currencies & Stamina -->
+                    <div class="unity-hdr-right">
+                        <div class="unity-stat-row">
+                            <span id="header-vip-badge" class="unity-stat-item">
+                                <img src="/assets/ui/dmc_authentic/icon_vip6.png" class="unity-vip-icon" alt="VIP"/>
+                            </span>
+                            <div class="unity-stat-item" title="KNB / Vàng">
+                                <img src="/assets/ui/dmc_authentic/icon_vang.png" class="unity-cur-icon" alt="Vàng"/>
+                                <span id="header-knb" class="unity-stat-val">0</span>
+                            </div>
+                            <div class="unity-stat-item" title="Thể lực">
+                                <img src="/assets/ui/dmc_authentic/icon_LuotGiangHo.png" class="unity-cur-icon" alt="Thể lực"/>
+                                <span id="header-stamina" class="unity-stat-val">30/30</span>
+                            </div>
+                        </div>
+                        <div class="unity-stat-row">
+                            <div class="unity-stat-item" title="Ngân lượng / Bạc">
+                                <img src="/assets/ui/dmc_authentic/icon_bac.png" class="unity-cur-icon" alt="Bạc"/>
+                                <span id="header-bac" class="unity-stat-val">0</span>
+                            </div>
+                            <div class="unity-stat-item" title="Khí lực / Bí kíp">
+                                <img src="/assets/ui/dmc_authentic/icon_LuotTimBiKip.png" class="unity-cur-icon" alt="Khí lực"/>
+                                <span id="header-qi" class="unity-stat-val">30/30</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span id="header-vip-badge" class="hdr-perf-vip"></span>
-                <span id="header-knb" class="hdr-perf-knb"></span>
-                <span id="header-stamina" class="hdr-perf-stamina"></span>
-                <span id="header-bac" class="hdr-perf-bac"></span>
-                <span id="header-qi" class="hdr-perf-qi"></span>
-                <button class="hdr-perf-settings-btn" onclick="openSettingsModal()" title="Cài Đặt & GM"></button>
-            </div>
 
             <!-- Content Area -->
             <div class="content-area">
@@ -235,45 +267,45 @@
                         <!-- Row 3 & 4: 6 Activity Icons -->
                         <div class="home-activities-grid">
                             <button class="home-btn-activity" onclick="openLongChauModal()" title="Long Châu">
-                                <img src="/assets/ui/home_authentic/clean_icon_longchau.png" alt="Long Châu"/>
+                                <img src="/assets/ui/dmc_authentic/longchau.png" alt="Long Châu"/>
                             </button>
                             <button class="home-btn-activity" onclick="openLienServerModal()" title="Liên Server">
-                                <img src="/assets/ui/home_authentic/clean_icon_lienserver.png" alt="Liên Server"/>
+                                <img src="/assets/ui/dmc_authentic/lien sever.png" alt="Liên Server"/>
                             </button>
                             <button class="home-btn-activity" onclick="switchTab('luankiem')" title="Luận kiếm">
-                                <img src="/assets/ui/home_authentic/clean_icon_luankiem.png" alt="Luận kiếm"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_12.png" alt="Luận kiếm"/>
                             </button>
 
                             <button class="home-btn-activity" onclick="switchTab('luyencong')" title="Luyện Công">
-                                <img src="/assets/ui/home_authentic/clean_icon_luyencong.png" alt="Luyện Công"/>
+                                <img src="/assets/ui/dmc_authentic/am_khi.png" alt="Luyện Công"/>
                             </button>
                             <button class="home-btn-activity" onclick="openGiftcodeModal()" title="fan page">
-                                <img src="/assets/ui/home_authentic/clean_icon_fanpage.png" alt="fan page"/>
+                                <img src="/assets/ui/dmc_authentic/fanpage.png" alt="fan page"/>
                             </button>
                             <button class="home-btn-activity" onclick="openLienMinhModal()" title="Liên minh">
-                                <img src="/assets/ui/home_authentic/clean_icon_lienminh.png" alt="Liên minh"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_43.png" alt="Liên minh"/>
                             </button>
                         </div>
 
                         <!-- Row 5: 6 Utility Square Buttons -->
                         <div class="home-utilities-row">
                             <button class="home-btn-utility" onclick="switchTab('items')" title="Tay nải">
-                                <img src="/assets/ui/home_authentic/clean_btn_taynai.png" alt="Tay nải"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_72.png" alt="Tay nải"/>
                             </button>
                             <button class="home-btn-utility" onclick="openTopServerModal()" title="Võ lâm phổ">
-                                <img src="/assets/ui/home_authentic/clean_btn_volampho.png" alt="Võ lâm phổ"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_15.png" alt="Võ lâm phổ"/>
                             </button>
                             <button class="home-btn-utility" onclick="openMailModal()" title="Truyền thư">
-                                <img src="/assets/ui/home_authentic/clean_btn_truyenthu.png" alt="Truyền thư"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_66.png" alt="Truyền thư"/>
                             </button>
                             <button class="home-btn-utility" onclick="openAnOanModal()" title="Ân oán">
-                                <img src="/assets/ui/home_authentic/clean_btn_anoan.png" alt="Ân oán"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_54.png" alt="Ân oán"/>
                             </button>
                             <button class="home-btn-utility" onclick="openChatModal()" title="Trò chuyện">
-                                <img src="/assets/ui/home_authentic/clean_btn_trochuyen.png" alt="Trò chuyện"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_45.png" alt="Trò chuyện"/>
                             </button>
                             <button class="home-btn-utility" onclick="openSettingsModal()" title="Cài đặt">
-                                <img src="/assets/ui/home_authentic/clean_btn_caidat.png" alt="Cài đặt"/>
+                                <img src="/assets/ui/dmc_authentic/home_02_70.png" alt="Cài đặt"/>
                             </button>
                         </div>
                     </div>
@@ -1107,17 +1139,73 @@
 
             <!-- Authentic 8-Tab Bottom Navigation Bar (Matching Image 2 & 3) -->
             <!-- 100% AUTHENTIC PERFECT SEAMLESS BOTTOM NAV -->
-            <div class="bottom-nav-authentic-perfect">
-                <img src="/assets/ui/home_authentic/bottom_nav_perfect.png" class="bottom-nav-seamless-bg" alt="Điều Hướng">
-                <div class="nav-perf-hotspot active" data-tab="home" style="left: 0%; width: 12.5%;" onclick="switchTab('home')" title="Tr.chủ"></div>
-                <div class="nav-perf-hotspot" data-tab="formation" style="left: 12.5%; width: 12.5%;" onclick="switchTab('formation')" title="D.trận"></div>
-                <div class="nav-perf-hotspot" data-tab="giangho" style="left: 25%; width: 12.5%;" onclick="switchTab('giangho')" title="Gi.hồ"></div>
-                <div class="nav-perf-hotspot" data-tab="luyencong" style="left: 37.5%; width: 12.5%;" onclick="switchTab('luyencong')" title="L.công"></div>
-                <div class="nav-perf-hotspot" data-tab="recruit" style="left: 50%; width: 12.5%;" onclick="switchTab('recruit')" title="Kỳ ngộ"></div>
-                <div class="nav-perf-hotspot" data-tab="market" style="left: 62.5%; width: 12.5%;" onclick="switchTab('market')" title="Chợ"></div>
-                <div class="nav-perf-hotspot" data-tab="luankiem" style="left: 75%; width: 12.5%;" onclick="switchTab('luankiem')" title="L.kiếm"></div>
-                <div class="nav-perf-hotspot" data-tab="lienminh" style="left: 87.5%; width: 12.5%;" onclick="openLienMinhModal()" title="L.Minh"></div>
+            <!-- Authentic MenuGroup Bottom Navigation Bar from Game.unity [5734] -->
+            <div class="unity-menu-group-bar">
+                <img src="/assets/ui/dmc_authentic/home_03_03.png" class="menu-group-bg" alt="Menu Bar"/>
+                
+                <!-- BottomLeftA: Gold Dragon HomeBtn -->
+                <button class="menu-home-btn active" data-tab="home" onclick="switchTab('home')" title="Trang chủ">
+                    <img src="/assets/ui/dmc_authentic/home_03_42.png" class="menu-home-dragon" alt="Trang chủ"/>
+                    <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-home-mask" alt=""/>
+                </button>
+
+                <img src="/assets/ui/dmc_authentic/home_03_15.png" class="menu-arrow-left" alt="<"/>
+
+                <!-- BottomA: SliderMenu Tabs -->
+                <div class="menu-slider-scroll" id="menu-slider-scroll">
+                    <!-- NhanVatBtn: Đội hình -->
+                    <button class="menu-tab-btn" data-tab="formation" onclick="switchTab('formation')" title="Đội hình">
+                        <img src="/assets/ui/dmc_authentic/home_03_30.png" class="menu-tab-icon" alt="Đội hình"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Đội hình</span>
+                    </button>
+
+                    <!-- GiangHoBtn: Giang hồ -->
+                    <button class="menu-tab-btn" data-tab="giangho" onclick="switchTab('giangho')" title="Giang hồ">
+                        <img src="/assets/ui/dmc_authentic/home_03_38.png" class="menu-tab-icon" alt="Giang hồ"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Giang hồ</span>
+                    </button>
+
+                    <!-- LuyenCongBtn: Luyện công -->
+                    <button class="menu-tab-btn" data-tab="luyencong" onclick="switchTab('luyencong')" title="Luyện công">
+                        <img src="/assets/ui/dmc_authentic/home_03_27.png" class="menu-tab-icon" alt="Luyện công"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Luyện công</span>
+                    </button>
+
+                    <!-- KyNgoBtn: Kỳ ngộ -->
+                    <button class="menu-tab-btn" data-tab="recruit" onclick="switchTab('recruit')" title="Kỳ ngộ">
+                        <img src="/assets/ui/dmc_authentic/home_03_09.png" class="menu-tab-icon" alt="Kỳ ngộ"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Kỳ ngộ</span>
+                    </button>
+
+                    <!-- CuaHangBtn: Chợ -->
+                    <button class="menu-tab-btn" data-tab="market" onclick="switchTab('market')" title="Chợ">
+                        <img src="/assets/ui/dmc_authentic/home_03_20.png" class="menu-tab-icon" alt="Chợ"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Chợ</span>
+                    </button>
+
+                    <!-- LuanKiemBtn: Luận kiếm -->
+                    <button class="menu-tab-btn" data-tab="luankiem" onclick="switchTab('luankiem')" title="Luận kiếm">
+                        <img src="/assets/ui/dmc_authentic/home_03_22.png" class="menu-tab-icon" alt="Luận kiếm"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Luận kiếm</span>
+                    </button>
+
+                    <!-- BangHoiBtn: Liên minh / Bang hội -->
+                    <button class="menu-tab-btn" data-tab="lienminh" onclick="openLienMinhModal()" title="Liên minh">
+                        <img src="/assets/ui/dmc_authentic/home_03_21.png" class="menu-tab-icon" alt="Liên minh"/>
+                        <img src="/assets/ui/dmc_authentic/home_03_34.png" class="menu-tab-mask" alt=""/>
+                        <span class="menu-tab-label">Liên minh</span>
+                    </button>
+                </div>
+
+                <img src="/assets/ui/dmc_authentic/home_03_11.png" class="menu-arrow-right" alt=">"/>
             </div>
+        </div>
         </div>
 
         <!-- ================= 100% AUTHENTIC 8V8 BATTLE ARENA WITH BUFF ACTIVATION (media_1793068311069_68fd0f94.jpg) ================= -->
@@ -3616,6 +3704,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=51"></script>
+    <script src="/js/game.js?v=52"></script>
 </body>
 </html>
