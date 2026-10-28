@@ -554,6 +554,12 @@
                         <button class="lc-icon-btn" id="btn-lc-boiduong" onclick="openBoiDuongModal()" title="Bồi Dưỡng Đệ Tử">
                             <img src="/assets/ui/boiduong_authentic/tab_title_boiduong.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="Bồi Dưỡng"/>
                         </button>
+                        <button class="lc-icon-btn" id="btn-lc-hkdetu" onclick="switchLuyencongSubTab('hkdetu')" title="Hoàng Kim Đệ Tử">
+                            <img src="/assets/ui/hoangkim_authentic/icon_sub_hk_detu.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="HK Đệ Tử"/>
+                        </button>
+                        <button class="lc-icon-btn" id="btn-lc-hkvocong" onclick="switchLuyencongSubTab('hkvocong')" title="Hoàng Kim Võ Công">
+                            <img src="/assets/ui/hoangkim_authentic/icon_sub_hk_vocong.png" class="lc-feature-icon" style="object-fit: cover; border-radius: 8px;" alt="HK Võ Công"/>
+                        </button>
                     </div>
 
                     <!-- Main Scenic Stage: Luyện Điêu Authentic GUI -->
@@ -2039,6 +2045,9 @@
                 <button class="hero-detail-btn-action btn-transfer" onclick="closeDiscipleDetailModal(); openBoiDuongModal();" title="Truyền công lực">
                     <img src="/assets/ui/hero_info_authentic/btn_transfer.png" alt="Truyền công lực"/>
                 </button>
+                <button class="hero-detail-btn-action btn-hk-detu" onclick="openHoangKimDeTuFromHeroModal()" title="Hoàng Kim Đệ Tử">
+                    <img src="/assets/ui/hoangkim_authentic/btn_hoang_kim.png" style="height: 38px; object-fit: contain; filter: drop-shadow(0 0 8px #facc15);" alt="Hoàng Kim"/>
+                </button>
             </div>
 
             <!-- Bottom Section: Duyên Phận (Bonds) -->
@@ -2126,6 +2135,9 @@
                 </button>
                 <button class="vocong-btn-action btn-thamngo" onclick="openThamNgoModal()" title="Tham ngộ">
                     <img src="/assets/ui/vocong_info_authentic/btn_tham_ngo.png" alt="Tham ngộ"/>
+                </button>
+                <button class="vocong-btn-action btn-hk-vocong" onclick="openHoangKimVoCongFromSkillModal()" title="Hoàng Kim Võ Công">
+                    <img src="/assets/ui/hoangkim_authentic/btn_thang_cap.png" style="height: 38px; object-fit: contain; filter: drop-shadow(0 0 8px #facc15);" alt="Hoàng Kim"/>
                 </button>
             </div>
         </div>
@@ -2899,6 +2911,273 @@
                 </div>
             </div>
         </div>
+
+        <!-- ================= 100% AUTHENTIC HOÀNG KIM ĐỆ TỬ ================= -->
+        <div id="screen-hoangkim-detu" class="authentic-modal" style="display: none; z-index: 10005;">
+            <div class="authentic-modal-content hk-modal-content">
+                <!-- Top Navigation Bar -->
+                <div class="hk-header-row">
+                    <div class="hk-title-plaque">
+                        <img src="/assets/ui/hoangkim_authentic/title_hoang_kim_de_tu.png" alt="Hoàng kim đệ tử" class="hk-title-img"/>
+                    </div>
+                    <button class="hk-quaylai-btn" onclick="closeHoangKimDeTuScreen()">
+                        <img src="/assets/ui/hoangkim_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                    </button>
+                </div>
+
+                <!-- Scrollable Body Content -->
+                <div class="hk-body-scroll">
+                    <!-- Subtitle / Instruction Banner -->
+                    <div class="hk-desc-banner">
+                        <div class="hk-desc-banner-content">
+                            Mỗi lần Hoàng kim, đệ tử sẽ gia tăng <span class="hk-green-highlight">1</span> cấp võ công thiên phú<br>
+                            và <span class="hk-green-highlight">20%</span> tất cả các duyên phận
+                        </div>
+                    </div>
+
+                    <!-- Hero Normal Upgrade Box -->
+                    <div class="hk-hero-box" id="hk-detu-box-normal">
+                        <!-- Left martial artist silhouette -->
+                        <img src="/assets/ui/hoangkim_authentic/sil_kick_left_clean.png" class="hk-hero-box-sil sil-left" alt="Sil"/>
+                        
+                        <!-- Center Hero Transition / Comparison -->
+                        <div class="hk-hero-center-row">
+                            <span class="hk-hero-label">Đệ tử:</span>
+                            <!-- Current Disciple Slot -->
+                            <div class="hk-hero-slot current-slot" onclick="openSelectHoangKimHeroModal()" title="Nhấn để đổi đệ tử">
+                                <img id="hk-hero-cur-avatar" src="/assets/ui/hoangkim_authentic/avatar_hero_purple.png" class="hk-hero-avatar-img" alt="Đệ tử"/>
+                                <span id="hk-hero-cur-tier" class="hk-badge-tier-num">0</span>
+                            </div>
+
+                            <!-- Red Transition Arrow -->
+                            <img src="/assets/ui/hoangkim_authentic/red_arrow_clean.png" class="hk-red-arrow" alt="->"/>
+
+                            <!-- Next Hoang Kim Disciple Slot -->
+                            <div class="hk-hero-slot next-slot">
+                                <img id="hk-hero-next-avatar" src="/assets/ui/hoangkim_authentic/avatar_hero_gold.png" class="hk-hero-avatar-img hk-gold-glow" alt="Đệ tử Hoàng Kim"/>
+                                <span id="hk-hero-next-tier" class="hk-badge-tier-gold">1</span>
+                            </div>
+                        </div>
+
+                        <!-- Right martial artist silhouette -->
+                        <img src="/assets/ui/hoangkim_authentic/sil_kick_right_clean.png" class="hk-hero-box-sil sil-right" alt="Sil"/>
+                    </div>
+
+                    <!-- Hero Max Hoang Kim Box (Shown when hero is level 10 max) -->
+                    <div class="hk-hero-box-max" id="hk-detu-box-max" style="display: none;">
+                        <div class="hk-max-top-row">
+                            <span class="hk-hero-label">Đệ tử:</span>
+                            <div class="hk-hero-slot next-slot" onclick="openSelectHoangKimHeroModal()" title="Nhấn để đổi đệ tử">
+                                <img id="hk-hero-max-avatar" src="/assets/ui/hoangkim_authentic/avatar_hero_max10.png" class="hk-hero-avatar-img hk-gold-glow" alt="Đệ tử"/>
+                                <span class="hk-badge-tier-gold">10</span>
+                            </div>
+                        </div>
+                        <!-- Chibi Girl and Speech Bubble -->
+                        <div class="hk-max-chibi-row">
+                            <img src="/assets/ui/hoangkim_authentic/npc_chibi_girl_clean.png" class="hk-chibi-girl" alt="Mỹ nữ"/>
+                            <div class="hk-speech-bubble">
+                                <span>Đệ tử đã đạt cấp Hoàng kim tối đa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Section (When not max) -->
+                    <div class="hk-material-section" id="hk-detu-mat-section">
+                        <div class="hk-section-title">
+                            <img src="/assets/ui/hoangkim_authentic/title_chon_nguyen_lieu.png" alt="Chọn nguyên liệu :" class="hk-title-mat-img"/>
+                        </div>
+
+                        <!-- 6 Material Items Grid -->
+                        <div class="hk-materials-grid">
+                            <!-- Item 1: Long châu Hoàng kim x1 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('longchau')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_long_chau_hk.png" class="hk-mat-icon" alt="Long Châu"/>
+                                </div>
+                                <div class="hk-mat-name">Long châu Hoàng kim x1</div>
+                            </div>
+
+                            <!-- Item 2: Ám khí Giáp x1 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('amkhi')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_am_khi_giap.png" class="hk-mat-icon" alt="Ám khí Giáp"/>
+                                </div>
+                                <div class="hk-mat-name">Ám khí Giáp x1</div>
+                            </div>
+
+                            <!-- Item 3: Hoàng Kim Tinh Phách x200 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('tinhphach')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_hk_tinh_phach.png" class="hk-mat-icon" alt="Tinh Phách"/>
+                                    <span class="hk-mat-badge-red" id="hk-tinhphach-badge">3236</span>
+                                </div>
+                                <div class="hk-mat-name">Hoàng Kim Tinh Phách x200</div>
+                            </div>
+
+                            <!-- Item 4: Huyền Thiết trọng kiếm x1 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('huyenkiem')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_huyen_thiet_kiem.png" class="hk-mat-icon" alt="Huyền Thiết Kiếm"/>
+                                    <span class="hk-mat-badge-purple">1</span>
+                                </div>
+                                <div class="hk-mat-name">Huyền Thiết trọng kiếm x1</div>
+                            </div>
+
+                            <!-- Item 5: Thất Bảo Hồn Lăng bào x1 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('thatbaobao')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_that_bao_bao.png" class="hk-mat-icon" alt="Thất Bảo Bào"/>
+                                    <span class="hk-mat-badge-purple">1</span>
+                                </div>
+                                <div class="hk-mat-name">Thất Bảo Hồn Lăng bào x1</div>
+                            </div>
+
+                            <!-- Item 6: Lưỡng Nghi Thần Khí x1 -->
+                            <div class="hk-mat-card" onclick="showMatDetail('thankhi')">
+                                <div class="hk-mat-icon-wrap">
+                                    <img src="/assets/ui/hoangkim_authentic/icon_luong_nghi_hk.png" class="hk-mat-icon" alt="Lưỡng Nghi Thần Khí"/>
+                                    <span class="hk-mat-badge-purple">1</span>
+                                </div>
+                                <div class="hk-mat-name">Lưỡng Nghi Thần Khí x1</div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Action Row -->
+                        <div class="hk-action-row">
+                            <img src="/assets/ui/hoangkim_authentic/sil_kick_left_clean.png" class="hk-hero-box-sil action-sil-left" alt="Sil"/>
+                            <button class="hk-action-btn-hoangkim" onclick="doHoangKimDeTu()">
+                                <img src="/assets/ui/hoangkim_authentic/btn_hoang_kim.png" alt="Hoàng kim"/>
+                            </button>
+                            <img src="/assets/ui/hoangkim_authentic/sil_kick_right_clean.png" class="hk-hero-box-sil action-sil-right" alt="Sil"/>
+                        </div>
+                    </div>
+
+                    <!-- Footer Text -->
+                    <div class="hk-footer-text">
+                        Duyên kích hoạt bởi đệ tử Hoàng kim được tăng gấp đôi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 100% AUTHENTIC HOÀNG KIM VÕ CÔNG ================= -->
+        <div id="screen-hoangkim-vocong" class="authentic-modal" style="display: none; z-index: 10005;">
+            <div class="authentic-modal-content hk-modal-content">
+                <!-- Top Navigation Bar -->
+                <div class="hk-header-row">
+                    <div class="hk-title-plaque">
+                        <img src="/assets/ui/hoangkim_authentic/title_hoang_kim_vo_cong.png" alt="Hoàng kim võ công" class="hk-title-img"/>
+                    </div>
+                    <button class="hk-quaylai-btn" onclick="closeHoangKimVoCongScreen()">
+                        <img src="/assets/ui/hoangkim_authentic/btn_quay_lai.png" alt="Quay lại"/>
+                    </button>
+                </div>
+
+                <!-- Scrollable Body Content -->
+                <div class="hk-body-scroll">
+                    <!-- Subtitle -->
+                    <div class="hk-vc-subtitle">
+                        Sử dụng hoàng kim thần khí, thăng cấp võ công HOÀNG KIM
+                    </div>
+
+                    <!-- Comparison Cards (Left vs Right) -->
+                    <div class="hk-vc-comparison-row">
+                        <!-- Left Card: Current Skill -->
+                        <div class="hk-vc-card left-card" onclick="openSelectHoangKimSkillModal()" title="Nhấn để đổi võ công">
+                            <div class="hk-vc-icon-wrap">
+                                <img id="hk-vc-cur-icon" src="/assets/ui/hoangkim_authentic/icon_vc_purple.png" class="hk-vc-icon-img" alt="Võ công"/>
+                                <span id="hk-vc-cur-lvl" class="hk-vc-lvl-badge">5</span>
+                            </div>
+                            <div class="hk-vc-attr-row">
+                                <span class="hk-vc-attr-label">Phẩm chất :</span>
+                                <img src="/assets/ui/hoangkim_authentic/badge_giap.png" class="hk-vc-badge-img" alt="Giáp"/>
+                            </div>
+                            <div class="hk-vc-attr-row">
+                                <span class="hk-vc-attr-label">Chỉ số :</span>
+                                <img src="/assets/ui/hoangkim_authentic/stat_thanphap.png" class="hk-vc-stat-ico" alt="Thân pháp"/>
+                                <span id="hk-vc-cur-stat-val" class="hk-vc-stat-val">82</span>
+                            </div>
+                        </div>
+
+                        <!-- Red Arrow -->
+                        <div class="hk-vc-arrow-col">
+                            <img src="/assets/ui/hoangkim_authentic/red_arrow_clean.png" class="hk-red-arrow" alt="->"/>
+                        </div>
+
+                        <!-- Right Card: Upgraded Hoang Kim Skill -->
+                        <div class="hk-vc-card right-card">
+                            <div class="hk-vc-icon-wrap">
+                                <img id="hk-vc-next-icon" src="/assets/ui/hoangkim_authentic/icon_vc_gold.png" class="hk-vc-icon-img hk-gold-glow" alt="Võ công Hoàng Kim"/>
+                                <span id="hk-vc-next-lvl" class="hk-vc-lvl-badge gold">5</span>
+                            </div>
+                            <div class="hk-vc-attr-row">
+                                <span class="hk-vc-attr-label">Phẩm chất :</span>
+                                <img src="/assets/ui/hoangkim_authentic/badge_kim.png" class="hk-vc-badge-img" alt="Kim"/>
+                            </div>
+                            <div class="hk-vc-attr-row">
+                                <span class="hk-vc-attr-label">Chỉ số :</span>
+                                <img src="/assets/ui/hoangkim_authentic/stat_thanphap.png" class="hk-vc-stat-ico" alt="Thân pháp"/>
+                                <span id="hk-vc-next-stat-val" class="hk-vc-stat-val gold">164</span>
+                            </div>
+                            <div class="hk-vc-bond-notice">
+                                Duyên kích hoạt bởi võ công HOÀNG KIM được tăng gấp đôi
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Section -->
+                    <div class="hk-material-section-vc">
+                        <div class="hk-section-title">
+                            <img src="/assets/ui/hoangkim_authentic/title_can_su_dung.png" alt="Cần sử dụng :" class="hk-title-mat-img"/>
+                        </div>
+
+                        <div class="hk-vc-material-row">
+                            <div class="hk-mat-icon-wrap" style="width: 76px; height: 74px;">
+                                <img src="/assets/ui/hoangkim_authentic/icon_hk_tinh_phach.png" class="hk-mat-icon" alt="Tinh Phách"/>
+                            </div>
+                            <div class="hk-vc-mat-info">
+                                <div class="hk-vc-mat-req">Hoàng Kim Tinh Phách x 80</div>
+                                <div class="hk-vc-mat-own">Đang có : <span id="hk-vc-own-tinhphach">999</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Thăng cấp Action Button -->
+                        <div class="hk-action-row" style="margin-top: 24px;">
+                            <button class="hk-action-btn-thangcap" onclick="doHoangKimVoCong()">
+                                <img src="/assets/ui/hoangkim_authentic/btn_thang_cap.png" alt="Thăng cấp"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL CHỌN ĐỆ TỬ HOÀNG KIM ================= -->
+        <div id="modal-select-hk-hero" class="authentic-modal" style="display: none; z-index: 10010;">
+            <div class="authentic-modal-content hk-select-modal-content">
+                <div class="hk-select-header">
+                    <span class="hk-select-title">Chọn Đệ Tử Hoàng Kim</span>
+                    <button class="hk-select-close" onclick="closeSelectHoangKimHeroModal()">×</button>
+                </div>
+                <div class="hk-select-list" id="hk-select-hero-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL CHỌN VÕ CÔNG HOÀNG KIM ================= -->
+        <div id="modal-select-hk-skill" class="authentic-modal" style="display: none; z-index: 10010;">
+            <div class="authentic-modal-content hk-select-modal-content">
+                <div class="hk-select-header">
+                    <span class="hk-select-title">Chọn Võ Công Hoàng Kim</span>
+                    <button class="hk-select-close" onclick="closeSelectHoangKimSkillModal()">×</button>
+                </div>
+                <div class="hk-select-list" id="hk-select-skill-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
 <!-- ================= MODAL: ĐẶT CƯỢC BÓNG ĐÁ ================= -->
         <div id="modal-bongda-bet" class="authentic-modal" style="display: none;">
             <div class="authentic-modal-content bd-bet-modal-content">
@@ -3001,6 +3280,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=42"></script>
+    <script src="/js/game.js?v=43"></script>
 </body>
 </html>

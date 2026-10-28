@@ -3949,6 +3949,10 @@ function switchLuyencongSubTab(tab) {
         else alert('💀 [TỬ CUNG - HUYẾT CHIẾN HẮC MỘC NHAI] 💀\nThách đấu đại ma đầu Hắc Mộc Nhai rinh kỳ trân dị bảo!');
     } else if (tab === 'tongkim') {
         alert('🛡️ [TỐNG KIM CHIẾN TRƯỜNG] 🛡️\nHai phe Tống - Kim giao tranh vạn binh khởi nghĩa! Chưởng môn chuẩn bị xuất trận lập công!');
+    } else if (tab === 'hkdetu') {
+        openHoangKimDeTuScreen();
+    } else if (tab === 'hkvocong') {
+        openHoangKimVoCongScreen();
     }
 }
 
@@ -6465,4 +6469,398 @@ function openThanKhiHelp() {
 function openThanKhiInventory() {
     sound.play('click');
     alert(`🎒 [KHO THẦN KHÍ] 🎒\nHiện tại Chưởng Môn đang mang thần khí mạnh nhất: [Lưỡng Nghi Thần Khí] phẩm Kim Hoàng Gia.`);
+}
+
+
+/* =========================================================================
+   AUTHENTIC HOÀNG KIM ĐỆ TỬ & HOÀNG KIM VÕ CÔNG (100% ORIGINAL GUI)
+   ========================================================================= */
+const hoangKimState = {
+    selectedHeroId: null,
+    selectedSkillId: 'skill_cuucung',
+    tinhPhach: 3236,
+    heroTiers: {
+        'default': 0,
+        'hero_truongtamphong': 0,
+        'hero_trieuman': 10
+    },
+    skills: {
+        'skill_cuucung': {
+            id: 'skill_cuucung',
+            name: 'Cửu Cung Kiếm Pháp',
+            iconPurple: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+            iconGold: '/assets/ui/hoangkim_authentic/icon_vc_gold.png',
+            quality: 'giap',
+            statType: 'Thân pháp',
+            statVal: 82,
+            level: 5
+        },
+        'skill_tiemvu': {
+            id: 'skill_tiemvu',
+            name: 'Tiêm Vũ Băng Châm',
+            iconPurple: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+            iconGold: '/assets/ui/hoangkim_authentic/icon_vc_gold.png',
+            quality: 'giap',
+            statType: 'Thân pháp',
+            statVal: 96,
+            level: 6
+        },
+        'skill_bangphach': {
+            id: 'skill_bangphach',
+            name: 'Băng Phách Thần Công',
+            iconPurple: '/assets/ui/hoangkim_authentic/icon_vc_purple.png',
+            iconGold: '/assets/ui/hoangkim_authentic/icon_vc_gold.png',
+            quality: 'giap',
+            statType: 'Nội lực',
+            statVal: 115,
+            level: 7
+        }
+    }
+};
+
+function getHoangKimSelectedHero() {
+    let hero = null;
+    const heroList = (typeof GameState !== 'undefined' && GameState.playerData && GameState.playerData.NhanVat) 
+        ? GameState.playerData.NhanVat : [];
+
+    if (hoangKimState.selectedHeroId) {
+        hero = heroList.find(h => (h.id || h.Id) === hoangKimState.selectedHeroId);
+    }
+    if (!hero && heroList.length > 0) {
+        hero = heroList[0];
+        hoangKimState.selectedHeroId = (hero.id || hero.Id);
+    }
+    if (!hero) {
+        hero = {
+            id: 'hero_truongtamphong',
+            name: 'Trương Tam Phong',
+            avatar: '/assets/ui/hoangkim_authentic/avatar_hero_purple.png',
+            quality: 'giap',
+            level: 99
+        };
+        hoangKimState.selectedHeroId = hero.id;
+    }
+    return hero;
+}
+
+function getHoangKimHeroTier(heroId) {
+    if (typeof hoangKimState.heroTiers[heroId] === 'number') {
+        return hoangKimState.heroTiers[heroId];
+    }
+    // Default tier is 0
+    return 0;
+}
+
+function renderHoangKimDeTuScreen() {
+    const hero = getHoangKimSelectedHero();
+    const heroId = hero.id || hero.Id;
+    const currentTier = getHoangKimHeroTier(heroId);
+
+    const normalBox = document.getElementById('hk-detu-box-normal');
+    const maxBox = document.getElementById('hk-detu-box-max');
+    const matSection = document.getElementById('hk-detu-mat-section');
+
+    const curAvatarEl = document.getElementById('hk-hero-cur-avatar');
+    const nextAvatarEl = document.getElementById('hk-hero-next-avatar');
+    const curTierEl = document.getElementById('hk-hero-cur-tier');
+    const nextTierEl = document.getElementById('hk-hero-next-tier');
+    const maxAvatarEl = document.getElementById('hk-hero-max-avatar');
+    const tinhPhachBadge = document.getElementById('hk-tinhphach-badge');
+
+    if (tinhPhachBadge) {
+        tinhPhachBadge.textContent = hoangKimState.tinhPhach;
+    }
+
+    const heroAvatarSrc = (hero.avatar && hero.avatar.startsWith('/assets/')) 
+        ? hero.avatar : '/assets/ui/hoangkim_authentic/avatar_hero_purple.png';
+
+    if (currentTier >= 10) {
+        // Disciples that reached MAX (Level 10)
+        if (normalBox) normalBox.style.display = 'none';
+        if (matSection) matSection.style.display = 'none';
+        if (maxBox) maxBox.style.display = 'flex';
+
+        if (maxAvatarEl) {
+            maxAvatarEl.src = (heroId === 'hero_trieuman') 
+                ? '/assets/ui/hoangkim_authentic/avatar_hero_max10.png' 
+                : '/assets/ui/hoangkim_authentic/avatar_hero_gold.png';
+        }
+    } else {
+        // Disciples upgrading
+        if (normalBox) normalBox.style.display = 'flex';
+        if (matSection) matSection.style.display = 'flex';
+        if (maxBox) maxBox.style.display = 'none';
+
+        if (curAvatarEl) {
+            curAvatarEl.src = (currentTier === 0) 
+                ? '/assets/ui/hoangkim_authentic/avatar_hero_purple.png' 
+                : '/assets/ui/hoangkim_authentic/avatar_hero_gold.png';
+        }
+        if (curTierEl) curTierEl.textContent = currentTier;
+
+        if (nextAvatarEl) {
+            nextAvatarEl.src = '/assets/ui/hoangkim_authentic/avatar_hero_gold.png';
+        }
+        if (nextTierEl) nextTierEl.textContent = currentTier + 1;
+    }
+}
+
+function openHoangKimDeTuScreen(heroId) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    if (heroId) {
+        hoangKimState.selectedHeroId = heroId;
+    }
+    renderHoangKimDeTuScreen();
+
+    const scr = document.getElementById('screen-hoangkim-detu');
+    if (scr) {
+        scr.style.display = 'flex';
+    }
+}
+
+function closeHoangKimDeTuScreen() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const scr = document.getElementById('screen-hoangkim-detu');
+    if (scr) scr.style.display = 'none';
+}
+
+function openHoangKimDeTuFromHeroModal() {
+    const heroId = (typeof GameState !== 'undefined') ? (GameState.selectedDiscipleId || GameState.selectedFormationDiscipleId) : null;
+    if (typeof closeDiscipleDetailModal === 'function') {
+        closeDiscipleDetailModal();
+    }
+    openHoangKimDeTuScreen(heroId);
+}
+
+function doHoangKimDeTu() {
+    const hero = getHoangKimSelectedHero();
+    const heroId = hero.id || hero.Id;
+    const currentTier = getHoangKimHeroTier(heroId);
+
+    if (currentTier >= 10) {
+        alert('Đệ tử đã đạt cấp Hoàng Kim tối đa (Cấp 10)!');
+        return;
+    }
+
+    if (hoangKimState.tinhPhach < 200) {
+        alert('Không đủ Hoàng Kim Tinh Phách! Cần x200 Hoàng Kim Tinh Phách.');
+        return;
+    }
+
+    // Deduct materials
+    hoangKimState.tinhPhach -= 200;
+    const newTier = currentTier + 1;
+    hoangKimState.heroTiers[heroId] = newTier;
+
+    if (typeof sound !== 'undefined') {
+        sound.play('level_up');
+    }
+
+    renderHoangKimDeTuScreen();
+
+    const heroName = hero.name || hero.Ten || 'Đệ tử';
+    alert('🎉 CHÚC MỪNG CHƯỞNG MÔN! 🎉\n' +
+          'Đệ tử [' + heroName + '] đã đột phá HOÀNG KIM CẤP ' + newTier + ' thành công!\n' +
+          '⭐ Tăng +1 Cấp võ công thiên phú\n' +
+          '⭐ Tăng +20% toàn bộ duyên phận\n' +
+          '⭐ Duyên phận kích hoạt nhân đôi sức mạnh!');
+}
+
+/* =========================================================================
+   HOÀNG KIM VÕ CÔNG LOGIC
+   ========================================================================= */
+function renderHoangKimVoCongScreen() {
+    const skill = hoangKimState.skills[hoangKimState.selectedSkillId] || hoangKimState.skills['skill_cuucung'];
+
+    const curIconEl = document.getElementById('hk-vc-cur-icon');
+    const nextIconEl = document.getElementById('hk-vc-next-icon');
+    const curLvlEl = document.getElementById('hk-vc-cur-lvl');
+    const nextLvlEl = document.getElementById('hk-vc-next-lvl');
+    const curStatVal = document.getElementById('hk-vc-cur-stat-val');
+    const nextStatVal = document.getElementById('hk-vc-next-stat-val');
+    const ownTinhPhachEl = document.getElementById('hk-vc-own-tinhphach');
+
+    if (ownTinhPhachEl) {
+        ownTinhPhachEl.textContent = hoangKimState.tinhPhach;
+    }
+
+    if (curIconEl) {
+        curIconEl.src = (skill.quality === 'kim') ? skill.iconGold : skill.iconPurple;
+    }
+    if (nextIconEl) {
+        nextIconEl.src = skill.iconGold;
+    }
+    if (curLvlEl) curLvlEl.textContent = skill.level;
+    if (nextLvlEl) nextLvlEl.textContent = skill.level;
+
+    if (curStatVal) curStatVal.textContent = skill.statVal;
+    if (nextStatVal) {
+        nextStatVal.textContent = (skill.quality === 'kim') ? skill.statVal : (skill.statVal * 2);
+    }
+}
+
+function openHoangKimVoCongScreen(skillId) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    if (skillId && hoangKimState.skills[skillId]) {
+        hoangKimState.selectedSkillId = skillId;
+    }
+    renderHoangKimVoCongScreen();
+
+    const scr = document.getElementById('screen-hoangkim-vocong');
+    if (scr) scr.style.display = 'flex';
+}
+
+function closeHoangKimVoCongScreen() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const scr = document.getElementById('screen-hoangkim-vocong');
+    if (scr) scr.style.display = 'none';
+}
+
+function openHoangKimVoCongFromSkillModal() {
+    if (typeof closeVoCongDetailModal === 'function') {
+        closeVoCongDetailModal();
+    }
+    openHoangKimVoCongScreen();
+}
+
+function doHoangKimVoCong() {
+    const skill = hoangKimState.skills[hoangKimState.selectedSkillId] || hoangKimState.skills['skill_cuucung'];
+
+    if (skill.quality === 'kim') {
+        alert('Võ công [' + skill.name + '] đã đạt phẩm chất HOÀNG KIM [Kim] chí tôn!');
+        return;
+    }
+
+    if (hoangKimState.tinhPhach < 80) {
+        alert('Không đủ Hoàng Kim Tinh Phách! Cần x80 Hoàng Kim Tinh Phách để thăng cấp.');
+        return;
+    }
+
+    // Deduct
+    hoangKimState.tinhPhach -= 80;
+    skill.quality = 'kim';
+    skill.statVal = skill.statVal * 2;
+
+    if (typeof sound !== 'undefined') {
+        sound.play('level_up');
+    }
+
+    renderHoangKimVoCongScreen();
+
+    alert('✨ THĂNG CẤP HOÀNG KIM THÀNH CÔNG! ✨\n' +
+          'Võ công [' + skill.name + '] đã chuyển hóa thành công pháp HOÀNG KIM [Kim]!\n' +
+          '⭐ Chỉ số thuộc tính tăng gấp đôi (+' + skill.statVal + ' ' + skill.statType + ')\n' +
+          '⭐ Kích hoạt duyên phận đệ tử nhận x2 uy lực!');
+}
+
+/* =========================================================================
+   SELECTION MODALS FOR HEROES & SKILLS
+   ========================================================================= */
+function openSelectHoangKimHeroModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const listEl = document.getElementById('hk-select-hero-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+    const heroList = (typeof GameState !== 'undefined' && GameState.playerData && GameState.playerData.NhanVat) 
+        ? GameState.playerData.NhanVat : [
+            { id: 'hero_truongtamphong', name: 'Trương Tam Phong', avatar: '/assets/ui/hoangkim_authentic/avatar_hero_purple.png', quality: 'giap', level: 99 },
+            { id: 'hero_trieuman', name: 'Triệu Mẫn', avatar: '/assets/ui/hoangkim_authentic/avatar_hero_max10.png', quality: 'kim', level: 100 },
+            { id: 'hero_duongqua', name: 'Dương Quá', avatar: '/assets/images/NV_DuongQua_ava_to.png', quality: 'giap', level: 95 },
+            { id: 'hero_lenhhoxung', name: 'Lệnh Hồ Xung', avatar: '/assets/images/NV_LenhHoXung_ava_to.png', quality: 'giap', level: 92 },
+            { id: 'hero_dongphuong', name: 'Đông Phương Bất Bại', avatar: '/assets/images/NV_DongPhuongBatBai_ava_to.png', quality: 'kim', level: 99 }
+        ];
+
+    heroList.forEach(h => {
+        const hId = h.id || h.Id;
+        const hName = h.name || h.Ten || 'Đệ tử';
+        const tier = getHoangKimHeroTier(hId);
+        const item = document.createElement('div');
+        item.className = 'hk-select-item';
+        item.onclick = function() {
+            selectHoangKimHero(hId);
+        };
+
+        const avaSrc = (hId === 'hero_trieuman') 
+            ? '/assets/ui/hoangkim_authentic/avatar_hero_max10.png' 
+            : (tier > 0 ? '/assets/ui/hoangkim_authentic/avatar_hero_gold.png' : '/assets/ui/hoangkim_authentic/avatar_hero_purple.png');
+
+        item.innerHTML = `
+            <img src="${avaSrc}" style="width: 46px; height: 46px; border-radius: 6px; border: 1px solid #ca8a04;">
+            <div style="flex: 1;">
+                <div style="color: #ffd700; font-weight: bold; font-size: 13px;">${hName}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Cấp Hoàng Kim: <b style="color: ${tier >= 10 ? '#facc15' : '#4ade80'};">${tier >= 10 ? 'Cấp 10 (Tối đa)' : 'Cấp ' + tier}</b></div>
+            </div>
+            <button class="btn-wuxia-gold" style="width: 70px; height: 28px; font-size: 11px;">Chọn</button>
+        `;
+        listEl.appendChild(item);
+    });
+
+    const modal = document.getElementById('modal-select-hk-hero');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeSelectHoangKimHeroModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const modal = document.getElementById('modal-select-hk-hero');
+    if (modal) modal.style.display = 'none';
+}
+
+function selectHoangKimHero(heroId) {
+    hoangKimState.selectedHeroId = heroId;
+    closeSelectHoangKimHeroModal();
+    renderHoangKimDeTuScreen();
+}
+
+function openSelectHoangKimSkillModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const listEl = document.getElementById('hk-select-skill-list');
+    if (!listEl) return;
+
+    listEl.innerHTML = '';
+    Object.values(hoangKimState.skills).forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'hk-select-item';
+        item.onclick = function() {
+            selectHoangKimSkill(s.id);
+        };
+
+        item.innerHTML = `
+            <img src="${s.quality === 'kim' ? s.iconGold : s.iconPurple}" style="width: 46px; height: 46px; border-radius: 6px; border: 1px solid #ca8a04;">
+            <div style="flex: 1;">
+                <div style="color: #ffd700; font-weight: bold; font-size: 13px;">${s.name}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Phẩm chất: <b style="color: ${s.quality === 'kim' ? '#facc15' : '#c084fc'};">${s.quality === 'kim' ? 'KIM' : 'GIÁP'}</b> | ${s.statType}: +${s.statVal}</div>
+            </div>
+            <button class="btn-wuxia-gold" style="width: 70px; height: 28px; font-size: 11px;">Chọn</button>
+        `;
+        listEl.appendChild(item);
+    });
+
+    const modal = document.getElementById('modal-select-hk-skill');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeSelectHoangKimSkillModal() {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const modal = document.getElementById('modal-select-hk-skill');
+    if (modal) modal.style.display = 'none';
+}
+
+function selectHoangKimSkill(skillId) {
+    hoangKimState.selectedSkillId = skillId;
+    closeSelectHoangKimSkillModal();
+    renderHoangKimVoCongScreen();
+}
+
+function showMatDetail(matKey) {
+    if (typeof sound !== 'undefined') sound.play('click');
+    const hints = {
+        longchau: '🐲 [Long châu Hoàng kim]\nBảo châu tích tụ nguyên khí rồng thiêng, thu thập tại Thất Tinh Long Châu hoặc Đại Chiến Liên Server.',
+        amkhi: '🗡️ [Ám khí Giáp]\nÁm khí Giáp phẩm cực hạn, rèn đúc tại Lò Rèn Ám Khí hoặc vượt ải Kỳ Ngộ.',
+        tinhphach: '⭐ [Hoàng Kim Tinh Phách]\nTinh phách vũ trụ thượng cổ, đoạt được từ Đua Top Chiến Lực, săn Boss Thế Giới hoặc Phân giải Thần Binh.',
+        huyenkiem: '⚔️ [Huyền Thiết trọng kiếm]\nThần kiếm ngàn cân từ thiên thạch ngoài hành tinh của Độc Cô Cầu Bại.',
+        thatbaobao: '🥋 [Thất Bảo Hồn Lăng bào]\nBảo y thần bí dệt từ tơ trời thất sắc, phòng ngự vô song.',
+        thankhi: '✨ [Lưỡng Nghi Thần Khí]\nThần khí thái cực thượng cổ có thể xoay chuyển càn khôn trong tab Dàn Trận.'
+    };
+    alert(hints[matKey] || 'Kỳ trân dị bảo võ lâm!');
 }
