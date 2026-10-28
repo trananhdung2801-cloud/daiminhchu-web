@@ -150,7 +150,7 @@ function updateHeader() {
     if (nameEl) nameEl.innerText = acc.DisplayName || acc.PublisherAccount || 'Chưởng Môn';
 
     const lvlEl = document.getElementById('header-level');
-    if (lvlEl) lvlEl.innerText = `Lv.${acc.Level || 1}`;
+    if (lvlEl) lvlEl.innerText = acc.Level || 1;
 
     const vipEl = document.getElementById('header-vip-badge');
     if (vipEl) vipEl.innerText = `VIP ${acc.Vip || 1}`;
@@ -159,7 +159,15 @@ function updateHeader() {
     if (knbEl) knbEl.innerText = Number(acc.Vang || 0).toLocaleString();
 
     const bacEl = document.getElementById('header-bac');
-    if (bacEl) bacEl.innerText = Number(acc.Bac || 0).toLocaleString();
+    if (bacEl) {
+        const bacVal = Number(acc.Bac || 0);
+        if (bacVal >= 1000000000) {
+            bacEl.innerText = (bacVal / 1000000000).toFixed(2) + ' tỷ';
+            bacEl.title = bacVal.toLocaleString() + ' Bạc';
+        } else {
+            bacEl.innerText = bacVal.toLocaleString();
+        }
+    }
 
     const expFill = document.getElementById('header-exp-fill');
     if (expFill) {
@@ -7431,12 +7439,8 @@ function initHomeLanterns() {
     if (container.children.length > 0) return;
 
     const lanternImages = [
-        '/assets/ui/denlong_02.png',
-        '/assets/ui/denlong_03.png',
-        '/assets/ui/denlong_04.png',
-        '/assets/ui/denlong_06.png',
-        '/assets/ui/denlong_07.png',
-        '/assets/ui/denlong_08.png'
+        '/assets/ui/denlong_clean_01.png',
+        '/assets/ui/denlong_clean_02.png'
     ];
 
     const lanternCount = 14;
