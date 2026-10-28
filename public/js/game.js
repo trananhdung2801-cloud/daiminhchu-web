@@ -194,6 +194,12 @@ function switchTab(tabName) {
         view.style.display = view.id === `tab-${tabName}` ? 'block' : 'none';
     });
 
+    const lanternBox = document.getElementById('home-floating-lanterns');
+    if (lanternBox) {
+        lanternBox.style.display = (tabName === 'home') ? 'block' : 'none';
+        if (tabName === 'home') initHomeLanterns();
+    }
+
     renderCurrentTab();
 }
 
@@ -2960,9 +2966,10 @@ function renderHomeCloudDisciples() {
     const level = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
     const maxSlots = getMaxSlotDoiHinh(level);
 
-    for (let slot = 1; slot <= 8; slot++) {
+    // Render 5 bust slots in horizon (bán thân, cận cảnh, không tên, bóng xám cho ô trống)
+    for (let slot = 1; slot <= 5; slot++) {
         const card = document.createElement('div');
-        card.className = 'cloud-slot-card';
+        card.className = 'cloud-bust-card';
 
         const isUnlocked = slot <= maxSlots;
         const discipleId = Number(dh['slot' + slot] || 0);
@@ -2973,44 +2980,25 @@ function renderHomeCloudDisciples() {
         if (isUnlocked && disciple) {
             const code = disciple.name || disciple.Code;
             const cfg = getDiscipleCfg(code);
-            const tier = getTierInfo(cfg.Hang || 1);
             card.onclick = () => openDiscipleDetailModal(code);
-            card.title = `${cfg.TenHienThi || code} (Vị trí #${slot}) - Ấn để xem chi tiết`;
+            card.title = `${cfg.TenHienThi || code} - Nhấn để xem chi tiết`;
             card.innerHTML = `
-                <span class="cloud-slot-badge">#${slot}</span>
-                <div class="cloud-figure-wrapper">
-                    <img class="cloud-figure-img" src="${getAvatarUrl(code)}" onerror="this.src='${IMG_BASE}Default-Particle.png'"/>
-                </div>
-                <img class="cloud-pedestal-img" src="/assets/ui/LTcung_cloud_02.png" alt="Mây"/>
-                <div class="cloud-hero-plate tier-${tier.cls}">
-                    <div class="cloud-hero-name">${cfg.TenHienThi || code}</div>
-                    <div class="cloud-hero-sub">Lv.${disciple.level || disciple.Level || 1}</div>
-                </div>
+                <img class="cloud-bust-img" src="${getAvatarUrl(code)}" onerror="this.src='/assets/images/NV_DuongQua_ava_to.png'" alt="${cfg.TenHienThi || code}"/>
             `;
         } else if (isUnlocked) {
+            // Unlocked empty slot: Show authentic grey silhouette in the mist!
             card.onclick = () => switchTab('formation');
-            card.title = `Vị trí #${slot} còn trống - Ấn để vào Xếp Đội Hình`;
+            card.title = `Vị trí #${slot} còn trống - Nhấn để xuất chiến đệ tử`;
             card.innerHTML = `
-                <span class="cloud-slot-badge">#${slot}</span>
-                <div class="cloud-empty-box">+</div>
-                <img class="cloud-pedestal-img" src="/assets/ui/LTcung_cloud_02.png" alt="Mây"/>
-                <div class="cloud-hero-plate">
-                    <div class="cloud-hero-name" style="color: #fde047;">Trống</div>
-                    <div class="cloud-hero-sub" style="color: #94a3b8;">Xuất chiến</div>
-                </div>
+                <img class="cloud-bust-img sil-empty" src="/assets/ui/home_authentic/clean_silhouette_empty.png" alt="Trống"/>
             `;
         } else {
+            // Locked slot: Subtle semi-transparent silhouette
             const reqLv = getRequiredLevelForSlot(slot);
             card.onclick = () => alert(`🔒 Vị trí #${slot} yêu cầu đạt Đẳng cấp ${reqLv} để mở khóa!`);
             card.title = `Khóa - Cần Đẳng cấp ${reqLv} mở khóa`;
             card.innerHTML = `
-                <span class="cloud-slot-badge" style="border-color: #6b7280; color: #9ca3af;">#${slot}</span>
-                <div class="cloud-locked-box">🔒</div>
-                <img class="cloud-pedestal-img" style="opacity: 0.45; filter: grayscale(80%);" src="/assets/ui/LTcung_cloud_02.png" alt="Mây"/>
-                <div class="cloud-hero-plate" style="border-color: #4b5563; background: #18181b;">
-                    <div class="cloud-hero-name" style="color: #9ca3af;">Khóa</div>
-                    <div class="cloud-hero-sub" style="color: #6b7280;">Lv.${reqLv} mở</div>
-                </div>
+                <img class="cloud-bust-img sil-empty" src="/assets/ui/home_authentic/clean_silhouette_empty.png" style="opacity: 0.28; filter: grayscale(100%);" alt="Khóa"/>
             `;
         }
 
@@ -7398,4 +7386,91 @@ function doTrangBiCuongHoa() {
 function shareTrangBiFB() {
     if (typeof sound !== 'undefined') sound.play('click');
     alert('📢 Đã chia sẻ thần binh [' + currentViewingTrangBi.name + '] lên Facebook!');
+}
+
+
+/* =========================================================================
+   AUTHENTIC PARTICLES: SKY LANTERNS (HOME) & SAKURA PETALS (LOGIN)
+   ========================================================================= */
+function initLoginSakura() {
+    const container = document.getElementById('login-falling-sakura');
+    if (!container) return;
+    if (container.children.length > 0) return;
+
+    const petalImages = [
+        '/assets/ui/dao_nho.png',
+        '/assets/ui/dao_nho_2.png'
+    ];
+
+    const petalCount = 22;
+    for (let i = 0; i < petalCount; i++) {
+        const img = document.createElement('img');
+        img.className = 'login-sakura-petal';
+        img.src = petalImages[i % petalImages.length];
+
+        const size = 16 + Math.floor(Math.random() * 20);
+        const left = (1 + Math.random() * 97).toFixed(1);
+        const duration = (6 + Math.random() * 7).toFixed(1);
+        const delay = (Math.random() * 8).toFixed(1);
+        const opacity = (0.7 + Math.random() * 0.3).toFixed(2);
+
+        img.style.width = size + 'px';
+        img.style.height = 'auto';
+        img.style.left = left + '%';
+        img.style.animationDuration = duration + 's';
+        img.style.animationDelay = delay + 's';
+        img.style.opacity = opacity;
+
+        container.appendChild(img);
+    }
+}
+
+function initHomeLanterns() {
+    const container = document.getElementById('home-floating-lanterns');
+    if (!container) return;
+    if (container.children.length > 0) return;
+
+    const lanternImages = [
+        '/assets/ui/denlong_02.png',
+        '/assets/ui/denlong_03.png',
+        '/assets/ui/denlong_04.png',
+        '/assets/ui/denlong_06.png',
+        '/assets/ui/denlong_07.png',
+        '/assets/ui/denlong_08.png'
+    ];
+
+    const lanternCount = 14;
+    for (let i = 0; i < lanternCount; i++) {
+        const img = document.createElement('img');
+        img.className = 'home-sky-lantern';
+        img.src = lanternImages[i % lanternImages.length];
+
+        const width = 24 + Math.floor(Math.random() * 26);
+        const left = (3 + Math.random() * 94).toFixed(1);
+        const duration = (10 + Math.random() * 10).toFixed(1);
+        const delay = (Math.random() * 12).toFixed(1);
+        const opacity = (0.75 + Math.random() * 0.25).toFixed(2);
+
+        img.style.width = width + 'px';
+        img.style.height = 'auto';
+        img.style.left = left + '%';
+        img.style.animationDuration = duration + 's';
+        img.style.animationDelay = delay + 's';
+        img.style.opacity = opacity;
+
+        container.appendChild(img);
+    }
+}
+
+// Trigger initial effects
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initLoginSakura();
+            initHomeLanterns();
+        });
+    } else {
+        initLoginSakura();
+        initHomeLanterns();
+    }
 }

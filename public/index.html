@@ -13,6 +13,7 @@
     <div id="game-container">
         <!-- ================= SCREEN 1: AUTHENTIC TITLE & LOGIN SCREEN ================= -->
         <div id="screen-login" class="screen active">
+            <div id="login-falling-sakura" class="login-sakura-container"></div>
             <!-- Panel 1: Authentic Title Screen with "BẮT ĐẦU" (media_1793066664538_b0d165c2.jpg) -->
             <div id="title-start-panel" class="screen-title-container" style="display: none;">
                 <div class="title-top-welcome-badge" id="title-welcome-user">Chưởng môn: MinhChu | S1 - Đào Hoa Đảo</div>
@@ -195,8 +196,13 @@
                 <!-- Tab 1: Authentic Disciple Scroll Painting (Tr.chủ) -->
                 <div id="tab-home" class="tab-view home-perfect-view">
                     <!-- 1. Interactive Formation Cloud Carousel (Swipe Left/Right for 8 Disciples) -->
+                    <!-- Floating Orange Sky Lanterns Layer -->
+                    <div id="home-floating-lanterns" class="home-lanterns-container"></div>
+
+                    <!-- Authentic Bust Disciples Cluster (5 Disciples with Mist Layer & Grey Silhouette for Empty Slots) -->
                     <div class="home-cloud-stage-wrapper">
                         <div class="home-cloud-stage-scroll" id="home-cloud-disciples"></div>
+                        <img src="/assets/ui/home_authentic/cloud_mist_layer.png" class="home-cloud-mist-overlay" alt="Mây"/>
                     </div>
 
                     <!-- 2. Authentic Carved Lower Board (6 Buttons + 6 Activities + 6 Utilities) -->
@@ -3568,6 +3574,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=45"></script>
+    <script src="/js/game.js?v=46"></script>
 </body>
 </html>

@@ -12445,3 +12445,205 @@ img {
 .trangbi-btn-action:active img {
     transform: scale(0.96);
 }
+
+/* =========================================================================
+   AUTHENTIC HOME DISCIPLE BUSTS, SILHOUETTES & PARTICLE EFFECTS (v=46)
+   ========================================================================= */
+
+/* 1. Top Disciple Busts Cluster & Cloud Mist */
+.home-cloud-stage-wrapper {
+    position: relative;
+    width: 100%;
+    height: 185px;
+    background: url('/assets/ui/home_authentic/cloud_mountain_bg.png') no-repeat center top;
+    background-size: cover;
+    border-bottom: 2px solid #573010;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.home-cloud-stage-scroll {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 4px 6px 4px;
+    position: relative;
+    z-index: 2;
+}
+
+.cloud-bust-card {
+    flex: 1;
+    max-width: 95px;
+    height: 170px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.cloud-bust-card:hover {
+    transform: translateY(-4px) scale(1.04);
+}
+
+.cloud-bust-card:hover .cloud-bust-img:not(.sil-empty) {
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.75));
+}
+
+.cloud-bust-img {
+    height: 155px;
+    max-width: 110%;
+    object-fit: contain;
+    object-position: bottom center;
+    pointer-events: auto;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+.cloud-bust-img.sil-empty {
+    opacity: 0.65;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.cloud-bust-card:hover .cloud-bust-img.sil-empty {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.home-cloud-mist-overlay {
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    object-fit: fill;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.94;
+}
+
+/* 2. Seamless Bottom Nav: Eliminate all square box hover effects */
+.bottom-nav-authentic-perfect {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 72px;
+    margin: 0 auto;
+    background: transparent;
+    user-select: none;
+}
+
+.nav-perf-hotspot,
+.nav-perf-hotspot:hover,
+.nav-perf-hotspot:focus,
+.nav-perf-hotspot:active,
+.nav-perf-hotspot.active {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.nav-perf-hotspot.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8, 0 0 10px #38bdf8;
+}
+
+/* 3. Floating Orange Sky Lanterns on Home Screen */
+.home-lanterns-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.home-sky-lantern {
+    position: absolute;
+    bottom: -60px;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: lanternFloatUp linear infinite;
+    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.8));
+}
+
+@keyframes lanternFloatUp {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.85);
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.88;
+    }
+    50% {
+        transform: translateY(-380px) translateX(18px) scale(1);
+        opacity: 0.95;
+    }
+    85% {
+        opacity: 0.75;
+    }
+    100% {
+        transform: translateY(-780px) translateX(-18px) scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* 4. Falling Peach Blossom Petals on Login Screen */
+.login-sakura-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.login-sakura-petal {
+    position: absolute;
+    top: -40px;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: sakuraFlutterDown linear infinite;
+    filter: drop-shadow(0 2px 4px rgba(244, 114, 182, 0.4));
+}
+
+@keyframes sakuraFlutterDown {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) rotateY(0deg);
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.95;
+    }
+    50% {
+        transform: translateY(460px) translateX(36px) rotate(180deg) rotateY(180deg);
+        opacity: 0.9;
+    }
+    88% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(960px) translateX(-24px) rotate(360deg) rotateY(360deg);
+        opacity: 0;
+    }
+}
