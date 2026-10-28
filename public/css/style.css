@@ -4096,8 +4096,10 @@ img {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 2px 2px;
-    margin-bottom: 2px;
+    flex: 0 0 auto;
+    min-height: 46px;
+    padding: 2px 4px;
+    margin-bottom: 4px;
 }
 
 .home-btn-utility {
@@ -12602,7 +12604,7 @@ img {
     flex: 0 0 27%;
     min-height: 110px;
     max-height: 175px;
-    background: url('/assets/ui/home_authentic/authentic_cloud_mountain_bg.png') no-repeat center top;
+    background: url('/assets/ui/home_authentic/clean_cloud_stage_bg.png') no-repeat center top;
     background-size: 100% 100%;
     overflow: hidden;
     display: flex;
@@ -12614,34 +12616,34 @@ img {
     align-items: flex-end;
     height: 100%;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
-    padding: 0 0 4px 0;
+    touch-action: pan-x;
+    cursor: grab;
+    user-select: none;
+    padding: 0 0 2px 0;
     position: relative;
     z-index: 2;
+}
+
+.home-cloud-stage-scroll.grabbing {
+    cursor: grabbing !important;
+    scroll-snap-type: none !important;
 }
 
 .home-cloud-stage-scroll::-webkit-scrollbar {
     display: none;
 }
 
-.home-cloud-stage-scroll {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    padding: 0 4px 6px 4px;
-    position: relative;
-    z-index: 2;
-}
 
 .cloud-bust-card {
     width: 20%;
+    min-width: 20%;
+    max-width: 20%;
     flex: 0 0 20%;
     height: 100%;
     display: flex;
@@ -12651,7 +12653,7 @@ img {
     cursor: pointer;
     scroll-snap-align: center;
     user-select: none;
-    overflow: hidden;
+    overflow: visible;
     transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0.25s ease;
 }
 

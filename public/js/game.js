@@ -2984,6 +2984,8 @@ function renderHomeCloudDisciples() {
     const level = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
     const maxSlots = getMaxSlotDoiHinh(level);
 
+    let dragMoved = false;
+
     // Render full 8 formation slots in interactive swipe carousel (5 slots visible at once)
     for (let slot = 1; slot <= 8; slot++) {
         const card = document.createElement('div');
@@ -3002,14 +3004,20 @@ function renderHomeCloudDisciples() {
         if (isUnlocked && disciple) {
             const code = disciple.name || disciple.Code;
             const cfg = getDiscipleCfg(code);
-            card.onclick = () => openDiscipleDetailModal(code);
+            card.onclick = (e) => {
+                if (dragMoved) return;
+                openDiscipleDetailModal(code);
+            };
             card.title = `${cfg.TenHienThi || code} - Nhấn để xem chi tiết`;
             card.innerHTML = `
                 <img class="cloud-bust-img" src="${getAvatarUrl(code)}" onerror="this.src='/assets/images/NV_DuongQua_ava_to.png'" alt="${cfg.TenHienThi || code}"/>
             `;
         } else if (isUnlocked) {
             // Unlocked empty slot: Show authentic grey silhouette in the mist!
-            card.onclick = () => switchTab('formation');
+            card.onclick = (e) => {
+                if (dragMoved) return;
+                switchTab('formation');
+            };
             card.title = `Vị trí #${slot} còn trống - Nhấn để xuất chiến đệ tử`;
             card.innerHTML = `
                 <img class="cloud-bust-img sil-empty" src="/assets/ui/home_authentic/clean_silhouette_empty.png" alt="Trống"/>
@@ -3017,7 +3025,10 @@ function renderHomeCloudDisciples() {
         } else {
             // Locked slot: Subtle semi-transparent silhouette
             const reqLv = getRequiredLevelForSlot(slot);
-            card.onclick = () => alert(`🔒 Vị trí #${slot} yêu cầu đạt Đẳng cấp ${reqLv} để mở khóa!`);
+            card.onclick = (e) => {
+                if (dragMoved) return;
+                alert(`🔒 Vị trí #${slot} yêu cầu đạt Đẳng cấp ${reqLv} để mở khóa!`);
+            };
             card.title = `Khóa - Cần Đẳng cấp ${reqLv} mở khóa`;
             card.innerHTML = `
                 <img class="cloud-bust-img sil-empty" src="/assets/ui/home_authentic/clean_silhouette_empty.png" style="opacity: 0.28; filter: grayscale(100%);" alt="Khóa"/>
@@ -3029,11 +3040,10 @@ function renderHomeCloudDisciples() {
 
     // Dynamic Center Focus Listener on swipe/scroll
     function updateCenterFocus() {
-        const scrollLeft = container.scrollLeft;
         const slotWidth = container.offsetWidth / 5;
         if (!slotWidth) return;
         // Center slot index (0 to 7) is closest to center of visible 5 slots
-        const centerIdx = Math.min(7, Math.max(0, Math.round(scrollLeft / slotWidth) + 2));
+        const centerIdx = Math.min(7, Math.max(0, Math.round(container.scrollLeft / slotWidth) + 2));
         container.querySelectorAll('.cloud-bust-card').forEach((card, idx) => {
             card.classList.toggle('center-focus', idx === centerIdx);
         });
@@ -3041,23 +3051,53 @@ function renderHomeCloudDisciples() {
 
     container.onscroll = updateCenterFocus;
 
+    // Desktop mouse wheel support (horizontal swipe via wheel)
+    container.onwheel = (e) => {
+        if (e.deltaY) {
+            e.preventDefault();
+            container.scrollLeft += e.deltaY * 0.8;
+            updateCenterFocus();
+        }
+    };
+
     // Mouse drag support for desktop swiping
     let isDown = false;
-    let startX, scrollLeftVal;
+    let startX = 0;
+    let scrollStart = 0;
+
     container.onmousedown = (e) => {
         isDown = true;
+        dragMoved = false;
+        container.classList.add('grabbing');
         startX = e.pageX - container.offsetLeft;
-        scrollLeftVal = container.scrollLeft;
+        scrollStart = container.scrollLeft;
     };
-    container.onmouseleave = () => { isDown = false; };
-    container.onmouseup = () => { isDown = false; };
+
+    const handleMouseUp = () => {
+        if (isDown) {
+            isDown = false;
+            container.classList.remove('grabbing');
+            const slotWidth = container.offsetWidth / 5;
+            if (slotWidth) {
+                const targetSlot = Math.round(container.scrollLeft / slotWidth);
+                container.scrollTo({ left: targetSlot * slotWidth, behavior: 'smooth' });
+            }
+            setTimeout(() => { dragMoved = false; }, 80);
+        }
+    };
+
+    window.addEventListener('mouseup', handleMouseUp);
+
     container.onmousemove = (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        container.scrollLeft = scrollLeftVal - walk;
-        updateCenterFocus();
+        const dist = (x - startX);
+        if (Math.abs(dist) > 5) {
+            dragMoved = true;
+            e.preventDefault();
+            container.scrollLeft = scrollStart - dist;
+            updateCenterFocus();
+        }
     };
 }
 
