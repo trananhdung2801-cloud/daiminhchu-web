@@ -3999,8 +3999,10 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 6px 10px 6px 10px;
-    background: #140d09;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    background: #140d09 url('/assets/ui/dmc_authentic/background.png') repeat center center;
+    background-size: cover;
 }
 
 .home-lower-bg {
@@ -12604,7 +12606,7 @@ img {
     flex: 0 0 27%;
     min-height: 110px;
     max-height: 175px;
-    background: url('/assets/ui/home_authentic/clean_cloud_stage_bg.png') no-repeat center top;
+    background: url('/assets/ui/dmc_authentic/background_dragon.png') no-repeat center top;
     background-size: 100% 100%;
     overflow: hidden;
     display: flex;
@@ -13150,4 +13152,58 @@ img {
 .menu-tab-btn.active .menu-tab-label {
     color: #38bdf8;
     text-shadow: 0 0 6px rgba(56, 189, 248, 0.8), 0 1px 3px #000;
+}
+
+/* Authentic Unity TrenBtn (home_02_05.png + Golden Calligraphy Text) */
+.unity-wooden-buttons-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 8px;
+    width: 100%;
+    padding: 4px 6px;
+    box-sizing: border-box;
+}
+
+.unity-wooden-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.unity-wooden-btn .unity-btn-bg {
+    width: 100%;
+    max-height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.75));
+    display: block;
+}
+
+.unity-wooden-btn .unity-btn-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Times New Roman', 'Palatino', serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff2a8;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 6px #78350f, 0 0 12px #451a03;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+.unity-wooden-btn:active {
+    transform: scale(0.93);
+    filter: brightness(1.2);
 }

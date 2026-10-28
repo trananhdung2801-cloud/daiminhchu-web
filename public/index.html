@@ -2,12 +2,15 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <title>Đại Minh Chủ - Web Game</title>
     <link rel="icon" type="image/png" href="/assets/res/app_icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=52">
+    <link rel="stylesheet" href="/css/style.css?v=53_unity_clean">
 </head>
 <body>
     <div id="game-container">
@@ -239,28 +242,39 @@
 
                     <!-- 2. Authentic Carved Lower Board (6 Buttons + 6 Activities + 6 Utilities) -->
                     <div class="home-lower-stage">
-                        <img src="/assets/ui/home_authentic/clean_home_board_backdrop.png" class="home-lower-bg" alt="Đại Minh Chủ">
+                        <img src="/assets/ui/dmc_authentic/background.png" class="home-lower-bg" alt="Đại Minh Chủ">
 
                         <!-- Row 1 & 2: 6 Carved Wooden Buttons -->
-                        <div class="home-wooden-buttons-grid">
-                            <button class="home-btn-wooden" onclick="openDiscipleDetailModal()" title="Đệ tử">
-                                <img src="/assets/ui/home_authentic/clean_btn_detu.png" alt="Đệ tử"/>
+                        <div class="unity-wooden-buttons-grid">
+                            <!-- NhanVatBtn: Đệ tử -->
+                            <button class="unity-wooden-btn" onclick="openDiscipleDetailModal()" title="Đệ tử">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Đệ tử"/>
+                                <span class="unity-btn-text">Đệ tử</span>
                             </button>
-                            <button class="home-btn-wooden" onclick="openTinhLuyenModal()" title="Trang bị">
-                                <img src="/assets/ui/home_authentic/clean_btn_trangbi.png" alt="Trang bị"/>
+                            <!-- TrangBiBtn: Trang bị -->
+                            <button class="unity-wooden-btn" onclick="openTinhLuyenModal()" title="Trang bị">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Trang bị"/>
+                                <span class="unity-btn-text">Trang bị</span>
                             </button>
-                            <button class="home-btn-wooden" onclick="openThanTienTyTyModal()" title="Võ công">
-                                <img src="/assets/ui/home_authentic/clean_btn_vocong.png" alt="Võ công"/>
+                            <!-- VoCongBtn: Võ công -->
+                            <button class="unity-wooden-btn" onclick="openThanTienTyTyModal()" title="Võ công">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Võ công"/>
+                                <span class="unity-btn-text">Võ công</span>
                             </button>
-
-                            <button class="home-btn-wooden" onclick="openKinhMachModal()" title="Kinh Mạch">
-                                <img src="/assets/ui/home_authentic/clean_btn_kinhmach.png" alt="Kinh Mạch"/>
+                            <!-- KinhMachBtn: Kinh Mạch -->
+                            <button class="unity-wooden-btn" onclick="openKinhMachModal()" title="Kinh Mạch">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Kinh Mạch"/>
+                                <span class="unity-btn-text">Kinh Mạch</span>
                             </button>
-                            <button class="home-btn-wooden" onclick="openChanKhiModal()" title="Chân khí">
-                                <img src="/assets/ui/home_authentic/clean_btn_chankhi.png" alt="Chân khí"/>
+                            <!-- ChanKhiBtn: Chân khí -->
+                            <button class="unity-wooden-btn" onclick="openChanKhiModal()" title="Chân khí">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Chân khí"/>
+                                <span class="unity-btn-text">Chân khí</span>
                             </button>
-                            <button class="home-btn-wooden" onclick="openTayDuyenModal()" title="Khẩu quyết">
-                                <img src="/assets/ui/home_authentic/clean_btn_khauquyet.png" alt="Khẩu quyết"/>
+                            <!-- TeDanBtn: Khẩu quyết -->
+                            <button class="unity-wooden-btn" onclick="openTayDuyenModal()" title="Khẩu quyết">
+                                <img src="/assets/ui/dmc_authentic/home_02_05.png" class="unity-btn-bg" alt="Khẩu quyết"/>
+                                <span class="unity-btn-text">Khẩu quyết</span>
                             </button>
                         </div>
 
@@ -3704,6 +3718,6 @@
             </div>
         </div>
 
-    <script src="/js/game.js?v=52"></script>
+    <script src="/js/game.js?v=53_unity_clean"></script>
 </body>
 </html>

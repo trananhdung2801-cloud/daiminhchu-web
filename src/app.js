@@ -40,10 +40,10 @@ function serveStaticFile(req, res, pathname) {
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
         const ext = path.extname(filePath).toLowerCase();
         const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-        const isDynamic = ext === '.html' || ext === '.js' || ext === '.css';
+        const isDynamic = ext === '.html' || ext === '.js' || ext === '.css' || ext === '.json';
         const cacheHeader = isDynamic
-            ? 'no-cache, no-store, must-revalidate, max-age=0'
-            : 'public, max-age=86400';
+            ? 'no-cache, no-store, must-revalidate, max-age=0, post-check=0, pre-check=0'
+            : 'public, max-age=3600';
 
         res.writeHead(200, {
             'Content-Type': contentType,
