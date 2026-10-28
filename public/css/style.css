@@ -3743,12 +3743,10 @@ img {
     padding: 0 !important;
     margin: 0 !important;
     width: 100%;
-    height: 100% !important;
-    max-height: 100% !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    background: #140d09 !important;
+    height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    background: #140d09;
 }
 
 .home-seamless-stage {
@@ -3995,20 +3993,138 @@ img {
 .home-lower-stage {
     position: relative;
     width: 100%;
-    flex: 1 1 72% !important;
-    min-height: 0 !important;
-    max-height: 100% !important;
-    overflow: hidden !important;
-    display: block !important;
-    margin: 0 auto;
+    flex: 1 1 73%;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px 10px 6px 10px;
+    background: #140d09;
 }
 
 .home-lower-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: fill !important;
+    object-fit: fill;
     pointer-events: none;
+    z-index: 1;
+}
+
+/* 1. Row 1 & 2: 6 Carved Wooden Buttons */
+.home-wooden-buttons-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px 8px;
+    width: 100%;
+    padding: 2px 2px;
+}
+
+.home-btn-wooden {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.home-btn-wooden img {
+    width: 100%;
+    max-height: 46px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+}
+
+.home-btn-wooden:active {
+    transform: scale(0.94);
+    filter: brightness(1.15);
+}
+
+/* 2. Row 3 & 4: 6 Activity Icons */
+.home-activities-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 8px;
+    width: 100%;
+    padding: 2px 2px;
+    align-items: center;
+}
+
+.home-btn-activity {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.home-btn-activity img {
+    width: 95%;
+    max-height: 54px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.75));
+}
+
+.home-btn-activity:active {
+    transform: scale(0.94);
+    filter: brightness(1.2);
+}
+
+/* 3. Row 5: 6 Utility Square Buttons (Bottom) */
+.home-utilities-row {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2px 2px;
+    margin-bottom: 2px;
+}
+
+.home-btn-utility {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    flex: 1;
+    max-width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.home-btn-utility img {
+    width: 100%;
+    max-height: 44px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.65));
+}
+
+.home-btn-utility:active {
+    transform: scale(0.92);
+    filter: brightness(1.2);
 }
 
 
@@ -12483,15 +12599,33 @@ img {
 .home-cloud-stage-wrapper {
     position: relative;
     width: 100%;
-    flex: 0 0 28% !important;
-    min-height: 110px !important;
-    max-height: 175px !important;
-    background: url('/assets/ui/home_authentic/cloud_mountain_bg.png') no-repeat center top;
-    background-size: cover;
-    border-bottom: 2px solid #573010;
+    flex: 0 0 27%;
+    min-height: 110px;
+    max-height: 175px;
+    background: url('/assets/ui/home_authentic/authentic_cloud_mountain_bg.png') no-repeat center top;
+    background-size: 100% 100%;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
+}
+
+.home-cloud-stage-scroll {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 0 4px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.home-cloud-stage-scroll::-webkit-scrollbar {
+    display: none;
 }
 
 .home-cloud-stage-scroll {
@@ -12507,46 +12641,56 @@ img {
 }
 
 .cloud-bust-card {
-    flex: 1;
-    max-width: 90px;
+    width: 20%;
+    flex: 0 0 20%;
     height: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
     cursor: pointer;
-    overflow: hidden;
+    scroll-snap-align: center;
     user-select: none;
-    transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.cloud-bust-card:hover {
-    transform: translateY(-2px);
-}
-
-.cloud-bust-card:hover .cloud-bust-img:not(.sil-empty) {
-    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.85));
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0.25s ease;
 }
 
 .cloud-bust-img {
-    width: 140%;
+    width: 145%;
     max-width: none;
     height: auto;
     object-fit: cover;
     object-position: top center;
-    transform: scale(1.58) translateY(6px);
+    transform: scale(1.42) translateY(6px);
     transform-origin: top center;
     pointer-events: auto;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+    opacity: 0.92;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease, filter 0.25s ease;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
 }
 
 .cloud-bust-img.sil-empty {
-    width: 75%;
+    width: 70%;
     transform: scale(1.0);
-    opacity: 0.65;
+    opacity: 0.6;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
-    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+/* Center Disciple (Vị trí ở giữa trong 5 nhân vật): Zoom in nhẹ nhàng, hùng dũng */
+.cloud-bust-card.center-focus {
+    z-index: 5;
+}
+
+.cloud-bust-card.center-focus .cloud-bust-img:not(.sil-empty) {
+    transform: scale(1.72) translateY(1px);
+    opacity: 1.0;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+.cloud-bust-card.center-focus .cloud-bust-img.sil-empty {
+    transform: scale(1.15);
+    opacity: 0.85;
 }
 
 .cloud-bust-card:hover .cloud-bust-img.sil-empty {

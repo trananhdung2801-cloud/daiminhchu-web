@@ -199,7 +199,11 @@ function switchTab(tabName) {
     });
 
     document.querySelectorAll('.tab-view').forEach(view => {
-        view.style.display = view.id === `tab-${tabName}` ? (tabName === 'home' ? 'flex' : 'block') : 'none';
+        if (view.id === `tab-${tabName}`) {
+            view.style.setProperty('display', tabName === 'home' ? 'flex' : 'block', 'important');
+        } else {
+            view.style.setProperty('display', 'none', 'important');
+        }
     });
 
     const contentArea = document.querySelector('.content-area');
@@ -2980,10 +2984,14 @@ function renderHomeCloudDisciples() {
     const level = (GameState.playerData.Account && GameState.playerData.Account.Level) ? Number(GameState.playerData.Account.Level) : 1;
     const maxSlots = getMaxSlotDoiHinh(level);
 
-    // Render 5 bust slots in horizon (bán thân, cận cảnh, không tên, bóng xám cho ô trống)
-    for (let slot = 1; slot <= 5; slot++) {
+    // Render full 8 formation slots in interactive swipe carousel (5 slots visible at once)
+    for (let slot = 1; slot <= 8; slot++) {
         const card = document.createElement('div');
         card.className = 'cloud-bust-card';
+        card.dataset.slot = slot;
+
+        // Slot 3 (the middle slot among 1,2,3,4,5) is zoomed in initially
+        if (slot === 3) card.classList.add('center-focus');
 
         const isUnlocked = slot <= maxSlots;
         const discipleId = Number(dh['slot' + slot] || 0);
@@ -3018,6 +3026,39 @@ function renderHomeCloudDisciples() {
 
         container.appendChild(card);
     }
+
+    // Dynamic Center Focus Listener on swipe/scroll
+    function updateCenterFocus() {
+        const scrollLeft = container.scrollLeft;
+        const slotWidth = container.offsetWidth / 5;
+        if (!slotWidth) return;
+        // Center slot index (0 to 7) is closest to center of visible 5 slots
+        const centerIdx = Math.min(7, Math.max(0, Math.round(scrollLeft / slotWidth) + 2));
+        container.querySelectorAll('.cloud-bust-card').forEach((card, idx) => {
+            card.classList.toggle('center-focus', idx === centerIdx);
+        });
+    }
+
+    container.onscroll = updateCenterFocus;
+
+    // Mouse drag support for desktop swiping
+    let isDown = false;
+    let startX, scrollLeftVal;
+    container.onmousedown = (e) => {
+        isDown = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeftVal = container.scrollLeft;
+    };
+    container.onmouseleave = () => { isDown = false; };
+    container.onmouseup = () => { isDown = false; };
+    container.onmousemove = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        container.scrollLeft = scrollLeftVal - walk;
+        updateCenterFocus();
+    };
 }
 
 function openDiscipleDetailModal(code) {
